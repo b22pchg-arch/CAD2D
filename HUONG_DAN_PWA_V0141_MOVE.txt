@@ -1,0 +1,10 @@
+DWG SKETCH PWA V0.14.1 - LENH MOVE
+
+1. Chon mot hoac nhieu doi tuong.
+2. Bam Di chuyen hoac go M / MOVE.
+3. Bam diem goc.
+4. Di chuyen con tro va bam diem dich.
+5. Esc de huy va phuc hoi vi tri ban dau.
+
+Lenh MOVE ho tro LINE, POLYLINE, CIRCLE, ARC, ELLIPSE, TEXT/MTEXT va cac doi tuong bo sung.
+Tren dien thoai: mo bang Them, chon Di chuyen.

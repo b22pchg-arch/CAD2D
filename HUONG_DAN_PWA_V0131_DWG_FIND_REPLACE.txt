@@ -1,0 +1,5 @@
+PWA V0.13.1
+- Xuất DXF R12 tối giản để chuyển bằng dxf2dwg.exe.
+- Chữ nhiều dòng được tách thành TEXT; elip thành polyline.
+- Tìm/thay thế chữ: thay hiện tại hoặc thay tất cả.
+- Lệnh FR và RA.

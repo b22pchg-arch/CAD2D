@@ -1,0 +1,21 @@
+DWG SKETCH PWA EDITOR V0.11.0
+====================================
+
+1. KHONG mo index.html bang file:// neu muon cai PWA/cap nhat.
+2. Thu nghiem tren Windows:
+   - Chay serve_local.cmd
+   - Mo http://localhost:8080/index.html
+   - Bam "Cai PWA" neu trinh duyet hien nut.
+3. Android:
+   - Dua toan bo thu muc PWA len may chu HTTPS noi bo/cong cong.
+   - Mo URL bang Chrome/Edge va chon Cai ung dung/Them vao man hinh chinh.
+4. Kiem tra cap nhat:
+   - Nut "Kiem tra phien ban" doc version.json.
+   - Khi version.json co version lon hon, nut "Cap nhat ngay" xuat hien.
+   - Can thay dong bo index.html, sw.js, manifest va cac tep lien quan tren may chu.
+   - Moi ban phat hanh phai doi APP_VERSION/CACHE_NAME trong sw.js va version trong version.json.
+5. Dia chi cap nhat:
+   - Mac dinh ./version.json cung may chu.
+   - Co the nhap URL version.json khac trong khung "PWA va cap nhat".
+   - Neu khac ten mien, may chu phai cho phep CORS.
+6. Du an JSON van duoc chon bang nut Mo JSON va duoc xu ly noi bo tren thiet bi.

@@ -1,0 +1,7 @@
+DWG SKETCH PWA V0.14.4
+
+- Thanh công cụ mặc định dạng biểu tượng; nút Biểu tượng/Có chữ chuyển chế độ và ghi nhớ lựa chọn.
+- Bộ lọc chọn cho phép bật đồng thời nhiều nhóm đối tượng.
+- Bộ lọc áp dụng cho chọn từng đối tượng và chọn vùng.
+- Các nút nhanh: Chỉ chữ, Chọn ngoài chữ, Chọn All, Bỏ chọn.
+- Trên điện thoại, mở Thêm > Lọc chọn để vào bảng bộ lọc.

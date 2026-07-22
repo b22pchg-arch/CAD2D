@@ -1,0 +1,87 @@
+{
+  "projectType": "DwgSketchProject",
+  "version": 1,
+  "savedAt": "2026-07-18T10:00:00+07:00",
+  "sourceFormat": "Sample",
+  "sourceFile": "sample.dwg",
+  "intermediateFile": null,
+  "unsupportedTypes": {},
+  "entities": [
+    {
+      "type": "LINE",
+      "layer": "SO_DO",
+      "handle": "1",
+      "colorIndex": 7,
+      "a": { "x": 0, "y": 0 },
+      "b": { "x": 100, "y": 0 },
+      "radius": 0,
+      "radiusY": 0,
+      "startDeg": 0,
+      "endDeg": 0,
+      "closed": false,
+      "points": [],
+      "height": 2.5,
+      "rotationDeg": 0
+    },
+    {
+      "type": "TEXT",
+      "layer": "CHU",
+      "handle": "2",
+      "colorIndex": 7,
+      "position": { "x": 15, "y": 8 },
+      "radius": 0,
+      "radiusY": 0,
+      "startDeg": 0,
+      "endDeg": 0,
+      "closed": false,
+      "points": [],
+      "text": "Chu DWG co the di chuyen",
+      "height": 5,
+      "rotationDeg": 0,
+      "fontName": "Arial"
+    }
+  ],
+  "overlays": [
+    {
+      "type": "RECTANGLE",
+      "color": 4294967295,
+      "stroke": 2,
+      "a": { "x": 10, "y": -10 },
+      "b": { "x": 55, "y": 20 },
+      "radius": 0,
+      "radiusY": 0,
+      "startDeg": 0,
+      "endDeg": 0,
+      "isSquare": false,
+      "height": 2.5,
+      "rotationDeg": 0
+    },
+    {
+      "type": "CIRCLE",
+      "color": 4294901760,
+      "stroke": 3,
+      "center": { "x": 80, "y": 10 },
+      "radius": 12,
+      "radiusY": 0,
+      "startDeg": 0,
+      "endDeg": 0,
+      "isSquare": false,
+      "height": 2.5,
+      "rotationDeg": 0
+    }
+  ],
+  "visibleLayers": ["SO_DO", "CHU"],
+  "exportRegion": {
+    "minX": -5,
+    "minY": -20,
+    "maxX": 110,
+    "maxY": 30
+  },
+  "display": {
+    "hideSmallText": true,
+    "minimumTextPixel": 4,
+    "dwgTextScale": 1,
+    "useDwgColors": false,
+    "exportBackground": "Dark"
+  }
+}

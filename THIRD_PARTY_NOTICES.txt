@@ -1,0 +1,17 @@
+THIRD-PARTY NOTICE
+==================
+
+DWG direct parsing uses:
+  @mlightcad/libredwg-web version 0.7.9
+  Project: https://github.com/mlightcad/libredwg-web
+  Package: https://www.npmjs.com/package/@mlightcad/libredwg-web
+  License declared by the package: GPL-3.0
+
+The package is loaded from the pinned jsDelivr URL:
+  https://cdn.jsdelivr.net/npm/@mlightcad/libredwg-web@0.7.9/
+
+libredwg-web is based on GNU LibreDWG:
+  https://www.gnu.org/software/libredwg/
+  https://github.com/LibreDWG/libredwg
+
+This PWA does not upload the user's DWG file to jsDelivr. The browser downloads only the parser code and processes the selected DWG locally.

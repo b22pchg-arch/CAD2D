@@ -1,0 +1,11 @@
+DWG SKETCH PWA V0.12.0 - XUAT DXF
+
+1. Mo hoac chinh sua file *.dwgsketch.json.
+2. Bam nut DXF tren thanh cong cu, hoac vao muc Xuat CAD 2D.
+3. PWA tao DXF ASCII AutoCAD 2000, giu nguyen toa do 1:1.
+4. Co the chi xuat layer dang hien va chon co xuat lop doi tuong bo sung hay khong.
+5. De tao DWG, chuyen DXF sang may Windows va dung phan mem C# voi nut Xuat DWG. PWA/Android khong the chay dxf2dwg.exe cua Windows.
+
+Lenh nhanh:
+- DXF: xuat DXF.
+- DWG: tao DXF co hau to _chuyen_DWG va hien huong dan chuyen doi.

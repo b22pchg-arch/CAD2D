@@ -1,0 +1,21 @@
+DWG SKETCH V0.13.2 - SỬA MỞ LẠI DWG VÀ CHỌN VÙNG
+
+1. MỞ LẠI DWG ĐÃ TẠO
+- Chương trình vẫn thử đọc DWG bằng dwgread -O JSON trước.
+- Nếu JSON LibreDWG có nan, inf, dấu nháy đơn hoặc cú pháp không đúng chuẩn JSON,
+  chương trình tự động gọi dwgread -O DXF và đọc bản vẽ từ DXF trung gian.
+- Cơ chế này phù hợp với DWG 2D do dxf2dwg.exe tạo ra và không sửa file DWG.
+- Thanh trạng thái sẽ ghi rõ khi đã dùng DXF dự phòng.
+
+2. CHỌN NHIỀU THEO VÙNG TRONG C#
+- Bấm nút Chọn vùng để vào chế độ chọn vùng độc lập.
+- Có thể bắt đầu kéo ngay cả khi con trỏ đang nằm trên một đối tượng.
+- Trái sang phải: Window, chỉ chọn đối tượng nằm hoàn toàn trong vùng.
+- Phải sang trái: Crossing, chọn đối tượng nằm trong hoặc cắt qua vùng.
+- Ctrl hoặc Shift: cộng thêm vào tập chọn hiện tại.
+- Lệnh W hoặc WINDOW mở chế độ chọn vùng.
+
+3. CHỌN VÙNG TRONG PWA
+- Có nút Chọn vùng riêng trên thanh công cụ.
+- Cơ chế hướng kéo và Ctrl/Shift giống bản C#.
+- Đã thêm dung sai 2 pixel và tính khung chữ xoay để chọn ổn định hơn.

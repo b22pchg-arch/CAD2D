@@ -1,0 +1,65 @@
+{
+  "id": "./",
+  "name": "DWG Sketch PWA Editor 2D",
+  "short_name": "DWG Sketch",
+  "description": "Mở trực tiếp DWG bằng WebAssembly ngay trong PWA; đọc DXF/JSON 2D, chỉnh sửa và xuất bản vẽ mà không cần chương trình chuyển đổi trên máy.",
+  "lang": "vi",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#202124",
+  "theme_color": "#202124",
+  "categories": [
+    "productivity",
+    "utilities",
+    "graphics"
+  ],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "./index.html",
+      "accept": {
+        "application/dxf": [
+          ".dxf"
+        ],
+        "application/json": [
+          ".json",
+          ".dwgsketch.json"
+        ],
+        "text/plain": [
+          ".dxf"
+        ],
+        "application/acad": [
+          ".dwg"
+        ],
+        "application/x-dwg": [
+          ".dwg"
+        ]
+      }
+    }
+  ],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+}

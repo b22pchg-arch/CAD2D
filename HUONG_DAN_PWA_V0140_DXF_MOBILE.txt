@@ -1,0 +1,19 @@
+DWG SKETCH PWA EDITOR V0.14.0
+
+1. MO TRUC TIEP DXF
+- Bam Mo JSON/DXF.
+- Chon file .dxf ASCII.
+- Ho tro LINE, POLYLINE, LWPOLYLINE, CIRCLE, ARC, ELLIPSE, TEXT, MTEXT.
+- Ky tu \U+XXXX trong DXF duoc giai ma thanh tieng Viet.
+- Doi tuong chua ho tro duoc thong ke tai muc Doc DXF truc tiep.
+
+2. DIEN THOAI MAN HINH NHO
+- Thanh tren chi giu Moi, Mo, Luu.
+- Thanh duoi: Mo, Chon, Keo, Tim, Layer, Them.
+- Nut Them mo bang cong cu lon de thao tac cam ung.
+- Layer va Thuoc tinh la ngan keo, co nut Dong.
+- Hai ngon tay zoom/pan; mot ngon tay chon/ve.
+
+3. PWA
+- Chay serve_local.cmd tren Windows hoac dua thu muc len HTTPS.
+- Mo index.html qua localhost/HTTPS de cai PWA va cap nhat.

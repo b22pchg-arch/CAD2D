@@ -1,0 +1,37 @@
+DWG SKETCH PWA EDITOR V0.14.2 - LENH CAD 2D
+================================================
+
+1. TRIM (TR)
+- Chọn trước một hoặc nhiều đối tượng làm biên.
+- Biên hỗ trợ: LINE, POLYLINE/LWPOLYLINE, hình chữ nhật, CIRCLE, ARC.
+- Chạy TR hoặc bấm Trim.
+- Bấm gần đầu của đường LINE cần cắt.
+- Phiên bản này chỉ sửa đối tượng đích loại LINE.
+
+2. EXTEND (EX)
+- Chọn trước các đối tượng làm biên đích.
+- Chạy EX hoặc bấm Extend.
+- Bấm gần đầu của đường LINE cần kéo dài.
+- Phiên bản này chỉ sửa đối tượng đích loại LINE.
+
+3. DIM (D)
+- Chạy D hoặc bấm Dim.
+- Chọn điểm đo thứ nhất.
+- Chọn điểm đo thứ hai.
+- Chọn vị trí đặt đường kích thước.
+- DIM được lưu trong JSON dự án; khi xuất DXF sẽ được bung thành LINE + TEXT để tương thích rộng.
+
+4. MATCHPROP (MA)
+- Chọn đúng một đối tượng nguồn.
+- Chạy MA hoặc bấm MatchProp.
+- Bấm lần lượt các đối tượng đích.
+- Sao chép màu/layer và một số thuộc tính phù hợp của chữ hoặc DIM.
+
+5. Trên điện thoại
+- Mở bảng Thêm để thấy Trim, Extend, Dim và MatchProp.
+- Có thể dùng dòng lệnh TR, EX, D, MA.
+- Nhấn Esc hoặc chuyển về Chọn để kết thúc lệnh đang chạy.
+
+Lưu ý
+- TRIM/EXTEND hiện ưu tiên bản vẽ 2D đơn giản và đường thẳng làm đối tượng đích.
+- Undo/Redo hoạt động sau các lệnh chỉnh sửa.

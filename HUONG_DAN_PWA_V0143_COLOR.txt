@@ -1,0 +1,9 @@
+DWG SKETCH PWA V0.14.3 - MÀU DXF/JSON
+
+- Đọc ACI 1-255, TrueColor group 420 và BYLAYER theo bảng LAYER.
+- Layer có mã màu âm được xem là đang tắt và không bật mặc định.
+- JSON dự án phiên bản 4 lưu layerStyles, trueColorArgb và colorMethod.
+- Khi xuất DXF R12, TrueColor được quy đổi sang ACI gần nhất.
+- BYBLOCK trong INSERT/BLOCK chưa thể phân giải chính xác vì PWA chưa bung block.
+
+Tệp thử: sample_color_aci_truecolor.dxf

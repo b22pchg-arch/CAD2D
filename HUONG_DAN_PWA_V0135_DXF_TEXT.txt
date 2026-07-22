@@ -1,0 +1,4 @@
+DWG SKETCH PWA V0.13.5
+- Xuất DXF dạng chữ tạo *_TEXT_UTF8.dxf.
+- DXF nguồn DWG tạo *_DWG_SOURCE_TEXT.dxf.
+- Cả hai giữ TEXT, không chuyển chữ thành hình học.

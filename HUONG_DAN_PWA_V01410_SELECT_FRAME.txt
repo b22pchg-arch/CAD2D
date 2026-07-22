@@ -1,0 +1,10 @@
+DWG SKETCH PWA V0.14.10 - CHỌN THEO KHUNG XUẤT
+================================================
+
+- Trong Bộ lọc chọn đối tượng, tích một hoặc nhiều loại.
+- Phạm vi: Toàn bản vẽ / Trong khung xuất / Vùng chọn gần nhất.
+- Crossing bật: lấy đối tượng nằm trong hoặc cắt phạm vi.
+- Crossing tắt: chỉ lấy đối tượng nằm hoàn toàn trong phạm vi.
+- Nút Chọn trong khung xuất dùng ngay bộ lọc hiện tại.
+- Lệnh nhanh: SELF hoặc SELFRAME.
+- Mỗi tab giữ bản vẽ, layer, zoom, undo/redo và khung xuất riêng.

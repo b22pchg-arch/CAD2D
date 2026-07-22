@@ -1,0 +1,14 @@
+DWG Sketch PWA V0.14.6
+
+COPY:
+1. Chọn một hoặc nhiều đối tượng.
+2. Chạy CO/COPY hoặc bấm Copy.
+3. Chạm điểm gốc, sau đó chạm điểm đích.
+Ctrl+C vẫn sao chép vào clipboard; Paste vẫn dán lệch nhẹ.
+
+MATCHPROP vùng:
+1. Chọn đúng một đối tượng nguồn.
+2. Chạy MA/MATCHPROP.
+3. Bấm từng đích hoặc kéo vùng.
+Kéo trái sang phải = Window; phải sang trái = Crossing.
+Bộ lọc chọn hiện tại được áp dụng cho vùng đích.

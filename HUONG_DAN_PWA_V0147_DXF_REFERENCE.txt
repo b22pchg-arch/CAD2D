@@ -1,0 +1,6 @@
+DWG Sketch PWA V0.14.7
+======================
+
+- PWA tiếp tục đọc trực tiếp DXF ASCII với màu ACI/TrueColor/BYLAYER và chữ Unicode.
+- Phiên bản này được dùng làm chuẩn đối chiếu cho bộ đọc DXF của C# V0.14.7.
+- Không có thay đổi làm mất các lệnh COPY theo điểm, MATCHPROP vùng, chọn liên kết và bộ lọc chọn.

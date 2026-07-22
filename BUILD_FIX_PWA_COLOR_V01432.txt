@@ -1,0 +1,17 @@
+DWG SKETCH PWA V0.14.3.2 - SỬA HIỂN THỊ MÀU DXF
+
+Lỗi đã sửa:
+- Khi group code 420 không tồn tại, JavaScript Number('') trả về 0.
+- PWA vì vậy hiểu nhầm mọi đối tượng không có TrueColor thành TrueColor đen.
+- Hàm đọc số DXF cũng hiểu nhầm trường số vắng mặt thành 0 thay vì dùng giá trị mặc định.
+
+Hiệu chỉnh:
+1. Chỉ đọc TrueColor khi thực sự có group code 420 và giá trị không rỗng.
+2. Group code số vắng mặt sử dụng đúng giá trị mặc định.
+3. Khi mở DXF, PWA tự bật Dùng màu DWG/DXF.
+4. Khôi phục thiết lập nền, bắt điểm và dung sai từ dự án JSON.
+5. Thông tin nạp DXF hiển thị số đối tượng BYLAYER và TrueColor.
+
+Kiểm tra:
+- Mở sample_color_aci_truecolor.dxf.
+- Phải thấy các đường đỏ, màu ACI 140, ACI 220 và TrueColor.

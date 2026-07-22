@@ -1,0 +1,7 @@
+DWG SKETCH PWA V0.13.3
+
+- Chọn vùng nhận cả đường ngang và đường dọc có bounds bằng 0.
+- Tính vùng chọn cung theo đúng đoạn cung.
+- Dung sai biên 4 px.
+- Góc tạo mới trong PWA nằm riêng ở nhóm Tạo đối tượng mới và không bị thay đổi khi chọn đối tượng cũ.
+- Nút Tạo DXF để chuyển DWG mặc định gộp layer về 0 và chuyển chữ có dấu sang ASCII.

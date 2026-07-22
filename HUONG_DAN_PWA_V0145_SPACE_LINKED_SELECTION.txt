@@ -1,0 +1,8 @@
+DWG SKETCH PWA V0.14.5 - SPACE COMMAND + LINKED SELECTION
+==============================================================
+
+- Enter hoặc phím cách đều chạy nội dung trong ô lệnh.
+- Chọn liên kết lần theo hình học nối/chạm/giao nhau.
+- Có thể chọn thêm TEXT/MTEXT nằm gần mạng hình học.
+- Phạm vi: toàn bản vẽ, khung xuất, vùng Window/Crossing gần nhất.
+- SL: chọn theo hạt giống. SLA: tự chọn toàn bản vẽ. SLF: khung xuất. SLR: vùng chọn gần nhất.

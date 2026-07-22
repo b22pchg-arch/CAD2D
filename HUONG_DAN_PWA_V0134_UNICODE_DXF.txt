@@ -1,0 +1,4 @@
+DWG SKETCH PWA V0.13.4
+- Nut DXF xuat AC1021 UTF-8, giu nguyen chu tieng Viet.
+- PWA khong chay dxf2dwg.exe. Khi can DWG, luu JSON va mo bang C# V0.13.4.
+- C# se chuyen chu thanh duong bao, tao DWG R2000 va sidecar JSON.

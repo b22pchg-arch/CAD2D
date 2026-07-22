@@ -1,0 +1,7 @@
+DWG Sketch PWA V0.14.9
+
+- Chọn nhiều DXF/JSON trong hộp Mở để tạo nhiều tab.
+- Mỗi tab giữ riêng zoom, layer, Undo/Redo và trạng thái chưa lưu.
+- Dấu * trước tên tab báo có thay đổi chưa lưu.
+- Nút × đóng riêng từng tab; ứng dụng hỏi xác nhận khi tab chưa lưu.
+- Trên điện thoại, thanh tab cuộn ngang.

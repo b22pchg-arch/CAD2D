@@ -1,0 +1,42 @@
+DWG SKETCH PWA EDITOR V0.15.0 - ĐỌC DWG TRỰC TIẾP BẰNG WEBASSEMBLY
+====================================================================
+
+1. NỘI DUNG MỚI
+- Có thể chọn hoặc kéo thả trực tiếp file .DWG vào PWA.
+- File DWG được giải mã ngay trong trình duyệt bằng WebAssembly trong Web Worker.
+- Không gọi C#, không chạy EXE, không dùng máy chủ chuyển đổi và không tạo file DXF trung gian.
+- Kết quả được chuyển vào mô hình DwgSketchProject hiện có để tiếp tục chọn, sửa, di chuyển, đổi màu, quản lý layer, lưu JSON và xuất PNG/PDF/DXF.
+
+2. KHỞI TẠO BỘ ĐỌC DWG
+- PWA phải được mở từ HTTPS hoặc localhost. Không dùng đường dẫn file://.
+- Lần đầu bấm “Chuẩn bị bộ đọc DWG” hoặc mở một file DWG, thiết bị cần có mạng để nhận gói WebAssembly khoảng 10 MB.
+- Service Worker lưu các thành phần này vào Cache Storage. Sau khi hiện thông báo “Bộ đọc DWG đã sẵn sàng”, có thể tắt mạng và tiếp tục mở DWG trên cùng trình duyệt/PWA.
+- Xóa dữ liệu trang web hoặc Cache Storage sẽ làm mất bộ đọc đã lưu; khi đó cần chuẩn bị lại một lần.
+
+3. ĐỐI TƯỢNG ĐÃ ĐƯA VÀO MÔ HÌNH PWA
+- LINE, CIRCLE, ARC.
+- LWPOLYLINE, POLYLINE2D, POLYLINE3D; có nội suy đoạn bulge.
+- ELLIPSE và SPLINE được xấp xỉ thành polyline để dùng được với bộ hiển thị/chỉnh sửa hiện tại.
+- TEXT, MTEXT, ATTRIB, ATTDEF.
+- DIMENSION tuyến tính cơ bản.
+- INSERT/BLOCK cơ bản, gồm dịch chuyển, xoay, tỷ lệ và mảng hàng/cột; có giới hạn chống tràn bộ nhớ.
+- POINT được biểu diễn bằng hai nét chữ thập.
+
+4. GIỚI HẠN HIỆN TẠI
+- Các đối tượng 3D, HATCH phức tạp, IMAGE, XREF, proxy/custom entity và một số loại DIM có thể bị bỏ qua.
+- Block động và đối tượng của phần mềm CAD chuyên ngành có thể không giải mã đủ.
+- Font SHX đặc biệt được thay bằng font trình duyệt theo cơ chế font hiện có; hình dáng có thể khác CAD gốc.
+- File DWG quá lớn có thể vượt giới hạn bộ nhớ của trình duyệt, đặc biệt trên điện thoại RAM thấp.
+- PWA chỉ đọc DWG; chỉnh sửa được lưu dưới dạng JSON/DXF hoặc xuất ảnh/PDF, chưa ghi ngược đầy đủ thành DWG.
+
+5. KIỂM TRA NHANH
+- Mở PWA từ HTTPS/localhost.
+- Bấm “Chuẩn bị bộ đọc DWG”, chờ báo sẵn sàng.
+- Chọn một DWG 2D nhỏ trước để kiểm tra.
+- Bật “Dùng màu DWG/DXF”.
+- Xem dòng thống kê: số đối tượng nguồn, số đối tượng hiển thị, layer, block và loại chưa chuyển được.
+- Tắt mạng, đóng/mở lại PWA và thử mở lại DWG để kiểm tra cache offline.
+
+6. AN TOÀN DỮ LIỆU
+- Nội dung DWG được xử lý trong bộ nhớ của thiết bị.
+- PWA không tải file DWG của người dùng lên CDN. CDN chỉ cung cấp mã JavaScript/WebAssembly của bộ đọc.

@@ -1,0 +1,19 @@
+DWG SKETCH PWA V0.13.0
+
+1. CHON NHIEU THEO VUNG
+- Chon cong cu Chon.
+- Keo tu trai sang phai: Window, chi chon doi tuong nam hoan toan trong khung xanh la.
+- Keo tu phai sang trai: Crossing, chon doi tuong nam trong hoac cat qua khung xanh duong.
+- Giu Ctrl/Shift de cong them vao tap dang chon.
+
+2. TIM CHU
+- Bam Tim chu hoac dung lenh F/FIND.
+- Ho tro Chua, Bang dung, Bat dau bang.
+- Co the bo qua hoa/thuong va dau tieng Viet.
+- Bam Truoc/Tiep hoac lenh FN de chuyen ket qua; ban ve tu zoom va chon doi tuong.
+
+3. DOI XUNG
+- Chon mot hoac nhieu doi tuong.
+- Bam Doi xung hoac go MI/MIRROR.
+- Keo hai diem tao truc doi xung.
+- Undo/Redo hoat dong binh thuong.

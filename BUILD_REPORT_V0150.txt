@@ -1,0 +1,21 @@
+BUILD REPORT - DWG SKETCH PWA V0.15.0 DIRECT DWG WASM
+=====================================================
+
+Đã kiểm tra:
+- Cú pháp JavaScript nội tuyến trong index.html: OK.
+- Cú pháp dwg-worker.js: OK.
+- Cú pháp sw.js: OK.
+- manifest.webmanifest và version.json: JSON hợp lệ.
+- Tất cả file CORE_ASSETS của Service Worker: tồn tại.
+- Không có id HTML bị trùng.
+- Bộ đọc DXF V0.14.11: thử với sample_color_aci_truecolor.dxf, đọc được 8 đối tượng và màu CAD vẫn bật.
+- Luồng mở .DWG của giao diện: thử bằng Worker giả lập, dự án DWG được nạp vào tab, cập nhật thống kê và mô hình chỉnh sửa.
+- Adapter DWG: thử bằng cơ sở dữ liệu giả lập gồm LINE, CIRCLE, LWPOLYLINE, TEXT và INSERT/BLOCK; phép biến đổi block hoạt động.
+
+Chưa thể kiểm thử trong môi trường đóng gói:
+- Không có file DWG thử nghiệm đi kèm gói người dùng.
+- Môi trường build không cho tải/chạy tài nguyên WebAssembly ngoài Internet trong Chromium, nên cần kiểm thử thực tế lần đầu trên trình duyệt có mạng bằng một DWG của người dùng.
+
+Lưu ý triển khai:
+- Lần đầu bấm “Chuẩn bị bộ đọc DWG” cần mạng để nhận @mlightcad/libredwg-web 0.7.9 và file WASM khoảng 10 MB.
+- Sau khi Service Worker cache thành công, các lần đọc sau có thể hoạt động offline trên cùng thiết bị/trình duyệt.

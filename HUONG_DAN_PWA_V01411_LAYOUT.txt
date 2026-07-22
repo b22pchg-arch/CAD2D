@@ -1,0 +1,5 @@
+DWG SKETCH PWA V0.14.11
+=======================
+- Sửa hiển thị bộ lọc và danh sách phạm vi trên màn hình hẹp.
+- Nhãn không còn bị tách thành từng ký tự.
+- Select phạm vi và nút thao tác dùng toàn bộ chiều rộng panel.
