@@ -1,6 +1,6 @@
 {
-  "version": "0.15.1",
-  "releasedAt": "2026-07-22T21:30:00+07:00",
-  "notes": "Khắc phục thiếu màu DWG bằng cách đọc lại ACI/TrueColor gốc từ bảng LAYER trong WebAssembly; sửa kế thừa ByLayer/ByBlock; nhận diện style font TCVN3 (.VnTime, .VnArial, .VnArialH...) và chuyển nội dung sang Unicode tiếng Việt; sửa mã \\U+XXXX đúng 4 chữ số.",
+  "version": "0.15.2",
+  "releasedAt": "2026-07-22T23:45:00+07:00",
+  "notes": "Khôi phục thực thi lệnh nhanh bằng phím cách trên bàn phím Android qua keydown/beforeinput/input; khi mở dòng lệnh trên điện thoại tự đặt con trỏ; chặn vuốt Back ngoài ý muốn, vuốt lần hai mới thoát; tự lưu toàn bộ tab bản vẽ vào IndexedDB và tự khôi phục khi mở lại PWA.",
   "downloadUrl": ""
 }
