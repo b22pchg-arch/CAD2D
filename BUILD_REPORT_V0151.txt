@@ -1,0 +1,40 @@
+BUILD REPORT - DWG SKETCH PWA V0.15.1 COLOR + VIETNAMESE FONT FIX
+=================================================================
+
+Nguồn nâng cấp: V0.15.0 Direct DWG WebAssembly.
+Ngày: 22/07/2026.
+
+THAY ĐỔI CHÍNH
+1. Color adapter mới:
+   - ACI, TrueColor, ByLayer, ByBlock.
+   - Đọc màu LAYER gốc qua WASM dynapi khi khả dụng.
+   - Workaround lỗi libredwg-web đối với layer color.method=0.
+   - Không gán nhầm số ACI nhỏ thành RGB gần màu đen.
+2. Text adapter mới:
+   - Đọc STYLE/font nguồn.
+   - TCVN3 -> Unicode, hỗ trợ font .VnTime/.VnArial/.VnArialH và biến thể.
+   - Unicode escape \U+XXXX đúng 4 ký tự.
+   - MTEXT control-code an toàn hơn.
+3. Canvas và bộ xuất ảnh dùng fontCss Unicode đã ánh xạ.
+4. Cache PWA đổi sang 0.15.1 để buộc nhận file mới.
+
+KIỂM TRA ĐÃ THỰC HIỆN
+- node --check: dwg-worker.js đạt.
+- node --check: JavaScript nội tuyến index.html đạt.
+- Unit test bộ phân loại màu:
+  + ACI nhỏ trong trường color.
+  + layer mặc định trắng.
+  + ByLayer entity.
+  + DWG cũ method=0/index ACI.
+  + packed C3 ACI và C2 TrueColor.
+- Unit test chữ:
+  + giải mã \U+1ECD đúng 4 hex.
+  + chuyển TCVN3 sang Unicode.
+  + nhận diện VNTIME/VNARIAL/VHARIAL.
+- Kiểm tra manifest/version/cache asset đạt.
+
+CHƯA THỂ KIỂM TRA TỰ ĐỘNG TRONG MÔI TRƯỜNG ĐÓNG GÓI
+- Chromium bị chính sách môi trường chặn chạy trang local/GitHub.
+- Vì vậy cần kiểm tra trực quan file LD Tinh (1)(2).dwg trên trình duyệt người dùng.
+- Bản sửa được xây dựng dựa trên chính cấu trúc màu/font của file mẫu và lỗi màu
+  layer old-format đã được xác định ở libredwg-web.

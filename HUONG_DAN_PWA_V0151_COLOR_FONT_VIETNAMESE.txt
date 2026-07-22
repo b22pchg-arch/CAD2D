@@ -1,0 +1,40 @@
+DWG SKETCH PWA EDITOR V0.15.1 - SỬA MÀU VÀ FONT TIẾNG VIỆT
+================================================================
+
+1. NỘI DUNG SỬA MÀU DWG
+- Đọc trực tiếp màu gốc của bảng LAYER từ bộ nhớ LibreDWG WebAssembly khi API thô được cung cấp.
+- Khôi phục màu ACI của DWG cũ có color.method = 0 và color.index chứa màu thật.
+- Nhận đúng màu đóng gói C3 = ACI và C2 = TrueColor.
+- Không còn coi mọi giá trị entity.color/layer.color là TrueColor.
+- Xử lý đúng thứ tự: màu trực tiếp -> ACI -> ByBlock -> ByLayer -> màu layer.
+- Màu ACI 7 tiếp tục tự đổi trắng/đen theo nền hiển thị.
+- Có cơ chế suy luận an toàn khi trình duyệt hoặc bản LibreDWG không mở API bảng thô.
+
+2. NỘI DUNG SỬA FONT VÀ CHỮ TIẾNG VIỆT
+- Đọc bảng STYLE của DWG và giữ lại tên style, tên font nguồn, big-font.
+- Nhận diện các font TCVN3/ABC thường gặp trong bản vẽ cũ:
+  .VnTime, VNTIME.TTF, .VnArial, VNARIAL.TTF,
+  .VnArialH, VHARIAL.TTF, .VnMemorandumH, VHMEMO.TTF...
+- Chuyển mã TCVN3 sang Unicode trước khi vẽ trên Canvas/PDF/PNG.
+- Font Times cũ được thay bằng Times New Roman; font Arial cũ được thay bằng Arial.
+- Không đóng gói hoặc phát tán file font của hệ thống.
+- Sửa mã AutoCAD Unicode dạng \U+XXXX theo đúng 4 chữ số hex, tránh nuốt ký tự A-F đứng sau.
+- Xử lý TEXT, MTEXT, ATTRIB, ATTDEF và chữ ghi kích thước.
+
+3. CẬP NHẬT BẢN GITHUB/PWA
+Do Service Worker lưu bản cũ, sau khi tải V0.15.1 lên GitHub Pages:
+- Mở trang và nhấn Ctrl+F5.
+- Nếu vẫn hiện PWA 0.15.0: DevTools -> Application -> Service Workers -> Unregister,
+  sau đó Application -> Storage -> Clear site data và tải lại trang.
+- Khi góc giao diện hiện “PWA 0.15.1” thì bản mới đã hoạt động.
+
+4. THÔNG TIN SAU KHI MỞ DWG
+Khung trạng thái DWG sẽ cho biết:
+- Có khôi phục bảng màu gốc hay chỉ dùng bộ suy luận tương thích.
+- Số layer được đọc màu gốc.
+- Số đối tượng chữ TCVN3 đã chuyển sang Unicode.
+
+5. GIỚI HẠN
+- Hình dáng chữ có thể khác nhẹ so với font TCVN3/SHX gốc vì trình duyệt dùng font Unicode thay thế.
+- Nội dung tiếng Việt được ưu tiên đọc đúng và tìm kiếm/sửa được.
+- Các font ký hiệu SHX chuyên dụng chưa được dựng đường nét chính xác trong phiên bản này.

@@ -1,6 +1,6 @@
 {
-  "version": "0.15.0",
-  "releasedAt": "2026-07-22T15:00:00+07:00",
-  "notes": "Tích hợp đọc DWG trực tiếp trong HTML/PWA bằng LibreDWG WebAssembly; xử lý trong Web Worker; mở rộng block INSERT cơ bản; giữ nguyên bộ đọc DXF/JSON và toàn bộ chức năng chỉnh sửa V0.14.11.",
+  "version": "0.15.1",
+  "releasedAt": "2026-07-22T21:30:00+07:00",
+  "notes": "Khắc phục thiếu màu DWG bằng cách đọc lại ACI/TrueColor gốc từ bảng LAYER trong WebAssembly; sửa kế thừa ByLayer/ByBlock; nhận diện style font TCVN3 (.VnTime, .VnArial, .VnArialH...) và chuyển nội dung sang Unicode tiếng Việt; sửa mã \\U+XXXX đúng 4 chữ số.",
   "downloadUrl": ""
 }

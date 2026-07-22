@@ -1,4 +1,4 @@
-/* DWG Sketch PWA V0.15.0 - direct DWG reader worker.
+/* DWG Sketch PWA V0.15.1 - direct DWG reader worker.
  * LibreDWG WebAssembly is loaded in this Worker, so parsing never calls a desktop converter.
  * Upstream: @mlightcad/libredwg-web 0.7.9 (GPL-3.0)
  */
@@ -25,8 +25,152 @@ const n = (value, fallback = 0) => {
 };
 const p2 = (value) => ({ x: n(value?.x ?? value?.X), y: n(value?.y ?? value?.Y) });
 const upper = (value) => String(value ?? '').trim().toUpperCase();
-const colorArgb = (value) => value === undefined || value === null ? null : ((0xff000000 | (n(value) & 0xffffff)) >>> 0);
 const clonePoint = (p) => ({ x: n(p?.x), y: n(p?.y) });
+const int = (value, fallback = 0) => Number.isFinite(Number(value)) ? Math.trunc(Number(value)) : fallback;
+
+function rawNumber(value) {
+  if (value === undefined || value === null || value === '') return null;
+  if (typeof value === 'object') value = value.rgb ?? value.color ?? value.value ?? value.data ?? null;
+  if (value === undefined || value === null || value === '') return null;
+  if (typeof value === 'string') {
+    const text = value.trim();
+    if (!text) return null;
+    if (/^(?:0x)?[0-9a-f]{6,8}$/i.test(text) && /[a-f]/i.test(text)) return parseInt(text.replace(/^0x/i, ''), 16) >>> 0;
+  }
+  const out = Number(value);
+  return Number.isFinite(out) ? (Math.trunc(out) >>> 0) : null;
+}
+function argbFromRgb(rgb) {
+  const value = rawNumber(rgb);
+  return value === null ? null : ((0xff000000 | (value & 0xffffff)) >>> 0);
+}
+function methodName(value) {
+  const text = String(value ?? '').toLowerCase();
+  const number = Number(value);
+  if (number === 4 || text.includes('true')) return 'TrueColor';
+  if (number === 3 || text.includes('aci')) return 'Aci';
+  if (number === 2 || text.includes('byblock')) return 'ByBlock';
+  if (number === 1 || text.includes('bylayer')) return 'ByLayer';
+  return '';
+}
+function unwrapDyn(value) {
+  if (value && typeof value === 'object' && 'data' in value) return value.data;
+  if (value && typeof value === 'object' && 'value' in value && Object.keys(value).length <= 3) return value.value;
+  return value;
+}
+function handleKey(value) {
+  if (value === undefined || value === null) return '';
+  if (Array.isArray(value)) return value.map(x => int(x)).join(':');
+  if (typeof value === 'object') return handleKey(value.handle ?? value.value ?? value.id ?? '');
+  return String(value).trim().toUpperCase();
+}
+
+/* libredwg-web <= 0.7.9 may lose old-format layer ACI colors while converting
+ * the raw DWG database. Read the original LAYER/STYLE objects through the
+ * exposed WASM API when it is available, then use the converted database only
+ * for geometry. All calls are feature-detected so newer engines remain valid. */
+function extractRawCadTables(engine, dwgPtr) {
+  const api = engine?.instance || engine;
+  const fn = name => typeof api?.[name] === 'function' ? api[name].bind(api) :
+    (typeof engine?.[name] === 'function' ? engine[name].bind(engine) : null);
+  const getCount = fn('dwg_get_num_objects'), getObject = fn('dwg_get_object');
+  const getType = fn('dwg_object_get_fixedtype'), toTio = fn('dwg_object_to_object_tio');
+  const dynValue = fn('dwg_dynapi_entity_value');
+  const result = { layers: new Map(), styles: new Map(), usedRawApi: false, error: '' };
+  if (!getCount || !getObject || !getType || !toTio || !dynValue) return result;
+  try {
+    const count = Math.max(0, Math.min(10_000_000, int(getCount(dwgPtr))));
+    for (let i = 0; i < count; i++) {
+      const objectPtr = getObject(dwgPtr, i);
+      if (!objectPtr) continue;
+      const fixedType = int(getType(objectPtr));
+      if (fixedType !== 51 && fixedType !== 53) continue; // LAYER / STYLE
+      const tio = toTio(objectPtr);
+      if (!tio) continue;
+      const read = field => {
+        try { return unwrapDyn(dynValue(tio, field)); } catch { return undefined; }
+      };
+      if (fixedType === 51) {
+        const name = String(read('name') ?? '').trim();
+        if (!name) continue;
+        const color = read('color');
+        result.layers.set(upper(name), {
+          name,
+          index: int(color?.index, NaN),
+          method: int(color?.method, NaN),
+          rgb: rawNumber(color?.rgb),
+          handle: handleKey(read('handle'))
+        });
+      } else {
+        const name = String(read('name') ?? '').trim();
+        if (!name) continue;
+        result.styles.set(upper(name), {
+          name,
+          fontFile: String(read('font_file') ?? read('font') ?? '').trim(),
+          bigFontFile: String(read('bigfont_file') ?? read('bigfont') ?? '').trim(),
+          handle: handleKey(read('handle'))
+        });
+      }
+    }
+    result.usedRawApi = result.layers.size > 0 || result.styles.size > 0;
+  } catch (error) {
+    result.error = error?.message || String(error);
+  }
+  return result;
+}
+
+function normalizeCadColor(colorIndex, color, kind = 'entity', rawColor = null, reportedMethod = null) {
+  let ci = int(colorIndex, kind === 'layer' ? 7 : 256);
+  const off = kind === 'layer' && ci < 0;
+  ci = Math.abs(ci);
+  const declared = methodName(reportedMethod);
+  const packageRgb = rawNumber(color);
+  const packedMethod = packageRgb === null ? -1 : ((packageRgb >>> 24) & 0xff);
+  const packageLow = packageRgb === null ? null : (packageRgb & 0xffffff);
+  const rawPacked = rawNumber(rawColor?.rgb);
+  const rawPackedMethod = rawPacked === null ? -1 : ((rawPacked >>> 24) & 0xff);
+  const rawMethod = Number.isFinite(Number(rawColor?.method)) ? int(rawColor.method) : rawPackedMethod;
+  const rawIndex = Number.isFinite(Number(rawColor?.index)) ? Math.abs(int(rawColor.index)) : null;
+  const rawLow = rawPacked === null ? null : (rawPacked & 0xffffff);
+  const make = (method, index, rgb, reason) => ({
+    colorIndex: index, trueColorArgb: rgb === null ? null : argbFromRgb(rgb), colorMethod: method,
+    sourceColorReason: reason, sourceColorRaw: packageRgb, sourceColorIndex: ci, isOff: off
+  });
+
+  // Exact raw DWG color has priority over the converter's synthesized fields.
+  if (rawMethod === 0xc3 || rawPackedMethod === 0xc3) {
+    const aci = (rawLow & 0xff) || rawIndex;
+    if (aci >= 1 && aci <= 255) return make('Aci', aci, null, 'raw-dwg-method-c3');
+  }
+  if (rawMethod === 0xc2 || rawPackedMethod === 0xc2) return make('TrueColor', 256, rawLow, 'raw-dwg-method-c2');
+  if ((rawMethod === 0 || !Number.isFinite(rawMethod)) && rawIndex >= 1 && rawIndex <= 255) return make('Aci', rawIndex, null, 'raw-dwg-old-aci-index');
+
+  if (declared === 'TrueColor' && packageLow !== null) return make('TrueColor', 256, packageLow, 'reported-truecolor');
+  if (declared === 'Aci' && ci >= 1 && ci <= 255) return make('Aci', ci, null, 'reported-aci');
+  if (declared === 'ByBlock' && kind !== 'layer') return make('ByBlock', 0, null, 'reported-byblock');
+  if (declared === 'ByLayer' && kind !== 'layer') return make('ByLayer', 256, null, 'reported-bylayer');
+
+  if (ci >= 1 && ci <= 255) return make('Aci', ci, null, 'color-index');
+  if (packedMethod === 0xc3) {
+    const aci = packageLow & 0xff;
+    if (aci >= 1 && aci <= 255) return make('Aci', aci, null, 'packed-method-c3');
+  }
+  if (packedMethod === 0xc2) return make('TrueColor', 256, packageLow, 'packed-method-c2');
+
+  // Some libredwg-web versions expose an ACI as a small integer in `color`.
+  if (packageRgb !== null && packageRgb >= 1 && packageRgb <= 255) return make('Aci', packageRgb, null, 'small-color-value-as-aci');
+
+  if (kind !== 'layer' && ci === 0) return make('ByBlock', 0, null, 'color-index-byblock');
+  if (kind !== 'layer' && ci === 256) return make('ByLayer', 256, null, 'color-index-bylayer');
+
+  // A layer cannot itself be BYLAYER. White is the safest adaptive fallback
+  // when the converter has replaced an unknown old ACI with 0xFFFFFF.
+  if (kind === 'layer' && ci === 256 && packageRgb === 0xffffff) return make('Aci', 7, null, 'converter-default-white-fallback');
+  if (kind === 'layer' && packageLow !== null && packageLow > 255) return make('TrueColor', 256, packageLow, 'layer-rgb-fallback');
+  if (kind === 'layer') return make('Aci', 7, null, 'layer-default-aci7');
+  if (packageLow !== null && packageLow > 255) return make('TrueColor', 256, packageLow, 'entity-rgb-fallback');
+  return make('ByLayer', 256, null, 'entity-default-bylayer');
+}
 
 function makeTransform(parent = null, insertion = { x: 0, y: 0 }, sx = 1, sy = 1, rotation = 0, base = { x: 0, y: 0 }) {
   const c = Math.cos(rotation), s = Math.sin(rotation);
@@ -43,22 +187,28 @@ function makeTransform(parent = null, insertion = { x: 0, y: 0 }, sx = 1, sy = 1
 }
 const IDENTITY = makeTransform();
 
-function commonProps(entity, inherited = null) {
-  let ci = entity?.colorIndex;
-  if (ci === undefined || ci === null) ci = 256;
-  let tc = colorArgb(entity?.color);
+function commonProps(entity, inherited = null, ctx = null) {
   let layer = String(entity?.layer || inherited?.layer || '0');
   if (layer === '0' && inherited?.layer) layer = inherited.layer;
-  if (Number(ci) === 0 && inherited) {
-    ci = inherited.colorIndex ?? 256;
-    tc = inherited.trueColorArgb ?? tc;
+  let spec = normalizeCadColor(entity?.colorIndex, entity?.color, 'entity', (entity?.color && typeof entity.color === 'object') ? entity.color : null, entity?.colorMethod);
+  if (spec.colorMethod === 'ByBlock' && inherited) {
+    spec = {
+      ...spec,
+      colorIndex: inherited.colorIndex ?? 256,
+      trueColorArgb: inherited.trueColorArgb ?? null,
+      colorMethod: inherited.colorMethod || ((inherited.trueColorArgb ?? null) !== null ? 'TrueColor' : 'ByLayer'),
+      sourceColorReason: 'inherited-byblock:' + (inherited.sourceColorReason || inherited.colorMethod || 'parent')
+    };
   }
+  if (ctx?.colorStats) ctx.colorStats[spec.sourceColorReason] = (ctx.colorStats[spec.sourceColorReason] || 0) + 1;
   return {
     layer,
-    colorIndex: n(ci, 256),
-    trueColorArgb: tc,
-    colorMethod: tc !== null ? 'TrueColor' : n(ci, 256) === 0 ? 'ByBlock' : n(ci, 256) === 256 ? 'ByLayer' : 'Aci',
-    sourceHandle: String(entity?.handle || ''),
+    colorIndex: spec.colorIndex,
+    trueColorArgb: spec.trueColorArgb,
+    colorMethod: spec.colorMethod,
+    sourceColorReason: spec.sourceColorReason,
+    sourceColorRaw: spec.sourceColorRaw,
+    sourceHandle: handleKey(entity?.handle),
     sourceType: upper(entity?.type),
     lineType: entity?.lineType || null,
     lineweight: entity?.lineweight ?? null
@@ -137,20 +287,135 @@ function circlePoints(center, radius, transform, start = 0, end = Math.PI * 2) {
   return { points: pts, closed };
 }
 
-function cleanMText(value) {
-  return String(value ?? '')
-    .replace(/\\P/gi, '\n')
-    .replace(/\\~+/g, ' ')
-    .replace(/\\[A-Za-z][^;]*;/g, '')
-    .replace(/[{}]/g, '')
-    .replace(/%%d/gi, '°')
-    .replace(/%%p/gi, '±')
-    .replace(/%%c/gi, 'Ø');
+const TCVN3_SOURCE = 'µ¸¶·¹¨»¾¼½Æ©ÇÊÈÉË®ÌÐÎÏÑªÒÕÓÔÖ×ÝØÜÞßãáâä«åèæçé¬êíëìîïóñòô­õøö÷ùúýûüþ¡¢§£¤¥¦';
+const TCVN3_UNICODE = 'àáảãạăằắẳẵặâầấẩẫậđèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵĂÂĐÊÔƠƯ';
+const TCVN3_MAP = new Map([...TCVN3_SOURCE].map((ch, i) => [ch, [...TCVN3_UNICODE][i]]));
+
+function decodeCadUnicodeEscapes(value, stats = null) {
+  return String(value ?? '').replace(/\\U\+([0-9A-Fa-f]{4})/g, (_, hex) => {
+    if (stats) stats.unicodeEscapesDecoded++;
+    return String.fromCodePoint(parseInt(hex, 16));
+  });
+}
+function cleanCadText(value, isMText = false, stats = null) {
+  let text = decodeCadUnicodeEscapes(value, stats)
+    .replace(/%%d/gi, '°').replace(/%%p/gi, '±').replace(/%%c/gi, 'Ø')
+    .replace(/\\~/g, ' ');
+  if (isMText) {
+    text = text.replace(/\\P/gi, '\n')
+      .replace(/\\S([^;]*);/gi, (_, body) => String(body).replace(/[#^]/g, '/'))
+      .replace(/\\[ACFHQTW][^;]*;/gi, '')
+      .replace(/\\[LlOoKk]/g, '')
+      .replace(/\\\\/g, '\\')
+      .replace(/[{}]/g, '');
+  }
+  return text.replace(/\r/g, '').normalize('NFC');
+}
+function decodeTcvn3(value, uppercaseFont = false) {
+  let changed = false, output = '';
+  for (const ch of String(value ?? '')) {
+    let mapped = TCVN3_MAP.get(ch);
+    if (mapped !== undefined) {
+      changed = true;
+      if (uppercaseFont) mapped = mapped.toLocaleUpperCase('vi-VN');
+      output += mapped;
+    } else output += ch;
+  }
+  return { text: output.normalize('NFC'), changed };
+}
+function styleFontFile(entry) {
+  return String(entry?.fontFile ?? entry?.font_file ?? entry?.font ?? entry?.fontName ?? entry?.fileName ?? '').trim();
+}
+function styleBigFontFile(entry) {
+  return String(entry?.bigFontFile ?? entry?.bigfont_file ?? entry?.bigFont ?? entry?.bigfont ?? '').trim();
+}
+function detectTextEncoding(styleName, fontFile) {
+  const key = upper(`${styleName} ${fontFile}`);
+  if (/VNI[-_. ]/.test(key)) return 'VNI';
+  if (/(^|[ ._\/-])\.?VN[A-Z0-9]|VNTIME|VNARIAL|VHARIAL|VHMEMO|VHELV|VNSWISS/.test(key)) return 'TCVN3';
+  return 'Unicode';
+}
+function isLegacyUppercaseFont(styleName, fontFile) {
+  const key = upper(`${styleName} ${fontFile}`).replace(/\.[A-Z0-9]+$/, '');
+  return /\.VN[A-Z0-9]*H(?:\s|$)|VHTIME|VHARIAL|VHMEMO|VH[A-Z]+/.test(key);
+}
+function cssFontFamily(styleName, fontFile) {
+  const key = upper(`${styleName} ${fontFile}`);
+  if (/COURIER|MONO|TXT\.SHX/.test(key)) return '"Courier New", monospace';
+  if (/TIME|ROMAN|MEMO|SERIF/.test(key)) return '"Times New Roman", "Liberation Serif", serif';
+  if (/SYMBOL|WING|GREEK/.test(key)) return '"Segoe UI Symbol", Arial, sans-serif';
+  return 'Arial, "Segoe UI", sans-serif';
+}
+function buildTextStyleMaps(database, rawTables) {
+  const byName = new Map(), byHandle = new Map();
+  const entries = database?.tables?.STYLE?.entries || database?.tables?.TEXTSTYLE?.entries || [];
+  const add = source => {
+    if (!source) return;
+    const name = String(source.name ?? source.styleName ?? '').trim() || 'STANDARD';
+    const raw = rawTables?.styles?.get(upper(name));
+    const fontFile = styleFontFile(source) || raw?.fontFile || '';
+    const bigFontFile = styleBigFontFile(source) || raw?.bigFontFile || '';
+    const encoding = detectTextEncoding(name, fontFile);
+    const item = {
+      name, fontFile, bigFontFile, encoding,
+      uppercaseLegacy: encoding === 'TCVN3' && isLegacyUppercaseFont(name, fontFile),
+      fontCss: cssFontFamily(name, fontFile),
+      handle: handleKey(source.handle || raw?.handle)
+    };
+    byName.set(upper(name), item);
+    if (item.handle) byHandle.set(item.handle, item);
+  };
+  entries.forEach(add);
+  for (const raw of rawTables?.styles?.values?.() || []) if (!byName.has(upper(raw.name))) add(raw);
+  if (!byName.has('STANDARD')) add({ name: 'STANDARD', fontFile: 'Arial.ttf' });
+  return { byName, byHandle, entries: [...byName.values()] };
+}
+function entityStyleName(entity) {
+  const candidate = entity?.styleName ?? entity?.textStyleName ?? entity?.textStyle?.name ?? entity?.style?.name ??
+    (typeof entity?.style === 'string' ? entity.style : '') ?? '';
+  return String(candidate || '').trim();
+}
+function resolveTextStyle(entity, ctx) {
+  const name = entityStyleName(entity);
+  let style = name ? ctx.textStyles.byName.get(upper(name)) : null;
+  if (!style) {
+    const key = handleKey(entity?.styleHandle ?? entity?.textStyleHandle ?? entity?.style?.handle ?? entity?.style);
+    if (key) style = ctx.textStyles.byHandle.get(key);
+  }
+  if (!style && name) {
+    const encoding = detectTextEncoding(name, name);
+    style = { name, fontFile: name, bigFontFile: '', encoding, uppercaseLegacy: encoding === 'TCVN3' && isLegacyUppercaseFont(name, name), fontCss: cssFontFamily(name, name), handle: '' };
+  }
+  return style || ctx.textStyles.byName.get('STANDARD');
+}
+function decodedTextRecord(entity, ctx, isMText = false, rawValue = '') {
+  const style = resolveTextStyle(entity, ctx);
+  const beforeEscapes = ctx.textStats.unicodeEscapesDecoded;
+  let text = cleanCadText(rawValue, isMText, ctx.textStats);
+  let converted = false;
+  if (style.encoding === 'TCVN3') {
+    const result = decodeTcvn3(text, style.uppercaseLegacy);
+    text = result.text; converted = result.changed;
+    if (converted) ctx.textStats.tcvn3Converted++;
+  }
+  if (beforeEscapes !== ctx.textStats.unicodeEscapesDecoded) ctx.textStats.entitiesWithUnicodeEscapes++;
+  ctx.textStats.total++;
+  ctx.textStats.styles[style.name] = (ctx.textStats.styles[style.name] || 0) + 1;
+  return {
+    text,
+    fontName: style.fontCss,
+    fontCss: style.fontCss,
+    sourceStyleName: style.name,
+    sourceFontFile: style.fontFile,
+    sourceBigFontFile: style.bigFontFile,
+    sourceTextEncoding: style.encoding,
+    sourceTextConverted: converted
+  };
 }
 
 function convertEntity(entity, ctx, transform = IDENTITY, inherited = null, depth = 0) {
   if (!entity || depth > 12) return [];
-  const type = upper(entity.type), base = commonProps(entity, inherited);
+  const type = upper(entity.type), base = commonProps(entity, inherited, ctx);
   const out = [];
   const transformedScale = Math.max(1e-12, (Math.abs(transform.scaleX) + Math.abs(transform.scaleY)) / 2);
   switch (type) {
@@ -209,13 +474,13 @@ function convertEntity(entity, ctx, transform = IDENTITY, inherited = null, dept
     case 'TEXT':
     case 'ATTRIB':
     case 'ATTDEF': {
-      const text = cleanMText(entity.text ?? entity.value ?? entity.defaultValue);
-      if (text) out.push({ type: 'TEXT', position: transform.point(entity.startPoint ?? entity.insertionPoint), text, height: Math.max(.0001, Math.abs(n(entity.textHeight, 2.5)) * transformedScale), rotationDeg: n(entity.rotation) * DEG + transform.rotation * DEG, fontName: entity.styleName || 'Arial', ...base });
+      const textInfo = decodedTextRecord(entity, ctx, false, entity.text ?? entity.value ?? entity.defaultValue);
+      if (textInfo.text) out.push({ type: 'TEXT', position: transform.point(entity.startPoint ?? entity.insertionPoint), height: Math.max(.0001, Math.abs(n(entity.textHeight, 2.5)) * transformedScale), rotationDeg: n(entity.rotation) * DEG + transform.rotation * DEG, ...textInfo, ...base });
       break;
     }
     case 'MTEXT': {
-      const text = cleanMText(entity.text);
-      if (text) out.push({ type: 'MTEXT', position: transform.point(entity.insertionPoint), text, height: Math.max(.0001, Math.abs(n(entity.textHeight, 2.5)) * transformedScale), rotationDeg: n(entity.rotation) * DEG + transform.rotation * DEG, fontName: entity.styleName || 'Arial', ...base });
+      const textInfo = decodedTextRecord(entity, ctx, true, entity.text);
+      if (textInfo.text) out.push({ type: 'MTEXT', position: transform.point(entity.insertionPoint), height: Math.max(.0001, Math.abs(n(entity.textHeight, 2.5)) * transformedScale), rotationDeg: n(entity.rotation) * DEG + transform.rotation * DEG, ...textInfo, ...base });
       break;
     }
     case 'DIMENSION': {
@@ -225,7 +490,8 @@ function convertEntity(entity, ctx, transform = IDENTITY, inherited = null, dept
         const a = transform.point(a0), b = transform.point(b0), tp = transform.point(entity.textPoint || entity.definitionPoint || b0);
         const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy);
         const offset = len > 1e-12 ? (tp.x - a.x) * (-dy / len) + (tp.y - a.y) * (dx / len) : 0;
-        out.push({ type: 'DIMENSION', a, b, offset, text: entity.text === '<>' ? '' : cleanMText(entity.text || ''), textOverride: entity.text === '<>' ? '' : cleanMText(entity.text || ''), height: Math.max(.0001, 2.5 * transformedScale), textHeight: Math.max(.0001, 2.5 * transformedScale), arrowSize: Math.max(.0001, 2 * transformedScale), fontName: 'Arial', ...base });
+        const textInfo = decodedTextRecord(entity, ctx, true, entity.text === '<>' ? '' : (entity.text || ''));
+        out.push({ type: 'DIMENSION', a, b, offset, text: textInfo.text, textOverride: textInfo.text, height: Math.max(.0001, 2.5 * transformedScale), textHeight: Math.max(.0001, 2.5 * transformedScale), arrowSize: Math.max(.0001, 2 * transformedScale), ...textInfo, ...base });
       } else appendUnsupported(ctx, 'DIMENSION_' + (entity.subclassMarker || 'UNKNOWN'));
       break;
     }
@@ -282,22 +548,38 @@ function convertEntity(entity, ctx, transform = IDENTITY, inherited = null, dept
   });
 }
 
-function convertDatabase(database, fileName, meta = {}) {
+function convertDatabase(database, fileName, meta = {}, rawTables = null) {
   const layerEntries = database?.tables?.LAYER?.entries || [];
   const blockEntries = database?.tables?.BLOCK_RECORD?.entries || [];
   const blocks = new Map(blockEntries.map(b => [upper(b.name), b]));
-  const layerStyles = layerEntries.map(layer => ({
-    name: String(layer.name || '0'),
-    colorIndex: Math.abs(n(layer.colorIndex, 7)) || 7,
-    trueColorArgb: colorArgb(layer.color),
-    colorMethod: layer.color !== undefined && layer.color !== null ? 'TrueColor' : 'Aci',
-    isOff: !!layer.off || n(layer.colorIndex) < 0,
-    frozen: !!layer.frozen,
-    locked: !!layer.locked,
-    lineType: layer.lineType || null,
-    lineweight: layer.lineweight ?? null
-  }));
-  const ctx = { blocks, unsupported: {}, blockStack: [] };
+  const textStyles = buildTextStyleMaps(database, rawTables);
+  const colorStats = {};
+  const layerStyles = layerEntries.map(layer => {
+    const name = String(layer.name || '0');
+    const raw = rawTables?.layers?.get(upper(name)) || null;
+    const spec = normalizeCadColor(layer.colorIndex, layer.color, 'layer', raw || ((layer.color && typeof layer.color === 'object') ? layer.color : null), layer.colorMethod);
+    colorStats['layer:' + spec.sourceColorReason] = (colorStats['layer:' + spec.sourceColorReason] || 0) + 1;
+    return {
+      name,
+      colorIndex: spec.colorIndex,
+      trueColorArgb: spec.trueColorArgb,
+      colorMethod: spec.colorMethod,
+      sourceColorReason: spec.sourceColorReason,
+      sourceColorRaw: spec.sourceColorRaw,
+      rawDwgColorIndex: raw?.index ?? null,
+      rawDwgColorMethod: raw?.method ?? null,
+      rawDwgColorRgb: raw?.rgb ?? null,
+      isOff: !!layer.off || spec.isOff || n(layer.colorIndex) < 0,
+      frozen: !!layer.frozen,
+      locked: !!layer.locked,
+      lineType: layer.lineType || null,
+      lineweight: layer.lineweight ?? null
+    };
+  });
+  const ctx = {
+    blocks, unsupported: {}, blockStack: [], textStyles, colorStats,
+    textStats: { total: 0, tcvn3Converted: 0, unicodeEscapesDecoded: 0, entitiesWithUnicodeEscapes: 0, styles: {} }
+  };
   const entities = [];
   const sourceEntities = Array.isArray(database?.entities) ? database.entities : [];
   for (let i = 0; i < sourceEntities.length; i++) {
@@ -307,6 +589,14 @@ function convertDatabase(database, fileName, meta = {}) {
   const layers = [...new Set(entities.map(e => String(e.layer || '0')))];
   if (!layers.length) layers.push('0');
   const styleMap = new Map(layerStyles.map(s => [upper(s.name), s]));
+  for (const name of layers) {
+    if (!styleMap.has(upper(name))) {
+      const raw = rawTables?.layers?.get(upper(name));
+      const spec = normalizeCadColor(raw?.index, raw?.rgb, 'layer', raw, raw?.method);
+      const item = { name, colorIndex: spec.colorIndex, trueColorArgb: spec.trueColorArgb, colorMethod: spec.colorMethod, sourceColorReason: spec.sourceColorReason, isOff: false, frozen: false, locked: false };
+      layerStyles.push(item); styleMap.set(upper(name), item);
+    }
+  }
   const visibleLayers = layers.filter(name => !styleMap.get(upper(name))?.isOff && !styleMap.get(upper(name))?.frozen);
   return {
     projectType: 'DwgSketchProject',
@@ -317,6 +607,7 @@ function convertDatabase(database, fileName, meta = {}) {
     intermediateFile: null,
     unsupportedTypes: ctx.unsupported,
     layerStyles,
+    textStyles: textStyles.entries,
     entities,
     overlays: [],
     visibleLayers: visibleLayers.length ? visibleLayers : layers,
@@ -330,7 +621,7 @@ function convertDatabase(database, fileName, meta = {}) {
       exportStrokeMode: 'original', exportStrokeColor: '#000000'
     },
     dwgImport: {
-      engine: '@mlightcad/libredwg-web 0.7.9',
+      engine: '@mlightcad/libredwg-web 0.7.9 + PWA color/font adapter 0.15.1',
       version: String(meta.version ?? 'không rõ'),
       codepage: String(meta.codepage ?? 'không rõ'),
       sourceEntityCount: sourceEntities.length,
@@ -338,6 +629,13 @@ function convertDatabase(database, fileName, meta = {}) {
       unknownEntityCount: n(meta.unknownEntityCount),
       blockCount: blockEntries.length,
       layerCount: layerEntries.length,
+      textStyleCount: textStyles.entries.length,
+      textStats: ctx.textStats,
+      colorStats: ctx.colorStats,
+      rawLayerColorCount: rawTables?.layers?.size || 0,
+      rawTextStyleCount: rawTables?.styles?.size || 0,
+      usedRawDwgTableApi: !!rawTables?.usedRawApi,
+      rawTableApiError: rawTables?.error || '',
       directInBrowser: true
     }
   };
@@ -360,9 +658,12 @@ self.onmessage = async event => {
     if (!ptr) throw new Error('LibreDWG không nhận được cấu trúc DWG hợp lệ hoặc phiên bản DWG này chưa được hỗ trợ.');
     let database;
     let meta = {};
+    let rawTables = null;
     try {
       meta.version = engine.dwg_get_version_type(ptr);
       meta.codepage = engine.dwg_get_codepage(ptr);
+      postProgress('raw-tables', 'Đang khôi phục màu layer gốc và bảng font DWG…', 30);
+      rawTables = extractRawCadTables(engine, ptr);
       postProgress('database', 'Đang tạo cơ sở dữ liệu bản vẽ trong bộ nhớ…', 38);
       if (typeof engine.convertEx === 'function') {
         const converted = engine.convertEx(ptr);
@@ -375,7 +676,7 @@ self.onmessage = async event => {
       try { engine.dwg_free(ptr); } catch { /* memory is released when worker closes */ }
     }
     if (!database) throw new Error('Bộ đọc DWG không tạo được cơ sở dữ liệu bản vẽ.');
-    const project = convertDatabase(database, message.fileName || 'BanVe.dwg', meta);
+    const project = convertDatabase(database, message.fileName || 'BanVe.dwg', meta, rawTables);
     if (!project.entities.length) throw new Error('DWG đã được đọc nhưng chưa lấy được đối tượng 2D phù hợp để hiển thị. Hãy xem thống kê loại đối tượng chưa hỗ trợ.');
     project.dwgImport.elapsedMs = Math.round(performance.now() - started);
     postProgress('done', `Đã đọc ${project.entities.length.toLocaleString('vi-VN')} đối tượng DWG.`, 100);
