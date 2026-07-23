@@ -2,7 +2,7 @@
   "id": "./",
   "name": "DWG Sketch PWA Editor 2D",
   "short_name": "DWG Sketch",
-  "description": "Mở DWG trực tiếp bằng WebAssembly; hỗ trợ màu và chữ tiếng Việt; lệnh nhanh bằng phím cách trên điện thoại; tự lưu và khôi phục tab bản vẽ khi vuốt Back hoặc đóng PWA.",
+  "description": "Mở DWG trực tiếp bằng WebAssembly; hỗ trợ màu và chữ tiếng Việt; tìm chữ bằng hộp nổi gọn; Layer/Config dùng một bảng trượt duy nhất trên điện thoại; tự lưu và khôi phục phiên.",
   "lang": "vi",
   "dir": "ltr",
   "start_url": "./index.html",

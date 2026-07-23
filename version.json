@@ -1,6 +1,6 @@
 {
-  "version": "0.15.2",
-  "releasedAt": "2026-07-22T23:45:00+07:00",
-  "notes": "Khôi phục thực thi lệnh nhanh bằng phím cách trên bàn phím Android qua keydown/beforeinput/input; khi mở dòng lệnh trên điện thoại tự đặt con trỏ; chặn vuốt Back ngoài ý muốn, vuốt lần hai mới thoát; tự lưu toàn bộ tab bản vẽ vào IndexedDB và tự khôi phục khi mở lại PWA.",
+  "version": "0.15.3",
+  "releasedAt": "2026-07-23T00:35:00+07:00",
+  "notes": "Tìm chữ bằng hộp nổi nhỏ không mở toàn bộ bảng Layer; nhập đến đâu tìm đến đó, Enter chuyển kết quả, có nút trước/sau và mở tùy chọn thay chữ. Trên điện thoại Layer và Config chuyển thành một bottom sheet duy nhất, không thể mở chồng; có nền che, chạm ngoài để đóng, nút chuyển Layer/Config và tab nhóm chức năng.",
   "downloadUrl": ""
 }

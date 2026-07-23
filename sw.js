@@ -1,5 +1,5 @@
 'use strict';
-const APP_VERSION='0.15.2';
+const APP_VERSION='0.15.3';
 const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION;
 const DWG_ENGINE_CACHE='dwg-sketch-libredwg-web-0.7.9';
 const DWG_CDN_PREFIX='https://cdn.jsdelivr.net/npm/@mlightcad/libredwg-web@0.7.9/';
@@ -15,7 +15,7 @@ const CORE_ASSETS=[
   './HUONG_DAN_PWA_V0145_SPACE_LINKED_SELECTION.txt','./HUONG_DAN_PWA_V0146_COPY_MATCHPROP_REGION.txt',
   './HUONG_DAN_PWA_V0147_DXF_REFERENCE.txt','./HUONG_DAN_PWA_V0149_MULTI_TAB.txt',
   './HUONG_DAN_PWA_V01410_SELECT_FRAME.txt','./HUONG_DAN_PWA_V01411_LAYOUT.txt',
-  './HUONG_DAN_PWA_V0150_DIRECT_DWG_WASM.txt','./HUONG_DAN_PWA_V0151_COLOR_FONT_VIETNAMESE.txt','./HUONG_DAN_PWA_V0152_MOBILE_COMMAND_BACK_RECOVERY.txt','./BUILD_REPORT_V0151.txt','./BUILD_REPORT_V0152.txt','./THIRD_PARTY_NOTICES.txt',
+  './HUONG_DAN_PWA_V0150_DIRECT_DWG_WASM.txt','./HUONG_DAN_PWA_V0151_COLOR_FONT_VIETNAMESE.txt','./HUONG_DAN_PWA_V0152_MOBILE_COMMAND_BACK_RECOVERY.txt','./HUONG_DAN_PWA_V0153_QUICK_FIND_MOBILE_PANELS.txt','./BUILD_REPORT_V0151.txt','./BUILD_REPORT_V0152.txt','./BUILD_REPORT_V0153.txt','./THIRD_PARTY_NOTICES.txt',
   './sample_dxf_r12_unicode.dxf','./sample_color_aci_truecolor.dxf'
 ];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE_ASSETS)));});
