@@ -1,7 +1,7 @@
 {
-  "version": "0.15.7",
+  "version": "0.15.9",
   "releasedAt": "2026-07-23T11:15:00+07:00",
-  "notes": "Khắc phục hồi quy V0.15.6 làm mất các hàm hình học và khung nhìn cốt lõi, khiến DWG/DXF/JSON không mở được; giữ nguyên nâng chất lượng PNG/Clipboard.",
+  "notes": "Tối ưu tương tác: render theo requestAnimationFrame, giới hạn DPR, culling vùng nhìn, cache bắt điểm và tự lưu khi rảnh.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
