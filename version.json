@@ -1,7 +1,7 @@
 {
-  "version": "0.15.5",
-  "releasedAt": "2026-07-23T09:30:00+07:00",
-  "notes": "Tách riêng màu đường nét/đối tượng và màu chữ khi xuất PNG, in, PDF; bổ sung PNG vào Clipboard và tùy chọn vừa tải file vừa sao chép ảnh; sửa lưu thiết lập xuất vào dự án.",
+  "version": "0.15.6",
+  "releasedAt": "2026-07-23T09:45:00+07:00",
+  "notes": "Nâng chất lượng PNG/Clipboard: 1×/2×/4×, nét tối thiểu, nét kỹ thuật sắc, tăng đậm chữ và giới hạn bộ nhớ an toàn trên điện thoại/máy tính.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
