@@ -1,7 +1,7 @@
 {
-  "version": "0.16.4",
-  "releasedAt": "2026-07-23T17:30:00+07:00",
-  "notes": "Bổ sung phạm vi Chỉ trong khung xuất cho AUDIT/REPAIR/RECTFIX/CLOSEGAP/AUTOCLOSE/JOIN/OVERKILL/TEXTFIX; hỗ trợ các lệnh nhanh hậu tố F như REPAIRF và TEXTFIXF.",
+  "version": "0.16.6",
+  "releasedAt": "2026-07-23T22:30:00+07:00",
+  "notes": "Bổ sung TRIANGLE ba điểm, tô đặc/HATCH vùng kín và thư viện ký hiệu điện có điểm nối/topology JSON để chuẩn bị tự động hóa sơ đồ lưới.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
