@@ -1,7 +1,7 @@
 {
-  "version": "0.15.9",
-  "releasedAt": "2026-07-23T11:15:00+07:00",
-  "notes": "Tối ưu tương tác: render theo requestAnimationFrame, giới hạn DPR, culling vùng nhìn, cache bắt điểm và tự lưu khi rảnh.",
+  "version": "0.16.0",
+  "releasedAt": "2026-07-23T15:30:00+07:00",
+  "notes": "Mở rộng TRIM cho đường cong và biên cong; bổ sung SCALE theo điểm gốc; tính AREA cho hình kín hoặc vùng ghép từ nhiều đường/cung đã chọn.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
