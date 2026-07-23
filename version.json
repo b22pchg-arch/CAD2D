@@ -1,7 +1,7 @@
 {
-  "version": "0.15.4",
-  "releasedAt": "2026-07-23T02:15:00+07:00",
-  "notes": "Tích hợp trực tiếp @mlightcad/libredwg-web 0.7.9 vào thư mục vendor; không còn phụ thuộc CDN. Gắn phiên bản Worker và Service Worker, kiểm tra bắt buộc PWA/Worker/libredwg đồng bộ, xóa cache bộ đọc cũ và cảnh báo các tab DWG được khôi phục từ bộ đọc cũ.",
+  "version": "0.15.5",
+  "releasedAt": "2026-07-23T09:30:00+07:00",
+  "notes": "Tách riêng màu đường nét/đối tượng và màu chữ khi xuất PNG, in, PDF; bổ sung PNG vào Clipboard và tùy chọn vừa tải file vừa sao chép ảnh; sửa lưu thiết lập xuất vào dự án.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
