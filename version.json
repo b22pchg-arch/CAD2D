@@ -1,7 +1,7 @@
 {
-  "version": "0.16.6",
-  "releasedAt": "2026-07-23T22:30:00+07:00",
-  "notes": "Bổ sung TRIANGLE ba điểm, tô đặc/HATCH vùng kín và thư viện ký hiệu điện có điểm nối/topology JSON để chuẩn bị tự động hóa sơ đồ lưới.",
+  "version": "0.16.7",
+  "releasedAt": "2026-07-23T23:40:00+07:00",
+  "notes": "Bổ sung HTML hướng dẫn sử dụng chi tiết, tra cứu và tìm kiếm toàn bộ lệnh; thêm nút Hướng dẫn trên máy tính và điện thoại; tài liệu được cache offline.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",

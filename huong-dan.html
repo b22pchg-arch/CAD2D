@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.25 / PWA V0.16.7</title>
+<meta name="description" content="Hướng dẫn chi tiết sử dụng DWG Sketch C# và PWA, bao gồm toàn bộ lệnh vẽ, chọn, hiệu chỉnh, sửa hình tự động, xuất bản và tự động hóa sơ đồ điện.">
+<style>
+:root{--bg:#0f1419;--panel:#182028;--panel2:#202a34;--text:#ecf2f8;--muted:#a9b6c3;--line:#344350;--accent:#45c4ef;--accent2:#76e3aa;--warn:#ffcc80;--code:#071b24}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#10161c,#0c1116);color:var(--text);font:15px/1.58 "Segoe UI",Arial,sans-serif}
+a{color:#76d7f4}code,kbd{font-family:Consolas,monospace}code{background:var(--code);border:1px solid #285064;border-radius:5px;padding:2px 6px;color:#a7efff}kbd{display:inline-block;border:1px solid #697784;border-bottom-width:3px;border-radius:4px;padding:1px 6px;background:#29333d;color:#fff}
+.hero{padding:44px 22px 34px;background:radial-gradient(circle at 15% 0,#16435b 0,transparent 42%),linear-gradient(135deg,#15242e,#111820);border-bottom:1px solid var(--line)}.hero-inner{max-width:1180px;margin:auto}.eyebrow{color:var(--accent2);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:12px}h1{font-size:clamp(30px,5vw,54px);line-height:1.08;margin:8px 0 14px}.lead{max-width:900px;color:#c6d4df;font-size:18px}.badges{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.badge{padding:6px 10px;border:1px solid #396477;border-radius:999px;background:#18303d;color:#d9f6ff;font-size:13px}.hero-actions{display:flex;gap:9px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;text-decoration:none;color:#fff;background:#237ea3;border:1px solid #43b9e7;padding:9px 13px;border-radius:7px;font-weight:650}.btn.secondary{background:#26333e;border-color:#536675}.btn:hover{filter:brightness(1.12)}
+.shell{display:grid;grid-template-columns:260px minmax(0,1fr);max-width:1440px;margin:auto}aside{position:sticky;top:0;height:100vh;overflow:auto;padding:20px 15px;border-right:1px solid var(--line);background:#111820}aside b{display:block;margin:6px 8px 12px}aside a{display:block;padding:7px 9px;border-radius:5px;text-decoration:none;color:#bac8d3;font-size:13px}aside a:hover{background:#22313b;color:#fff}main{min-width:0;padding:24px clamp(16px,4vw,48px) 70px}section{scroll-margin-top:18px;margin:0 0 38px}h2{font-size:27px;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}h3{font-size:18px;margin:4px 0}p{margin:8px 0}.muted{color:var(--muted)}
+.quick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.quick-card,.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:0 8px 22px #0003}.quick-card b{display:block;color:var(--accent);margin-bottom:6px}.workflow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:stretch}.step{position:relative;background:#17232c;border:1px solid #38505f;border-radius:8px;padding:13px;text-align:center}.step:not(:last-child):after{content:'→';position:absolute;right:-9px;top:50%;transform:translateY(-50%);z-index:2;color:var(--accent);font-size:20px;font-weight:800}
+.callout{border-left:4px solid var(--warn);background:#2b251b;padding:12px 14px;border-radius:0 7px 7px 0;margin:13px 0}.ok{border-left-color:var(--accent2);background:#172a25}.danger{border-left-color:#ff7b7b;background:#301e21}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;min-width:700px;background:#172028}th,td{padding:10px;border-bottom:1px solid #34414c;text-align:left;vertical-align:top}th{position:sticky;top:0;background:#24313b;color:#dff7ff}tr:last-child td{border-bottom:0}
+.command-tools{position:sticky;top:0;z-index:8;background:#0f151bea;border:1px solid var(--line);backdrop-filter:blur(8px);padding:10px;border-radius:9px;margin-bottom:13px}.search-row{display:grid;grid-template-columns:1fr auto;gap:8px}#commandSearch{width:100%;background:#111a21;border:1px solid #4b626f;color:#fff;border-radius:6px;padding:10px 12px;font-size:15px}#resultCount{display:flex;align-items:center;color:var(--muted);white-space:nowrap}.filters{display:flex;gap:6px;overflow:auto;padding-top:8px}.filter{white-space:nowrap;border:1px solid #465a68;background:#1c2730;color:#d8e1e8;border-radius:999px;padding:6px 10px;cursor:pointer}.filter.active{background:#176d8f;border-color:#45c4ef;color:#fff}
+.command-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.command-card{background:linear-gradient(180deg,#1c2730,#172028);border:1px solid var(--line);border-radius:10px;padding:15px;min-width:0}.command-card.hidden{display:none}.command-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.command-head code{font-size:14px;font-weight:800}.platform{white-space:nowrap;color:#b8ddec;border:1px solid #426171;border-radius:999px;padding:3px 7px;font-size:11px}.command-card ol{margin:7px 0 7px 20px;padding:0}.command-card .note{color:#c9d4dc;background:#111a21;border-radius:6px;padding:8px}
+.diagram{font-family:Consolas,monospace;white-space:pre;overflow:auto;background:#091219;border:1px solid #2f4654;border-radius:8px;padding:14px;color:#bfefff}details{background:#172028;border:1px solid var(--line);border-radius:8px;padding:11px 13px;margin:8px 0}summary{cursor:pointer;font-weight:700}footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var(--muted)}.top{position:fixed;right:16px;bottom:16px;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#1c8db7;color:#fff;text-decoration:none;box-shadow:0 8px 22px #0008}
+@media(max-width:1050px){.shell{grid-template-columns:1fr}aside{display:none}.quick-grid{grid-template-columns:1fr 1fr}.workflow{grid-template-columns:1fr}.step:not(:last-child):after{content:'↓';right:auto;left:50%;top:auto;bottom:-17px}}
+@media(max-width:720px){.hero{padding:28px 16px}main{padding:18px 12px 60px}.quick-grid,.two-col,.command-list{grid-template-columns:1fr}.search-row{grid-template-columns:1fr}#resultCount{padding-left:3px}h2{font-size:23px}.command-head{display:block}.platform{display:inline-block;margin-top:8px}}
+@media print{body{background:#fff;color:#111;font-size:11pt}.hero{background:#fff;color:#111;padding:10px;border:0}aside,.hero-actions,.command-tools,.top{display:none!important}.shell{display:block}main{padding:0}.panel,.quick-card,.command-card,details{box-shadow:none;background:#fff;border-color:#aaa;break-inside:avoid}a{color:#111;text-decoration:none}code{color:#111;background:#eee;border-color:#bbb}h2{break-after:avoid}}
+</style>
+</head>
+<body id="top">
+<header class="hero"><div class="hero-inner">
+<div class="eyebrow">Tài liệu sử dụng tích hợp · Hoạt động offline</div>
+<h1>DWG Sketch — Hướng dẫn sử dụng chi tiết</h1>
+<p class="lead">Dành cho bản C# WPF V0.14.25 và PWA V0.16.7. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản và phần chuẩn bị tự động hóa sơ đồ điện.</p>
+<div class="badges"><span class="badge">C# .NET 8 / Windows</span><span class="badge">PWA / Android / Desktop</span><span class="badge">DWG trực tiếp qua LibreDWG 0.7.9</span><span class="badge">Không cần Internet sau khi cài PWA</span></div>
+<div class="hero-actions"><a class="btn" href="./index.html">Mở PWA cùng thư mục</a><a class="btn secondary" href="./HtmlViewer/PWA/index.html">Mở PWA trong gói C#</a><a class="btn secondary" href="#command-reference">Tra cứu lệnh</a><a class="btn secondary" href="javascript:window.print()">In / Lưu PDF hướng dẫn</a></div>
+</div></header>
+<div class="shell">
+<aside><b>Mục lục</b>
+<a href="#start">Bắt đầu nhanh</a><a href="#install">Cài đặt và mở phần mềm</a><a href="#interface">Giao diện</a><a href="#open-files">Mở DWG/DXF/JSON</a><a href="#navigate">Pan, zoom, cảm ứng</a><a href="#selection">Chọn đối tượng và Layer</a><a href="#command-line">Sử dụng dòng lệnh</a><a href="#workflows">Quy trình thao tác mẫu</a><a href="#repair">Sửa hình tự động</a><a href="#electrical">Ký hiệu và topology điện</a><a href="#export">Xuất PNG/PDF/DXF/DWG</a><a href="#mobile">Sử dụng trên điện thoại</a><a href="#performance">Bản vẽ lớn và hiệu năng</a><a href="#troubleshooting">Khắc phục lỗi</a><a href="#command-reference">Tra cứu toàn bộ lệnh</a>
+</aside>
+<main>
+<section id="start"><h2>1. Bắt đầu nhanh</h2>
+<div class="workflow"><div class="step"><b>1. Mở file</b><br>DWG, DXF hoặc JSON</div><div class="step"><b>2. Kiểm tra hiển thị</b><br>Layer, màu, font, khung</div><div class="step"><b>3. Chọn và hiệu chỉnh</b><br>Move, Scale, Trim, Text</div><div class="step"><b>4. Kiểm tra tự động</b><br>AUDIT, TEXTFIX, REPAIR</div><div class="step"><b>5. Lưu và xuất</b><br>JSON, PNG, PDF, DXF</div></div>
+<div class="callout ok"><b>Khuyến nghị:</b> ngay sau khi mở bản vẽ, hãy lưu một bản dự án JSON. JSON là định dạng chỉnh sửa chính, giữ được đối tượng bổ sung, khung xuất, vùng tô, ký hiệu điện và cấu hình hiển thị.</div>
+<div class="quick-grid"><div class="quick-card"><b>Mở lệnh</b>Gõ bí danh ở ô <b>Lệnh</b>, sau đó nhấn <kbd>Enter</kbd> hoặc <kbd>Space</kbd>.</div><div class="quick-card"><b>Hủy công cụ</b>Nhấn <kbd>Esc</kbd> để về chế độ chọn.</div><div class="quick-card"><b>Lặp lại</b>Nhấn <kbd>F3</kbd> để chạy lại lệnh gần nhất.</div><div class="quick-card"><b>Hoàn tác</b><kbd>Ctrl</kbd> + <kbd>Z</kbd>; làm lại bằng <kbd>Ctrl</kbd> + <kbd>Y</kbd>.</div><div class="quick-card"><b>Chọn nhiều</b>Giữ <kbd>Ctrl</kbd>/<kbd>Shift</kbd> hoặc dùng lệnh <code>W</code>.</div><div class="quick-card"><b>Zoom toàn bộ</b>Chạy <code>FIT</code> nếu bản vẽ bị trôi khỏi màn hình.</div></div>
+</section>
+<section id="install"><h2>2. Cài đặt và mở phần mềm</h2><div class="two-col">
+<div class="panel"><h3>C# WPF trên Windows</h3><ol><li>Giải nén toàn bộ gói nguồn.</li><li>Cài .NET 8 SDK nếu máy chưa có.</li><li>Chạy <code>build_release.cmd</code>.</li><li>Mở chương trình trong thư mục publish.</li></ol><p class="muted">Không tách riêng file EXE khỏi các thư mục HtmlViewer, Assets và tools.</p></div>
+<div class="panel"><h3>PWA trên trình duyệt</h3><ol><li>Đưa toàn bộ thư mục PWA lên HTTPS/GitHub Pages hoặc chạy <code>serve_local.cmd</code>.</li><li>Mở <code>index.html</code> qua HTTPS hoặc localhost.</li><li>Bấm <b>Cài PWA</b> để đưa ứng dụng ra màn hình chính.</li><li>Sau lần tải đầu, PWA có thể dùng offline.</li></ol><p class="muted">Mở trực tiếp bằng đường dẫn <code>file://</code> sẽ làm Service Worker, Clipboard và một số chức năng không hoạt động đầy đủ.</p></div></div>
+<div class="callout"><b>Cập nhật PWA:</b> sau khi thay phiên bản trên máy chủ, bấm <b>Kiểm tra phiên bản</b> → <b>Cập nhật ngay</b>. Nếu vẫn thấy bản cũ, xóa cache/Service Worker của trang rồi mở lại với tham số phiên bản mới.</div></section>
+<section id="interface"><h2>3. Giao diện chính</h2><div class="table-wrap"><table><thead><tr><th>Khu vực</th><th>Công dụng</th><th>Lưu ý</th></tr></thead><tbody>
+<tr><td>Thanh công cụ</td><td>Mở file, Undo/Redo, chọn, vẽ, hiệu chỉnh, xuất.</td><td>Trên điện thoại chỉ hiện nhóm chính; các lệnh còn lại nằm trong nút Thêm.</td></tr>
+<tr><td>Khung Layer</td><td>Bật/tắt layer, màu DWG/DXF, Snap, bộ lọc chọn, tìm chữ.</td><td>Ẩn layer không cần thiết giúp bản vẽ lớn chạy nhẹ hơn.</td></tr>
+<tr><td>Vùng bản vẽ</td><td>Hiển thị, pan, zoom, chọn, vẽ và xem preview.</td><td>Màu cyan/magenta thường là preview hoặc đề xuất sửa.</td></tr>
+<tr><td>Khung Config/Thuộc tính</td><td>Sửa đối tượng, tạo chữ, Fill/Hatch, ký hiệu điện, cấu hình xuất.</td><td>Các trường chỉ áp dụng sau khi bấm Áp dụng nếu giao diện yêu cầu.</td></tr>
+<tr><td>Dòng lệnh</td><td>Chạy nhanh toàn bộ chức năng bằng bí danh.</td><td><kbd>↑</kbd>/<kbd>↓</kbd> duyệt lịch sử; <kbd>F3</kbd> lặp lại.</td></tr>
+<tr><td>Thanh trạng thái</td><td>Thông báo công cụ, tọa độ, tiến độ quét và hiệu năng.</td><td>Đọc thông báo trước khi bấm điểm tiếp theo.</td></tr></tbody></table></div></section>
+<section id="open-files"><h2>4. Mở DWG, DXF và JSON</h2><ol><li>Bấm <b>Mở DWG/DXF/JSON</b> hoặc chạy <code>OPEN</code>.</li><li>Chọn file. PWA có thể mở nhiều file thành nhiều tab.</li><li>Chờ hoàn tất giải mã; không đóng tab khi file DWG lớn đang đọc.</li><li>Kiểm tra số đối tượng, layer, màu và chữ tiếng Việt.</li><li>Nếu bản vẽ quá nhỏ/lớn, chạy <code>FIT</code>.</li></ol>
+<div class="two-col"><div class="panel"><h3>DWG</h3><p>PWA dùng <b>libredwg-web 0.7.9</b> và WebAssembly nội bộ. Bộ đọc chỉ tham gia giai đoạn giải mã; pan, zoom và chỉnh sửa do ứng dụng xử lý.</p></div><div class="panel"><h3>JSON dự án</h3><p>Đây là định dạng nên dùng để tiếp tục chỉnh sửa. File lưu cả hình học bổ sung, chữ, vùng tô, symbol, khung xuất và thiết lập hiển thị.</p></div></div>
+<div class="callout danger"><b>Không thấy đủ chi tiết:</b> bật tất cả Layer, bật màu DWG/DXF, chạy Zoom toàn bộ, sau đó dùng AUDIT/REPAIR để kiểm tra cạnh thiếu và khe hở. Không nên kết luận file nguồn mất dữ liệu trước khi kiểm tra layer.</div></section>
+<section id="navigate"><h2>5. Pan, zoom và thao tác cảm ứng</h2><div class="two-col"><div class="panel"><h3>Máy tính</h3><ul><li>Lăn chuột để zoom tại vị trí con trỏ.</li><li>Dùng công cụ Pan hoặc nút giữa chuột tùy phiên bản để kéo nền.</li><li>Chạy <code>FIT</code> để trở về toàn bộ bản vẽ.</li></ul></div><div class="panel"><h3>Điện thoại/máy tính bảng</h3><ul><li>Một ngón: chọn, vẽ hoặc kéo theo công cụ hiện tại.</li><li>Hai ngón: pinch zoom và pan đồng thời.</li><li>Điểm CAD dưới trung điểm hai ngón được giữ làm neo, tránh trượt xa.</li><li>Nhấc hết ngón rồi thao tác lại khi chuyển từ zoom sang chọn/vẽ.</li></ul></div></div>
+<p class="diagram">Hai ngón bắt đầu pinch
+          ↓
+Ghi điểm neo CAD tại trung điểm
+          ↓
+Khoảng cách ngón thay đổi → Scale
+Trung điểm di chuyển       → Pan
+          ↓
+Điểm neo vẫn nằm dưới trung điểm hai ngón</p></section>
+<section id="selection"><h2>6. Layer, Snap và chọn đối tượng</h2><h3>Snap</h3><p>Bật Snap khi vẽ nối tuyến, tạo vùng kín, Trim/Extend hoặc chèn symbol. Dung sai quá lớn có thể bắt nhầm điểm; dung sai quá nhỏ gây khó chọn trên màn hình cảm ứng.</p>
+<h3>Bộ lọc chọn</h3><p>Có thể bật/tắt riêng chữ, line, polyline, circle, curve, square, rectangle, dimension và đối tượng khác. Bộ lọc áp dụng cả bấm chọn lẫn Window/Crossing.</p>
+<h3>Phạm vi chọn</h3><ul><li><b>Toàn bản vẽ đang hiển thị:</b> mọi đối tượng thuộc layer đang bật.</li><li><b>Trong khung xuất:</b> giới hạn theo vùng xuất.</li><li><b>Trong vùng chọn gần nhất:</b> dùng vùng Window/Crossing vừa tạo.</li></ul>
+<div class="callout"><b>Bản vẽ lớn:</b> không dùng ALL nếu chỉ sửa một khu vực nhỏ. Tạo khung xuất rồi dùng SLF, SELF hoặc các lệnh sửa hậu tố F.</div></section>
+<section id="command-line"><h2>7. Cách sử dụng dòng lệnh</h2><ol><li>Bấm vào ô <b>Lệnh</b> hoặc bắt đầu gõ khi vùng bản vẽ đang có focus.</li><li>Gõ bí danh, ví dụ <code>TR</code>, <code>SC</code>, <code>TEXTFIX</code>.</li><li>Nhấn <kbd>Enter</kbd> hoặc <kbd>Space</kbd>.</li><li>Đọc thanh trạng thái để biết phải chọn đối tượng hay bấm điểm nào tiếp theo.</li></ol>
+<div class="two-col"><div class="panel"><h3>Phím hữu ích</h3><p><kbd>↑</kbd>/<kbd>↓</kbd>: lịch sử lệnh<br><kbd>F3</kbd>: lặp lại<br><kbd>Esc</kbd>: hủy công cụ<br><kbd>Delete</kbd>: xóa<br><kbd>Ctrl</kbd>+<kbd>S</kbd>: lưu</p></div><div class="panel"><h3>C# — sửa thư viện lệnh</h3><p>Bấm <b>Sửa thư viện lệnh</b> để đổi bí danh. Mỗi bí danh phải duy nhất và Action phải thuộc danh sách được hỗ trợ.</p></div></div></section>
+<section id="workflows"><h2>8. Quy trình thao tác mẫu</h2>
+<details open><summary>Cắt đường bằng một đường cong</summary><ol><li>Chọn circle, arc, ellipse hoặc polyline làm biên.</li><li>Chạy <code>TR</code>.</li><li>Bấm đúng phần của line/curve cần bỏ.</li><li>Nhấn Esc khi kết thúc.</li></ol></details>
+<details><summary>Scale một nhóm thiết bị</summary><ol><li>Chọn toàn bộ nhóm bằng SL hoặc Chọn liên kết.</li><li>Chạy <code>SC</code>.</li><li>Bấm điểm gốc cố định.</li><li>Nhập 2 để phóng gấp đôi hoặc 0.5 để thu còn một nửa.</li></ol></details>
+<details><summary>Tính và tô một vùng tạo bởi nhiều đường</summary><ol><li>Bật Snap và bảo đảm các đầu mút nối nhau.</li><li>Chọn tất cả line/arc thuộc đường bao.</li><li>Chạy <code>AA</code> để kiểm tra vùng kín.</li><li>Nếu còn chuỗi hở, chạy CLOSEGAP/AUTOCLOSE.</li><li>Chạy <code>SOLID</code> hoặc <code>H</code>.</li></ol></details>
+<details><summary>Sửa chữ đang đè lên đường</summary><ol><li>Tạo khung xuất quanh khu vực cần sửa nếu bản vẽ lớn.</li><li>Chạy <code>TEXTFIXF</code> hoặc <code>TEXTFIX</code>.</li><li>Chọn phạm vi và dung sai khoảng cách chữ.</li><li>Bấm Bắt đầu quét.</li><li>Kiểm tra đường dẫn từ vị trí cũ tới vị trí mới.</li><li>Chọn các đề xuất phù hợp rồi áp dụng.</li></ol></details>
+</section>
+<section id="repair"><h2>9. Sửa hình tự động không làm treo giao diện</h2><p>Mọi lệnh tự động đều dùng quy trình <b>chọn phạm vi trước, quét sau</b>. Hộp thoại không đọc toàn bộ hình học ngay khi mở.</p>
+<div class="workflow"><div class="step"><b>Chọn phạm vi</b><br>Toàn bộ / Khung / Đã chọn</div><div class="step"><b>Chọn nhóm</b><br>Cạnh, khe, chữ, trùng…</div><div class="step"><b>Đặt dung sai</b><br>Bắt đầu nhỏ</div><div class="step"><b>Quét theo lô</b><br>Có tiến độ và Hủy</div><div class="step"><b>Xem trước</b><br>Áp dụng một Undo</div></div>
+<div class="callout ok"><b>Thiết lập an toàn:</b> dung sai nhỏ, ngưỡng tự sửa 95%, phạm vi khung xuất, chỉ chọn các đề xuất có preview đúng.</div>
+<div class="callout danger"><b>Không thấy TEXTFIX:</b> chọn đúng nhóm “Chữ tránh đường/hình”, giảm ngưỡng chỉ để tự đánh dấu (không phải để ẩn kết quả), kiểm tra chữ nằm hoàn toàn trong phạm vi và bảo đảm Layer chữ/hình đang hiển thị.</div></section>
+<section id="electrical"><h2>10. Ký hiệu điện và dữ liệu topology</h2><p>Giai đoạn 2 đã chuẩn bị thư viện ký hiệu vector và điểm nối. Mỗi symbol mang loại thiết bị, mã, vị trí, góc, tỷ lệ và danh sách terminal.</p>
+<p class="diagram">[Thanh cái]──port──[Dao cách ly]──port──[Máy cắt]──port──[MBA]
+     node             node                 node          node
+          └──────── connections được suy luận ────────┘</p>
+<ol><li>Chọn loại symbol trong bảng Tạo mới.</li><li>Nhập tên/mã thiết bị.</li><li>Đặt tỷ lệ và góc.</li><li>Chạy <code>SYM</code> rồi bấm vị trí.</li><li>Bật Snap để terminal gần hoặc chạm nhau.</li><li>Chạy <code>TOPOLOGY</code> để xuất JSON.</li></ol>
+<div class="callout"><b>Chuẩn bị cho tự động hóa tiếp theo:</b> nên dùng tên thiết bị thống nhất, chọn đúng loại symbol và nối qua terminal thay vì vẽ line tùy ý không gắn metadata.</div></section>
+<section id="export"><h2>11. Lưu và xuất bản vẽ</h2><div class="table-wrap"><table><thead><tr><th>Định dạng</th><th>Mục đích</th><th>Khuyến nghị</th></tr></thead><tbody>
+<tr><td>JSON</td><td>Tiếp tục chỉnh sửa trong C#/PWA.</td><td>Lưu thường xuyên và trước khi chạy sửa hàng loạt.</td></tr><tr><td>PNG</td><td>Đưa vào báo cáo, Word, Excel.</td><td>2×, nét tối thiểu 1.5 px là cấu hình cân bằng.</td></tr><tr><td>Clipboard PNG</td><td>Paste nhanh vào ứng dụng khác.</td><td>PWA cần HTTPS/localhost.</td></tr><tr><td>PDF</td><td>In hoặc lưu hồ sơ.</td><td>Chọn nền trắng và màu chữ/đường đen khi in.</td></tr><tr><td>DXF R12</td><td>Trao đổi với CAD khác.</td><td>Mở thử file sau xuất; chữ vẫn là TEXT.</td></tr><tr><td>DWG</td><td>Trao đổi khi bắt buộc dùng DWG.</td><td>Dùng C# và dxf2dwg; PWA chỉ tạo DXF nguồn.</td></tr><tr><td>Topology JSON</td><td>Dữ liệu mạng điện cho tự động hóa.</td><td>Kiểm tra nodes, ports và connections.</td></tr></tbody></table></div></section>
+<section id="mobile"><h2>12. Sử dụng PWA trên điện thoại</h2><ul><li>Thanh dưới gồm Mở, Chọn, Kéo, Tìm, Layer và Thêm.</li><li>Nút <b>Thêm</b> mở các lệnh Move, Copy, Scale, Trim, Extend, Area, Repair, TEXTFIX, Dim và xuất.</li><li>Layer/Config hiển thị dạng bottom sheet; đóng sheet trước khi thao tác trên Canvas.</li><li>Dòng lệnh có thể thu gọn; phím cách trên bàn phím điện thoại vẫn chạy lệnh.</li><li>Hai ngón chỉ dùng cho zoom/pan; một ngón dùng cho công cụ hiện tại.</li><li>Nút Back của Android được bảo vệ để giảm nguy cơ thoát mất phiên; dự án được lưu tạm trong IndexedDB.</li></ul>
+<div class="callout"><b>Mẹo:</b> với bản vẽ lớn, ẩn layer không cần thiết, dùng khung xuất và chọn phạm vi nhỏ trước khi chạy lệnh tự động.</div></section>
+<section id="performance"><h2>13. Hiệu năng với bản vẽ lớn</h2><div class="two-col"><div class="panel"><h3>C#</h3><ul><li>Chọn chế độ Tự động hoặc Ưu tiên mượt.</li><li>Giữ spatial index và giảm chi tiết khi thao tác.</li><li>Quét sửa hình chạy luồng nền và có hủy.</li><li>Tắt bảng chẩn đoán khi không cần.</li></ul></div><div class="panel"><h3>PWA</h3><ul><li>Render theo requestAnimationFrame và chỉ vẽ vùng nhìn.</li><li>Con trỏ được gom theo khung hình.</li><li>Quét sửa hình chia thành lô nhỏ.</li><li>PNG 4× có thể tự giảm nếu vượt giới hạn bộ nhớ.</li></ul></div></div>
+<p><b>Thứ tự giảm tải:</b> ẩn layer → tạo khung xuất → dùng phạm vi khung/đã chọn → giảm nhóm kiểm tra → hủy nếu dung sai quá rộng → chạy lại.</p></section>
+<section id="troubleshooting"><h2>14. Khắc phục lỗi thường gặp</h2>
+<details><summary>PWA vẫn chạy phiên bản cũ</summary><p>Bấm Kiểm tra phiên bản/Cập nhật. Nếu chưa được, xóa dữ liệu trang và Service Worker, sau đó tải lại toàn bộ gói cùng phiên bản.</p></details>
+<details><summary>Không mở được DWG</summary><p>Kiểm tra thư mục <code>vendor/libredwg-web-0.7.9</code>, đặc biệt các file JS và WASM; mở PWA qua HTTPS/localhost; không thay riêng Worker hoặc WASM giữa các phiên bản.</p></details>
+<details><summary>Không thấy màu đầy đủ</summary><p>Bật “Dùng màu DWG/DXF”, bật đúng layer và dùng toàn bộ gói phát hành để tránh Worker cũ.</p></details>
+<details><summary>Chữ tiếng Việt sai</summary><p>Kiểm tra font thay thế và bộ chuyển Unicode/TCVN3. Không thay riêng <code>dwg-worker.js</code> bằng bản cũ.</p></details>
+<details><summary>AREA/SOLID/HATCH báo đường bao hở</summary><p>Chạy AUDIT, CLOSEGAP hoặc AUTOCLOSE với dung sai nhỏ; bật Snap; kiểm tra các đầu mút và đường trùng.</p></details>
+<details><summary>TRIM không cắt được</summary><p>Chọn biên trước khi chạy TR; bấm đúng phần cần bỏ; kiểm tra layer và đối tượng có thuộc loại LINE/POLYLINE/CIRCLE/ARC/ELLIPSE được hỗ trợ.</p></details>
+<details><summary>Clipboard PNG không hoạt động</summary><p>PWA phải chạy trong secure context (HTTPS hoặc localhost) và trình duyệt phải hỗ trợ ClipboardItem. Dùng nút tải PNG làm phương án dự phòng.</p></details>
+<details><summary>Quét tự động quá lâu</summary><p>Hủy quét, tạo khung xuất nhỏ hơn, chọn đúng nhóm kiểm tra, giảm số layer hiển thị và tránh dung sai quá lớn.</p></details>
+</section>
+<section id="command-reference"><h2>15. Tra cứu toàn bộ lệnh</h2><p class="muted">Nhập tên lệnh, chức năng hoặc từ khóa như “chữ”, “khung xuất”, “đường cong”, “topology”.</p>
+<div class="command-tools"><div class="search-row"><input id="commandSearch" type="search" placeholder="Tìm lệnh hoặc chức năng…"><span id="resultCount"></span></div><div class="filters"><button class="filter active" data-filter="ALL">Tất cả</button><button class="filter" data-filter="Vẽ hình">Vẽ hình</button><button class="filter" data-filter="Chọn đối tượng">Chọn đối tượng</button><button class="filter" data-filter="Hiệu chỉnh">Hiệu chỉnh</button><button class="filter" data-filter="Đo và tô vùng">Đo và tô vùng</button><button class="filter" data-filter="Tìm và sửa chữ">Tìm và sửa chữ</button><button class="filter" data-filter="Sửa hình tự động">Sửa hình tự động</button><button class="filter" data-filter="Tự động hóa điện">Tự động hóa điện</button><button class="filter" data-filter="Tệp và xuất bản">Tệp và xuất bản</button></div></div>
+<div class="command-list"><article class="command-card" data-group="Vẽ hình" data-search="vẽ hình l / line vẽ đường thẳng c# + pwa không cần chọn trước. chạy lệnh. bấm điểm đầu. bấm điểm cuối. bật bắt điểm để nối chính xác vào đầu mút, trung điểm hoặc giao điểm.">
+      <div class="command-head"><div><code>L / LINE</code><h3>Vẽ đường thẳng</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không cần chọn trước.</p>
+      <ol><li>Chạy lệnh.</li><li>Bấm điểm đầu.</li><li>Bấm điểm cuối.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Bật bắt điểm để nối chính xác vào đầu mút, trung điểm hoặc giao điểm.</p>
+    </article><article class="command-card" data-group="Vẽ hình" data-search="vẽ hình rec / rect / rectangle vẽ hình chữ nhật c# + pwa không cần chọn trước. bấm góc thứ nhất. bấm góc đối diện. hình được giữ là đối tượng chữ nhật, có thể chọn, move, scale, mirror và tính area.">
+      <div class="command-head"><div><code>REC / RECT / RECTANGLE</code><h3>Vẽ hình chữ nhật</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không cần chọn trước.</p>
+      <ol><li>Bấm góc thứ nhất.</li><li>Bấm góc đối diện.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Hình được giữ là đối tượng chữ nhật, có thể chọn, Move, Scale, Mirror và tính Area.</p>
+    </article><article class="command-card" data-group="Vẽ hình" data-search="vẽ hình sq / square vẽ hình vuông c# + pwa không cần chọn trước. bấm góc thứ nhất. bấm vị trí xác định cạnh và hướng. chương trình ép chiều rộng và chiều cao bằng nhau.">
+      <div class="command-head"><div><code>SQ / SQUARE</code><h3>Vẽ hình vuông</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không cần chọn trước.</p>
+      <ol><li>Bấm góc thứ nhất.</li><li>Bấm vị trí xác định cạnh và hướng.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Chương trình ép chiều rộng và chiều cao bằng nhau.</p>
+    </article><article class="command-card" data-group="Vẽ hình" data-search="vẽ hình tri / triangle / tg vẽ tam giác ba điểm c# + pwa không cần chọn trước. bấm đỉnh 1. bấm đỉnh 2. bấm đỉnh 3. ba điểm gần thẳng hàng sẽ bị từ chối. tam giác được lưu như polyline kín.">
+      <div class="command-head"><div><code>TRI / TRIANGLE / TG</code><h3>Vẽ tam giác ba điểm</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không cần chọn trước.</p>
+      <ol><li>Bấm đỉnh 1.</li><li>Bấm đỉnh 2.</li><li>Bấm đỉnh 3.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Ba điểm gần thẳng hàng sẽ bị từ chối. Tam giác được lưu như polyline kín.</p>
+    </article><article class="command-card" data-group="Vẽ hình" data-search="vẽ hình c / circle vẽ đường tròn c# + pwa không cần chọn trước. bấm tâm. bấm điểm xác định bán kính. có thể dùng đường tròn làm biên trim hoặc đối tượng bị trim.">
+      <div class="command-head"><div><code>C / CIRCLE</code><h3>Vẽ đường tròn</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không cần chọn trước.</p>
+      <ol><li>Bấm tâm.</li><li>Bấm điểm xác định bán kính.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Có thể dùng đường tròn làm biên TRIM hoặc đối tượng bị TRIM.</p>
+    </article><article class="command-card" data-group="Vẽ hình" data-search="vẽ hình a / arc vẽ cung tròn c# + pwa thiết lập góc kết thúc trong bảng tạo mới nếu cần. bấm tâm. bấm điểm xác định bán kính và hướng bắt đầu. cung có thể dùng làm biên cắt, tính vùng và hatch khi ghép kín.">
+      <div class="command-head"><div><code>A / ARC</code><h3>Vẽ cung tròn</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Thiết lập góc kết thúc trong bảng Tạo mới nếu cần.</p>
+      <ol><li>Bấm tâm.</li><li>Bấm điểm xác định bán kính và hướng bắt đầu.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Cung có thể dùng làm biên cắt, tính vùng và Hatch khi ghép kín.</p>
+    </article><article class="command-card" data-group="Vẽ hình" data-search="vẽ hình el / ellipse vẽ elip c# + pwa không cần chọn trước. bấm tâm. bấm điểm xác định hai bán trục theo thao tác hiện tại. elip được hỗ trợ trong trim, scale, area và fill.">
+      <div class="command-head"><div><code>EL / ELLIPSE</code><h3>Vẽ elip</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không cần chọn trước.</p>
+      <ol><li>Bấm tâm.</li><li>Bấm điểm xác định hai bán trục theo thao tác hiện tại.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Elip được hỗ trợ trong TRIM, Scale, Area và Fill.</p>
+    </article><article class="command-card" data-group="Vẽ hình" data-search="vẽ hình t / text đặt chữ c# + pwa nhập nội dung, chiều cao, màu và góc trong bảng tạo mới. chạy lệnh. bấm vị trí đặt chữ. nháy đúp chữ để sửa nhanh. textfix có thể tự di chuyển chữ tránh đè lên hình.">
+      <div class="command-head"><div><code>T / TEXT</code><h3>Đặt chữ</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Nhập nội dung, chiều cao, màu và góc trong bảng Tạo mới.</p>
+      <ol><li>Chạy lệnh.</li><li>Bấm vị trí đặt chữ.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Nháy đúp chữ để sửa nhanh. TEXTFIX có thể tự di chuyển chữ tránh đè lên hình.</p>
+    </article><article class="command-card" data-group="Vẽ hình" data-search="vẽ hình d / dim ghi kích thước thẳng hàng c# + pwa không cần chọn trước. bấm điểm đo thứ nhất. bấm điểm đo thứ hai. bấm vị trí đặt đường kích thước. kích thước tham gia chọn, move, scale, mirror và xuất ảnh/dxf.">
+      <div class="command-head"><div><code>D / DIM</code><h3>Ghi kích thước thẳng hàng</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không cần chọn trước.</p>
+      <ol><li>Bấm điểm đo thứ nhất.</li><li>Bấm điểm đo thứ hai.</li><li>Bấm vị trí đặt đường kích thước.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Kích thước tham gia chọn, Move, Scale, Mirror và xuất ảnh/DXF.</p>
+    </article><article class="command-card" data-group="Vẽ hình" data-search="vẽ hình frame tạo khung xuất pwa; c# dùng nút khung xuất xóa khung cũ nếu muốn thay thế. chạy lệnh hoặc bấm khung xuất. kéo hai góc của vùng cần xuất. khung được dùng cho png, pdf, chọn đối tượng và các lệnh sửa hình hậu tố f.">
+      <div class="command-head"><div><code>FRAME</code><h3>Tạo khung xuất</h3></div><span class="platform">PWA; C# dùng nút Khung xuất</span></div>
+      <p><b>Chuẩn bị:</b> Xóa khung cũ nếu muốn thay thế.</p>
+      <ol><li>Chạy lệnh hoặc bấm Khung xuất.</li><li>Kéo hai góc của vùng cần xuất.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Khung được dùng cho PNG, PDF, chọn đối tượng và các lệnh sửa hình hậu tố F.</p>
+    </article><article class="command-card" data-group="Chọn đối tượng" data-search="chọn đối tượng s / select chọn và sửa đối tượng c# + pwa bật các loại đối tượng cần chọn trong bộ lọc chọn. bấm đối tượng để chọn. giữ ctrl/shift để chọn thêm. dùng bảng thuộc tính để chỉnh sửa. esc đưa công cụ về chế độ chọn.">
+      <div class="command-head"><div><code>S / SELECT</code><h3>Chọn và sửa đối tượng</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Bật các loại đối tượng cần chọn trong Bộ lọc chọn.</p>
+      <ol><li>Bấm đối tượng để chọn.</li><li>Giữ Ctrl/Shift để chọn thêm.</li><li>Dùng bảng Thuộc tính để chỉnh sửa.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Esc đưa công cụ về chế độ chọn.</p>
+    </article><article class="command-card" data-group="Chọn đối tượng" data-search="chọn đối tượng w / window chọn bằng vùng window/crossing c# + pwa thiết lập bộ lọc chọn nếu cần. chạy lệnh. kéo một vùng chọn. window lấy đối tượng nằm trong vùng; crossing có thể lấy cả đối tượng cắt qua biên.">
+      <div class="command-head"><div><code>W / WINDOW</code><h3>Chọn bằng vùng Window/Crossing</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Thiết lập bộ lọc chọn nếu cần.</p>
+      <ol><li>Chạy lệnh.</li><li>Kéo một vùng chọn.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Window lấy đối tượng nằm trong vùng; Crossing có thể lấy cả đối tượng cắt qua biên.</p>
+    </article><article class="command-card" data-group="Chọn đối tượng" data-search="chọn đối tượng sl / selectlink chọn mạng hình học liên kết c# + pwa chọn một đối tượng làm hạt giống. chạy sl. chương trình lần theo các phần tử nối/chạm nhau. có thể chọn thêm chữ liên quan ở gần. điều chỉnh dung sai nối và khoảng cách chữ ở bảng layer/lọc chọn.">
+      <div class="command-head"><div><code>SL / SELECTLINK</code><h3>Chọn mạng hình học liên kết</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn một đối tượng làm hạt giống.</p>
+      <ol><li>Chạy SL.</li><li>Chương trình lần theo các phần tử nối/chạm nhau.</li><li>Có thể chọn thêm chữ liên quan ở gần.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Điều chỉnh dung sai nối và khoảng cách chữ ở bảng Layer/Lọc chọn.</p>
+    </article><article class="command-card" data-group="Chọn đối tượng" data-search="chọn đối tượng sla / linkall tự chọn liên kết toàn bản vẽ c# + pwa không bắt buộc có hạt giống. chạy sla. kiểm tra tập đối tượng được chọn. với bản vẽ lớn nên giới hạn phạm vi bằng slf hoặc slr.">
+      <div class="command-head"><div><code>SLA / LINKALL</code><h3>Tự chọn liên kết toàn bản vẽ</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không bắt buộc có hạt giống.</p>
+      <ol><li>Chạy SLA.</li><li>Kiểm tra tập đối tượng được chọn.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Với bản vẽ lớn nên giới hạn phạm vi bằng SLF hoặc SLR.</p>
+    </article><article class="command-card" data-group="Chọn đối tượng" data-search="chọn đối tượng slf / linkframe tự chọn liên kết trong khung xuất c# + pwa phải có khung xuất. tạo khung xuất. chạy slf. phù hợp khi chỉ cần xử lý một khu vực nhỏ của bản vẽ lớn.">
+      <div class="command-head"><div><code>SLF / LINKFRAME</code><h3>Tự chọn liên kết trong khung xuất</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Phải có khung xuất.</p>
+      <ol><li>Tạo khung xuất.</li><li>Chạy SLF.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Phù hợp khi chỉ cần xử lý một khu vực nhỏ của bản vẽ lớn.</p>
+    </article><article class="command-card" data-group="Chọn đối tượng" data-search="chọn đối tượng slr / linkregion tự chọn liên kết trong vùng chọn gần nhất c# + pwa kéo một vùng chọn trước. tạo vùng chọn. chạy slr. dùng lại vùng chọn gần nhất làm giới hạn.">
+      <div class="command-head"><div><code>SLR / LINKREGION</code><h3>Tự chọn liên kết trong vùng chọn gần nhất</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Kéo một vùng chọn trước.</p>
+      <ol><li>Tạo vùng chọn.</li><li>Chạy SLR.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Dùng lại vùng chọn gần nhất làm giới hạn.</p>
+    </article><article class="command-card" data-group="Chọn đối tượng" data-search="chọn đối tượng all chọn tất cả đối tượng phù hợp bộ lọc c# + pwa kiểm tra bộ lọc chọn. chạy all. pwa còn hỗ trợ seltext, selnontext, selline, selcircle, selcurve, selsquare và selrect.">
+      <div class="command-head"><div><code>ALL</code><h3>Chọn tất cả đối tượng phù hợp bộ lọc</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Kiểm tra Bộ lọc chọn.</p>
+      <ol><li>Chạy ALL.</li></ol>
+      <p class="note"><b>Lưu ý:</b> PWA còn hỗ trợ SELTEXT, SELNONTEXT, SELLINE, SELCIRCLE, SELCURVE, SELSQUARE và SELRECT.</p>
+    </article><article class="command-card" data-group="Chọn đối tượng" data-search="chọn đối tượng self / selframe chọn đối tượng trong khung xuất pwa phải có khung xuất. chạy self hoặc selframe. tuân theo bộ lọc chọn hiện tại.">
+      <div class="command-head"><div><code>SELF / SELFRAME</code><h3>Chọn đối tượng trong khung xuất</h3></div><span class="platform">PWA</span></div>
+      <p><b>Chuẩn bị:</b> Phải có khung xuất.</p>
+      <ol><li>Chạy SELF hoặc SELFRAME.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Tuân theo bộ lọc chọn hiện tại.</p>
+    </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh m / move di chuyển đối tượng c# + pwa chọn một hoặc nhiều đối tượng. chạy m. bấm điểm gốc. bấm điểm đích. đối tượng được dịch chuyển theo cùng một vector.">
+      <div class="command-head"><div><code>M / MOVE</code><h3>Di chuyển đối tượng</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn một hoặc nhiều đối tượng.</p>
+      <ol><li>Chạy M.</li><li>Bấm điểm gốc.</li><li>Bấm điểm đích.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Đối tượng được dịch chuyển theo cùng một vector.</p>
+    </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh co / copy sao chép theo điểm gốc và điểm đích c# + pwa chọn đối tượng. chạy co. bấm điểm gốc. bấm điểm đích. khác ctrl+c: lệnh co tạo bản sao trực tiếp trên bản vẽ.">
+      <div class="command-head"><div><code>CO / COPY</code><h3>Sao chép theo điểm gốc và điểm đích</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn đối tượng.</p>
+      <ol><li>Chạy CO.</li><li>Bấm điểm gốc.</li><li>Bấm điểm đích.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Khác Ctrl+C: lệnh CO tạo bản sao trực tiếp trên bản vẽ.</p>
+    </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh pa / paste dán đối tượng đã sao chép c# + pwa đã copy hoặc ctrl+c. chạy pa hoặc ctrl+v. vị trí dán phụ thuộc cơ chế clipboard của phiên bản hiện tại.">
+      <div class="command-head"><div><code>PA / PASTE</code><h3>Dán đối tượng đã sao chép</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Đã Copy hoặc Ctrl+C.</p>
+      <ol><li>Chạy PA hoặc Ctrl+V.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Vị trí dán phụ thuộc cơ chế clipboard của phiên bản hiện tại.</p>
+    </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh sc / scale phóng to hoặc thu nhỏ đối tượng c# + pwa chọn đối tượng. chạy sc. bấm điểm gốc. nhập hệ số dương. hệ số &gt;1 phóng to; 0–1 thu nhỏ. chữ, bán kính và kích thước được scale đồng đều.">
+      <div class="command-head"><div><code>SC / SCALE</code><h3>Phóng to hoặc thu nhỏ đối tượng</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn đối tượng.</p>
+      <ol><li>Chạy SC.</li><li>Bấm điểm gốc.</li><li>Nhập hệ số dương.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Hệ số &gt;1 phóng to; 0–1 thu nhỏ. Chữ, bán kính và kích thước được scale đồng đều.</p>
+    </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh mi / mirror đối xứng đối tượng c# + pwa chọn đối tượng. chạy mi. bấm hai điểm xác định trục đối xứng. góc chữ và cung được điều chỉnh theo trục đối xứng.">
+      <div class="command-head"><div><code>MI / MIRROR</code><h3>Đối xứng đối tượng</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn đối tượng.</p>
+      <ol><li>Chạy MI.</li><li>Bấm hai điểm xác định trục đối xứng.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Góc chữ và cung được điều chỉnh theo trục đối xứng.</p>
+    </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh tr / trim cắt đường hoặc đường cong c# + pwa chọn trước một hoặc nhiều biên cắt. chạy tr. bấm vào phần cần loại bỏ. tiếp tục cắt hoặc nhấn esc. biên và đối tượng bị cắt có thể là line, polyline, rectangle, circle, arc hoặc ellipse. circle sau cắt thành arc.">
+      <div class="command-head"><div><code>TR / TRIM</code><h3>Cắt đường hoặc đường cong</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn trước một hoặc nhiều biên cắt.</p>
+      <ol><li>Chạy TR.</li><li>Bấm vào phần cần loại bỏ.</li><li>Tiếp tục cắt hoặc nhấn Esc.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Biên và đối tượng bị cắt có thể là LINE, POLYLINE, RECTANGLE, CIRCLE, ARC hoặc ELLIPSE. Circle sau cắt thành ARC.</p>
+    </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh ex / extend kéo dài đường đến biên c# + pwa chọn trước biên đích. chạy ex. bấm gần đầu đường cần kéo dài. hỗ trợ kéo line tới biên thẳng hoặc cong.">
+      <div class="command-head"><div><code>EX / EXTEND</code><h3>Kéo dài đường đến biên</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn trước biên đích.</p>
+      <ol><li>Chạy EX.</li><li>Bấm gần đầu đường cần kéo dài.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Hỗ trợ kéo LINE tới biên thẳng hoặc cong.</p>
+    </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh ma / matchprop sao chép thuộc tính c# + pwa chọn đúng một đối tượng nguồn. chạy ma. bấm từng đối tượng đích hoặc kéo vùng chọn. sao chép các thuộc tính phù hợp như màu, layer, độ dày và kiểu hiển thị.">
+      <div class="command-head"><div><code>MA / MATCHPROP</code><h3>Sao chép thuộc tính</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn đúng một đối tượng nguồn.</p>
+      <ol><li>Chạy MA.</li><li>Bấm từng đối tượng đích hoặc kéo vùng chọn.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Sao chép các thuộc tính phù hợp như màu, layer, độ dày và kiểu hiển thị.</p>
+    </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh del / delete xóa đối tượng đã chọn c# + pwa chọn đối tượng. nhấn delete hoặc chạy del. có thể undo để khôi phục.">
+      <div class="command-head"><div><code>DEL / DELETE</code><h3>Xóa đối tượng đã chọn</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn đối tượng.</p>
+      <ol><li>Nhấn Delete hoặc chạy DEL.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Có thể Undo để khôi phục.</p>
+    </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh u / undo hoàn tác c# + pwa có thao tác đã thực hiện. chạy u hoặc ctrl+z. một phiên sửa tự động được gom thành một bước undo.">
+      <div class="command-head"><div><code>U / UNDO</code><h3>Hoàn tác</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Có thao tác đã thực hiện.</p>
+      <ol><li>Chạy U hoặc Ctrl+Z.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Một phiên sửa tự động được gom thành một bước Undo.</p>
+    </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh r / redo làm lại c# + pwa đã undo. chạy r hoặc ctrl+y. không nhầm r với rec.">
+      <div class="command-head"><div><code>R / REDO</code><h3>Làm lại</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Đã Undo.</p>
+      <ol><li>Chạy R hoặc Ctrl+Y.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Không nhầm R với REC.</p>
+    </article><article class="command-card" data-group="Đo và tô vùng" data-search="đo và tô vùng aa / area tính diện tích và chu vi c# + pwa chọn hình kín hoặc các đường/cung ghép thành biên kín. chạy aa. xem tổng diện tích, chu vi, số vùng kín và chuỗi hở. bật snap khi dựng biên để giảm khe hở đầu mút.">
+      <div class="command-head"><div><code>AA / AREA</code><h3>Tính diện tích và chu vi</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn hình kín hoặc các đường/cung ghép thành biên kín.</p>
+      <ol><li>Chạy AA.</li><li>Xem tổng diện tích, chu vi, số vùng kín và chuỗi hở.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Bật Snap khi dựng biên để giảm khe hở đầu mút.</p>
+    </article><article class="command-card" data-group="Đo và tô vùng" data-search="đo và tô vùng solid / fill tô đặc hình hoặc vùng kín c# + pwa chọn hình kín hoặc các đường tạo vùng kín. thiết lập màu và opacity. chạy solid. tạo đối tượng vùng tô riêng, không xóa đường bao gốc.">
+      <div class="command-head"><div><code>SOLID / FILL</code><h3>Tô đặc hình hoặc vùng kín</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn hình kín hoặc các đường tạo vùng kín.</p>
+      <ol><li>Thiết lập màu và opacity.</li><li>Chạy SOLID.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Tạo đối tượng vùng tô riêng, không xóa đường bao gốc.</p>
+    </article><article class="command-card" data-group="Đo và tô vùng" data-search="đo và tô vùng h / hatch đổ hatch cho vùng kín c# + pwa chọn vùng kín. thiết lập khoảng cách, góc và kiểu một/hai hướng. chạy h. khi xuất dxf r12, hatch được chuyển thành các line đã cắt theo biên.">
+      <div class="command-head"><div><code>H / HATCH</code><h3>Đổ Hatch cho vùng kín</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn vùng kín.</p>
+      <ol><li>Thiết lập khoảng cách, góc và kiểu một/hai hướng.</li><li>Chạy H.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Khi xuất DXF R12, Hatch được chuyển thành các LINE đã cắt theo biên.</p>
+    </article><article class="command-card" data-group="Tìm và sửa chữ" data-search="tìm và sửa chữ f / find tìm chữ nhanh c# + pwa không cần chọn trước. chạy f. nhập từ khóa. duyệt các kết quả. có thể bỏ qua hoa/thường và dấu tiếng việt.">
+      <div class="command-head"><div><code>F / FIND</code><h3>Tìm chữ nhanh</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không cần chọn trước.</p>
+      <ol><li>Chạy F.</li><li>Nhập từ khóa.</li><li>Duyệt các kết quả.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Có thể bỏ qua hoa/thường và dấu tiếng Việt.</p>
+    </article><article class="command-card" data-group="Tìm và sửa chữ" data-search="tìm và sửa chữ fn / findnext đến kết quả tiếp theo c# + pwa đã có kết quả tìm kiếm. chạy fn hoặc f3 trong vùng tìm kiếm. pwa hỗ trợ shift+enter để đi ngược trong ô tìm nhanh.">
+      <div class="command-head"><div><code>FN / FINDNEXT</code><h3>Đến kết quả tiếp theo</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Đã có kết quả tìm kiếm.</p>
+      <ol><li>Chạy FN hoặc F3 trong vùng tìm kiếm.</li></ol>
+      <p class="note"><b>Lưu ý:</b> PWA hỗ trợ Shift+Enter để đi ngược trong ô tìm nhanh.</p>
+    </article><article class="command-card" data-group="Tìm và sửa chữ" data-search="tìm và sửa chữ fr / replace mở tìm và thay thế c# + pwa không cần chọn trước. chạy fr. nhập nội dung tìm và nội dung thay. thay kết quả hiện tại hoặc thay tất cả. kiểm tra phạm vi layer trước khi thay hàng loạt.">
+      <div class="command-head"><div><code>FR / REPLACE</code><h3>Mở tìm và thay thế</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không cần chọn trước.</p>
+      <ol><li>Chạy FR.</li><li>Nhập nội dung tìm và nội dung thay.</li><li>Thay kết quả hiện tại hoặc thay tất cả.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Kiểm tra phạm vi layer trước khi thay hàng loạt.</p>
+    </article><article class="command-card" data-group="Tìm và sửa chữ" data-search="tìm và sửa chữ ra / replaceall thay tất cả chữ phù hợp c# + pwa đã nhập điều kiện tìm/thay. chạy ra. xác nhận kết quả. nên lưu dự án trước và dùng undo nếu kết quả không đúng.">
+      <div class="command-head"><div><code>RA / REPLACEALL</code><h3>Thay tất cả chữ phù hợp</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Đã nhập điều kiện tìm/thay.</p>
+      <ol><li>Chạy RA.</li><li>Xác nhận kết quả.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Nên lưu dự án trước và dùng Undo nếu kết quả không đúng.</p>
+    </article><article class="command-card" data-group="Sửa hình tự động" data-search="sửa hình tự động audit kiểm tra lỗi hình học c# + pwa chưa quét dữ liệu khi vừa mở hộp thoại. chọn phạm vi: toàn bản vẽ, khung xuất hoặc đối tượng đã chọn. chọn nhóm kiểm tra và dung sai. bấm bắt đầu quét. phân tích theo lô/luồng nền để tránh treo. có thể hủy giữa chừng.">
+      <div class="command-head"><div><code>AUDIT</code><h3>Kiểm tra lỗi hình học</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chưa quét dữ liệu khi vừa mở hộp thoại.</p>
+      <ol><li>Chọn phạm vi: toàn bản vẽ, khung xuất hoặc đối tượng đã chọn.</li><li>Chọn nhóm kiểm tra và dung sai.</li><li>Bấm Bắt đầu quét.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Phân tích theo lô/luồng nền để tránh treo. Có thể hủy giữa chừng.</p>
+    </article><article class="command-card" data-group="Sửa hình tự động" data-search="sửa hình tự động repair mở bảng sửa hình tự động c# + pwa không cần chọn trước nếu dùng phạm vi toàn bản vẽ/khung xuất. chọn phạm vi. bắt đầu quét. xem trước và chọn đề xuất. áp dụng mục đã chọn. không nên tự sửa âm thầm; xem mức tin cậy trước khi áp dụng.">
+      <div class="command-head"><div><code>REPAIR</code><h3>Mở bảng sửa hình tự động</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không cần chọn trước nếu dùng phạm vi toàn bản vẽ/khung xuất.</p>
+      <ol><li>Chọn phạm vi.</li><li>Bắt đầu quét.</li><li>Xem trước và chọn đề xuất.</li><li>Áp dụng mục đã chọn.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Không nên tự sửa âm thầm; xem mức tin cậy trước khi áp dụng.</p>
+    </article><article class="command-card" data-group="Sửa hình tự động" data-search="sửa hình tự động rectfix bổ sung cạnh hình chữ nhật thiếu c# + pwa có ba cạnh gần tạo thành hình chữ nhật. chạy rectfix. chọn phạm vi. quét và xem cạnh đề xuất. hỗ trợ cả hình chữ nhật xoay.">
+      <div class="command-head"><div><code>RECTFIX</code><h3>Bổ sung cạnh hình chữ nhật thiếu</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Có ba cạnh gần tạo thành hình chữ nhật.</p>
+      <ol><li>Chạy RECTFIX.</li><li>Chọn phạm vi.</li><li>Quét và xem cạnh đề xuất.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Hỗ trợ cả hình chữ nhật xoay.</p>
+    </article><article class="command-card" data-group="Sửa hình tự động" data-search="sửa hình tự động closegap nối các đầu mút gần nhau c# + pwa đặt dung sai nhỏ theo đơn vị bản vẽ. chạy closegap. quét. chọn các khe cần nối. dung sai quá lớn có thể nối nhầm các phần tử không liên quan.">
+      <div class="command-head"><div><code>CLOSEGAP</code><h3>Nối các đầu mút gần nhau</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Đặt dung sai nhỏ theo đơn vị bản vẽ.</p>
+      <ol><li>Chạy CLOSEGAP.</li><li>Quét.</li><li>Chọn các khe cần nối.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Dung sai quá lớn có thể nối nhầm các phần tử không liên quan.</p>
+    </article><article class="command-card" data-group="Sửa hình tự động" data-search="sửa hình tự động autoclose đóng polyline chưa kín c# + pwa đầu và cuối polyline gần nhau. chạy autoclose. kiểm tra đề xuất đóng đường bao. hữu ích trước area, solid và hatch.">
+      <div class="command-head"><div><code>AUTOCLOSE</code><h3>Đóng polyline chưa kín</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Đầu và cuối polyline gần nhau.</p>
+      <ol><li>Chạy AUTOCLOSE.</li><li>Kiểm tra đề xuất đóng đường bao.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Hữu ích trước AREA, SOLID và HATCH.</p>
+    </article><article class="command-card" data-group="Sửa hình tự động" data-search="sửa hình tự động join gộp các line cùng phương c# + pwa các đoạn cùng layer, gần chung đầu mút và gần cùng phương. chạy join. quét và áp dụng đề xuất phù hợp. hai đoạn cũ được thay bằng một đoạn liên tục.">
+      <div class="command-head"><div><code>JOIN</code><h3>Gộp các LINE cùng phương</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Các đoạn cùng layer, gần chung đầu mút và gần cùng phương.</p>
+      <ol><li>Chạy JOIN.</li><li>Quét và áp dụng đề xuất phù hợp.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Hai đoạn cũ được thay bằng một đoạn liên tục.</p>
+    </article><article class="command-card" data-group="Sửa hình tự động" data-search="sửa hình tự động overkill xóa đối tượng trùng c# + pwa có các đối tượng trùng tọa độ và thuộc tính. chạy overkill. kiểm tra từng cặp trùng trước khi xóa. không xóa các đối tượng khác layer hoặc khác thuộc tính có chủ ý.">
+      <div class="command-head"><div><code>OVERKILL</code><h3>Xóa đối tượng trùng</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Có các đối tượng trùng tọa độ và thuộc tính.</p>
+      <ol><li>Chạy OVERKILL.</li><li>Kiểm tra từng cặp trùng trước khi xóa.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Không xóa các đối tượng khác layer hoặc khác thuộc tính có chủ ý.</p>
+    </article><article class="command-card" data-group="Sửa hình tự động" data-search="sửa hình tự động textfix / labelfix di chuyển chữ tránh đè lên đường/hình c# + pwa chữ và hình học nằm trong phạm vi quét. chọn nhóm chữ tránh đường/hình. chọn phạm vi. quét. xem đường dẫn và hộp chữ tại vị trí mới. áp dụng đề xuất. chữ được đưa tới vị trí trống gần khối liên quan; giữ nguyên nội dung, font, chiều cao, góc, màu và layer.">
+      <div class="command-head"><div><code>TEXTFIX / LABELFIX</code><h3>Di chuyển chữ tránh đè lên đường/hình</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chữ và hình học nằm trong phạm vi quét.</p>
+      <ol><li>Chọn nhóm Chữ tránh đường/hình.</li><li>Chọn phạm vi.</li><li>Quét.</li><li>Xem đường dẫn và hộp chữ tại vị trí mới.</li><li>Áp dụng đề xuất.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Chữ được đưa tới vị trí trống gần khối liên quan; giữ nguyên nội dung, font, chiều cao, góc, màu và layer.</p>
+    </article><article class="command-card" data-group="Sửa hình tự động" data-search="sửa hình tự động autofix quét và tự áp dụng mục chắc chắn c# + pwa thiết lập ngưỡng tin cậy phù hợp. chọn phạm vi. chọn ngưỡng. bấm bắt đầu quét và tự sửa. mặc định nên để khoảng 95%. các mục thấp hơn vẫn có thể chọn thủ công.">
+      <div class="command-head"><div><code>AUTOFIX</code><h3>Quét và tự áp dụng mục chắc chắn</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Thiết lập ngưỡng tin cậy phù hợp.</p>
+      <ol><li>Chọn phạm vi.</li><li>Chọn ngưỡng.</li><li>Bấm Bắt đầu quét và tự sửa.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Mặc định nên để khoảng 95%. Các mục thấp hơn vẫn có thể chọn thủ công.</p>
+    </article><article class="command-card" data-group="Sửa hình tự động" data-search="sửa hình tự động …f giới hạn lệnh sửa trong khung xuất c# + pwa phải có khung xuất. dùng auditf, repairf, rectfixf, closegapf, autoclosef, joinf, overkillf, textfixf hoặc autofixf. đối tượng cắt qua biên khung có thể bị loại để tránh sửa phần nằm ngoài vùng.">
+      <div class="command-head"><div><code>…F</code><h3>Giới hạn lệnh sửa trong khung xuất</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Phải có khung xuất.</p>
+      <ol><li>Dùng AUDITF, REPAIRF, RECTFIXF, CLOSEGAPF, AUTOCLOSEF, JOINF, OVERKILLF, TEXTFIXF hoặc AUTOFIXF.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Đối tượng cắt qua biên khung có thể bị loại để tránh sửa phần nằm ngoài vùng.</p>
+    </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện sym / symbol chèn ký hiệu điện vector c# + pwa chọn loại, mã thiết bị, tỷ lệ và góc. chạy sym. bấm vị trí chèn. dùng snap để nối vào các terminal. có 13 loại ký hiệu: thanh cái, máy cắt, dao, mba, máy phát, tụ, kháng, tải, ct, vt và nối đất.">
+      <div class="command-head"><div><code>SYM / SYMBOL</code><h3>Chèn ký hiệu điện vector</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn loại, mã thiết bị, tỷ lệ và góc.</p>
+      <ol><li>Chạy SYM.</li><li>Bấm vị trí chèn.</li><li>Dùng Snap để nối vào các terminal.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Có 13 loại ký hiệu: thanh cái, máy cắt, dao, MBA, máy phát, tụ, kháng, tải, CT, VT và nối đất.</p>
+    </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện topo / topology / gridjson xuất dữ liệu topology c# + pwa đã chèn ký hiệu và bố trí các cổng gần/chạm nhau. chạy topology. lưu file json. kiểm tra nodes, ports, connections và layout. đây là dữ liệu nền cho giai đoạn sinh sơ đồ lưới tự động.">
+      <div class="command-head"><div><code>TOPO / TOPOLOGY / GRIDJSON</code><h3>Xuất dữ liệu topology</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Đã chèn ký hiệu và bố trí các cổng gần/chạm nhau.</p>
+      <ol><li>Chạy TOPOLOGY.</li><li>Lưu file JSON.</li><li>Kiểm tra nodes, ports, connections và layout.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Đây là dữ liệu nền cho giai đoạn sinh sơ đồ lưới tự động.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản hd / help mở hướng dẫn sử dụng chi tiết c# + pwa không cần. chạy hd hoặc help. tài liệu huong-dan.html mở trong trình duyệt. hướng dẫn có mục lục, tìm kiếm lệnh và có thể in/lưu pdf; pwa cache tài liệu để dùng offline.">
+      <div class="command-head"><div><code>HD / HELP</code><h3>Mở hướng dẫn sử dụng chi tiết</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không cần.</p>
+      <ol><li>Chạy HD hoặc HELP.</li><li>Tài liệu huong-dan.html mở trong trình duyệt.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Hướng dẫn có mục lục, tìm kiếm lệnh và có thể in/lưu PDF; PWA cache tài liệu để dùng offline.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản new tạo bản vẽ mới c# + pwa lưu dự án đang sửa nếu cần. chạy new. ứng dụng có thể hỏi lưu khi dự án hiện tại chưa được lưu.">
+      <div class="command-head"><div><code>NEW</code><h3>Tạo bản vẽ mới</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Lưu dự án đang sửa nếu cần.</p>
+      <ol><li>Chạy NEW.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Ứng dụng có thể hỏi lưu khi dự án hiện tại chưa được lưu.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản open mở dwg, dxf hoặc json c# + pwa chuẩn bị file nguồn. chạy open hoặc bấm mở. chọn một hay nhiều file. pwa đọc dwg bằng libredwg webassembly nội bộ; c# có pipeline đọc riêng.">
+      <div class="command-head"><div><code>OPEN</code><h3>Mở DWG, DXF hoặc JSON</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chuẩn bị file nguồn.</p>
+      <ol><li>Chạy OPEN hoặc bấm Mở.</li><li>Chọn một hay nhiều file.</li></ol>
+      <p class="note"><b>Lưu ý:</b> PWA đọc DWG bằng LibreDWG WebAssembly nội bộ; C# có pipeline đọc riêng.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản sv / save lưu dự án json c# + pwa đã mở hoặc tạo dự án. chạy sv hoặc ctrl+s. chọn nơi lưu nếu trình duyệt yêu cầu. json là định dạng chỉnh sửa chính và giữ các đối tượng bổ sung.">
+      <div class="command-head"><div><code>SV / SAVE</code><h3>Lưu dự án JSON</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Đã mở hoặc tạo dự án.</p>
+      <ol><li>Chạy SV hoặc Ctrl+S.</li><li>Chọn nơi lưu nếu trình duyệt yêu cầu.</li></ol>
+      <p class="note"><b>Lưu ý:</b> JSON là định dạng chỉnh sửa chính và giữ các đối tượng bổ sung.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản sva / saveas lưu dự án thành file khác c# đã có dự án. chạy sva. pwa tải xuống file json mới khi save.">
+      <div class="command-head"><div><code>SVA / SAVEAS</code><h3>Lưu dự án thành file khác</h3></div><span class="platform">C#</span></div>
+      <p><b>Chuẩn bị:</b> Đã có dự án.</p>
+      <ol><li>Chạy SVA.</li></ol>
+      <p class="note"><b>Lưu ý:</b> PWA tải xuống file JSON mới khi Save.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản fit zoom toàn bộ bản vẽ c# + pwa đã nạp bản vẽ. chạy fit. hữu ích khi pan/zoom làm mất vị trí bản vẽ.">
+      <div class="command-head"><div><code>FIT</code><h3>Zoom toàn bộ bản vẽ</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Đã nạp bản vẽ.</p>
+      <ol><li>Chạy FIT.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Hữu ích khi pan/zoom làm mất vị trí bản vẽ.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản png xuất ảnh png c# + pwa chọn phạm vi, nền, màu và chất lượng. chạy png. lưu ảnh. pwa hỗ trợ 1×, 2×, 4× và tự giới hạn bộ nhớ khi ảnh quá lớn.">
+      <div class="command-head"><div><code>PNG</code><h3>Xuất ảnh PNG</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn phạm vi, nền, màu và chất lượng.</p>
+      <ol><li>Chạy PNG.</li><li>Lưu ảnh.</li></ol>
+      <p class="note"><b>Lưu ý:</b> PWA hỗ trợ 1×, 2×, 4× và tự giới hạn bộ nhớ khi ảnh quá lớn.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản pngclip / clippng đưa png vào clipboard c# + pwa pwa cần https hoặc localhost. chạy pngclip. paste vào word, excel hoặc ứng dụng đích. nếu trình duyệt không hỗ trợ clipboard ảnh, hãy tải png theo cách thông thường.">
+      <div class="command-head"><div><code>PNGCLIP / CLIPPNG</code><h3>Đưa PNG vào Clipboard</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> PWA cần HTTPS hoặc localhost.</p>
+      <ol><li>Chạy PNGCLIP.</li><li>Paste vào Word, Excel hoặc ứng dụng đích.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Nếu trình duyệt không hỗ trợ Clipboard ảnh, hãy tải PNG theo cách thông thường.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản pr / print in bản vẽ c#; pwa dùng nút in thiết lập phạm vi và màu xuất. mở hộp thoại in. chọn máy in và khổ giấy. pwa có thể bị chặn pop-up; cần cho phép cửa sổ mới.">
+      <div class="command-head"><div><code>PR / PRINT</code><h3>In bản vẽ</h3></div><span class="platform">C#; PWA dùng nút In</span></div>
+      <p><b>Chuẩn bị:</b> Thiết lập phạm vi và màu xuất.</p>
+      <ol><li>Mở hộp thoại in.</li><li>Chọn máy in và khổ giấy.</li></ol>
+      <p class="note"><b>Lưu ý:</b> PWA có thể bị chặn pop-up; cần cho phép cửa sổ mới.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản pdf lưu pdf c# + pwa thiết lập phạm vi và nền. chạy pdf. pwa chọn save as pdf trong hộp thoại in. có thể xuất theo khung xuất.">
+      <div class="command-head"><div><code>PDF</code><h3>Lưu PDF</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Thiết lập phạm vi và nền.</p>
+      <ol><li>Chạy PDF.</li><li>PWA chọn Save as PDF trong hộp thoại in.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Có thể xuất theo khung xuất.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản dxf xuất dxf r12 dạng chữ c# + pwa chọn layer và phạm vi cần xuất. chạy dxf. mở thử bằng phần mềm cad khác. chữ tiếng việt được giữ là text; pwa dùng unicode escape trong dxf ascii r12.">
+      <div class="command-head"><div><code>DXF</code><h3>Xuất DXF R12 dạng chữ</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn layer và phạm vi cần xuất.</p>
+      <ol><li>Chạy DXF.</li><li>Mở thử bằng phần mềm CAD khác.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Chữ tiếng Việt được giữ là TEXT; PWA dùng Unicode escape trong DXF ASCII R12.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản dwg tạo dwg qua dxf trung gian c#; pwa chỉ chuẩn bị dxf nguồn c# cần dxf2dwg.exe phù hợp. chạy dwg. chờ công cụ chuyển đổi hoàn tất. pwa/android không thể chạy exe windows trực tiếp.">
+      <div class="command-head"><div><code>DWG</code><h3>Tạo DWG qua DXF trung gian</h3></div><span class="platform">C#; PWA chỉ chuẩn bị DXF nguồn</span></div>
+      <p><b>Chuẩn bị:</b> C# cần dxf2dwg.exe phù hợp.</p>
+      <ol><li>Chạy DWG.</li><li>Chờ công cụ chuyển đổi hoàn tất.</li></ol>
+      <p class="note"><b>Lưu ý:</b> PWA/Android không thể chạy EXE Windows trực tiếp.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản ht / html xuất html sửa bản vẽ c# đã mở dự án. chạy ht. lưu html có dữ liệu dự án nhúng. html xuất ra có thể mở độc lập để xem và chỉnh sửa nhẹ.">
+      <div class="command-head"><div><code>HT / HTML</code><h3>Xuất HTML sửa bản vẽ</h3></div><span class="platform">C#</span></div>
+      <p><b>Chuẩn bị:</b> Đã mở dự án.</p>
+      <ol><li>Chạy HT.</li><li>Lưu HTML có dữ liệu dự án nhúng.</li></ol>
+      <p class="note"><b>Lưu ý:</b> HTML xuất ra có thể mở độc lập để xem và chỉnh sửa nhẹ.</p>
+    </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản lay / cfg ẩn/hiện bảng layer hoặc config c# không cần. chạy lay hoặc cfg. pwa dùng các nút layer/thuộc tính hoặc bottom sheet trên điện thoại.">
+      <div class="command-head"><div><code>LAY / CFG</code><h3>Ẩn/hiện bảng Layer hoặc Config</h3></div><span class="platform">C#</span></div>
+      <p><b>Chuẩn bị:</b> Không cần.</p>
+      <ol><li>Chạy LAY hoặc CFG.</li></ol>
+      <p class="note"><b>Lưu ý:</b> PWA dùng các nút Layer/Thuộc tính hoặc bottom sheet trên điện thoại.</p>
+    </article></div></section>
+</main></div>
+<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.25 và PWA V0.16.7 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
+<script>
+const cards=[...document.querySelectorAll('.command-card')], search=document.getElementById('commandSearch'), count=document.getElementById('resultCount');let active='ALL';
+function normalize(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}
+function apply(){const q=normalize(search.value);let n=0;cards.forEach(c=>{const group=c.dataset.group,matchGroup=active==='ALL'||group===active,matchText=!q||normalize(c.dataset.search).includes(q);const show=matchGroup&&matchText;c.classList.toggle('hidden',!show);if(show)n++});count.textContent=n+' / '+cards.length+' lệnh'}
+document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');active=b.dataset.filter;apply()}));search.addEventListener('input',apply);apply();
+</script>
+</body></html>
