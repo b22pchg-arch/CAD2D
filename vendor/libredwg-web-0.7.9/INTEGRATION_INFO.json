@@ -1,0 +1,21 @@
+{
+  "package": "@mlightcad/libredwg-web",
+  "version": "0.7.9",
+  "license": "GPL-3.0",
+  "source": "local-vendor",
+  "integratedByPwaVersion": "0.15.4",
+  "runtimeFiles": {
+    "dist/libredwg-web.js": {
+      "sha256": "438b77262a85e8815e3928f3ff97a51ec84df06d3f3fd184c8459e798d568b81",
+      "size": 269601
+    },
+    "wasm/libredwg-web.js": {
+      "sha256": "62deaef11c2d6cf8fd0a0ee83d29120ca40bdabc2cdd9baa1f7911410bf9d73f",
+      "size": 110192
+    },
+    "wasm/libredwg-web.wasm": {
+      "sha256": "d8b78f6d5e63e6e178cf7343cfd08ebe798d75b6754c593e15d8f948b823e038",
+      "size": 9960337
+    }
+  }
+}
