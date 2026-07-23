@@ -5,7 +5,7 @@
   "description": "Mở DWG trực tiếp bằng libredwg-web nội bộ; xuất PNG/Clipboard 1×/2×/4× với nét kỹ thuật sắc, màu đối tượng và màu chữ riêng; hỗ trợ tiếng Việt.",
   "lang": "vi",
   "dir": "ltr",
-  "start_url": "./index.html?v=0.15.7",
+  "start_url": "./index.html?v=0.15.8",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
