@@ -5,13 +5,25 @@ DWG direct parsing uses:
   @mlightcad/libredwg-web version 0.7.9
   Project: https://github.com/mlightcad/libredwg-web
   Package: https://www.npmjs.com/package/@mlightcad/libredwg-web
-  License declared by the package: GPL-3.0
-
-The package is loaded from the pinned jsDelivr URL:
-  https://cdn.jsdelivr.net/npm/@mlightcad/libredwg-web@0.7.9/
+  License declared by package.json: GPL-3.0
 
 libredwg-web is based on GNU LibreDWG:
   https://www.gnu.org/software/libredwg/
   https://github.com/LibreDWG/libredwg
 
-This PWA does not upload the user's DWG file to jsDelivr. The browser downloads only the parser code and processes the selected DWG locally.
+LOCAL VENDOR INTEGRATION V0.15.4
+--------------------------------
+The user-supplied @mlightcad/libredwg-web 0.7.9 package is bundled under:
+  vendor/libredwg-web-0.7.9/
+
+The PWA imports the parser only from that local folder. It does not use jsDelivr,
+npm CDN, a conversion server, C#, EXE, or another desktop process to read DWG.
+The selected DWG stays on the device and is parsed in a Web Worker.
+
+Runtime files cached for offline use:
+  vendor/libredwg-web-0.7.9/dist/libredwg-web.js
+  vendor/libredwg-web-0.7.9/wasm/libredwg-web.js
+  vendor/libredwg-web-0.7.9/wasm/libredwg-web.wasm
+
+Runtime SHA-256 and sizes are recorded in:
+  vendor/libredwg-web-0.7.9/INTEGRATION_INFO.json

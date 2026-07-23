@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-<title>DWG Sketch PWA Editor V0.15.3</title>
+<title>DWG Sketch PWA Editor V0.15.4</title>
 <style>
 :root{color-scheme:dark;--bg:#202124;--panel:#292a2d;--line:#45464a;--text:#f1f3f4;--muted:#aeb0b4;--accent:#4fc3f7;--orange:#ffb74d;--danger:#ef5350;--ok:#66bb6a}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);touch-action:none;overscroll-behavior:none}
@@ -79,7 +79,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
   </div>
   <div class="tool-group"><button id="fitBtn">Zoom toàn bộ</button><button id="findTextBtn">Tìm chữ</button><button id="leftBtn">Layer</button><button id="rightBtn">Thuộc tính</button><button id="pngBtn">PNG</button><button id="printBtn">In</button><button id="pdfBtn">PDF</button><button id="dxfBtn">DXF</button></div>
   <div class="tool-group"><button id="toolbarModeBtn" title="Chuyển thanh công cụ biểu tượng/có chữ">Biểu tượng</button><button id="installPwaBtn" class="install-hidden">Cài PWA</button><button id="checkUpdateBtn">Kiểm tra phiên bản</button><button id="applyUpdateBtn" class="install-hidden">Cập nhật ngay</button></div>
-  <span class="spacer"></span><span class="version-pill">PWA 0.15.3</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
+  <span class="spacer"></span><span class="version-pill">PWA 0.15.4</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
 </header>
 <div id="drawingTabs" class="drawing-tabs" role="tablist" aria-label="Các bản vẽ đang mở"></div>
 <main id="layout" class="layout">
@@ -142,11 +142,11 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
     <div class="section" data-mobile-group="other"><h3>Đọc DWG/DXF trực tiếp</h3>
       <div class="muted"><b>DWG:</b> giải mã ngay trong trình duyệt bằng WebAssembly, không gọi C#, EXE, máy chủ chuyển đổi hoặc tạo DXF trung gian. <b>DXF:</b> vẫn dùng bộ đọc ASCII tích hợp sẵn.</div>
       <div id="dxfImportInfo" class="update-info muted" style="margin-top:7px">Chưa mở DWG/DXF.</div>
-      <div class="button-row"><button id="prepareDwgEngineBtn">Chuẩn bị bộ đọc DWG</button><a class="button" href="./sample_dxf_r12_unicode.dxf" download>DXF mẫu</a></div>
-      <div class="muted" style="margin-top:6px">Lần đầu cần mạng để PWA nhận khoảng 10 MB WebAssembly từ gói mã nguồn mở; Service Worker sẽ lưu đệm để những lần sau có thể đọc DWG offline trên chính thiết bị.</div>
+      <div class="button-row"><button id="prepareDwgEngineBtn">Kiểm tra bộ đọc DWG nội bộ</button><a class="button" href="./sample_dxf_r12_unicode.dxf" download>DXF mẫu</a></div>
+      <div class="muted" style="margin-top:6px">Bộ đọc @mlightcad/libredwg-web 0.7.9 và WebAssembly khoảng 10 MB đã được đặt trực tiếp trong dự án. Không dùng CDN; sau khi PWA được tải/cài, máy tính và điện thoại cùng dùng đúng một bộ đọc nội bộ và có thể mở DWG offline.</div>
     </div>
     <div class="section" data-mobile-group="other"><h3>PWA và cập nhật</h3>
-      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.15.3</b></div>
+      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.15.4</b></div>
       <div class="form-grid" style="margin-top:7px"><label class="full">Địa chỉ version.json<input id="updateUrlInput" value="./version.json" autocomplete="off"></label></div>
       <div class="button-row"><button id="saveUpdateUrlBtn">Lưu địa chỉ</button><button id="panelCheckUpdateBtn">Kiểm tra</button><button id="panelApplyUpdateBtn" class="install-hidden">Cập nhật</button></div>
       <div id="updateInfo" class="update-info muted">Chưa kiểm tra phiên bản.</div>
@@ -203,7 +203,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
 <div id="pwaToast" class="pwa-toast"><span id="pwaToastText"></span><button id="pwaToastAction" class="install-hidden">Cập nhật</button></div>
 <script>
 'use strict';
-const PWA_APP_VERSION='0.15.3';
+const PWA_APP_VERSION='0.15.4';
 const PWA_VERSION_URL_KEY='DwgSketchPwa.VersionUrl.V1';
 let deferredInstallPrompt=null,pwaRegistration=null,latestVersionInfo=null,reloadingForUpdate=false;
 function parseVersion(v){return String(v||'0').trim().replace(/^v/i,'').split(/[.-]/).map(x=>Number.parseInt(x,10)||0)}
@@ -245,7 +245,7 @@ async function initPwa(){
   document.getElementById('currentVersionText').textContent=PWA_APP_VERSION;document.getElementById('updateUrlInput').value=getVersionUrl();
   window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;document.getElementById('installPwaBtn').classList.remove('install-hidden')});
   window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;document.getElementById('installPwaBtn').classList.add('install-hidden');showPwaToast('Đã cài DWG Sketch PWA.')});
-  if('serviceWorker' in navigator&&location.protocol!=='file:'){try{const reg=await navigator.serviceWorker.register('./sw.js',{scope:'./'});wireServiceWorkerRegistration(reg)}catch(err){setUpdateInfo('Không đăng ký được Service Worker: '+err.message,'error')}}
+  if('serviceWorker' in navigator&&location.protocol!=='file:'){try{const reg=await navigator.serviceWorker.register('./sw.js?v='+encodeURIComponent(PWA_APP_VERSION),{scope:'./',updateViaCache:'none'});wireServiceWorkerRegistration(reg)}catch(err){setUpdateInfo('Không đăng ký được Service Worker: '+err.message,'error')}}
   navigator.serviceWorker?.addEventListener('controllerchange',()=>{if(reloadingForUpdate)return;reloadingForUpdate=true;location.reload()});
 }
 async function installPwa(){if(!deferredInstallPrompt){showPwaToast('Trình duyệt chưa cung cấp hộp thoại cài đặt. Có thể dùng menu “Thêm vào màn hình chính”.');return}deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;document.getElementById('installPwaBtn').classList.add('install-hidden')}
@@ -288,7 +288,7 @@ function workspaceSessionForStorage(s){return{id:s.id,displayName:s.displayName,
 function workspaceSnapshot(){captureDrawingSession();return{schemaVersion:WORKSPACE_SCHEMA_VERSION,savedAt:nowIso(),activeDrawingSessionId,drawingSessionSequence,sessions:drawingSessions.map(workspaceSessionForStorage)}}
 async function saveWorkspaceNow(reason='autosave'){if(!workspacePersistenceReady||workspacePersistenceBusy||workspaceRestoreInProgress||!drawingSessions.length)return false;workspacePersistenceBusy=true;if(workspaceSaveTimer){clearTimeout(workspaceSaveTimer);workspaceSaveTimer=null}try{await writeWorkspaceRecord(workspaceSnapshot());workspacePersistenceErrorShown=false;return true}catch(err){console.error('Không tự lưu được phiên làm việc:',err);if(!workspacePersistenceErrorShown){workspacePersistenceErrorShown=true;showPwaToast('Không thể tự lưu phiên bản vẽ trên thiết bị: '+(err?.message||err))}return false}finally{workspacePersistenceBusy=false}}
 function scheduleWorkspaceSave(delay=850){if(!workspacePersistenceReady||workspacePersistenceBusy||workspaceRestoreInProgress)return;if(workspaceSaveTimer)clearTimeout(workspaceSaveTimer);workspaceSaveTimer=setTimeout(()=>{workspaceSaveTimer=null;void saveWorkspaceNow('debounced')},Math.max(50,delay))}
-async function restoreWorkspaceFromStorage(){let saved;try{saved=await readWorkspaceRecord()}catch(err){console.warn('Không đọc được phiên khôi phục:',err);return false}if(!saved||!Array.isArray(saved.sessions)||!saved.sessions.length)return false;workspaceRestoreInProgress=true;try{drawingSessions=saved.sessions.filter(x=>x&&x.project).map((x,i)=>({id:String(x.id||('tab-restored-'+(i+1))),displayName:String(x.displayName||x.fileName||'Bản vẽ đã khôi phục'),fileName:String(x.fileName||'BanVe_KhoiPhuc.dwgsketch.json'),project:x.project,dirty:!!x.dirty,scale:num(x.scale,1),offsetX:num(x.offsetX),offsetY:num(x.offsetY),undoStack:[],redoStack:[],lastSelectionRegion:x.lastSelectionRegion||null,dxfInfo:String(x.dxfInfo||'')}));if(!drawingSessions.length)return false;activeDrawingSessionId=drawingSessions.some(x=>x.id===saved.activeDrawingSessionId)?saved.activeDrawingSessionId:drawingSessions[0].id;const maxId=drawingSessions.reduce((m,x)=>Math.max(m,num(String(x.id).match(/(\d+)$/)?.[1],0)),0);drawingSessionSequence=Math.max(num(saved.drawingSessionSequence,1),maxId+1);restoreDrawingSession(activeDrawingSession());showPwaToast(`Đã khôi phục ${drawingSessions.length} bản vẽ của phiên trước trên thiết bị.`);return true}catch(err){console.error('Phiên khôi phục không hợp lệ:',err);drawingSessions=[];activeDrawingSessionId=null;return false}finally{workspaceRestoreInProgress=false}}
+async function restoreWorkspaceFromStorage(){let saved;try{saved=await readWorkspaceRecord()}catch(err){console.warn('Không đọc được phiên khôi phục:',err);return false}if(!saved||!Array.isArray(saved.sessions)||!saved.sessions.length)return false;workspaceRestoreInProgress=true;try{drawingSessions=saved.sessions.filter(x=>x&&x.project).map((x,i)=>({id:String(x.id||('tab-restored-'+(i+1))),displayName:String(x.displayName||x.fileName||'Bản vẽ đã khôi phục'),fileName:String(x.fileName||'BanVe_KhoiPhuc.dwgsketch.json'),project:x.project,dirty:!!x.dirty,scale:num(x.scale,1),offsetX:num(x.offsetX),offsetY:num(x.offsetY),undoStack:[],redoStack:[],lastSelectionRegion:x.lastSelectionRegion||null,dxfInfo:String(x.dxfInfo||'')}));if(!drawingSessions.length)return false;activeDrawingSessionId=drawingSessions.some(x=>x.id===saved.activeDrawingSessionId)?saved.activeDrawingSessionId:drawingSessions[0].id;const maxId=drawingSessions.reduce((m,x)=>Math.max(m,num(String(x.id).match(/(\d+)$/)?.[1],0)),0);drawingSessionSequence=Math.max(num(saved.drawingSessionSequence,1),maxId+1);restoreDrawingSession(activeDrawingSession());const legacyCount=drawingSessions.filter(x=>isLegacyDwgProject(x.project)).length;if(legacyCount)showPwaToast(`Đã khôi phục ${drawingSessions.length} tab; có ${legacyCount} tab DWG dùng bộ đọc cũ, cần mở lại file gốc.`);else showPwaToast(`Đã khôi phục ${drawingSessions.length} bản vẽ của phiên trước trên thiết bị.`);return true}catch(err){console.error('Phiên khôi phục không hợp lệ:',err);drawingSessions=[];activeDrawingSessionId=null;return false}finally{workspaceRestoreInProgress=false}}
 function closeTransientUiForBackGesture(){const modal=$('textModal');if(modal?.classList.contains('show')){modal.classList.remove('show');return true}if($('quickFindPalette')?.classList.contains('show')){closeQuickFind();return true}const sheet=$('mobileSheet');if(sheet?.classList.contains('show')){showMobileSheet(false);return true}if(!layout.classList.contains('hide-left')||!layout.classList.contains('hide-right')){closeMobilePanels();return true}const bar=$('commandInput')?.parentElement;if(bar&&!bar.classList.contains('mobile-collapsed')){bar.classList.add('mobile-collapsed');canvas.focus();return true}return false}
 function isMobileBackGuardEnabled(){return window.matchMedia('(pointer:coarse)').matches||window.matchMedia('(max-width:700px)').matches||window.matchMedia('(display-mode:standalone)').matches||navigator.standalone===true}
 function pushBackGuardState(){try{history.pushState({...history.state,__dwgSketchBackGuard:true},'',location.href)}catch(err){console.warn('Không tạo được trạng thái chặn Back:',err)}}
@@ -324,7 +324,7 @@ function renderDrawingTabs(){const host=$('drawingTabs');if(!host)return;host.in
 function captureDrawingSession(){if(restoringDrawingSession)return;const s=activeDrawingSession();if(!s||!project)return;syncProject();s.project=clone(project);s.fileName=currentFileName;s.dirty=dirty;s.scale=scale;s.offsetX=offsetX;s.offsetY=offsetY;s.undoStack=clone(undoStack);s.redoStack=clone(redoStack);s.lastSelectionRegion=lastSelectionRegion?clone(lastSelectionRegion):null;s.dxfInfo=$('dxfImportInfo')?.textContent||'';renderDrawingTabs();scheduleWorkspaceSave()}
 function makeDrawingSession(displayName='Bản vẽ mới'){return{id:'tab-'+drawingSessionSequence++,displayName,fileName:displayName,project:createBlankProject(),dirty:false,scale:1,offsetX:0,offsetY:0,undoStack:[],redoStack:[],lastSelectionRegion:null,dxfInfo:''}}
 function beginIncomingDrawingSession(displayName){captureDrawingSession();let session=activeDrawingSession();const reusable=drawingSessions.length===1&&session&&!session.dirty&&entities.length===0&&overlays.length===0;if(!reusable){session=makeDrawingSession(displayName);drawingSessions.push(session);activeDrawingSessionId=session.id}else session.displayName=displayName;renderDrawingTabs();return session}
-function restoreDrawingSession(session){if(!session)return;restoringDrawingSession=true;try{loadProjectObject(clone(session.project),session.fileName,!session.dirty,false);scale=num(session.scale,scale);offsetX=num(session.offsetX,offsetX);offsetY=num(session.offsetY,offsetY);undoStack=clone(session.undoStack||[]);redoStack=clone(session.redoStack||[]);lastSelectionRegion=session.lastSelectionRegion?clone(session.lastSelectionRegion):null;if($('dxfImportInfo'))$('dxfImportInfo').textContent=session.dxfInfo||'Chưa mở DWG/DXF.';dirty=!!session.dirty;$('dirtyBadge').textContent=dirty?'Chưa lưu':'Đã lưu';$('dirtyBadge').className='badge '+(dirty?'dirty':'ok');updateHistoryButtons();draw()}finally{restoringDrawingSession=false}renderDrawingTabs();document.title=`${dirty?'* ':''}DWG Sketch PWA — ${session.displayName||session.fileName}`}
+function restoreDrawingSession(session){if(!session)return;restoringDrawingSession=true;try{loadProjectObject(clone(session.project),session.fileName,!session.dirty,false);scale=num(session.scale,scale);offsetX=num(session.offsetX,offsetX);offsetY=num(session.offsetY,offsetY);undoStack=clone(session.undoStack||[]);redoStack=clone(session.redoStack||[]);lastSelectionRegion=session.lastSelectionRegion?clone(session.lastSelectionRegion):null;if($('dxfImportInfo')){const stale=isLegacyDwgProject(session.project);$('dxfImportInfo').textContent=stale?'Cảnh báo: tab DWG này được lưu bởi bộ đọc cũ. Hãy mở lại file DWG gốc bằng V0.15.4 để nhận đúng màu/font và bộ đọc nội bộ.':(session.dxfInfo||'Chưa mở DWG/DXF.');$('dxfImportInfo').classList.toggle('error',stale);$('dxfImportInfo').classList.toggle('success',!stale&&!!session.dxfInfo)}dirty=!!session.dirty;$('dirtyBadge').textContent=dirty?'Chưa lưu':'Đã lưu';$('dirtyBadge').className='badge '+(dirty?'dirty':'ok');updateHistoryButtons();draw()}finally{restoringDrawingSession=false}renderDrawingTabs();document.title=`${dirty?'* ':''}DWG Sketch PWA — ${session.displayName||session.fileName}`}
 function switchDrawingSession(id){if(id===activeDrawingSessionId)return;captureDrawingSession();const target=drawingSessions.find(x=>x.id===id);if(!target)return;activeDrawingSessionId=id;restoreDrawingSession(target);status(`Đã chuyển sang tab ${target.displayName||target.fileName}.`)}
 function closeDrawingSession(id){captureDrawingSession();const index=drawingSessions.findIndex(x=>x.id===id);if(index<0)return;const target=drawingSessions[index];if(target.dirty&&!confirm(`Tab “${target.displayName||target.fileName}” có thay đổi chưa lưu. Đóng tab?`))return;drawingSessions.splice(index,1);if(!drawingSessions.length){const blank=makeDrawingSession('Bản vẽ mới');drawingSessions.push(blank);activeDrawingSessionId=blank.id;restoringDrawingSession=true;try{loadProjectObject(createBlankProject(),'BanVeMoi.dwgsketch.json',true,false)}finally{restoringDrawingSession=false}captureDrawingSession();renderDrawingTabs();return}if(activeDrawingSessionId===id){const next=drawingSessions[Math.min(index,drawingSessions.length-1)];activeDrawingSessionId=next.id;restoreDrawingSession(next)}else renderDrawingTabs()}
 function initializeDrawingTabs(){if(drawingSessions.length)return;const s=makeDrawingSession('Bản vẽ mới');drawingSessions.push(s);activeDrawingSessionId=s.id;captureDrawingSession();renderDrawingTabs()}
@@ -547,14 +547,29 @@ function parseDxfText(text,fileName='BanVe.dxf',encodingInfo={}){
 }
 function loadDxfArrayBuffer(buffer,fileName){const decoded=decodeDxfArrayBuffer(buffer),p=parseDxfText(decoded.text,fileName,decoded);p.drawingBounds=null;const jsonName=String(fileName||'BanVe.dxf').replace(/\.dxf$/i,'')+'.dwgsketch.json';loadProjectObject(p,jsonName,true);updateProjectInfo(fileName);recalcBounds();fitView();const skipped=Object.values(p.unsupportedTypes||{}).reduce((a,b)=>a+b,0),details=Object.entries(p.unsupportedTypes||{}).map(([k,v])=>`${k}: ${v}`).join(', '),trueColorCount=p.entities.filter(e=>e.trueColorArgb!==null&&e.trueColorArgb!==undefined).length,byLayerCount=p.entities.filter(e=>String(e.colorMethod||'').toLowerCase().includes('bylayer')||Number(e.colorIndex)===256).length;$('dxfImportInfo').textContent=`Đã đọc ${p.entities.length.toLocaleString('vi-VN')} đối tượng · ${p.visibleLayers.length} layer · màu lớp ${byLayerCount} · TrueColor ${trueColorCount} · ${p.dxfImport.acadVersion} · ${p.dxfImport.encoding}${skipped?` · bỏ qua ${skipped} (${details})`:''}`;status(`Đã mở DXF và bật màu CAD: ${p.entities.length.toLocaleString('vi-VN')} đối tượng${skipped?`, bỏ qua ${skipped}`:''}.`)}
 
-const DWG_ENGINE_PACKAGE='@mlightcad/libredwg-web 0.7.9';
+const DWG_ENGINE_VERSION='0.7.9';
+const DWG_ENGINE_PACKAGE='@mlightcad/libredwg-web 0.7.9 nội bộ';
+const DWG_ENGINE_SOURCE='local-vendor';
 let dwgEngineWorker=null,dwgEngineReady=false,dwgEngineInitPromise=null;
+function validateDwgWorkerIdentity(message){
+  const workerVersion=String(message?.workerVersion||'');
+  const engineVersion=String(message?.engineVersion||'');
+  const engineSource=String(message?.engineSource||'');
+  if(workerVersion!==PWA_APP_VERSION)throw new Error(`Sai phiên bản Worker DWG: ứng dụng ${PWA_APP_VERSION}, Worker ${workerVersion||'không khai báo'}. Hãy cập nhật/xóa cache PWA.`);
+  if(engineVersion!==DWG_ENGINE_VERSION)throw new Error(`Sai phiên bản libredwg-web: yêu cầu ${DWG_ENGINE_VERSION}, nhận ${engineVersion||'không khai báo'}.`);
+  if(engineSource!==DWG_ENGINE_SOURCE)throw new Error(`Bộ đọc DWG không phải bản nội bộ (${engineSource||'không khai báo'}).`);
+  return true;
+}
+function isLegacyDwgProject(p){
+  if(!p||!String(p.sourceFormat||'').toUpperCase().includes('DWG'))return false;
+  return String(p.dwgImport?.workerVersion||'')!==PWA_APP_VERSION||String(p.dwgImport?.engineVersion||'')!==DWG_ENGINE_VERSION||String(p.dwgImport?.engineSource||'')!==DWG_ENGINE_SOURCE;
+}
 function setDwgEngineInfo(message,state=''){
   const el=$('dxfImportInfo');if(el){el.textContent=message;el.classList.toggle('error',state==='error');el.classList.toggle('success',state==='success')}
 }
 function newDwgWorker(){
   if(dwgEngineWorker)try{dwgEngineWorker.terminate()}catch{}
-  dwgEngineWorker=new Worker('./dwg-worker.js',{type:'module',name:'DwgSketchDirectReader'});
+  const workerUrl='./dwg-worker.js?v='+encodeURIComponent(PWA_APP_VERSION);dwgEngineWorker=new Worker(workerUrl,{type:'module',name:'DwgSketchDirectReader-'+PWA_APP_VERSION});
   return dwgEngineWorker;
 }
 function initializeDwgEngine(){
@@ -563,8 +578,8 @@ function initializeDwgEngine(){
   dwgEngineInitPromise=new Promise((resolve,reject)=>{
     const worker=newDwgWorker();
     const finish=(ok,value)=>{dwgEngineInitPromise=null;try{worker.terminate()}catch{};if(dwgEngineWorker===worker)dwgEngineWorker=null;if(!ok)reject(value);else resolve(value)};
-    worker.onmessage=e=>{const m=e.data||{};if(m.type==='progress'){setDwgEngineInfo(m.message,m.stage==='done'||m.stage==='ready'?'success':'');status(m.message)}else if(m.type==='ready'){dwgEngineReady=true;setDwgEngineInfo(`Bộ đọc DWG đã sẵn sàng: ${DWG_ENGINE_PACKAGE}. Có thể tắt mạng và mở DWG ở những lần sau.`, 'success');status('Bộ đọc DWG WebAssembly đã sẵn sàng.');finish(true,true)}else if(m.type==='error'){const err=new Error(m.message||'Không nạp được bộ đọc DWG.');setDwgEngineInfo('Không nạp được bộ đọc DWG: '+err.message,'error');finish(false,err)}};
-    worker.onerror=e=>{const err=new Error(e.message||'Không tải được WebAssembly. Hãy kiểm tra mạng ở lần khởi tạo đầu tiên.');setDwgEngineInfo('Không nạp được bộ đọc DWG: '+err.message,'error');finish(false,err)};
+    worker.onmessage=e=>{const m=e.data||{};if(m.type==='progress'){setDwgEngineInfo(m.message,m.stage==='done'||m.stage==='ready'?'success':'');status(m.message)}else if(m.type==='ready'){try{validateDwgWorkerIdentity(m)}catch(err){setDwgEngineInfo(err.message,'error');finish(false,err);return}dwgEngineReady=true;setDwgEngineInfo(`Bộ đọc DWG nội bộ đã sẵn sàng · PWA/Worker ${PWA_APP_VERSION} · ${DWG_ENGINE_PACKAGE} · không CDN.`, 'success');status('Bộ đọc DWG WebAssembly nội bộ đã sẵn sàng.');finish(true,true)}else if(m.type==='error'){const err=new Error(m.message||'Không nạp được bộ đọc DWG.');setDwgEngineInfo('Không nạp được bộ đọc DWG: '+err.message,'error');finish(false,err)}};
+    worker.onerror=e=>{const err=new Error(e.message||'Không tải được WebAssembly nội bộ. Hãy kiểm tra thư mục vendor/libredwg-web-0.7.9 và cập nhật đủ file dự án.');setDwgEngineInfo('Không nạp được bộ đọc DWG: '+err.message,'error');finish(false,err)};
     setDwgEngineInfo('Đang chuẩn bị bộ đọc DWG WebAssembly…');worker.postMessage({command:'init'});
   });
   return dwgEngineInitPromise;
@@ -578,12 +593,13 @@ async function loadDwgArrayBuffer(buffer,fileName){
       if(m.type==='progress'){setDwgEngineInfo(m.message,m.stage==='done'?'success':'');status(m.message);return}
       if(m.type==='error'){const err=new Error(m.message||'Không đọc được DWG.');setDwgEngineInfo('Không đọc được DWG: '+err.message,'error');finish(false,err);return}
       if(m.type!=='result')return;
+      try{validateDwgWorkerIdentity(m)}catch(err){setDwgEngineInfo(err.message,'error');finish(false,err);return}
       const p=m.project;p.drawingBounds=null;const jsonName=String(fileName||'BanVe.dwg').replace(/\.dwg$/i,'')+'.dwgsketch.json';
       loadProjectObject(p,jsonName,true);updateProjectInfo(fileName);recalcBounds();fitView();
       const skipped=Object.values(p.unsupportedTypes||{}).reduce((a,b)=>a+Number(b||0),0),details=Object.entries(p.unsupportedTypes||{}).slice(0,12).map(([k,v])=>`${k}: ${v}`).join(', '),info=p.dwgImport||{};
       const textStats=info.textStats||{},fontNote=textStats.tcvn3Converted?` · đã đổi ${Number(textStats.tcvn3Converted).toLocaleString('vi-VN')} chữ TCVN3 sang Unicode`:'';
       const colorNote=info.usedRawDwgTableApi?` · khôi phục màu gốc ${Number(info.rawLayerColorCount||0).toLocaleString('vi-VN')} layer`:' · dùng bộ suy luận màu tương thích';
-      setDwgEngineInfo(`DWG trực tiếp · ${p.entities.length.toLocaleString('vi-VN')} đối tượng hiển thị từ ${Number(info.sourceEntityCount||0).toLocaleString('vi-VN')} đối tượng nguồn · ${p.visibleLayers.length} layer · ${Number(info.blockCount||0).toLocaleString('vi-VN')} block${colorNote}${fontNote} · ${Math.round(Number(info.elapsedMs||0)/100)/10}s${skipped?` · chưa chuyển được ${skipped} (${details}${Object.keys(p.unsupportedTypes||{}).length>12?', …':''})`:''}`,'success');
+      setDwgEngineInfo(`DWG trực tiếp · Worker ${info.workerVersion||m.workerVersion} · libredwg ${info.engineVersion||m.engineVersion} nội bộ · ${p.entities.length.toLocaleString('vi-VN')} đối tượng hiển thị từ ${Number(info.sourceEntityCount||0).toLocaleString('vi-VN')} đối tượng nguồn · ${p.visibleLayers.length} layer · ${Number(info.blockCount||0).toLocaleString('vi-VN')} block${colorNote}${fontNote} · ${Math.round(Number(info.elapsedMs||0)/100)/10}s${skipped?` · chưa chuyển được ${skipped} (${details}${Object.keys(p.unsupportedTypes||{}).length>12?', …':''})`:''}`,'success');
       status(`Đã mở DWG trực tiếp trong PWA: ${p.entities.length.toLocaleString('vi-VN')} đối tượng${skipped?`, chưa chuyển được ${skipped}`:''}.`);finish(true,p)
     };
     worker.onerror=e=>{const err=new Error(e.message||'Worker đọc DWG bị lỗi.');setDwgEngineInfo('Không đọc được DWG: '+err.message,'error');finish(false,err)};

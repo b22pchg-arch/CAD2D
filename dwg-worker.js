@@ -1,8 +1,21 @@
-/* DWG Sketch PWA V0.15.3 - direct DWG reader worker.
+/* DWG Sketch PWA V0.15.4 - direct DWG reader worker.
  * LibreDWG WebAssembly is loaded in this Worker, so parsing never calls a desktop converter.
  * Upstream: @mlightcad/libredwg-web 0.7.9 (GPL-3.0)
  */
-import { Dwg_File_Type, LibreDwg } from 'https://cdn.jsdelivr.net/npm/@mlightcad/libredwg-web@0.7.9/dist/libredwg-web.js';
+import { Dwg_File_Type, LibreDwg } from './vendor/libredwg-web-0.7.9/dist/libredwg-web.js';
+
+const DWG_WORKER_VERSION = '0.15.4';
+const DWG_ENGINE_VERSION = '0.7.9';
+const DWG_ENGINE_PACKAGE = '@mlightcad/libredwg-web';
+const DWG_ENGINE_SOURCE = 'local-vendor';
+const DWG_ENGINE_WASM_BASE = new URL('./vendor/libredwg-web-0.7.9/wasm', self.location.href).href.replace(/\/$/, '');
+const DWG_ENGINE_INFO = Object.freeze({
+  workerVersion: DWG_WORKER_VERSION,
+  engineVersion: DWG_ENGINE_VERSION,
+  enginePackage: DWG_ENGINE_PACKAGE,
+  engineSource: DWG_ENGINE_SOURCE,
+  engineBase: DWG_ENGINE_WASM_BASE
+});
 
 let enginePromise = null;
 const DEG = 180 / Math.PI;
@@ -14,7 +27,7 @@ function postProgress(stage, message, percent) {
 async function getEngine() {
   if (!enginePromise) {
     postProgress('engine', 'Đang nạp bộ đọc DWG WebAssembly…', 5);
-    enginePromise = LibreDwg.create();
+    enginePromise = LibreDwg.create(DWG_ENGINE_WASM_BASE);
   }
   return enginePromise;
 }
@@ -621,7 +634,10 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
       exportStrokeMode: 'original', exportStrokeColor: '#000000'
     },
     dwgImport: {
-      engine: '@mlightcad/libredwg-web 0.7.9 + PWA color/font adapter 0.15.3',
+      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font adapter 0.15.4',
+      workerVersion: DWG_WORKER_VERSION,
+      engineVersion: DWG_ENGINE_VERSION,
+      engineSource: DWG_ENGINE_SOURCE,
       version: String(meta.version ?? 'không rõ'),
       codepage: String(meta.codepage ?? 'không rõ'),
       sourceEntityCount: sourceEntities.length,
@@ -646,8 +662,8 @@ self.onmessage = async event => {
   try {
     if (message.command === 'init') {
       await getEngine();
-      postProgress('ready', 'Bộ đọc DWG WebAssembly đã sẵn sàng và được PWA lưu đệm.', 100);
-      self.postMessage({ type: 'ready' });
+      postProgress('ready', 'Bộ đọc DWG WebAssembly nội bộ đã sẵn sàng.', 100);
+      self.postMessage({ type: 'ready', ...DWG_ENGINE_INFO });
       return;
     }
     if (message.command !== 'open-dwg') return;
@@ -680,9 +696,9 @@ self.onmessage = async event => {
     if (!project.entities.length) throw new Error('DWG đã được đọc nhưng chưa lấy được đối tượng 2D phù hợp để hiển thị. Hãy xem thống kê loại đối tượng chưa hỗ trợ.');
     project.dwgImport.elapsedMs = Math.round(performance.now() - started);
     postProgress('done', `Đã đọc ${project.entities.length.toLocaleString('vi-VN')} đối tượng DWG.`, 100);
-    self.postMessage({ type: 'result', project });
+    self.postMessage({ type: 'result', project, ...DWG_ENGINE_INFO });
   } catch (error) {
     console.error(error);
-    self.postMessage({ type: 'error', message: error?.message || String(error), stack: error?.stack || '' });
+    self.postMessage({ type: 'error', message: error?.message || String(error), stack: error?.stack || '', ...DWG_ENGINE_INFO });
   }
 };
