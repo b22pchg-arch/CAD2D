@@ -1,7 +1,7 @@
 {
-  "version": "0.16.2",
-  "releasedAt": "2026-07-23T16:30:00+07:00",
-  "notes": "Bổ sung TEXTFIX/LABELFIX: phát hiện chữ đè lên đường, nằm trong hình kín và đề xuất vị trí trống gần khối; xem trước và Undo theo phiên.",
+  "version": "0.16.4",
+  "releasedAt": "2026-07-23T17:30:00+07:00",
+  "notes": "Bổ sung phạm vi Chỉ trong khung xuất cho AUDIT/REPAIR/RECTFIX/CLOSEGAP/AUTOCLOSE/JOIN/OVERKILL/TEXTFIX; hỗ trợ các lệnh nhanh hậu tố F như REPAIRF và TEXTFIXF.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-<title>DWG Sketch PWA Editor V0.16.1</title>
+<title>DWG Sketch PWA Editor V0.16.4</title>
 <style>
 :root{color-scheme:dark;--bg:#202124;--panel:#292a2d;--line:#45464a;--text:#f1f3f4;--muted:#aeb0b4;--accent:#4fc3f7;--orange:#ffb74d;--danger:#ef5350;--ok:#66bb6a}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);touch-action:none;overscroll-behavior:none}
@@ -52,7 +52,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
 
 .tool-icon{display:none;font-weight:700;line-height:1}.tool-label{display:inline}.toolbar.icon-mode button{width:38px;min-width:38px;height:36px;padding:3px;display:inline-grid;place-items:center}.toolbar.icon-mode .tool-icon{display:inline;font-size:18px}.toolbar.icon-mode .tool-label{display:none}.toolbar.icon-mode #toolbarModeBtn{width:auto;min-width:38px}.selection-kind-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 8px}.selection-kind-grid label{display:flex;gap:6px;align-items:center;min-height:30px;font-size:12px}.selection-filter-summary{margin-top:6px;padding:6px;border:1px solid #45464a;border-radius:4px;background:#202124}.mobile-bar .tool-icon,.mobile-action-grid .tool-icon{display:block;font-size:18px;margin-bottom:2px}.mobile-bar .tool-label,.mobile-action-grid .tool-label{display:block;font-size:10px;line-height:1.1}
 
-.repair-list{display:grid;gap:7px;max-height:42vh;overflow:auto;margin-top:9px;padding-right:3px}.repair-row{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:start;border:1px solid #555b60;background:#25272a;border-radius:6px;padding:8px}.repair-row:hover{border-color:#78909c}.repair-row .repair-title{font-weight:600;font-size:13px}.repair-row .repair-detail{font-size:11px;color:var(--muted);margin-top:3px}.repair-confidence{font-size:11px;border-radius:12px;padding:3px 7px;background:#455a64;white-space:nowrap}.repair-confidence.high{background:#2e7d32}.repair-confidence.medium{background:#8d6e00}.repair-confidence.low{background:#8e3b3b}.repair-summary{padding:7px 9px;border:1px solid #4f555a;border-radius:6px;background:#202225;margin-top:8px;font-size:12px}.repair-tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}.repair-tools-grid button{min-height:38px}.repair-preview-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:6px}.repair-preview-legend span:before{content:'';display:inline-block;width:18px;height:3px;margin-right:5px;vertical-align:middle;background:#ff4fd8}.repair-preview-legend span:nth-child(2):before{background:#66ff66}.repair-preview-legend span:nth-child(3):before{background:#ff5252}
+.repair-list{display:grid;gap:7px;max-height:42vh;overflow:auto;margin-top:9px;padding-right:3px}.repair-row{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:start;border:1px solid #555b60;background:#25272a;border-radius:6px;padding:8px}.repair-row:hover{border-color:#78909c}.repair-row .repair-title{font-weight:600;font-size:13px}.repair-row .repair-detail{font-size:11px;color:var(--muted);margin-top:3px}.repair-confidence{font-size:11px;border-radius:12px;padding:3px 7px;background:#455a64;white-space:nowrap}.repair-confidence.high{background:#2e7d32}.repair-confidence.medium{background:#8d6e00}.repair-confidence.low{background:#8e3b3b}.repair-summary{padding:7px 9px;border:1px solid #4f555a;border-radius:6px;background:#202225;margin-top:8px;font-size:12px}.repair-tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}.repair-tools-grid button{min-height:38px}.repair-preview-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:6px}.repair-preview-legend span:before{content:'';display:inline-block;width:18px;height:3px;margin-right:5px;vertical-align:middle;background:#ff4fd8}.repair-preview-legend span:nth-child(2):before{background:#66ff66}.repair-preview-legend span:nth-child(3):before{background:#ff5252}.repair-progress{display:none;margin-top:8px;padding:8px;border:1px solid #4f555a;border-radius:6px;background:#202225}.repair-progress.show{display:block}.repair-progress-bar{height:8px;border-radius:5px;overflow:hidden;background:#111}.repair-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#4fc3f7,#66ff99);transition:width .12s linear}.repair-progress-text{font-size:11px;color:var(--muted);margin-top:5px}.repair-scope-hint{font-size:11px;color:#ffd180;margin-top:6px}.repair-running .repair-lock{opacity:.58;pointer-events:none}
 </style>
 
 <meta name="theme-color" content="#202124">
@@ -81,7 +81,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
   </div>
   <div class="tool-group"><button id="fitBtn">Zoom toàn bộ</button><button id="findTextBtn">Tìm chữ</button><button id="leftBtn">Layer</button><button id="rightBtn">Thuộc tính</button><button id="pngBtn">PNG</button><button id="copyPngBtn" title="Sao chép ảnh xuất hiện tại vào Clipboard">PNG → Clipboard</button><button id="printBtn">In</button><button id="pdfBtn">PDF</button><button id="dxfBtn">DXF</button></div>
   <div class="tool-group"><button id="toolbarModeBtn" title="Chuyển thanh công cụ biểu tượng/có chữ">Biểu tượng</button><button id="installPwaBtn" class="install-hidden">Cài PWA</button><button id="checkUpdateBtn">Kiểm tra phiên bản</button><button id="applyUpdateBtn" class="install-hidden">Cập nhật ngay</button></div>
-  <span class="spacer"></span><span class="version-pill">PWA 0.16.2</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
+  <span class="spacer"></span><span class="version-pill">PWA 0.16.4</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
 </header>
 <div id="drawingTabs" class="drawing-tabs" role="tablist" aria-label="Các bản vẽ đang mở"></div>
 <main id="layout" class="layout">
@@ -148,7 +148,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
       <div class="muted" style="margin-top:6px">Bộ đọc @mlightcad/libredwg-web 0.7.9 và WebAssembly khoảng 10 MB đã được đặt trực tiếp trong dự án. Không dùng CDN; sau khi PWA được tải/cài, máy tính và điện thoại cùng dùng đúng một bộ đọc nội bộ và có thể mở DWG offline.</div>
     </div>
     <div class="section" data-mobile-group="other"><h3>PWA và cập nhật</h3>
-      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.16.2</b></div>
+      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.16.4</b></div>
       <div class="form-grid" style="margin-top:7px"><label class="full">Địa chỉ version.json<input id="updateUrlInput" value="./version.json" autocomplete="off"></label></div>
       <div class="button-row"><button id="saveUpdateUrlBtn">Lưu địa chỉ</button><button id="panelCheckUpdateBtn">Kiểm tra</button><button id="panelApplyUpdateBtn" class="install-hidden">Cập nhật</button></div>
       <div id="updateInfo" class="update-info muted">Chưa kiểm tra phiên bản.</div>
@@ -164,7 +164,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
     <div class="section" data-mobile-group="property"><h3>Đối tượng được chọn</h3><div id="selectionSummary" class="muted">Bấm vào đối tượng để chọn. Giữ Ctrl/Shift để chọn nhiều.</div></div>
     <div class="section" data-mobile-group="property"><h3>Thuộc tính</h3><div id="propertyForm" class="form-grid"><div class="muted full">Chưa chọn đối tượng.</div></div><div class="button-row"><button id="applyBtn" class="primary">Áp dụng</button><button id="selectLinkedPropertyBtn">Chọn liên kết</button><button id="moveSelectedBtn">Di chuyển</button><button id="scaleSelectedBtn">Scale</button><button id="trimSelectedBtn">Trim</button><button id="extendSelectedBtn">Extend</button><button id="areaSelectedBtn">Diện tích</button><button id="dimSelectedBtn">Dim</button><button id="matchPropSelectedBtn">MatchProp</button><button id="rotateLeftBtn">Xoay −15°</button><button id="rotateRightBtn">Xoay +15°</button><button id="mirrorSelectedBtn">Đối xứng</button></div></div>
     <div class="section" data-mobile-group="property"><h3>Lệnh CAD 2D</h3><div class="muted"><b>TRIM:</b> chọn trước biên cắt rồi bấm đường/cung/tròn/elip/polyline cần cắt. Đường cong có thể vừa là biên vừa là đối tượng bị cắt.<br><b>SCALE:</b> chọn đối tượng, kích hoạt lệnh, bấm điểm gốc rồi nhập hệ số.<br><b>AREA:</b> tính diện tích hình kín hoặc vùng ghép bởi các đường/cung đã chọn.<br><b>EXTEND:</b> hiện hỗ trợ kéo dài LINE tới biên thẳng hoặc cong.<br><b>DIM:</b> chọn hai điểm đo rồi chọn vị trí đặt kích thước.<br><b>MATCHPROP:</b> chọn đúng một đối tượng nguồn, kích hoạt lệnh rồi bấm từng đích hoặc kéo vùng Window/Crossing.</div></div>
-    <div class="section" data-mobile-group="property"><h3>Sửa hình tự động</h3><div class="muted">Phát hiện cạnh chữ nhật bị thiếu, khe hở đầu mút, polyline chưa kín, đường thẳng cùng phương, đối tượng trùng và chữ đang đè lên đường/hình. TEXTFIX tự đề xuất vị trí trống gần khối liên quan; mặc định chỉ xem trước và mọi thay đổi được gom thành một bước Undo.</div><div class="repair-tools-grid"><button id="auditRepairBtn">AUDIT</button><button id="repairGeometryBtn">REPAIR</button><button data-repair-filter="TEXTFIX">Chữ tránh hình</button><button data-repair-filter="RECTFIX">Cạnh thiếu</button><button data-repair-filter="CLOSEGAP">Đóng khe</button><button data-repair-filter="JOIN">Gộp đoạn</button><button data-repair-filter="OVERKILL">Xóa trùng</button></div></div>
+    <div class="section" data-mobile-group="property"><h3>Sửa hình tự động</h3><div class="muted">Phát hiện cạnh chữ nhật bị thiếu, khe hở đầu mút, polyline chưa kín, đường thẳng cùng phương, đối tượng trùng và chữ đang đè lên đường/hình. TEXTFIX tự đề xuất vị trí trống gần khối liên quan; có thể giới hạn toàn bộ phép quét trong khung xuất; mặc định chỉ xem trước và mọi thay đổi được gom thành một bước Undo.</div><div class="repair-tools-grid"><button id="auditRepairBtn">AUDIT</button><button id="repairGeometryBtn">REPAIR</button><button data-repair-filter="TEXTFIX">Chữ tránh hình</button><button data-repair-filter="RECTFIX">Cạnh thiếu</button><button data-repair-filter="CLOSEGAP">Đóng khe</button><button data-repair-filter="JOIN">Gộp đoạn</button><button data-repair-filter="OVERKILL">Xóa trùng</button></div></div>
     <div class="section" data-mobile-group="create"><h3>Tạo đối tượng mới</h3><div class="form-grid"><label class="full">Nội dung chữ<textarea id="newText">Ghi chú mới</textarea></label><label>Chiều cao chữ<input id="newTextHeight" type="number" value="2.5" step="0.1"></label><label>Góc chữ/cung<input id="newRotation" type="number" value="0" step="1"></label><label>Góc kết thúc cung<input id="newArcEnd" type="number" value="180" step="1"></label><label>Màu<input id="newColor" type="color" value="#ffffff"></label><label>Độ dày nét<input id="newStroke" type="number" value="2" min="0.2" step="0.2"></label></div></div>
 
     <div class="section" data-mobile-group="export"><h3>Xuất CAD 2D</h3><div class="form-grid">
@@ -219,13 +219,13 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
 <textarea id="areaResultText" readonly style="height:180px"></textarea>
 <div class="dialog-actions"><button id="areaClose">Đóng</button><button id="areaCopy">Sao chép kết quả</button></div></div></div>
 <div id="repairModal" class="modal"><div class="dialog" style="width:min(760px,100%)"><h2>Kiểm tra và sửa hình học tự động</h2>
-<div class="form-grid"><label>Dung sai nối / khoảng cách chữ<input id="repairTolerance" type="number" min="0.000001" step="any" value="2"></label><label>Ngưỡng tự sửa (%)<input id="repairConfidence" type="number" min="50" max="100" step="1" value="95"></label><label>Phạm vi<select id="repairScope"><option value="drawing">Toàn bản vẽ đang hiển thị</option><option value="selected">Các đối tượng đã chọn</option></select></label><label>Nhóm kiểm tra<select id="repairFilter"><option value="ALL">Tất cả</option><option value="RECTFIX">Cạnh hình chữ nhật thiếu</option><option value="CLOSEGAP">Khe hở / đóng đường bao</option><option value="AUTOCLOSE">Polyline chưa kín</option><option value="JOIN">Gộp đường cùng phương</option><option value="OVERKILL">Đối tượng trùng</option><option value="TEXTFIX">Chữ tránh đường/hình</option></select></label></div>
-<div id="repairSummary" class="repair-summary">Chưa quét bản vẽ.</div><div class="repair-preview-legend"><span>Cạnh bổ sung</span><span>Đường sau gộp</span><span>Đối tượng sẽ xóa</span><span>Vị trí chữ đề xuất</span></div><div id="repairList" class="repair-list"></div>
-<div class="dialog-actions" style="flex-wrap:wrap"><button id="repairRescan">Quét lại</button><button id="repairSelectAll">Chọn tất cả</button><button id="repairSelectHigh">Chọn mức chắc chắn</button><button id="repairApplyHigh">Tự sửa chắc chắn</button><button id="repairApplySelected">Áp dụng mục đã chọn</button><button id="repairClose">Đóng</button></div></div></div>
+<div class="form-grid repair-lock"><label>Dung sai nối / khoảng cách chữ<input id="repairTolerance" type="number" min="0.000001" step="any" value="2"></label><label>Ngưỡng tự sửa (%)<input id="repairConfidence" type="number" min="50" max="100" step="1" value="95"></label><label>Phạm vi<select id="repairScope"><option value="" selected>— Chọn phạm vi trước khi quét —</option><option value="drawing">Toàn bản vẽ đang hiển thị</option><option value="frame">Chỉ trong khung xuất</option><option value="selected">Các đối tượng đã chọn</option></select></label><label>Nhóm kiểm tra<select id="repairFilter"><option value="ALL">Tất cả</option><option value="RECTFIX">Cạnh hình chữ nhật thiếu</option><option value="CLOSEGAP">Khe hở / đóng đường bao</option><option value="AUTOCLOSE">Polyline chưa kín</option><option value="JOIN">Gộp đường cùng phương</option><option value="OVERKILL">Đối tượng trùng</option><option value="TEXTFIX">Chữ tránh đường/hình</option></select></label></div>
+<div id="repairScopeHint" class="repair-scope-hint">Chọn phạm vi, sau đó bấm “Bắt đầu quét”. Chương trình chưa đọc hình học khi hộp thoại vừa mở.</div><div id="repairSummary" class="repair-summary">Chưa quét bản vẽ.</div><div id="repairProgress" class="repair-progress"><div class="repair-progress-bar"><div id="repairProgressFill" class="repair-progress-fill"></div></div><div id="repairProgressText" class="repair-progress-text">Đang chuẩn bị…</div></div><div class="repair-preview-legend"><span>Cạnh bổ sung</span><span>Đường sau gộp</span><span>Đối tượng sẽ xóa</span><span>Vị trí chữ đề xuất</span></div><div id="repairList" class="repair-list"></div>
+<div class="dialog-actions" style="flex-wrap:wrap"><button id="repairStartScan">Bắt đầu quét</button><button id="repairCancelScan" disabled>Hủy quét</button><button id="repairSelectAll" class="repair-lock">Chọn tất cả</button><button id="repairSelectHigh" class="repair-lock">Chọn mức chắc chắn</button><button id="repairApplyHigh" class="repair-lock">Tự sửa chắc chắn</button><button id="repairApplySelected" class="repair-lock">Áp dụng mục đã chọn</button><button id="repairClose">Đóng</button></div></div></div>
 <div id="pwaToast" class="pwa-toast"><span id="pwaToastText"></span><button id="pwaToastAction" class="install-hidden">Cập nhật</button></div>
 <script>
 'use strict';
-const PWA_APP_VERSION='0.16.2';
+const PWA_APP_VERSION='0.16.4';
 const PWA_VERSION_URL_KEY='DwgSketchPwa.VersionUrl.V1';
 let deferredInstallPrompt=null,pwaRegistration=null,latestVersionInfo=null,reloadingForUpdate=false;
 function parseVersion(v){return String(v||'0').trim().replace(/^v/i,'').split(/[.-]/).map(x=>Number.parseInt(x,10)||0)}
@@ -283,7 +283,7 @@ let backGuardInitialized=false,backNavigationAllowed=false,backExitDeadline=0;
 let interaction=null,preview=null,snapPoint=null,selectionBox=null,lastSelectionRegion=null,clipboard=[],undoStack=[],redoStack=[],actionBefore=null;
 let moveBasePoint=null,moveLastPoint=null,copyBasePoint=null,copyLastPoint=null;
 let editBoundaries=[],dimPointA=null,dimPointB=null,matchPropSource=null,scaleBasePoint=null;
-let repairSuggestions=[],repairSuggestionSequence=1,repairPreviewEnabled=false,repairLastFilter='ALL';
+let repairSuggestions=[],repairSuggestionSequence=1,repairPreviewEnabled=false,repairLastFilter='ALL',repairScanState={runId:0,running:false,cancelled:false,autoApply:false};
 let textSearchResults=[],textSearchIndex=-1,quickFindTimer=null,quickFindLastQuery='';
 let activeMobilePanelSide=null,activeMobilePanelGroups={left:'layer',right:'property'};
 const SELECTION_KINDS=['text','line','polyline','circle','curve','square','rectangle','dimension','other'];
@@ -350,7 +350,7 @@ function renderDrawingTabs(){const host=$('drawingTabs');if(!host)return;host.in
 function captureDrawingSession(){if(restoringDrawingSession)return;const s=activeDrawingSession();if(!s||!project)return;syncProject();s.project=clone(project);s.fileName=currentFileName;s.dirty=dirty;s.scale=scale;s.offsetX=offsetX;s.offsetY=offsetY;s.undoStack=clone(undoStack);s.redoStack=clone(redoStack);s.lastSelectionRegion=lastSelectionRegion?clone(lastSelectionRegion):null;s.dxfInfo=$('dxfImportInfo')?.textContent||'';renderDrawingTabs();scheduleWorkspaceSave()}
 function makeDrawingSession(displayName='Bản vẽ mới'){return{id:'tab-'+drawingSessionSequence++,displayName,fileName:displayName,project:createBlankProject(),dirty:false,scale:1,offsetX:0,offsetY:0,undoStack:[],redoStack:[],lastSelectionRegion:null,dxfInfo:''}}
 function beginIncomingDrawingSession(displayName){captureDrawingSession();let session=activeDrawingSession();const reusable=drawingSessions.length===1&&session&&!session.dirty&&entities.length===0&&overlays.length===0;if(!reusable){session=makeDrawingSession(displayName);drawingSessions.push(session);activeDrawingSessionId=session.id}else session.displayName=displayName;renderDrawingTabs();return session}
-function restoreDrawingSession(session){if(!session)return;restoringDrawingSession=true;try{loadProjectObject(clone(session.project),session.fileName,!session.dirty,false);scale=num(session.scale,scale);offsetX=num(session.offsetX,offsetX);offsetY=num(session.offsetY,offsetY);undoStack=clone(session.undoStack||[]);redoStack=clone(session.redoStack||[]);lastSelectionRegion=session.lastSelectionRegion?clone(session.lastSelectionRegion):null;if($('dxfImportInfo')){const stale=isLegacyDwgProject(session.project);$('dxfImportInfo').textContent=stale?'Cảnh báo: tab DWG này được lưu bởi bộ đọc cũ. Hãy mở lại file DWG gốc bằng V0.16.1 để nhận đúng màu/font và bộ đọc nội bộ.':(session.dxfInfo||'Chưa mở DWG/DXF.');$('dxfImportInfo').classList.toggle('error',stale);$('dxfImportInfo').classList.toggle('success',!stale&&!!session.dxfInfo)}dirty=!!session.dirty;$('dirtyBadge').textContent=dirty?'Chưa lưu':'Đã lưu';$('dirtyBadge').className='badge '+(dirty?'dirty':'ok');updateHistoryButtons();draw()}finally{restoringDrawingSession=false}renderDrawingTabs();document.title=`${dirty?'* ':''}DWG Sketch PWA — ${session.displayName||session.fileName}`}
+function restoreDrawingSession(session){if(!session)return;restoringDrawingSession=true;try{loadProjectObject(clone(session.project),session.fileName,!session.dirty,false);scale=num(session.scale,scale);offsetX=num(session.offsetX,offsetX);offsetY=num(session.offsetY,offsetY);undoStack=clone(session.undoStack||[]);redoStack=clone(session.redoStack||[]);lastSelectionRegion=session.lastSelectionRegion?clone(session.lastSelectionRegion):null;if($('dxfImportInfo')){const stale=isLegacyDwgProject(session.project);$('dxfImportInfo').textContent=stale?'Cảnh báo: tab DWG này được lưu bởi bộ đọc cũ. Hãy mở lại file DWG gốc bằng V0.16.4 để nhận đúng màu/font và bộ đọc nội bộ.':(session.dxfInfo||'Chưa mở DWG/DXF.');$('dxfImportInfo').classList.toggle('error',stale);$('dxfImportInfo').classList.toggle('success',!stale&&!!session.dxfInfo)}dirty=!!session.dirty;$('dirtyBadge').textContent=dirty?'Chưa lưu':'Đã lưu';$('dirtyBadge').className='badge '+(dirty?'dirty':'ok');updateHistoryButtons();draw()}finally{restoringDrawingSession=false}renderDrawingTabs();document.title=`${dirty?'* ':''}DWG Sketch PWA — ${session.displayName||session.fileName}`}
 function switchDrawingSession(id){if(id===activeDrawingSessionId)return;captureDrawingSession();const target=drawingSessions.find(x=>x.id===id);if(!target)return;activeDrawingSessionId=id;restoreDrawingSession(target);status(`Đã chuyển sang tab ${target.displayName||target.fileName}.`)}
 function closeDrawingSession(id){captureDrawingSession();const index=drawingSessions.findIndex(x=>x.id===id);if(index<0)return;const target=drawingSessions[index];if(target.dirty&&!confirm(`Tab “${target.displayName||target.fileName}” có thay đổi chưa lưu. Đóng tab?`))return;drawingSessions.splice(index,1);if(!drawingSessions.length){const blank=makeDrawingSession('Bản vẽ mới');drawingSessions.push(blank);activeDrawingSessionId=blank.id;restoringDrawingSession=true;try{loadProjectObject(createBlankProject(),'BanVeMoi.dwgsketch.json',true,false)}finally{restoringDrawingSession=false}captureDrawingSession();renderDrawingTabs();return}if(activeDrawingSessionId===id){const next=drawingSessions[Math.min(index,drawingSessions.length-1)];activeDrawingSessionId=next.id;restoreDrawingSession(next)}else renderDrawingTabs()}
 function initializeDrawingTabs(){if(drawingSessions.length)return;const s=makeDrawingSession('Bản vẽ mới');drawingSessions.push(s);activeDrawingSessionId=s.id;captureDrawingSession();renderDrawingTabs()}
@@ -796,7 +796,25 @@ function doubleClick(e){if(!project)return;const hit=hitTest(eventPos(e));if(hit
 function wheel(e){const s=eventPos(e);zoomAt(s,e.deltaY<0?1.15:1/1.15);draw();e.preventDefault()}
 
 function repairRef(item,kind){return{item,kind}}
-function repairSourceRefs(){const scope=$('repairScope')?.value||'drawing';if(scope==='selected'&&selected.length)return selected.slice();const refs=[];if($('overlayCheck')?.checked!==false)overlays.forEach(e=>refs.push(repairRef(e,'overlay')));entities.filter(e=>visibleLayers.has(String(e.layer||'0'))).forEach(e=>refs.push(repairRef(e,'entity')));return refs}
+function repairFrameBounds(){return validBounds(project?.exportRegion)?normalizeBounds(project.exportRegion):null}
+function repairItemFullyInsideFrame(ref,frame){const b=getItemBounds(ref?.item);if(!b||!frame)return false;const eps=Math.max(1e-9,Math.max(frame.maxX-frame.minX,frame.maxY-frame.minY)*1e-9);return boundsInside(b,frame,eps)}
+function repairSourceRefs(scopeOverride=null){
+  const scope=scopeOverride??$('repairScope')?.value??'';
+  if(scope==='selected')return selected.length?selected.slice():[];
+  const refs=[];
+  if($('overlayCheck')?.checked!==false)overlays.forEach(e=>refs.push(repairRef(e,'overlay')));
+  entities.filter(e=>visibleLayers.has(String(e.layer||'0'))).forEach(e=>refs.push(repairRef(e,'entity')));
+  if(scope!=='frame')return refs;
+  const frame=repairFrameBounds();
+  if(!frame)return[];
+  return refs.filter(ref=>repairItemFullyInsideFrame(ref,frame));
+}
+function repairScopeCount(scope){
+  if(scope==='selected')return selected.length;
+  if(scope==='frame'){const frame=repairFrameBounds();if(!frame)return 0;let count=0;if($('overlayCheck')?.checked!==false)for(const e of overlays)if(repairItemFullyInsideFrame(repairRef(e,'overlay'),frame))count++;for(const e of entities)if(visibleLayers.has(String(e.layer||'0'))&&repairItemFullyInsideFrame(repairRef(e,'entity'),frame))count++;return count}
+  if(scope==='drawing'){let count=$('overlayCheck')?.checked!==false?overlays.length:0;for(const e of entities)if(visibleLayers.has(String(e.layer||'0')))count++;return count}
+  return 0
+}
 function repairRound(v,t){return Math.round(num(v)/Math.max(t,1e-9))}
 function repairPtKey(p,t){return repairRound(p.x,t)+','+repairRound(p.y,t)}
 function repairPairKey(a,b,t){const x=repairPtKey(a,t),y=repairPtKey(b,t);return x<y?x+'|'+y:y+'|'+x}
@@ -841,36 +859,56 @@ function repairTextCandidatePositions(textBox,target,margin){
   ];
   return desired.map(d=>({x:textBox.anchor.x+d.minX-textBox.minX,y:textBox.anchor.y+d.minY-textBox.minY}))
 }
-function repairFindTextPlacement(textRef,allRefs,tol){
+function repairPrepareTextPlacement(allRefs){
+  const geometry=[],texts=[];
+  for(const r of allRefs){
+    if(repairIsTextRef(r)){const bounds=repairTextBounds(r);if(bounds)texts.push({ref:r,bounds});continue}
+    const bounds=getItemBounds(r.item),segments=repairGeometrySegments(r);if(bounds&&segments.length)geometry.push({ref:r,segments,bounds})
+  }
+  return{geometry,texts}
+}
+function repairFindTextPlacement(textRef,allRefs,tol,prepared=null){
   const original=repairTextBounds(textRef);if(!original)return null;
-  const geometry=allRefs.filter(r=>r.item!==textRef.item&&!repairIsTextRef(r)).map(r=>({ref:r,segments:repairGeometrySegments(r),bounds:getItemBounds(r.item)})).filter(x=>x.bounds&&x.segments.length);
+  prepared=prepared||repairPrepareTextPlacement(allRefs);
+  const h=Math.max(.05,num(textRef.item.height,2.5)),searchPad=Math.max(tol*8,h*12);
+  const localGeometry=prepared.geometry.filter(x=>x.ref.item!==textRef.item&&boundsIntersect(repairExpandedBounds(original,searchPad),x.bounds));
   const center={x:(original.minX+original.maxX)/2,y:(original.minY+original.maxY)/2};
-  const hit=geometry.map(x=>({...x,outlineHit:x.segments.some(seg=>repairSegmentHitsBounds(seg,original,Math.max(.02,num(textRef.item.height,2.5)*.08))),contained:repairClosedShapeContainsPoint(x.ref,center)})).filter(x=>x.outlineHit||x.contained);
+  const hit=localGeometry.map(x=>({...x,outlineHit:x.segments.some(seg=>repairSegmentHitsBounds(seg,original,Math.max(.02,h*.08))),contained:repairClosedShapeContainsPoint(x.ref,center)})).filter(x=>x.outlineHit||x.contained);
   if(!hit.length)return null;
   const target=repairBoundsUnion(hit.map(x=>x.bounds));if(!target)return null;
-  const otherTexts=allRefs.filter(r=>r.item!==textRef.item&&repairIsTextRef(r)).map(r=>repairTextBounds(r)).filter(Boolean);
-  const baseMargin=Math.max(tol,num(textRef.item.height,2.5)*.55),rings=[1,1.4,2,3.2];let best=null;
+  const otherTexts=prepared.texts.filter(x=>x.ref.item!==textRef.item);
+  const baseMargin=Math.max(tol,h*.55),rings=[1,1.4,2,3.2];let best=null;
+  const relevantGeometry=prepared.geometry.filter(x=>x.ref.item!==textRef.item&&boundsIntersect(repairExpandedBounds(target,searchPad),x.bounds));
   for(const ring of rings){for(const pos of repairTextCandidatePositions(original,target,baseMargin*ring)){
     const box=repairTextBounds(textRef,pos);if(!box)continue;
-    const geometryCollision=geometry.some(x=>x.segments.some(seg=>repairSegmentHitsBounds(seg,box,Math.max(.01,baseMargin*.08))));
+    const geometryCollision=relevantGeometry.some(x=>boundsIntersect(repairExpandedBounds(box,baseMargin*.12),x.bounds)&&x.segments.some(seg=>repairSegmentHitsBounds(seg,box,Math.max(.01,baseMargin*.08))));
     if(geometryCollision)continue;
-    const textCollision=otherTexts.some(b=>boundsIntersect(repairExpandedBounds(box,baseMargin*.18),b));if(textCollision)continue;
+    const textCollision=otherTexts.some(x=>boundsIntersect(repairExpandedBounds(box,baseMargin*.18),x.bounds));if(textCollision)continue;
     const movement=dist(original.anchor,pos),score=movement+ring*baseMargin*.25;
     if(!best||score<best.score)best={position:pos,box,movement,score,hitCount:hit.length,margin:baseMargin*ring};
   }if(best)break}
   return best?{...best,original,target,containedCount:hit.filter(x=>x.contained&&!x.outlineHit).length,outlineCount:hit.filter(x=>x.outlineHit).length}:null
 }
 
-function buildRepairSuggestions(filter='ALL'){
-  const tol=Math.max(1e-6,num($('repairTolerance')?.value,2));
-  const refs=repairSourceRefs();
+async function buildRepairSuggestions(filter='ALL',run=null){
+  const tol=Math.max(1e-6,num(run?.tolerance??$('repairTolerance')?.value,2));
+  const scope=run?.scope??$('repairScope')?.value??'';
+  const refs=repairSourceRefs(scope);
   const suggestions=[];
   const seen=new Set();
   const proposedLines=new Set();
   const segments=[];
   const lineRefs=[];
+  let yieldCounter=0;
+  const checkpoint=async(done,total,label)=>{
+    if(run?.cancelled?.())throw new Error('REPAIR_SCAN_CANCELLED');
+    if(run?.progress)run.progress(done,total,label);
+    if((++yieldCounter&15)===0)await new Promise(resolve=>(window.requestIdleCallback?requestIdleCallback(()=>resolve(),{timeout:32}):setTimeout(resolve,0)));
+  };
 
+  let prepIndex=0;
   for(const ref of refs){
+    if((prepIndex++&255)===0)await checkpoint(prepIndex,Math.max(1,refs.length),'Chuẩn bị hình học');
     const e=ref.item;
     const t=String(e.type||'').toUpperCase();
     const lr=repairLineRef(ref);
@@ -891,7 +929,9 @@ function buildRepairSuggestions(filter='ALL'){
   const accept=k=>filter==='ALL'||filter===k||(filter==='CLOSEGAP'&&k==='AUTOCLOSE');
 
   if(accept('AUTOCLOSE')){
+    let autoCloseIndex=0;
     for(const ref of refs){
+      if((autoCloseIndex++&127)===0)await checkpoint(autoCloseIndex,Math.max(1,refs.length),'Kiểm tra đường bao hở');
       const path=repairOpenPath(ref);
       if(!path||path.closed||path.points.length<2)continue;
       const a=path.points[0],b=path.points.at(-1),d=dist(a,b);
@@ -906,18 +946,24 @@ function buildRepairSuggestions(filter='ALL'){
 
   if(accept('CLOSEGAP')){
     const endpoints=[];
+    let gapPrepIndex=0;
     for(const ref of refs){
+      if((gapPrepIndex++&127)===0)await checkpoint(gapPrepIndex,Math.max(1,refs.length),'Chuẩn bị đầu mút');
       const path=repairOpenPath(ref);
       if(!path||path.closed)continue;
       endpoints.push({ref,p:path.points[0],end:'A'},{ref,p:path.points.at(-1),end:'B'});
     }
     const cell=tol,buckets=new Map();
+    let bucketIndex=0;
     for(const ep of endpoints){
+      if((bucketIndex++&255)===0)await checkpoint(bucketIndex,Math.max(1,endpoints.length),'Lập chỉ mục khe hở');
       const k=Math.floor(ep.p.x/cell)+','+Math.floor(ep.p.y/cell);
       if(!buckets.has(k))buckets.set(k,[]);
       buckets.get(k).push(ep);
     }
+    let gapScanIndex=0;
     for(const ep of endpoints){
+      if((gapScanIndex++&63)===0)await checkpoint(gapScanIndex,Math.max(1,endpoints.length),'Tìm đầu mút gần nhau');
       const cx=Math.floor(ep.p.x/cell),cy=Math.floor(ep.p.y/cell);
       for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++){
         const candidates=buckets.get((cx+dx)+','+(cy+dy))||[];
@@ -947,6 +993,7 @@ function buildRepairSuggestions(filter='ALL'){
     lineRefs.forEach((line,index)=>{addAdj(line.a,index,0);addAdj(line.b,index,1)});
 
     for(let i=0;i<lineRefs.length;i++){
+      if((i&31)===0)await checkpoint(i+1,Math.max(1,lineRefs.length),'Tìm cạnh hình chữ nhật bị thiếu');
       const s1=lineRefs[i];
       for(const end1 of [0,1]){
         const p1=end1?s1.b:s1.a;
@@ -985,7 +1032,9 @@ function buildRepairSuggestions(filter='ALL'){
   }
 
   if(accept('JOIN')){
-    for(let i=0;i<lineRefs.length;i++)for(let j=i+1;j<lineRefs.length;j++){
+    for(let i=0;i<lineRefs.length;i++){
+      if((i&15)===0)await checkpoint(i+1,Math.max(1,lineRefs.length),'Tìm các đoạn có thể gộp');
+      for(let j=i+1;j<lineRefs.length;j++){
       const first=lineRefs[i],second=lineRefs[j];
       if(first.ref.item===second.ref.item||first.layer!==second.layer)continue;
       let outer=null,join=null;
@@ -1008,6 +1057,7 @@ function buildRepairSuggestions(filter='ALL'){
       if(seen.has(key))continue;
       seen.add(key);
       suggestions.push(repairSuggestion('JOIN',98,'Gộp hai đoạn thẳng cùng phương',`Khe đầu mút ${dist(join[0],join[1]).toFixed(4)}; cùng layer ${first.layer}.`,{type:'JOIN_LINES',a:outer[0],b:outer[1],refs:[first.ref,second.ref]},[{type:'JOIN',a:outer[0],b:outer[1]}]));
+      }
     }
   }
 
@@ -1016,8 +1066,14 @@ function buildRepairSuggestions(filter='ALL'){
     const allRefs=[];
     if($('overlayCheck')?.checked!==false)overlays.forEach(e=>allRefs.push(repairRef(e,'overlay')));
     entities.filter(e=>visibleLayers.has(String(e.layer||'0'))).forEach(e=>allRefs.push(repairRef(e,'entity')));
-    for(const ref of refs.filter(repairIsTextRef)){
-      const placement=repairFindTextPlacement(ref,allRefs,tol);if(!placement)continue;
+    const repairFrame=scope==='frame'?repairFrameBounds():null;
+    await checkpoint(0,1,'Chuẩn bị chỉ mục chữ và hình học');
+    const textPlacementCache=repairPrepareTextPlacement(allRefs),textRefs=refs.filter(repairIsTextRef);
+    let textIndex=0;
+    for(const ref of textRefs){
+      if((textIndex++&7)===0)await checkpoint(textIndex,Math.max(1,textRefs.length),'Tìm vị trí chữ không chồng lấn');
+      const placement=repairFindTextPlacement(ref,allRefs,tol,textPlacementCache);if(!placement)continue;
+      if(repairFrame&&!boundsInside(placement.box,repairFrame,Math.max(1e-9,Math.max(repairFrame.maxX-repairFrame.minX,repairFrame.maxY-repairFrame.minY)*1e-9)))continue;
       const h=Math.max(.05,num(ref.item.height,2.5)),ratio=placement.movement/Math.max(h,1e-6);
       const conf=Math.max(68,Math.min(99,Math.round(99-Math.min(22,ratio*2.5)-Math.max(0,placement.hitCount-1)*2-placement.containedCount*8)));
       const oldPos=point(ref.item.position),newPos=point(placement.position),content=String(ref.item.text||'').replace(/\s+/g,' ').trim();
@@ -1028,7 +1084,9 @@ function buildRepairSuggestions(filter='ALL'){
 
   if(accept('OVERKILL')){
     const signatures=new Map();
+    let duplicateIndex=0;
     for(const ref of refs){
+      if((duplicateIndex++&255)===0)await checkpoint(duplicateIndex,Math.max(1,refs.length),'Tìm đối tượng trùng');
       const e=ref.item,t=String(e.type||'').toUpperCase();
       let sig='';
       if(t==='LINE')sig='L:'+ref.kind+':'+repairItemLayer(ref)+':'+repairPairKey(point(e.a),point(e.b),tol*.25);
@@ -1048,18 +1106,91 @@ function buildRepairSuggestions(filter='ALL'){
     }
   }
 
+  await checkpoint(1,1,'Hoàn tất quét');
   return suggestions.sort((a,b)=>b.confidence-a.confidence||a.kind.localeCompare(b.kind));
 }
-function renderRepairList(){const list=$('repairList'),summary=$('repairSummary');if(!list||!summary)return;const count=repairSuggestions.length,checked=repairSuggestions.filter(x=>x.checked).length,by={};repairSuggestions.forEach(x=>by[x.kind]=(by[x.kind]||0)+1);summary.textContent=count?`Phát hiện ${count} đề xuất; đang chọn ${checked}. `+Object.entries(by).map(([k,v])=>`${k}: ${v}`).join(' · '):'Không phát hiện lỗi phù hợp với dung sai và nhóm kiểm tra hiện tại.';list.innerHTML='';for(const x of repairSuggestions){const row=document.createElement('label');row.className='repair-row';const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!x.checked;cb.onchange=()=>{x.checked=cb.checked;repairPreviewEnabled=true;renderRepairList();draw()};const body=document.createElement('div');body.innerHTML=`<div class="repair-title">${x.title}</div><div class="repair-detail">${x.detail}</div>`;const conf=document.createElement('span');conf.className='repair-confidence '+repairConfidenceClass(x.confidence);conf.textContent=x.confidence+'%';row.append(cb,body,conf);row.onmouseenter=()=>{repairSuggestions.forEach(y=>y.hover=false);x.hover=true;draw()};row.onmouseleave=()=>{x.hover=false;draw()};list.append(row)}repairPreviewEnabled=true;draw()}
-function scanRepairSuggestions(){repairLastFilter=$('repairFilter')?.value||repairLastFilter||'ALL';repairSuggestions=buildRepairSuggestions(repairLastFilter);renderRepairList();status(`AUDIT: phát hiện ${repairSuggestions.length} đề xuất sửa hình học.`);return repairSuggestions}
-function openRepairDialog(filter='ALL',auto=false){repairLastFilter=filter||'ALL';if($('repairFilter'))$('repairFilter').value=repairLastFilter;if($('repairScope'))$('repairScope').value=selected.length?'selected':'drawing';$('repairModal').classList.add('show');scanRepairSuggestions();if(auto)applyRepairSuggestions(true)}
-function closeRepairDialog(){repairPreviewEnabled=false;repairSuggestions=[];$('repairModal').classList.remove('show');draw()}
+function renderRepairList(){const list=$('repairList'),summary=$('repairSummary');if(!list||!summary)return;const count=repairSuggestions.length,checked=repairSuggestions.filter(x=>x.checked).length,by={};repairSuggestions.forEach(x=>by[x.kind]=(by[x.kind]||0)+1);summary.textContent=count?`Phát hiện ${count} đề xuất; đang chọn ${checked}. `+Object.entries(by).map(([k,v])=>`${k}: ${v}`).join(' · '):'Không phát hiện lỗi phù hợp với dung sai và nhóm kiểm tra hiện tại.';list.innerHTML='';for(const x of repairSuggestions){const row=document.createElement('label');row.className='repair-row';const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!x.checked;cb.onchange=()=>{x.checked=cb.checked;repairPreviewEnabled=true;renderRepairList();draw()};const body=document.createElement('div');body.innerHTML=`<div class="repair-title">${x.title}</div><div class="repair-detail">${x.detail}</div>`;const conf=document.createElement('span');conf.className='repair-confidence '+repairConfidenceClass(x.confidence);conf.textContent=x.confidence+'%';row.append(cb,body,conf);row.onmouseenter=()=>{repairSuggestions.forEach(y=>y.hover=false);x.hover=true;draw()};row.onmouseleave=()=>{x.hover=false;draw()};list.append(row)}repairPreviewEnabled=true;updateRepairActionButtons();draw()}
+function repairScopeLabel(scopeOverride=null){const scope=scopeOverride??$('repairScope')?.value??'';return scope==='frame'?'trong khung xuất':scope==='selected'?'trong các đối tượng đã chọn':scope==='drawing'?'trên toàn bản vẽ đang hiển thị':'chưa chọn phạm vi'}
+function updateRepairActionButtons(){const enabled=!repairScanState.running&&repairSuggestions.length>0;for(const id of ['repairSelectAll','repairSelectHigh','repairApplyHigh','repairApplySelected'])if($(id))$(id).disabled=!enabled}
+function setRepairRunning(running){
+  repairScanState.running=running;
+  $('repairModal')?.classList.toggle('repair-running',running);
+  for(const id of ['repairTolerance','repairConfidence','repairScope','repairFilter'])if($(id))$(id).disabled=running;
+  if($('repairStartScan'))$('repairStartScan').disabled=running;
+  if($('repairCancelScan'))$('repairCancelScan').disabled=!running;
+  if($('repairProgress'))$('repairProgress').classList.toggle('show',running);
+  updateRepairActionButtons()
+}
+function updateRepairProgress(done,total,label){
+  const pct=Math.max(0,Math.min(100,total>0?done*100/total:0));
+  if($('repairProgressFill'))$('repairProgressFill').style.width=pct.toFixed(1)+'%';
+  if($('repairProgressText'))$('repairProgressText').textContent=`${label||'Đang quét'} — ${Math.round(pct)}%`;
+}
+function repairSettingsChanged(){
+  if(repairScanState.running)return;
+  repairSuggestions=[];repairPreviewEnabled=false;
+  const scope=$('repairScope')?.value||'',count=repairScopeCount(scope),hint=$('repairScopeHint');
+  if(hint)hint.textContent=!scope?'Chọn phạm vi, sau đó bấm “Bắt đầu quét”.':scope==='frame'&&!repairFrameBounds()?'Chưa có khung xuất hợp lệ. Hãy tạo khung trước khi quét.':scope==='selected'&&!selected.length?'Chưa có đối tượng được chọn.':`Phạm vi dự kiến có ${count.toLocaleString('vi-VN')} đối tượng. Chỉ bắt đầu đọc hình học khi bấm “Bắt đầu quét”.`;
+  if($('repairSummary'))$('repairSummary').textContent='Thiết lập đã thay đổi. Chưa quét bản vẽ.';
+  if($('repairList'))$('repairList').innerHTML='';
+  updateRepairActionButtons();draw()
+}
+async function scanRepairSuggestions(){
+  if(repairScanState.running)return[];
+  repairLastFilter=$('repairFilter')?.value||repairLastFilter||'ALL';
+  const scope=$('repairScope')?.value||'';
+  if(!scope){alert('Hãy chọn một phạm vi trước khi bắt đầu quét.');$('repairScope')?.focus();return[]}
+  if(scope==='frame'&&!repairFrameBounds()){alert('Chưa có khung xuất hợp lệ. Hãy dùng công cụ Khung xuất để tạo vùng trước.');status('AUDIT: chưa có khung xuất hợp lệ.');return[]}
+  if(scope==='selected'&&!selected.length){alert('Chưa có đối tượng được chọn. Hãy chọn đối tượng trước hoặc đổi phạm vi.');return[]}
+  const count=repairScopeCount(scope);
+  if(count>25000&&!confirm(`Phạm vi có khoảng ${count.toLocaleString('vi-VN')} đối tượng. Quá trình sẽ chạy theo từng lô và có thể mất thời gian. Tiếp tục?`))return[];
+  const runId=++repairScanState.runId;repairScanState.cancelled=false;
+  repairSuggestions=[];repairPreviewEnabled=false;
+  if($('repairList'))$('repairList').innerHTML='';
+  if($('repairSummary'))$('repairSummary').textContent=`Đang quét ${count.toLocaleString('vi-VN')} đối tượng ${repairScopeLabel(scope)}…`;
+  setRepairRunning(true);updateRepairProgress(0,1,'Chuẩn bị');
+  try{
+    const run={scope,tolerance:Math.max(1e-6,num($('repairTolerance')?.value,2)),cancelled:()=>repairScanState.cancelled||repairScanState.runId!==runId,progress:updateRepairProgress};
+    repairSuggestions=await buildRepairSuggestions(repairLastFilter,run);
+    if(run.cancelled())throw new Error('REPAIR_SCAN_CANCELLED');
+    renderRepairList();
+    status(`AUDIT: phát hiện ${repairSuggestions.length} đề xuất ${repairScopeLabel(scope)}.`);
+    if(repairScanState.autoApply)applyRepairSuggestions(true);
+    return repairSuggestions
+  }catch(err){
+    if(String(err?.message)==='REPAIR_SCAN_CANCELLED'){
+      repairSuggestions=[];repairPreviewEnabled=false;
+      if($('repairSummary'))$('repairSummary').textContent='Đã hủy quét. Không có thay đổi nào được áp dụng.';
+      if($('repairList'))$('repairList').innerHTML='';
+      status('AUDIT: đã hủy quét.')
+    }else{
+      console.error(err);repairSuggestions=[];
+      if($('repairSummary'))$('repairSummary').textContent='Không thể hoàn tất quét: '+(err?.message||err);
+      status('AUDIT bị lỗi: '+(err?.message||err))
+    }
+    return[]
+  }finally{
+    if(repairScanState.runId===runId){setRepairRunning(false);if($('repairProgress'))$('repairProgress').classList.remove('show')}
+  }
+}
+function cancelRepairScan(){if(!repairScanState.running)return;repairScanState.cancelled=true;if($('repairProgressText'))$('repairProgressText').textContent='Đang hủy sau lô hiện tại…'}
+function openRepairDialog(filter='ALL',auto=false,forcedScope=null){
+  repairLastFilter=filter||'ALL';repairScanState.autoApply=!!auto;repairScanState.cancelled=false;
+  if($('repairFilter'))$('repairFilter').value=repairLastFilter;
+  if(forcedScope==='frame'&&!repairFrameBounds()){alert('Chưa có khung xuất hợp lệ. Hãy dùng công cụ Khung xuất để tạo vùng trước.');status('Chưa có khung xuất hợp lệ.');return}
+  if($('repairScope'))$('repairScope').value=forcedScope||'';
+  repairSuggestions=[];repairPreviewEnabled=false;
+  $('repairModal').classList.add('show');
+  if($('repairStartScan'))$('repairStartScan').textContent=auto?'Bắt đầu quét và tự sửa':'Bắt đầu quét';
+  setRepairRunning(false);repairSettingsChanged()
+}
+function closeRepairDialog(){if(repairScanState.running)repairScanState.cancelled=true;repairScanState.runId++;repairScanState.running=false;repairPreviewEnabled=false;repairSuggestions=[];$('repairModal').classList.remove('show');draw()}
 function setRepairChecks(mode){const threshold=Math.max(50,Math.min(100,num($('repairConfidence')?.value,95)));for(const x of repairSuggestions)x.checked=mode==='all'||x.confidence>=threshold;renderRepairList()}
 function applyOneRepair(x){const a=x.action;if(!a)return null;if(a.type==='ADD_LINE')return repairAddLine(a.a,a.b,a.refs||[]);if(a.type==='CLOSE_PATH'){a.ref.item.closed=true;return a.ref}if(a.type==='JOIN_LINES'){for(const r of a.refs||[])repairRemoveRef(r);return repairAddLine(a.a,a.b,a.refs||[])}if(a.type==='REMOVE_REF'){repairRemoveRef(a.ref);return null}if(a.type==='MOVE_TEXT'&&a.ref?.item){a.ref.item.position=point(a.position);return a.ref}return null}
 function applyRepairSuggestions(highOnly=false){const threshold=Math.max(50,Math.min(100,num($('repairConfidence')?.value,95))),items=repairSuggestions.filter(x=>highOnly?x.confidence>=threshold:x.checked);if(!items.length){status('Không có đề xuất được chọn để áp dụng.');return}simpleAction(`Đã sửa hình tự động ${items.length} mục`,()=>{const newly=[];for(const x of items){const r=applyOneRepair(x);if(r)newly.push(r)}selected=newly});repairSuggestions=[];repairPreviewEnabled=false;$('repairModal').classList.remove('show');status(`REPAIR: đã áp dụng ${items.length} mục trong một bước Undo.`)}
 function drawRepairPreview(){if(!repairPreviewEnabled||!repairSuggestions.length)return;const active=repairSuggestions.filter(x=>x.checked||x.hover);if(!active.length)return;ctx.save();ctx.setLineDash([8,5]);ctx.lineWidth=2;for(const s of active)for(const p of s.preview||[]){if(p.type==='ADD'||p.type==='JOIN'){ctx.strokeStyle=p.type==='JOIN'?'#66ff66':'#ff4fd8';ctx.beginPath();ctx.moveTo(sx(p.a.x),sy(p.a.y));ctx.lineTo(sx(p.b.x),sy(p.b.y));ctx.stroke()}else if(p.type==='REMOVE'&&p.ref?.item){ctx.setLineDash([4,3]);drawItem(p.ref.item,p.ref.kind==='overlay','#ff5252');ctx.setLineDash([8,5])}else if(p.type==='MOVE_TEXT'&&p.ref?.item){ctx.strokeStyle='#00e5ff';ctx.beginPath();ctx.moveTo(sx(p.from.x),sy(p.from.y));ctx.lineTo(sx(p.to.x),sy(p.to.y));ctx.stroke();ctx.setLineDash([3,3]);const temp={...p.ref.item,position:point(p.to)};drawItem(temp,p.ref.kind==='overlay','#00e5ff');if(p.box)ctx.strokeRect(sx(p.box.minX),sy(p.box.maxY),Math.abs((p.box.maxX-p.box.minX)*scale),Math.abs((p.box.maxY-p.box.minY)*scale));ctx.setLineDash([8,5])}}ctx.restore()}
 
-function command(cmd){cmd=String(cmd||'').trim().toUpperCase();if(cmd)addCommandHistory(cmd);const map={L:'line',LINE:'line',REC:'rectangle',RECT:'rectangle',SQ:'square',C:'circle',A:'arc',EL:'ellipse',T:'text',S:'select',W:'selectRegion',WINDOW:'selectRegion',P:'pan',M:'move',MOVE:'move',CO:'copy',COPY:'copy',SC:'scale',SCALE:'scale',MI:'mirror',MIRROR:'mirror',TR:'trim',TRIM:'trim',EX:'extend',EXTEND:'extend',D:'dim',DIM:'dim',MA:'matchprop',MATCHPROP:'matchprop',FRAME:'frame'};if(map[cmd])setTool(map[cmd]);else if(cmd==='U'||cmd==='UNDO')undo();else if(cmd==='R'||cmd==='REDO')redo();else if(cmd==='PA'||cmd==='PASTE')pasteSelection();else if(cmd==='SAVE'||cmd==='SV')saveJson();else if(cmd==='FIT')fitView();else if(cmd==='DEL'||cmd==='DELETE')deleteSelection();else if(cmd==='NEW')newProject();else if(cmd==='OPEN')$('fileInput').click();else if(cmd==='F'||cmd==='FIND'){openQuickFind(true)}else if(cmd==='FN'||cmd==='FINDNEXT')moveTextSearchResult(1);else if(cmd==='FR'||cmd==='REPLACE'){openAdvancedTextSearch();setTimeout(()=>$('textReplaceInput').focus(),160)}else if(cmd==='RA'||cmd==='REPLACEALL')replaceAllText();else if(cmd==='DXF')exportDxf(false);else if(cmd==='DWG')exportDxf(true);else if(cmd==='PNG')exportPng();else if(cmd==='PNGCLIP'||cmd==='CLIPPNG')copyPngToClipboard();else if(cmd==='PDF')exportPdf();else if(cmd==='AA'||cmd==='AREA')calculateSelectedArea();else if(cmd==='AUDIT')openRepairDialog('ALL',false);else if(cmd==='REPAIR')openRepairDialog('ALL',false);else if(cmd==='CLOSEGAP'||cmd==='RECTFIX'||cmd==='AUTOCLOSE'||cmd==='JOIN'||cmd==='OVERKILL'||cmd==='TEXTFIX'||cmd==='LABELFIX')openRepairDialog(cmd==='LABELFIX'?'TEXTFIX':cmd,false);else if(cmd==='AUTOFIX')openRepairDialog('ALL',true);else if(cmd==='SL'||cmd==='SELECTLINK'||cmd==='LINKSELECT')linkedSelectionCommand();else if(cmd==='SLA'||cmd==='LINKALL')linkedSelectionCommand('drawing',true);else if(cmd==='SLF'||cmd==='LINKFRAME')linkedSelectionCommand('frame',true);else if(cmd==='SLR'||cmd==='LINKREGION')linkedSelectionCommand('region',true);else if(cmd==='SELF'||cmd==='SELFRAME')selectAllMatchingFilter('frame');else if(cmd==='ALL'){setSelectionFilterPreset('all');selectAllMatchingFilter()}else if(cmd==='SELNONTEXT'){setSelectionFilterPreset('nonText');selectAllMatchingFilter()}else if(cmd==='SELTEXT'){setSelectionFilterPreset('text');selectAllMatchingFilter()}else if(cmd==='SELLINE'){setSelectionFilterPreset(['line']);selectAllMatchingFilter()}else if(cmd==='SELCIRCLE'){setSelectionFilterPreset(['circle']);selectAllMatchingFilter()}else if(cmd==='SELCURVE'){setSelectionFilterPreset(['curve']);selectAllMatchingFilter()}else if(cmd==='SELSQUARE'){setSelectionFilterPreset(['square']);selectAllMatchingFilter()}else if(cmd==='SELRECT'){setSelectionFilterPreset(['rectangle']);selectAllMatchingFilter()}else status('Không nhận diện lệnh: '+cmd);$('commandInput').value=''}
+function command(cmd){cmd=String(cmd||'').trim().toUpperCase();if(cmd)addCommandHistory(cmd);const map={L:'line',LINE:'line',REC:'rectangle',RECT:'rectangle',SQ:'square',C:'circle',A:'arc',EL:'ellipse',T:'text',S:'select',W:'selectRegion',WINDOW:'selectRegion',P:'pan',M:'move',MOVE:'move',CO:'copy',COPY:'copy',SC:'scale',SCALE:'scale',MI:'mirror',MIRROR:'mirror',TR:'trim',TRIM:'trim',EX:'extend',EXTEND:'extend',D:'dim',DIM:'dim',MA:'matchprop',MATCHPROP:'matchprop',FRAME:'frame'};if(map[cmd])setTool(map[cmd]);else if(cmd==='U'||cmd==='UNDO')undo();else if(cmd==='R'||cmd==='REDO')redo();else if(cmd==='PA'||cmd==='PASTE')pasteSelection();else if(cmd==='SAVE'||cmd==='SV')saveJson();else if(cmd==='FIT')fitView();else if(cmd==='DEL'||cmd==='DELETE')deleteSelection();else if(cmd==='NEW')newProject();else if(cmd==='OPEN')$('fileInput').click();else if(cmd==='F'||cmd==='FIND'){openQuickFind(true)}else if(cmd==='FN'||cmd==='FINDNEXT')moveTextSearchResult(1);else if(cmd==='FR'||cmd==='REPLACE'){openAdvancedTextSearch();setTimeout(()=>$('textReplaceInput').focus(),160)}else if(cmd==='RA'||cmd==='REPLACEALL')replaceAllText();else if(cmd==='DXF')exportDxf(false);else if(cmd==='DWG')exportDxf(true);else if(cmd==='PNG')exportPng();else if(cmd==='PNGCLIP'||cmd==='CLIPPNG')copyPngToClipboard();else if(cmd==='PDF')exportPdf();else if(cmd==='AA'||cmd==='AREA')calculateSelectedArea();else if(cmd==='AUDIT')openRepairDialog('ALL',false);else if(cmd==='REPAIR')openRepairDialog('ALL',false);else if(cmd==='AUDITF'||cmd==='REPAIRF')openRepairDialog('ALL',false,'frame');else if(cmd==='CLOSEGAP'||cmd==='RECTFIX'||cmd==='AUTOCLOSE'||cmd==='JOIN'||cmd==='OVERKILL'||cmd==='TEXTFIX'||cmd==='LABELFIX')openRepairDialog(cmd==='LABELFIX'?'TEXTFIX':cmd,false);else if(cmd==='CLOSEGAPF'||cmd==='RECTFIXF'||cmd==='AUTOCLOSEF'||cmd==='JOINF'||cmd==='OVERKILLF'||cmd==='TEXTFIXF'||cmd==='LABELFIXF'){const base=cmd.slice(0,-1);openRepairDialog(base==='LABELFIX'?'TEXTFIX':base,false,'frame')}else if(cmd==='AUTOFIX')openRepairDialog('ALL',true);else if(cmd==='AUTOFIXF')openRepairDialog('ALL',true,'frame');else if(cmd==='SL'||cmd==='SELECTLINK'||cmd==='LINKSELECT')linkedSelectionCommand();else if(cmd==='SLA'||cmd==='LINKALL')linkedSelectionCommand('drawing',true);else if(cmd==='SLF'||cmd==='LINKFRAME')linkedSelectionCommand('frame',true);else if(cmd==='SLR'||cmd==='LINKREGION')linkedSelectionCommand('region',true);else if(cmd==='SELF'||cmd==='SELFRAME')selectAllMatchingFilter('frame');else if(cmd==='ALL'){setSelectionFilterPreset('all');selectAllMatchingFilter()}else if(cmd==='SELNONTEXT'){setSelectionFilterPreset('nonText');selectAllMatchingFilter()}else if(cmd==='SELTEXT'){setSelectionFilterPreset('text');selectAllMatchingFilter()}else if(cmd==='SELLINE'){setSelectionFilterPreset(['line']);selectAllMatchingFilter()}else if(cmd==='SELCIRCLE'){setSelectionFilterPreset(['circle']);selectAllMatchingFilter()}else if(cmd==='SELCURVE'){setSelectionFilterPreset(['curve']);selectAllMatchingFilter()}else if(cmd==='SELSQUARE'){setSelectionFilterPreset(['square']);selectAllMatchingFilter()}else if(cmd==='SELRECT'){setSelectionFilterPreset(['rectangle']);selectAllMatchingFilter()}else status('Không nhận diện lệnh: '+cmd);$('commandInput').value=''}
 function dxfPair(code,value){return String(code)+'\r\n'+String(value)+'\r\n'}
 function dxfNumber(value){const n=Number(value);return Number.isFinite(n)?String(Number(n.toPrecision(15))):'0'}
 function dxfAngle(value){let n=Number(value)||0;n%=360;if(n<0)n+=360;return n}
@@ -1172,7 +1303,7 @@ for(const id of['overlayCheck','colorCheck','frameCheck','darkCheck','snapCheck'
 $('applyBtn').onclick=applyProperties;$('selectLinkedPropertyBtn').onclick=linkedSelectionCommand;$('moveSelectedBtn').onclick=()=>setTool('move');$('scaleSelectedBtn').onclick=()=>setTool('scale');$('areaSelectedBtn').onclick=calculateSelectedArea;$('areaBtn').onclick=calculateSelectedArea;$('trimSelectedBtn').onclick=()=>setTool('trim');$('extendSelectedBtn').onclick=()=>setTool('extend');$('dimSelectedBtn').onclick=()=>setTool('dim');$('matchPropSelectedBtn').onclick=()=>setTool('matchprop');$('rotateLeftBtn').onclick=()=>rotateSelected(-15);$('rotateRightBtn').onclick=()=>rotateSelected(15);$('mirrorSelectedBtn').onclick=()=>setTool('mirror');
 $('textSearchBtn').onclick=()=>{runTextSearch();syncQuickFindStatus()};$('textSearchPrevBtn').onclick=()=>{moveTextSearchResult(-1);syncQuickFindStatus()};$('textSearchNextBtn').onclick=()=>{moveTextSearchResult(1);syncQuickFindStatus()};$('textReplaceCurrentBtn').onclick=()=>{replaceCurrentText();syncQuickFindStatus()};$('textReplaceAllBtn').onclick=()=>{replaceAllText();syncQuickFindStatus()};$('textSearchInput').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();runTextSearch();syncQuickFindStatus()}else if(e.key==='F3'){e.preventDefault();moveTextSearchResult(1);syncQuickFindStatus()}};$('textReplaceInput').onkeydown=e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();replaceCurrentText();syncQuickFindStatus()}};
 $('quickFindCloseBtn').onclick=closeQuickFind;$('quickFindPrevBtn').onclick=()=>{if(!textSearchResults.length||quickFindLastQuery!==$('quickFindInput').value)runQuickFind(true);else moveTextSearchResult(-1);syncQuickFindStatus()};$('quickFindNextBtn').onclick=()=>{if(!textSearchResults.length||quickFindLastQuery!==$('quickFindInput').value)runQuickFind(true);else moveTextSearchResult(1);syncQuickFindStatus()};$('quickFindOptionsBtn').onclick=openAdvancedTextSearch;$('quickFindInput').addEventListener('input',()=>runQuickFind(false));$('quickFindInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(textSearchResults.length&&quickFindLastQuery===$('quickFindInput').value)moveTextSearchResult(e.shiftKey?-1:1);else runQuickFind(true);syncQuickFindStatus()}else if(e.key==='Escape'){e.preventDefault();closeQuickFind()}else if(e.key==='ArrowDown'&&e.altKey){e.preventDefault();moveTextSearchResult(1);syncQuickFindStatus()}else if(e.key==='ArrowUp'&&e.altKey){e.preventDefault();moveTextSearchResult(-1);syncQuickFindStatus()}});new MutationObserver(syncQuickFindStatus).observe($('textSearchStatus'),{childList:true,subtree:true,characterData:true});
-$('auditRepairBtn').onclick=()=>openRepairDialog('ALL',false);$('repairGeometryBtn').onclick=()=>openRepairDialog('ALL',false);document.querySelectorAll('[data-repair-filter]').forEach(b=>b.onclick=()=>openRepairDialog(b.dataset.repairFilter||'ALL',false));$('repairRescan').onclick=()=>scanRepairSuggestions();$('repairSelectAll').onclick=()=>setRepairChecks('all');$('repairSelectHigh').onclick=()=>setRepairChecks('high');$('repairApplyHigh').onclick=()=>applyRepairSuggestions(true);$('repairApplySelected').onclick=()=>applyRepairSuggestions(false);$('repairClose').onclick=closeRepairDialog;$('repairTolerance').onchange=()=>scanRepairSuggestions();$('repairScope').onchange=()=>scanRepairSuggestions();$('repairFilter').onchange=()=>scanRepairSuggestions();
+$('auditRepairBtn').onclick=()=>openRepairDialog('ALL',false);$('repairGeometryBtn').onclick=()=>openRepairDialog('ALL',false);document.querySelectorAll('[data-repair-filter]').forEach(b=>b.onclick=()=>openRepairDialog(b.dataset.repairFilter||'ALL',false));$('repairStartScan').onclick=()=>scanRepairSuggestions();$('repairCancelScan').onclick=cancelRepairScan;$('repairSelectAll').onclick=()=>setRepairChecks('all');$('repairSelectHigh').onclick=()=>setRepairChecks('high');$('repairApplyHigh').onclick=()=>applyRepairSuggestions(true);$('repairApplySelected').onclick=()=>applyRepairSuggestions(false);$('repairClose').onclick=closeRepairDialog;$('repairTolerance').onchange=repairSettingsChanged;$('repairScope').onchange=repairSettingsChanged;$('repairFilter').onchange=repairSettingsChanged;
 $('modalCancel').onclick=()=>$('textModal').classList.remove('show');$('modalApply').onclick=applyTextModal;$('scaleCancel').onclick=()=>{scaleBasePoint=null;$('scaleModal').classList.remove('show');setTool('select')};$('scaleApply').onclick=applyScaleDialog;$('areaClose').onclick=()=>$('areaModal').classList.remove('show');$('areaCopy').onclick=async()=>{try{await navigator.clipboard.writeText($('areaResultText').value);status('Đã sao chép kết quả AREA.')}catch{alert($('areaResultText').value)}};$('modalText').onkeydown=e=>{if(e.ctrlKey&&e.key==='Enter')applyTextModal()};
 const commandInputEl=$('commandInput');let commandInputComposing=false,commandInputExecuting=false;
 function executeCommandInput(){if(commandInputExecuting)return;const value=String(commandInputEl.value||'').replace(/[\s\u00a0]+$/g,'').trim();if(!value)return;commandInputExecuting=true;try{commandInputEl.value=value;command(value)}finally{commandInputExecuting=false}}
