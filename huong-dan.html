@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.32 / PWA V0.17.1</title>
+<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.32 / PWA V0.17.2</title>
 <meta name="description" content="Hướng dẫn chi tiết sử dụng DWG Sketch C# và PWA, bao gồm toàn bộ lệnh vẽ, chọn, hiệu chỉnh, sửa hình tự động, xuất bản và tự động hóa sơ đồ điện.">
 <style>
 :root{--bg:#0f1419;--panel:#182028;--panel2:#202a34;--text:#ecf2f8;--muted:#a9b6c3;--line:#344350;--accent:#45c4ef;--accent2:#76e3aa;--warn:#ffcc80;--code:#071b24}
@@ -25,7 +25,7 @@ a{color:#76d7f4}code,kbd{font-family:Consolas,monospace}code{background:var(--co
 <header class="hero"><div class="hero-inner">
 <div class="eyebrow">Tài liệu sử dụng tích hợp · Hoạt động offline</div>
 <h1>DWG Sketch — Hướng dẫn sử dụng chi tiết</h1>
-<p class="lead">Dành cho bản C# WPF V0.14.32 và PWA V0.17.1. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
+<p class="lead">Dành cho bản C# WPF V0.14.32 và PWA V0.17.2. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
 <div class="badges"><span class="badge">C# .NET 8 / Windows</span><span class="badge">PWA / Android / Desktop</span><span class="badge">DWG trực tiếp qua LibreDWG 0.7.9</span><span class="badge">Không cần Internet sau khi cài PWA</span></div>
 <div class="hero-actions"><a class="btn" href="./index.html">Mở PWA cùng thư mục</a><a class="btn secondary" href="./HtmlViewer/PWA/index.html">Mở PWA trong gói C#</a><a class="btn secondary" href="#command-reference">Tra cứu lệnh</a><a class="btn secondary" href="javascript:window.print()">In / Lưu PDF hướng dẫn</a></div>
 </div></header>
@@ -369,7 +369,7 @@ Trung điểm di chuyển       → Pan
       <div class="command-head"><div><code>SYMIMPORT / SYMEXPORT</code><h3>Nhập hoặc xuất thư viện mẫu</h3></div><span class="platform">C# + PWA</span></div>
       <p><b>Chuẩn bị:</b> Có thư viện JSON hoặc ít nhất một mẫu người dùng.</p>
       <ol><li>Chạy SYMEXPORT để sao lưu/chia sẻ.</li><li>Chạy SYMIMPORT để nhập thư viện trên máy khác.</li><li>Kiểm tra các mẫu trong danh sách ký hiệu.</li></ol>
-      <p class="note"><b>Lưu ý:</b> V0.14.30/V0.17.1 hỗ trợ trao đổi thư viện giữa C# và PWA; mẫu trùng mã được cập nhật bằng bản nhập.</p>
+      <p class="note"><b>Lưu ý:</b> V0.14.30/V0.17.2 hỗ trợ trao đổi thư viện giữa C# và PWA; mẫu trùng mã được cập nhật bằng bản nhập.</p>
     </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện topo / topology / gridjson xuất dữ liệu topology c# + pwa đã chèn ký hiệu và bố trí các cổng gần/chạm nhau. chạy topology. lưu file json. kiểm tra nodes, ports, connections và layout. đây là dữ liệu nền cho giai đoạn sinh sơ đồ lưới tự động.">
       <div class="command-head"><div><code>TOPO / TOPOLOGY / GRIDJSON</code><h3>Xuất dữ liệu topology</h3></div><span class="platform">C# + PWA</span></div>
       <p><b>Chuẩn bị:</b> Đã chèn ký hiệu và bố trí các cổng gần/chạm nhau.</p>
@@ -467,7 +467,7 @@ Trung điểm di chuyển       → Pan
       <p class="note"><b>Lưu ý:</b> PWA dùng các nút Layer/Thuộc tính hoặc bottom sheet trên điện thoại.</p>
     </article></div></section>
 
-<section id="osnap-v01430"><h2>OSNAP tổng hợp C# V0.14.32 và PWA V0.17.1</h2>
+<section id="osnap-v01430"><h2>OSNAP tổng hợp C# V0.14.32 và PWA V0.17.2</h2>
 <p>Các chế độ bắt điểm có thể hoạt động đồng thời. Điểm bất kỳ trên đường là lớp bắt nền; khi con trỏ đi vào vùng hút của điểm đặc trưng, chương trình tự ưu tiên đầu mút, trung điểm, tâm, giao điểm hoặc chân vuông góc mà không cần tắt chế độ khác.</p>
 <table><tr><th>Loại bắt điểm</th><th>Ký hiệu</th><th>Phạm vi</th></tr>
 <tr><td>Đầu mút / đầu cung</td><td>Hình vuông</td><td>Đường, polyline, cung</td></tr>
@@ -479,7 +479,7 @@ Trung điểm di chuyển       → Pan
 <p class="note"><b>Thao tác nhanh:</b> trong bảng cấu hình C# hoặc PWA, mở mục Bắt điểm và nhấn <b>Bật đồng thời tất cả chế độ</b>. Vuông góc chỉ xuất hiện khi thao tác đã có điểm gốc, chẳng hạn đang vẽ đường, DIM, MOVE, COPY, MIRROR hoặc kéo sửa đầu đường.</p>
 </section>
 </main></div>
-<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.32 và PWA V0.17.1 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
+<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.32 và PWA V0.17.2 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
 <script>
 const cards=[...document.querySelectorAll('.command-card')], search=document.getElementById('commandSearch'), count=document.getElementById('resultCount');let active='ALL';
 function normalize(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}

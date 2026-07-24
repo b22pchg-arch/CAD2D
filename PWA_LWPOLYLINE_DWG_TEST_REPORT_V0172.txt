@@ -1,0 +1,12 @@
+PWA V0.17.2 - BÁO CÁO KIỂM TRA LWPOLYLINE TRÊN FILE NGƯỜI DÙNG
+
+FILE: LD Tinh (1)(3).dwg
+- Tổng entity nguồn: 24.024.
+- LWPOLYLINE: 617.
+- Phân bố flag do bộ chuyển DWG trả về: flag 512 = 617.
+- Theo quy tắc cũ (flag & 1): 0/617 được nhận là kín.
+- Theo quy tắc V0.17.2 (bit 512, bit 1 hoặc explicit closed): 617/617 được nhận là kín.
+- Số cạnh đóng được phục hồi: 617.
+
+KẾT LUẬN
+Mất nét quan sát được đến từ cạnh đóng cuối cùng của LWPOLYLINE bị bỏ. V0.17.2 đã sửa đúng tại bước chuyển đổi DWG sang dữ liệu hiển thị.

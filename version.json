@@ -1,7 +1,7 @@
 {
-  "version": "0.17.1",
-  "releasedAt": "2026-07-24T10:00:00+07:00",
-  "notes": "Bổ sung OSNAP tổng hợp cho PWA: điểm mút, trung điểm, tâm, phần tư, giao điểm, vuông góc và điểm bất kỳ trên đường hoạt động đồng thời; có ký hiệu riêng và thứ tự ưu tiên giống bản C#.",
+  "version": "0.17.2",
+  "releasedAt": "2026-07-24T13:30:00+07:00",
+  "notes": "Sửa mất nét LWPOLYLINE khi đọc DWG: nhận đúng cờ khép kín bit 512 của libredwg-web, phục hồi cạnh đóng cuối cùng; giữ HATCH, màu/font và OSNAP tổng hợp.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",

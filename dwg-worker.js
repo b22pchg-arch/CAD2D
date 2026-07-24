@@ -1,10 +1,10 @@
-/* DWG Sketch PWA V0.17.1 - direct DWG reader worker.
+/* DWG Sketch PWA V0.17.2 - direct DWG reader worker.
  * LibreDWG WebAssembly is loaded in this Worker, so parsing never calls a desktop converter.
  * Upstream: @mlightcad/libredwg-web 0.7.9 (GPL-3.0)
  */
 import { Dwg_File_Type, LibreDwg } from './vendor/libredwg-web-0.7.9/dist/libredwg-web.js';
 
-const DWG_WORKER_VERSION = '0.17.1';
+const DWG_WORKER_VERSION = '0.17.2';
 const DWG_ENGINE_VERSION = '0.7.9';
 const DWG_ENGINE_PACKAGE = '@mlightcad/libredwg-web';
 const DWG_ENGINE_SOURCE = 'local-vendor';
@@ -40,6 +40,13 @@ const p2 = (value) => ({ x: n(value?.x ?? value?.X), y: n(value?.y ?? value?.Y) 
 const upper = (value) => String(value ?? '').trim().toUpperCase();
 const clonePoint = (p) => ({ x: n(p?.x), y: n(p?.y) });
 const int = (value, fallback = 0) => Number.isFinite(Number(value)) ? Math.trunc(Number(value)) : fallback;
+
+function isClosedLwPolyline(entity) {
+  const flag = int(entity?.flag);
+  // libredwg-web 0.7.9 exposes the DWG LWPOLYLINE closed state in bit 512.
+  // Keep bit 1 and explicit booleans as compatibility fallbacks for other sources.
+  return entity?.closed === true || entity?.isClosed === true || (flag & 512) !== 0 || (flag & 1) !== 0;
+}
 
 function rawNumber(value) {
   if (value === undefined || value === null || value === '') return null;
@@ -572,9 +579,15 @@ function convertEntity(entity, ctx, transform = IDENTITY, inherited = null, dept
       break;
     }
     case 'LWPOLYLINE': {
-      const closed = (n(entity.flag) & 1) !== 0;
+      const flag = int(entity.flag);
+      const closed = isClosedLwPolyline(entity);
+      ctx.lwPolylineStats.total++;
+      if (closed) ctx.lwPolylineStats.closed++;
+      if ((flag & 512) !== 0) ctx.lwPolylineStats.closedFlag512++;
+      if ((flag & 1) !== 0) ctx.lwPolylineStats.closedLegacyFlag1++;
+      if (entity?.closed === true || entity?.isClosed === true) ctx.lwPolylineStats.closedExplicit++;
       const points = expandBulges(entity.vertices, closed, transform);
-      if (points.length >= 2) out.push({ type: 'LWPOLYLINE', points, closed, ...base });
+      if (points.length >= 2) out.push({ type: 'LWPOLYLINE', points, closed, sourceFlag: flag, ...base });
       else appendUnsupported(ctx, type + '_EMPTY');
       break;
     }
@@ -704,7 +717,8 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
   });
   const ctx = {
     blocks, unsupported: {}, blockStack: [], textStyles, colorStats,
-    textStats: { total: 0, tcvn3Converted: 0, unicodeEscapesDecoded: 0, entitiesWithUnicodeEscapes: 0, styles: {} }
+    textStats: { total: 0, tcvn3Converted: 0, unicodeEscapesDecoded: 0, entitiesWithUnicodeEscapes: 0, styles: {} },
+    lwPolylineStats: { total: 0, closed: 0, closedFlag512: 0, closedLegacyFlag1: 0, closedExplicit: 0 }
   };
   const entities = [];
   const sourceEntities = Array.isArray(database?.entities) ? database.entities : [];
@@ -748,7 +762,7 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
       exportStrokeMode: 'original', exportStrokeColor: '#000000'
     },
     dwgImport: {
-      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch adapter 0.17.1',
+      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch/lwpolyline adapter 0.17.2',
       workerVersion: DWG_WORKER_VERSION,
       engineVersion: DWG_ENGINE_VERSION,
       engineSource: DWG_ENGINE_SOURCE,
@@ -761,6 +775,7 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
       layerCount: layerEntries.length,
       textStyleCount: textStyles.entries.length,
       textStats: ctx.textStats,
+      lwPolylineStats: ctx.lwPolylineStats,
       colorStats: ctx.colorStats,
       rawLayerColorCount: rawTables?.layers?.size || 0,
       rawTextStyleCount: rawTables?.styles?.size || 0,
