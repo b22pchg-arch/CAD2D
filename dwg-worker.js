@@ -1,10 +1,10 @@
-/* DWG Sketch PWA V0.17.0 - direct DWG reader worker.
+/* DWG Sketch PWA V0.17.1 - direct DWG reader worker.
  * LibreDWG WebAssembly is loaded in this Worker, so parsing never calls a desktop converter.
  * Upstream: @mlightcad/libredwg-web 0.7.9 (GPL-3.0)
  */
 import { Dwg_File_Type, LibreDwg } from './vendor/libredwg-web-0.7.9/dist/libredwg-web.js';
 
-const DWG_WORKER_VERSION = '0.17.0';
+const DWG_WORKER_VERSION = '0.17.1';
 const DWG_ENGINE_VERSION = '0.7.9';
 const DWG_ENGINE_PACKAGE = '@mlightcad/libredwg-web';
 const DWG_ENGINE_SOURCE = 'local-vendor';
@@ -426,6 +426,116 @@ function decodedTextRecord(entity, ctx, isMText = false, rawValue = '') {
   };
 }
 
+
+function appendUniquePoint(points, point, epsilon = 1e-8) {
+  if (!point || !Number.isFinite(point.x) || !Number.isFinite(point.y)) return;
+  const last = points[points.length - 1];
+  if (!last || Math.hypot(last.x - point.x, last.y - point.y) > epsilon) points.push(point);
+}
+
+function sampleHatchArc(center, radius, start, end, isCCW, transform) {
+  radius = Math.abs(n(radius));
+  if (radius <= 1e-12) return [];
+  let sweep = n(end) - n(start);
+  if (isCCW) while (sweep <= 0) sweep += Math.PI * 2;
+  else while (sweep >= 0) sweep -= Math.PI * 2;
+  const count = Math.max(8, Math.min(192, Math.ceil(Math.abs(sweep) / (Math.PI / 24))));
+  const pts = [];
+  for (let i = 0; i <= count; i++) {
+    const a = n(start) + sweep * i / count;
+    pts.push(transform.point({ x: n(center?.x) + radius * Math.cos(a), y: n(center?.y) + radius * Math.sin(a) }));
+  }
+  return pts;
+}
+
+function sampleHatchEllipse(edge, transform) {
+  const center = p2(edge?.center), major = p2(edge?.end);
+  const ratio = Math.abs(n(edge?.lengthOfMinorAxis, 1));
+  const majorLength = Math.hypot(major.x, major.y);
+  if (majorLength <= 1e-12 || ratio <= 1e-12) return [];
+  const minor = { x: -major.y * ratio, y: major.x * ratio };
+  let sweep = n(edge?.endAngle) - n(edge?.startAngle);
+  if (edge?.isCCW) while (sweep <= 0) sweep += Math.PI * 2;
+  else while (sweep >= 0) sweep -= Math.PI * 2;
+  const count = Math.max(8, Math.min(192, Math.ceil(Math.abs(sweep) / (Math.PI / 24))));
+  const pts = [];
+  for (let i = 0; i <= count; i++) {
+    const a = n(edge?.startAngle) + sweep * i / count;
+    pts.push(transform.point({
+      x: center.x + major.x * Math.cos(a) + minor.x * Math.sin(a),
+      y: center.y + major.y * Math.cos(a) + minor.y * Math.sin(a)
+    }));
+  }
+  return pts;
+}
+
+function hatchBoundaryPoints(path, transform) {
+  if (!path) return [];
+  if (Array.isArray(path.vertices) && path.vertices.length >= 2)
+    return expandBulges(path.vertices, path.isClosed !== 0, transform);
+
+  const points = [];
+  for (const edge of path.edges || []) {
+    let sampled = [];
+    switch (int(edge?.type)) {
+      case 1:
+        sampled = [transform.point(edge.start), transform.point(edge.end)];
+        break;
+      case 2:
+        sampled = sampleHatchArc(p2(edge.center), edge.radius, edge.startAngle, edge.endAngle, edge.isCCW !== 0, transform);
+        break;
+      case 3:
+        sampled = sampleHatchEllipse(edge, transform);
+        break;
+      case 4: {
+        const src = edge.fitPoints?.length ? edge.fitPoints : edge.controlPoints;
+        sampled = (src || []).map(transform.point);
+        break;
+      }
+    }
+    for (const q of sampled) appendUniquePoint(points, q);
+  }
+  if (points.length > 2) {
+    const a = points[0], b = points[points.length - 1];
+    if (Math.hypot(a.x - b.x, a.y - b.y) <= 1e-8) points.pop();
+  }
+  return points;
+}
+
+function convertHatch(entity, base, transform, ctx) {
+  const result = [];
+  const paths = entity?.boundaryPaths || [];
+  const solid = int(entity?.solidFill) !== 0 || upper(entity?.patternName) === 'SOLID';
+  const line = entity?.definitionLines?.[0];
+  const offset = p2(line?.offset);
+  const spacing = Math.max(1e-6, Math.hypot(offset.x, offset.y) || Math.abs(n(entity?.patternScale, 1)));
+  const angle = n(line?.angle, n(entity?.patternAngle)) * DEG;
+  for (let i = 0; i < paths.length; i++) {
+    const path = paths[i];
+    const points = hatchBoundaryPoints(path, transform);
+    if (points.length < 2) continue;
+    const closed = path?.isClosed !== 0 || points.length >= 3;
+    if (points.length >= 3) {
+      result.push({
+        type: 'FILL', points, closed: true,
+        fillMode: solid ? 'solid' : 'hatch',
+        opacity: solid ? 1 : .9,
+        hatchSpacing: spacing * Math.max(1e-12, (Math.abs(transform.scaleX) + Math.abs(transform.scaleY)) / 2),
+        hatchAngle: angle + transform.rotation * DEG,
+        hatchPattern: 'lines',
+        sourceHatchPattern: String(entity?.patternName || ''),
+        sourceHatchPathIndex: i,
+        approximationOf: 'HATCH',
+        ...base
+      });
+    } else {
+      result.push({ type: 'LWPOLYLINE', points, closed, approximationOf: 'HATCH_BOUNDARY', ...base });
+    }
+  }
+  if (!result.length) appendUnsupported(ctx, 'HATCH_EMPTY');
+  return result;
+}
+
 function convertEntity(entity, ctx, transform = IDENTITY, inherited = null, depth = 0) {
   if (!entity || depth > 12) return [];
   const type = upper(entity.type), base = commonProps(entity, inherited, ctx);
@@ -484,6 +594,9 @@ function convertEntity(entity, ctx, transform = IDENTITY, inherited = null, dept
       else appendUnsupported(ctx, 'SPLINE_EMPTY');
       break;
     }
+    case 'HATCH':
+      out.push(...convertHatch(entity, base, transform, ctx));
+      break;
     case 'TEXT':
     case 'ATTRIB':
     case 'ATTDEF': {
@@ -629,16 +742,17 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
     display: {
       hideSmallText: false, minimumTextPixel: 1, dwgTextScale: 1, useDwgColors: true,
       exportBackground: 'Dark', enableSnap: true, snapEndpoint: true, snapMidpoint: true,
-      snapCenter: true, snapIntersection: true, snapPerpendicular: false, snapTolerancePixel: 14,
+      snapCenter: true, snapQuadrant: true, snapIntersection: true, snapPerpendicular: true,
+      snapNearest: true, snapCombinedVersion: 1, snapTolerancePixel: 14,
       exportScope: 'full', printFrameBorder: false, exportBgMode: 'white', exportBgColor: '#ffffff',
       exportStrokeMode: 'original', exportStrokeColor: '#000000'
     },
     dwgImport: {
-      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font adapter 0.17.0',
+      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch adapter 0.17.1',
       workerVersion: DWG_WORKER_VERSION,
       engineVersion: DWG_ENGINE_VERSION,
       engineSource: DWG_ENGINE_SOURCE,
-      version: String(meta.version ?? 'không rõ'),
+      version: typeof meta.version === 'object' ? String(meta.version?.description || meta.version?.hdr || meta.version?.type || 'không rõ') : String(meta.version ?? 'không rõ'),
       codepage: String(meta.codepage ?? 'không rõ'),
       sourceEntityCount: sourceEntities.length,
       convertedEntityCount: entities.length,

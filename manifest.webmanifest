@@ -5,7 +5,7 @@
   "description": "Mở và chỉnh sửa DWG/DXF/JSON 2D; ROTATE, sửa hình tự động, Fill/Hatch, thư viện mẫu thiết bị điện tùy chỉnh và tự động sinh sơ đồ lưới.",
   "lang": "vi",
   "dir": "ltr",
-  "start_url": "./index.html?v=0.17.0",
+  "start_url": "./index.html?v=0.17.1",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",

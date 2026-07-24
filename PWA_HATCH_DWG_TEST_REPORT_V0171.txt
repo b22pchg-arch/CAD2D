@@ -1,0 +1,14 @@
+PWA V0.17.1 — BÁO CÁO KIỂM TRA HATCH TRÊN FILE NGƯỜI DÙNG
+
+File: LD Tinh (1)(3).dwg
+
+KẾT QUẢ PHÂN TÍCH
+- Tổng entity model-space: 24.024.
+- Số HATCH: 487.
+- PWA V0.17.0 không có nhánh chuyển đổi HATCH nên bỏ toàn bộ 487 đối tượng này.
+- Dữ liệu hiển thị V0.17.0: 23.539 entity; unsupportedTypes = { HATCH: 487 }.
+- PWA V0.17.1 hỗ trợ đường bao HATCH polyline/bulge, line, arc, ellipse và spline.
+- Dữ liệu hiển thị V0.17.1: 24.046 entity; FILL = 507; unsupportedTypes rỗng.
+
+KẾT LUẬN
+Phần hình bị khuyết trong PWA có nguyên nhân xác định là HATCH bị bỏ qua khi nhập. V0.17.1 đã phục hồi các vùng này. Cần mở lại file DWG gốc sau khi cập nhật Worker; JSON đã nhập bằng bản cũ không chứa dữ liệu HATCH đã bị bỏ.
