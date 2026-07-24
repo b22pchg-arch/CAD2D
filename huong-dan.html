@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.30 / PWA V0.17.0</title>
+<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.31 / PWA V0.17.0</title>
 <meta name="description" content="Hướng dẫn chi tiết sử dụng DWG Sketch C# và PWA, bao gồm toàn bộ lệnh vẽ, chọn, hiệu chỉnh, sửa hình tự động, xuất bản và tự động hóa sơ đồ điện.">
 <style>
 :root{--bg:#0f1419;--panel:#182028;--panel2:#202a34;--text:#ecf2f8;--muted:#a9b6c3;--line:#344350;--accent:#45c4ef;--accent2:#76e3aa;--warn:#ffcc80;--code:#071b24}
@@ -25,7 +25,7 @@ a{color:#76d7f4}code,kbd{font-family:Consolas,monospace}code{background:var(--co
 <header class="hero"><div class="hero-inner">
 <div class="eyebrow">Tài liệu sử dụng tích hợp · Hoạt động offline</div>
 <h1>DWG Sketch — Hướng dẫn sử dụng chi tiết</h1>
-<p class="lead">Dành cho bản C# WPF V0.14.30 và PWA V0.17.0. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
+<p class="lead">Dành cho bản C# WPF V0.14.31 và PWA V0.17.0. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
 <div class="badges"><span class="badge">C# .NET 8 / Windows</span><span class="badge">PWA / Android / Desktop</span><span class="badge">DWG trực tiếp qua LibreDWG 0.7.9</span><span class="badge">Không cần Internet sau khi cài PWA</span></div>
 <div class="hero-actions"><a class="btn" href="./index.html">Mở PWA cùng thư mục</a><a class="btn secondary" href="./HtmlViewer/PWA/index.html">Mở PWA trong gói C#</a><a class="btn secondary" href="#command-reference">Tra cứu lệnh</a><a class="btn secondary" href="javascript:window.print()">In / Lưu PDF hướng dẫn</a></div>
 </div></header>
@@ -44,7 +44,7 @@ a{color:#76d7f4}code,kbd{font-family:Consolas,monospace}code{background:var(--co
 <div class="panel"><h3>PWA trên trình duyệt</h3><ol><li>Đưa toàn bộ thư mục PWA lên HTTPS/GitHub Pages hoặc chạy <code>serve_local.cmd</code>.</li><li>Mở <code>index.html</code> qua HTTPS hoặc localhost.</li><li>Bấm <b>Cài PWA</b> để đưa ứng dụng ra màn hình chính.</li><li>Sau lần tải đầu, PWA có thể dùng offline.</li></ol><p class="muted">Mở trực tiếp bằng đường dẫn <code>file://</code> sẽ làm Service Worker, Clipboard và một số chức năng không hoạt động đầy đủ.</p></div></div>
 <div class="callout"><b>Cập nhật PWA:</b> sau khi thay phiên bản trên máy chủ, bấm <b>Kiểm tra phiên bản</b> → <b>Cập nhật ngay</b>. Nếu vẫn thấy bản cũ, xóa cache/Service Worker của trang rồi mở lại với tham số phiên bản mới.</div></section>
 <section id="interface"><h2>3. Giao diện chính</h2><div class="table-wrap"><table><thead><tr><th>Khu vực</th><th>Công dụng</th><th>Lưu ý</th></tr></thead><tbody>
-<tr><td>Thanh công cụ</td><td>Mở file, Undo/Redo, chọn, vẽ, hiệu chỉnh, xuất. C# V0.14.30 dùng ký hiệu/mã gọn riêng cho từng lệnh; rê chuột để xem tên đầy đủ và dùng nút Tên lệnh/Mã gọn để chuyển chế độ.</td><td>Trên điện thoại chỉ hiện nhóm chính; các lệnh còn lại nằm trong nút Thêm.</td></tr>
+<tr><td>Thanh công cụ</td><td>Mở file, Undo/Redo, chọn, vẽ, hiệu chỉnh, xuất. C# V0.14.31 dùng ký hiệu/mã gọn riêng cho từng lệnh; rê chuột để xem tên đầy đủ và dùng nút Tên lệnh/Mã gọn để chuyển chế độ.</td><td>Trên điện thoại chỉ hiện nhóm chính; các lệnh còn lại nằm trong nút Thêm.</td></tr>
 <tr><td>Khung Layer</td><td>Bật/tắt layer, màu DWG/DXF, Snap, bộ lọc chọn, tìm chữ.</td><td>Ẩn layer không cần thiết giúp bản vẽ lớn chạy nhẹ hơn.</td></tr>
 <tr><td>Vùng bản vẽ</td><td>Hiển thị, pan, zoom, chọn, vẽ và xem preview.</td><td>Màu cyan/magenta thường là preview hoặc đề xuất sửa.</td></tr>
 <tr><td>Khung Config/Thuộc tính</td><td>Sửa đối tượng, tạo chữ, Fill/Hatch, ký hiệu điện, cấu hình xuất.</td><td>Các trường chỉ áp dụng sau khi bấm Áp dụng nếu giao diện yêu cầu.</td></tr>
@@ -467,7 +467,7 @@ Trung điểm di chuyển       → Pan
       <p class="note"><b>Lưu ý:</b> PWA dùng các nút Layer/Thuộc tính hoặc bottom sheet trên điện thoại.</p>
     </article></div></section>
 
-<section id="osnap-v01430"><h2>OSNAP tổng hợp C# V0.14.30 và PWA V0.17.0</h2>
+<section id="osnap-v01430"><h2>OSNAP tổng hợp C# V0.14.31 và PWA V0.17.0</h2>
 <p>Các chế độ bắt điểm có thể hoạt động đồng thời. Điểm bất kỳ trên đường là lớp bắt nền; khi con trỏ đi vào vùng hút của điểm đặc trưng, chương trình tự ưu tiên đầu mút, trung điểm, tâm, giao điểm hoặc chân vuông góc mà không cần tắt chế độ khác.</p>
 <table><tr><th>Loại bắt điểm</th><th>Ký hiệu</th><th>Phạm vi</th></tr>
 <tr><td>Đầu mút / đầu cung</td><td>Hình vuông</td><td>Đường, polyline, cung</td></tr>
@@ -479,7 +479,7 @@ Trung điểm di chuyển       → Pan
 <p class="note"><b>Thao tác nhanh:</b> trong bảng cấu hình C# hoặc PWA, mở mục Bắt điểm và nhấn <b>Bật đồng thời tất cả chế độ</b>. Vuông góc chỉ xuất hiện khi thao tác đã có điểm gốc, chẳng hạn đang vẽ đường, DIM, MOVE, COPY, MIRROR hoặc kéo sửa đầu đường.</p>
 </section>
 </main></div>
-<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.30 và PWA V0.17.0 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
+<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.31 và PWA V0.17.0 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
 <script>
 const cards=[...document.querySelectorAll('.command-card')], search=document.getElementById('commandSearch'), count=document.getElementById('resultCount');let active='ALL';
 function normalize(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}
