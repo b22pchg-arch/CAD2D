@@ -1,7 +1,7 @@
 {
-  "version": "0.16.9",
-  "releasedAt": "2026-07-24T02:30:00+07:00",
-  "notes": "Bổ sung lệnh ROTATE theo điểm gốc và góc quay; cho phép bung, chỉnh sửa, lưu, nhập/xuất mẫu thiết bị điện người dùng để dùng lại và dùng trong bộ sinh sơ đồ tự động.",
+  "version": "0.17.0",
+  "releasedAt": "2026-07-24T10:00:00+07:00",
+  "notes": "Bổ sung OSNAP tổng hợp cho PWA: điểm mút, trung điểm, tâm, phần tư, giao điểm, vuông góc và điểm bất kỳ trên đường hoạt động đồng thời; có ký hiệu riêng và thứ tự ưu tiên giống bản C#.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",

@@ -1,5 +1,5 @@
 'use strict';
-const APP_VERSION='0.16.9';
+const APP_VERSION='0.17.0';
 const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION;
 const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(APP_VERSION);
 const CORE_ASSETS=[
@@ -28,7 +28,7 @@ const OPTIONAL_ASSETS=[
   './BUILD_REPORT_V0151.txt','./BUILD_REPORT_V0152.txt','./BUILD_REPORT_V0153.txt','./BUILD_REPORT_V0154.txt','./BUILD_REPORT_V0155.txt','./BUILD_REPORT_V0156.txt','./BUILD_REPORT_V0157.txt','./BUILD_REPORT_V0158.txt','./BUILD_REPORT_V0159.txt','./BUILD_REPORT_V0160.txt','./BUILD_REPORT_V0161.txt','./BUILD_REPORT_V0162.txt','./BUILD_REPORT_V0163.txt','./BUILD_REPORT_V0164.txt','./BUILD_REPORT_V0165.txt','./BUILD_REPORT_V0166.txt',
   './huong-dan.html',
   './BUILD_REPORT_V0168.txt',
-  './HUONG_DAN_PWA_V0168_AUTO_GRID_GENERATOR.txt','./HUONG_DAN_PWA_V0169_ROTATE_CUSTOM_SYMBOL_TEMPLATES.txt','./BUILD_REPORT_V0169.txt',
+  './HUONG_DAN_PWA_V0168_AUTO_GRID_GENERATOR.txt','./HUONG_DAN_PWA_V0169_ROTATE_CUSTOM_SYMBOL_TEMPLATES.txt','./BUILD_REPORT_V0169.txt','./HUONG_DAN_PWA_V0170_COMBINED_OSNAP.txt','./BUILD_REPORT_V0170.txt',
   './sample_electrical_grid.topology.json','./sample_custom_symbol_library.json',
   './sample_electrical_grid.csv','./HUONG_DAN_PWA_V0167_INTEGRATED_HELP.txt','./BUILD_REPORT_V0167.txt','./THIRD_PARTY_NOTICES.txt','./sample_dxf_r12_unicode.dxf','./sample_color_aci_truecolor.dxf'
 ];
