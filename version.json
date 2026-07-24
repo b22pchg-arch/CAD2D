@@ -1,7 +1,7 @@
 {
-  "version": "0.16.7",
-  "releasedAt": "2026-07-23T23:40:00+07:00",
-  "notes": "Bổ sung HTML hướng dẫn sử dụng chi tiết, tra cứu và tìm kiếm toàn bộ lệnh; thêm nút Hướng dẫn trên máy tính và điện thoại; tài liệu được cache offline.",
+  "version": "0.16.8",
+  "releasedAt": "2026-07-23T23:59:00+07:00",
+  "notes": "Giai đoạn 3 tự động hóa sơ đồ điện: nhập CSV/topology JSON, bố trí thanh cái–ngăn lộ theo chiều dọc hoặc ngang, xem trước, tự tạo ký hiệu vector và dây nối CAD có thể chỉnh sửa; kèm dữ liệu mẫu và hướng dẫn offline.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",

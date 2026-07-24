@@ -1,0 +1,20 @@
+{
+  "schema": "dwg-sketch-electrical-topology",
+  "schemaVersion": 2,
+  "name": "Sơ đồ trạm mẫu",
+  "nodes": [
+    {"id":"BUS110","type":"BUSBAR","label":"Thanh cái 110 kV","voltageLevel":"110","order":1},
+    {"id":"MC131","type":"CIRCUIT_BREAKER","label":"MC 131","voltageLevel":"110","order":2},
+    {"id":"MBA_T1","type":"TRANSFORMER_2W","label":"MBA T1","voltageLevel":"110/35","order":3},
+    {"id":"BUS35","type":"BUSBAR","label":"Thanh cái 35 kV","voltageLevel":"35","order":4},
+    {"id":"MC371","type":"CIRCUIT_BREAKER","label":"MC 371","voltageLevel":"35","order":5},
+    {"id":"LOAD371","type":"LOAD","label":"ĐZ 371","voltageLevel":"35","order":6}
+  ],
+  "connections": [
+    {"id":"E1","fromNodeId":"BUS110","toNodeId":"MC131"},
+    {"id":"E2","fromNodeId":"MC131","toNodeId":"MBA_T1"},
+    {"id":"E3","fromNodeId":"MBA_T1","toNodeId":"BUS35"},
+    {"id":"E4","fromNodeId":"BUS35","toNodeId":"MC371"},
+    {"id":"E5","fromNodeId":"MC371","toNodeId":"LOAD371"}
+  ]
+}

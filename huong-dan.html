@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.25 / PWA V0.16.7</title>
+<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.26 / PWA V0.16.8</title>
 <meta name="description" content="Hướng dẫn chi tiết sử dụng DWG Sketch C# và PWA, bao gồm toàn bộ lệnh vẽ, chọn, hiệu chỉnh, sửa hình tự động, xuất bản và tự động hóa sơ đồ điện.">
 <style>
 :root{--bg:#0f1419;--panel:#182028;--panel2:#202a34;--text:#ecf2f8;--muted:#a9b6c3;--line:#344350;--accent:#45c4ef;--accent2:#76e3aa;--warn:#ffcc80;--code:#071b24}
@@ -25,7 +25,7 @@ a{color:#76d7f4}code,kbd{font-family:Consolas,monospace}code{background:var(--co
 <header class="hero"><div class="hero-inner">
 <div class="eyebrow">Tài liệu sử dụng tích hợp · Hoạt động offline</div>
 <h1>DWG Sketch — Hướng dẫn sử dụng chi tiết</h1>
-<p class="lead">Dành cho bản C# WPF V0.14.25 và PWA V0.16.7. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản và phần chuẩn bị tự động hóa sơ đồ điện.</p>
+<p class="lead">Dành cho bản C# WPF V0.14.26 và PWA V0.16.8. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
 <div class="badges"><span class="badge">C# .NET 8 / Windows</span><span class="badge">PWA / Android / Desktop</span><span class="badge">DWG trực tiếp qua LibreDWG 0.7.9</span><span class="badge">Không cần Internet sau khi cài PWA</span></div>
 <div class="hero-actions"><a class="btn" href="./index.html">Mở PWA cùng thư mục</a><a class="btn secondary" href="./HtmlViewer/PWA/index.html">Mở PWA trong gói C#</a><a class="btn secondary" href="#command-reference">Tra cứu lệnh</a><a class="btn secondary" href="javascript:window.print()">In / Lưu PDF hướng dẫn</a></div>
 </div></header>
@@ -78,12 +78,17 @@ Trung điểm di chuyển       → Pan
 <div class="workflow"><div class="step"><b>Chọn phạm vi</b><br>Toàn bộ / Khung / Đã chọn</div><div class="step"><b>Chọn nhóm</b><br>Cạnh, khe, chữ, trùng…</div><div class="step"><b>Đặt dung sai</b><br>Bắt đầu nhỏ</div><div class="step"><b>Quét theo lô</b><br>Có tiến độ và Hủy</div><div class="step"><b>Xem trước</b><br>Áp dụng một Undo</div></div>
 <div class="callout ok"><b>Thiết lập an toàn:</b> dung sai nhỏ, ngưỡng tự sửa 95%, phạm vi khung xuất, chỉ chọn các đề xuất có preview đúng.</div>
 <div class="callout danger"><b>Không thấy TEXTFIX:</b> chọn đúng nhóm “Chữ tránh đường/hình”, giảm ngưỡng chỉ để tự đánh dấu (không phải để ẩn kết quả), kiểm tra chữ nằm hoàn toàn trong phạm vi và bảo đảm Layer chữ/hình đang hiển thị.</div></section>
-<section id="electrical"><h2>10. Ký hiệu điện và dữ liệu topology</h2><p>Giai đoạn 2 đã chuẩn bị thư viện ký hiệu vector và điểm nối. Mỗi symbol mang loại thiết bị, mã, vị trí, góc, tỷ lệ và danh sách terminal.</p>
-<p class="diagram">[Thanh cái]──port──[Dao cách ly]──port──[Máy cắt]──port──[MBA]
-     node             node                 node          node
-          └──────── connections được suy luận ────────┘</p>
-<ol><li>Chọn loại symbol trong bảng Tạo mới.</li><li>Nhập tên/mã thiết bị.</li><li>Đặt tỷ lệ và góc.</li><li>Chạy <code>SYM</code> rồi bấm vị trí.</li><li>Bật Snap để terminal gần hoặc chạm nhau.</li><li>Chạy <code>TOPOLOGY</code> để xuất JSON.</li></ol>
-<div class="callout"><b>Chuẩn bị cho tự động hóa tiếp theo:</b> nên dùng tên thiết bị thống nhất, chọn đúng loại symbol và nối qua terminal thay vì vẽ line tùy ý không gắn metadata.</div></section>
+<section id="electrical"><h2>10. Ký hiệu điện và tự động tạo sơ đồ lưới</h2><p>Giai đoạn 2 cung cấp thư viện ký hiệu vector và cổng kết nối. Giai đoạn 3 đọc dữ liệu CSV/topology JSON, bố trí phân tầng và tạo toàn bộ sơ đồ thành các đối tượng CAD có thể chọn, MOVE, SCALE, sửa nhãn, lưu JSON và xuất DXF.</p>
+<p class="diagram">CSV / topology JSON
+          ↓ Chuẩn hóa node + connection
+[Thanh cái]──[Dao cách ly]──[Máy cắt]──[MBA]──[Thanh cái]
+          ↓ Bố trí dọc/ngang + nối cổng trực giao
+        Đối tượng CAD có thể chỉnh sửa</p>
+<h3>Chèn thủ công và xuất topology</h3><ol><li>Chọn loại symbol trong bảng Tạo mới.</li><li>Nhập tên/mã thiết bị, tỷ lệ và góc.</li><li>Chạy <code>SYM</code> rồi bấm vị trí.</li><li>Bật Snap để terminal gần hoặc chạm nhau.</li><li>Chạy <code>TOPOLOGY</code> để xuất JSON.</li></ol>
+<h3>Tự động sinh sơ đồ</h3><ol><li>Chạy <code>GRIDIMPORT</code> hoặc bấm <b>Mở CSV / topology JSON</b>.</li><li>Chọn bố trí dọc/ngang, khoảng cách, tỷ lệ và điểm gốc.</li><li>Chạy <code>GRIDPREVIEW</code> để kiểm tra số thiết bị, liên kết và thành phần mạng.</li><li>Chạy <code>AUTOGRID</code> để tạo ký hiệu và dây nối.</li><li>Kiểm tra nhãn, cổng, hướng tuyến rồi lưu JSON/DXF.</li></ol>
+<div class="table-wrap"><table><thead><tr><th>Trường dữ liệu</th><th>Ý nghĩa</th><th>Ví dụ</th></tr></thead><tbody><tr><td>id, type, label</td><td>Mã, loại ký hiệu và tên hiển thị.</td><td>MC131, CIRCUIT_BREAKER, MC 131</td></tr><tr><td>from, to</td><td>Hai nút của một liên kết.</td><td>DCL131 → MC131</td></tr><tr><td>fromPort, toPort</td><td>Cổng cụ thể; có thể để trống để tự chọn cổng gần nhất.</td><td>OUT → IN</td></tr><tr><td>order, x, y</td><td>Thứ tự hoặc tọa độ được giữ khi bật tùy chọn.</td><td>3, 120, 80</td></tr><tr><td>station, voltageLevel</td><td>Thông tin phục vụ phân nhóm và mở rộng bố trí.</td><td>Trạm A, 110 kV</td></tr></tbody></table></div>
+<div class="callout ok"><b>Thử nhanh:</b> chạy <code>GRIDSAMPLE</code>, xem trước rồi chạy <code>AUTOGRID</code>. Gói phát hành cũng có <code>sample_electrical_grid.csv</code> và <code>sample_electrical_grid.topology.json</code>.</div>
+<div class="callout"><b>An toàn:</b> bật “Xóa sơ đồ tự động cũ” chỉ xóa các đối tượng có metadata tự động, không xóa phần CAD thủ công hoặc DWG gốc.</div></section>
 <section id="export"><h2>11. Lưu và xuất bản vẽ</h2><div class="table-wrap"><table><thead><tr><th>Định dạng</th><th>Mục đích</th><th>Khuyến nghị</th></tr></thead><tbody>
 <tr><td>JSON</td><td>Tiếp tục chỉnh sửa trong C#/PWA.</td><td>Lưu thường xuyên và trước khi chạy sửa hàng loạt.</td></tr><tr><td>PNG</td><td>Đưa vào báo cáo, Word, Excel.</td><td>2×, nét tối thiểu 1.5 px là cấu hình cân bằng.</td></tr><tr><td>Clipboard PNG</td><td>Paste nhanh vào ứng dụng khác.</td><td>PWA cần HTTPS/localhost.</td></tr><tr><td>PDF</td><td>In hoặc lưu hồ sơ.</td><td>Chọn nền trắng và màu chữ/đường đen khi in.</td></tr><tr><td>DXF R12</td><td>Trao đổi với CAD khác.</td><td>Mở thử file sau xuất; chữ vẫn là TEXT.</td></tr><tr><td>DWG</td><td>Trao đổi khi bắt buộc dùng DWG.</td><td>Dùng C# và dxf2dwg; PWA chỉ tạo DXF nguồn.</td></tr><tr><td>Topology JSON</td><td>Dữ liệu mạng điện cho tự động hóa.</td><td>Kiểm tra nodes, ports và connections.</td></tr></tbody></table></div></section>
 <section id="mobile"><h2>12. Sử dụng PWA trên điện thoại</h2><ul><li>Thanh dưới gồm Mở, Chọn, Kéo, Tìm, Layer và Thêm.</li><li>Nút <b>Thêm</b> mở các lệnh Move, Copy, Scale, Trim, Extend, Area, Repair, TEXTFIX, Dim và xuất.</li><li>Layer/Config hiển thị dạng bottom sheet; đóng sheet trước khi thao tác trên Canvas.</li><li>Dòng lệnh có thể thu gọn; phím cách trên bàn phím điện thoại vẫn chạy lệnh.</li><li>Hai ngón chỉ dùng cho zoom/pan; một ngón dùng cho công cụ hiện tại.</li><li>Nút Back của Android được bảo vệ để giảm nguy cơ thoát mất phiên; dự án được lưu tạm trong IndexedDB.</li></ul>
@@ -342,6 +347,26 @@ Trung điểm di chuyển       → Pan
       <p><b>Chuẩn bị:</b> Đã chèn ký hiệu và bố trí các cổng gần/chạm nhau.</p>
       <ol><li>Chạy TOPOLOGY.</li><li>Lưu file JSON.</li><li>Kiểm tra nodes, ports, connections và layout.</li></ol>
       <p class="note"><b>Lưu ý:</b> Đây là dữ liệu nền cho giai đoạn sinh sơ đồ lưới tự động.</p>
+    </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện gridimport gridopen mở csv topology json c# + pwa chuẩn bị file csv hoặc topology json. chạy gridimport. chọn file. kiểm tra số node và liên kết. hỗ trợ dấu phẩy chấm phẩy tab và pipe; tên cột tiếng việt hoặc tiếng anh.">
+      <div class="command-head"><div><code>GRIDIMPORT / GRIDOPEN</code><h3>Mở dữ liệu sơ đồ lưới</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> File CSV hoặc topology JSON có danh sách thiết bị.</p>
+      <ol><li>Chạy GRIDIMPORT.</li><li>Chọn file.</li><li>Kiểm tra số thiết bị và liên kết đã nhận.</li></ol>
+      <p class="note"><b>Lưu ý:</b> CSV hỗ trợ dấu phẩy, chấm phẩy, Tab hoặc |; tên cột có thể dùng tiếng Việt hoặc tiếng Anh.</p>
+    </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện gridpreview gridlayout xem trước bố trí thanh cái ngăn lộ c# + pwa đã nạp dữ liệu. chọn chiều dọc hoặc ngang, khoảng cách, điểm gốc. chạy gridpreview. kiểm tra sơ đồ xem trước. không tạo đối tượng cad cho tới khi chạy autogrid.">
+      <div class="command-head"><div><code>GRIDPREVIEW / GRIDLAYOUT</code><h3>Xem trước bố trí tự động</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Đã nạp dữ liệu và chọn hướng bố trí.</p>
+      <ol><li>Đặt khoảng cách X/Y, tỷ lệ và điểm gốc.</li><li>Chạy GRIDPREVIEW.</li><li>Kiểm tra nhánh, cấp và thành phần mạng.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Xem trước chưa thay đổi bản vẽ.</p>
+    </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện autogrid gridgenerate tự tạo sơ đồ lưới điện ký hiệu dây nối trực giao c# + pwa đã xem trước bố trí. chạy autogrid. kiểm tra kết quả và sửa bằng move scale. tạo symbol và polyline có metadata; hỗ trợ undo.">
+      <div class="command-head"><div><code>AUTOGRID / GRIDGENERATE</code><h3>Tạo sơ đồ lưới điện tự động</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Đã nạp dữ liệu; nên xem trước trước khi tạo.</p>
+      <ol><li>Chạy AUTOGRID.</li><li>Chương trình tạo symbol và dây nối trực giao.</li><li>Kiểm tra, MOVE/SCALE và lưu dự án.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Toàn bộ lần tạo là một bước Undo; tùy chọn xóa cũ chỉ tác động lên sơ đồ đã sinh tự động.</p>
+    </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện gridsample dữ liệu mẫu thử tự tạo sơ đồ c# + pwa không cần file. chạy gridsample. xem trước. chạy autogrid. dùng để kiểm tra nhanh quy trình.">
+      <div class="command-head"><div><code>GRIDSAMPLE</code><h3>Nạp dữ liệu lưới mẫu</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Không cần file.</p>
+      <ol><li>Chạy GRIDSAMPLE.</li><li>Kiểm tra preview.</li><li>Chạy AUTOGRID để tạo sơ đồ mẫu.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Dùng để xác nhận chức năng trước khi nhập dữ liệu thực tế.</p>
     </article><article class="command-card" data-group="Tệp và xuất bản" data-search="tệp và xuất bản hd / help mở hướng dẫn sử dụng chi tiết c# + pwa không cần. chạy hd hoặc help. tài liệu huong-dan.html mở trong trình duyệt. hướng dẫn có mục lục, tìm kiếm lệnh và có thể in/lưu pdf; pwa cache tài liệu để dùng offline.">
       <div class="command-head"><div><code>HD / HELP</code><h3>Mở hướng dẫn sử dụng chi tiết</h3></div><span class="platform">C# + PWA</span></div>
       <p><b>Chuẩn bị:</b> Không cần.</p>
@@ -414,7 +439,7 @@ Trung điểm di chuyển       → Pan
       <p class="note"><b>Lưu ý:</b> PWA dùng các nút Layer/Thuộc tính hoặc bottom sheet trên điện thoại.</p>
     </article></div></section>
 </main></div>
-<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.25 và PWA V0.16.7 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
+<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.26 và PWA V0.16.8 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
 <script>
 const cards=[...document.querySelectorAll('.command-card')], search=document.getElementById('commandSearch'), count=document.getElementById('resultCount');let active='ALL';
 function normalize(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}
