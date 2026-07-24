@@ -1,0 +1,24 @@
+{
+  "schema": "dwg-sketch-electrical-symbol-library",
+  "schemaVersion": 1,
+  "exportedAt": "2026-07-24T03:00:00+07:00",
+  "templates": [
+    {
+      "Id": "CUSTOM_FUSE",
+      "Name": "Cầu chì tùy chỉnh",
+      "UpdatedAt": "2026-07-24T03:00:00+07:00",
+      "LabelPosition": { "X": 0, "Y": 24 },
+      "LabelHeight": 3.8,
+      "Primitives": [
+        { "Type": "LINE", "A": { "X": 0, "Y": -20 }, "B": { "X": 0, "Y": -8 }, "Color": 4294967295, "Stroke": 2 },
+        { "Type": "RECTANGLE", "A": { "X": -6, "Y": -8 }, "B": { "X": 6, "Y": 8 }, "Color": 4294967295, "Stroke": 2 },
+        { "Type": "LINE", "A": { "X": -5, "Y": -6 }, "B": { "X": 5, "Y": 6 }, "Color": 4294967295, "Stroke": 2 },
+        { "Type": "LINE", "A": { "X": 0, "Y": 8 }, "B": { "X": 0, "Y": 20 }, "Color": 4294967295, "Stroke": 2 }
+      ],
+      "Ports": [
+        { "Name": "IN", "Position": { "X": 0, "Y": -20 } },
+        { "Name": "OUT", "Position": { "X": 0, "Y": 20 } }
+      ]
+    }
+  ]
+}

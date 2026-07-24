@@ -1,10 +1,10 @@
-/* DWG Sketch PWA V0.16.8 - direct DWG reader worker.
+/* DWG Sketch PWA V0.16.9 - direct DWG reader worker.
  * LibreDWG WebAssembly is loaded in this Worker, so parsing never calls a desktop converter.
  * Upstream: @mlightcad/libredwg-web 0.7.9 (GPL-3.0)
  */
 import { Dwg_File_Type, LibreDwg } from './vendor/libredwg-web-0.7.9/dist/libredwg-web.js';
 
-const DWG_WORKER_VERSION = '0.16.8';
+const DWG_WORKER_VERSION = '0.16.9';
 const DWG_ENGINE_VERSION = '0.7.9';
 const DWG_ENGINE_PACKAGE = '@mlightcad/libredwg-web';
 const DWG_ENGINE_SOURCE = 'local-vendor';
@@ -634,7 +634,7 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
       exportStrokeMode: 'original', exportStrokeColor: '#000000'
     },
     dwgImport: {
-      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font adapter 0.16.8',
+      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font adapter 0.16.9',
       workerVersion: DWG_WORKER_VERSION,
       engineVersion: DWG_ENGINE_VERSION,
       engineSource: DWG_ENGINE_SOURCE,

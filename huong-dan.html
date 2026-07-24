@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.26 / PWA V0.16.8</title>
+<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.28 / PWA V0.16.9</title>
 <meta name="description" content="Hướng dẫn chi tiết sử dụng DWG Sketch C# và PWA, bao gồm toàn bộ lệnh vẽ, chọn, hiệu chỉnh, sửa hình tự động, xuất bản và tự động hóa sơ đồ điện.">
 <style>
 :root{--bg:#0f1419;--panel:#182028;--panel2:#202a34;--text:#ecf2f8;--muted:#a9b6c3;--line:#344350;--accent:#45c4ef;--accent2:#76e3aa;--warn:#ffcc80;--code:#071b24}
@@ -25,7 +25,7 @@ a{color:#76d7f4}code,kbd{font-family:Consolas,monospace}code{background:var(--co
 <header class="hero"><div class="hero-inner">
 <div class="eyebrow">Tài liệu sử dụng tích hợp · Hoạt động offline</div>
 <h1>DWG Sketch — Hướng dẫn sử dụng chi tiết</h1>
-<p class="lead">Dành cho bản C# WPF V0.14.26 và PWA V0.16.8. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
+<p class="lead">Dành cho bản C# WPF V0.14.28 và PWA V0.16.9. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
 <div class="badges"><span class="badge">C# .NET 8 / Windows</span><span class="badge">PWA / Android / Desktop</span><span class="badge">DWG trực tiếp qua LibreDWG 0.7.9</span><span class="badge">Không cần Internet sau khi cài PWA</span></div>
 <div class="hero-actions"><a class="btn" href="./index.html">Mở PWA cùng thư mục</a><a class="btn secondary" href="./HtmlViewer/PWA/index.html">Mở PWA trong gói C#</a><a class="btn secondary" href="#command-reference">Tra cứu lệnh</a><a class="btn secondary" href="javascript:window.print()">In / Lưu PDF hướng dẫn</a></div>
 </div></header>
@@ -71,6 +71,7 @@ Trung điểm di chuyển       → Pan
 <section id="workflows"><h2>8. Quy trình thao tác mẫu</h2>
 <details open><summary>Cắt đường bằng một đường cong</summary><ol><li>Chọn circle, arc, ellipse hoặc polyline làm biên.</li><li>Chạy <code>TR</code>.</li><li>Bấm đúng phần của line/curve cần bỏ.</li><li>Nhấn Esc khi kết thúc.</li></ol></details>
 <details><summary>Scale một nhóm thiết bị</summary><ol><li>Chọn toàn bộ nhóm bằng SL hoặc Chọn liên kết.</li><li>Chạy <code>SC</code>.</li><li>Bấm điểm gốc cố định.</li><li>Nhập 2 để phóng gấp đôi hoặc 0.5 để thu còn một nửa.</li></ol></details>
+<details><summary>Quay một nhóm thiết bị theo điểm gốc</summary><ol><li>Chọn toàn bộ nhóm hoặc các đối tượng cần quay.</li><li>Chạy <code>RO</code> hoặc <code>ROTATE</code>.</li><li>Bấm điểm gốc quay trên bản vẽ.</li><li>Nhập góc; số dương quay ngược chiều kim đồng hồ, số âm quay theo chiều kim đồng hồ.</li><li>Kiểm tra dây nối và nhãn sau khi quay.</li></ol><p class="muted">Rectangle/Square và Ellipse được chuyển thành polyline kín khi quay để giữ chính xác hình học.</p></details>
 <details><summary>Tính và tô một vùng tạo bởi nhiều đường</summary><ol><li>Bật Snap và bảo đảm các đầu mút nối nhau.</li><li>Chọn tất cả line/arc thuộc đường bao.</li><li>Chạy <code>AA</code> để kiểm tra vùng kín.</li><li>Nếu còn chuỗi hở, chạy CLOSEGAP/AUTOCLOSE.</li><li>Chạy <code>SOLID</code> hoặc <code>H</code>.</li></ol></details>
 <details><summary>Sửa chữ đang đè lên đường</summary><ol><li>Tạo khung xuất quanh khu vực cần sửa nếu bản vẽ lớn.</li><li>Chạy <code>TEXTFIXF</code> hoặc <code>TEXTFIX</code>.</li><li>Chọn phạm vi và dung sai khoảng cách chữ.</li><li>Bấm Bắt đầu quét.</li><li>Kiểm tra đường dẫn từ vị trí cũ tới vị trí mới.</li><li>Chọn các đề xuất phù hợp rồi áp dụng.</li></ol></details>
 </section>
@@ -85,13 +86,15 @@ Trung điểm di chuyển       → Pan
           ↓ Bố trí dọc/ngang + nối cổng trực giao
         Đối tượng CAD có thể chỉnh sửa</p>
 <h3>Chèn thủ công và xuất topology</h3><ol><li>Chọn loại symbol trong bảng Tạo mới.</li><li>Nhập tên/mã thiết bị, tỷ lệ và góc.</li><li>Chạy <code>SYM</code> rồi bấm vị trí.</li><li>Bật Snap để terminal gần hoặc chạm nhau.</li><li>Chạy <code>TOPOLOGY</code> để xuất JSON.</li></ol>
+<h3>Chỉnh sửa và lưu mẫu thiết bị người dùng</h3><ol><li>Chèn một ký hiệu chuẩn hoặc chọn hình học đã tự vẽ.</li><li>Với PWA, chọn đúng một SYMBOL rồi chạy <code>SYMEDIT</code> để bung thành LINE/CIRCLE/POLYLINE/TEXT và các vòng tròn cyan đánh dấu cổng. Với C#, chọn một primitive rồi chạy <code>SYMEDIT</code> để chọn toàn bộ nhóm.</li><li>Dùng MOVE, ROTATE, SCALE, TRIM và thuộc tính để chỉnh mẫu; di chuyển các dấu cổng tới đúng điểm đấu nối.</li><li>Chọn toàn bộ phần hình học của mẫu rồi chạy <code>SYMSAVE</code>.</li><li>Nhập mã, tên mẫu và tên cổng; mẫu được lưu cục bộ và xuất hiện trong danh sách ký hiệu ở những lần mở sau.</li></ol>
+<div class="callout ok"><b>Dùng lại trong AUTOGRID:</b> trường <code>type</code> của CSV/topology có thể dùng mã mẫu người dùng, ví dụ <code>CUSTOM_MC_110KV</code>. Có thể dùng <code>SYMEXPORT</code>/<code>SYMIMPORT</code> để chuyển thư viện mẫu giữa C# và PWA.</div>
 <h3>Tự động sinh sơ đồ</h3><ol><li>Chạy <code>GRIDIMPORT</code> hoặc bấm <b>Mở CSV / topology JSON</b>.</li><li>Chọn bố trí dọc/ngang, khoảng cách, tỷ lệ và điểm gốc.</li><li>Chạy <code>GRIDPREVIEW</code> để kiểm tra số thiết bị, liên kết và thành phần mạng.</li><li>Chạy <code>AUTOGRID</code> để tạo ký hiệu và dây nối.</li><li>Kiểm tra nhãn, cổng, hướng tuyến rồi lưu JSON/DXF.</li></ol>
 <div class="table-wrap"><table><thead><tr><th>Trường dữ liệu</th><th>Ý nghĩa</th><th>Ví dụ</th></tr></thead><tbody><tr><td>id, type, label</td><td>Mã, loại ký hiệu và tên hiển thị.</td><td>MC131, CIRCUIT_BREAKER, MC 131</td></tr><tr><td>from, to</td><td>Hai nút của một liên kết.</td><td>DCL131 → MC131</td></tr><tr><td>fromPort, toPort</td><td>Cổng cụ thể; có thể để trống để tự chọn cổng gần nhất.</td><td>OUT → IN</td></tr><tr><td>order, x, y</td><td>Thứ tự hoặc tọa độ được giữ khi bật tùy chọn.</td><td>3, 120, 80</td></tr><tr><td>station, voltageLevel</td><td>Thông tin phục vụ phân nhóm và mở rộng bố trí.</td><td>Trạm A, 110 kV</td></tr></tbody></table></div>
 <div class="callout ok"><b>Thử nhanh:</b> chạy <code>GRIDSAMPLE</code>, xem trước rồi chạy <code>AUTOGRID</code>. Gói phát hành cũng có <code>sample_electrical_grid.csv</code> và <code>sample_electrical_grid.topology.json</code>.</div>
 <div class="callout"><b>An toàn:</b> bật “Xóa sơ đồ tự động cũ” chỉ xóa các đối tượng có metadata tự động, không xóa phần CAD thủ công hoặc DWG gốc.</div></section>
 <section id="export"><h2>11. Lưu và xuất bản vẽ</h2><div class="table-wrap"><table><thead><tr><th>Định dạng</th><th>Mục đích</th><th>Khuyến nghị</th></tr></thead><tbody>
 <tr><td>JSON</td><td>Tiếp tục chỉnh sửa trong C#/PWA.</td><td>Lưu thường xuyên và trước khi chạy sửa hàng loạt.</td></tr><tr><td>PNG</td><td>Đưa vào báo cáo, Word, Excel.</td><td>2×, nét tối thiểu 1.5 px là cấu hình cân bằng.</td></tr><tr><td>Clipboard PNG</td><td>Paste nhanh vào ứng dụng khác.</td><td>PWA cần HTTPS/localhost.</td></tr><tr><td>PDF</td><td>In hoặc lưu hồ sơ.</td><td>Chọn nền trắng và màu chữ/đường đen khi in.</td></tr><tr><td>DXF R12</td><td>Trao đổi với CAD khác.</td><td>Mở thử file sau xuất; chữ vẫn là TEXT.</td></tr><tr><td>DWG</td><td>Trao đổi khi bắt buộc dùng DWG.</td><td>Dùng C# và dxf2dwg; PWA chỉ tạo DXF nguồn.</td></tr><tr><td>Topology JSON</td><td>Dữ liệu mạng điện cho tự động hóa.</td><td>Kiểm tra nodes, ports và connections.</td></tr></tbody></table></div></section>
-<section id="mobile"><h2>12. Sử dụng PWA trên điện thoại</h2><ul><li>Thanh dưới gồm Mở, Chọn, Kéo, Tìm, Layer và Thêm.</li><li>Nút <b>Thêm</b> mở các lệnh Move, Copy, Scale, Trim, Extend, Area, Repair, TEXTFIX, Dim và xuất.</li><li>Layer/Config hiển thị dạng bottom sheet; đóng sheet trước khi thao tác trên Canvas.</li><li>Dòng lệnh có thể thu gọn; phím cách trên bàn phím điện thoại vẫn chạy lệnh.</li><li>Hai ngón chỉ dùng cho zoom/pan; một ngón dùng cho công cụ hiện tại.</li><li>Nút Back của Android được bảo vệ để giảm nguy cơ thoát mất phiên; dự án được lưu tạm trong IndexedDB.</li></ul>
+<section id="mobile"><h2>12. Sử dụng PWA trên điện thoại</h2><ul><li>Thanh dưới gồm Mở, Chọn, Kéo, Tìm, Layer và Thêm.</li><li>Nút <b>Thêm</b> mở các lệnh Move, Copy, Scale, Rotate, Trim, Extend, Area, Repair, TEXTFIX, Dim, mẫu thiết bị và xuất.</li><li>Layer/Config hiển thị dạng bottom sheet; đóng sheet trước khi thao tác trên Canvas.</li><li>Dòng lệnh có thể thu gọn; phím cách trên bàn phím điện thoại vẫn chạy lệnh.</li><li>Hai ngón chỉ dùng cho zoom/pan; một ngón dùng cho công cụ hiện tại.</li><li>Nút Back của Android được bảo vệ để giảm nguy cơ thoát mất phiên; dự án được lưu tạm trong IndexedDB.</li></ul>
 <div class="callout"><b>Mẹo:</b> với bản vẽ lớn, ẩn layer không cần thiết, dùng khung xuất và chọn phạm vi nhỏ trước khi chạy lệnh tự động.</div></section>
 <section id="performance"><h2>13. Hiệu năng với bản vẽ lớn</h2><div class="two-col"><div class="panel"><h3>C#</h3><ul><li>Chọn chế độ Tự động hoặc Ưu tiên mượt.</li><li>Giữ spatial index và giảm chi tiết khi thao tác.</li><li>Quét sửa hình chạy luồng nền và có hủy.</li><li>Tắt bảng chẩn đoán khi không cần.</li></ul></div><div class="panel"><h3>PWA</h3><ul><li>Render theo requestAnimationFrame và chỉ vẽ vùng nhìn.</li><li>Con trỏ được gom theo khung hình.</li><li>Quét sửa hình chia thành lô nhỏ.</li><li>PNG 4× có thể tự giảm nếu vượt giới hạn bộ nhớ.</li></ul></div></div>
 <p><b>Thứ tự giảm tải:</b> ẩn layer → tạo khung xuất → dùng phạm vi khung/đã chọn → giảm nhóm kiểm tra → hủy nếu dung sai quá rộng → chạy lại.</p></section>
@@ -217,6 +220,11 @@ Trung điểm di chuyển       → Pan
       <p><b>Chuẩn bị:</b> Chọn đối tượng.</p>
       <ol><li>Chạy SC.</li><li>Bấm điểm gốc.</li><li>Nhập hệ số dương.</li></ol>
       <p class="note"><b>Lưu ý:</b> Hệ số &gt;1 phóng to; 0–1 thu nhỏ. Chữ, bán kính và kích thước được scale đồng đều.</p>
+    </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh ro rotate xoay quay đối tượng theo điểm gốc c# pwa chọn đối tượng chạy ro bấm điểm gốc nhập góc dương âm rectangle ellipse polyline">
+      <div class="command-head"><div><code>RO / ROTATE / XOAY</code><h3>Quay đối tượng theo điểm gốc</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn một hoặc nhiều đối tượng.</p>
+      <ol><li>Chạy RO hoặc ROTATE.</li><li>Bấm điểm gốc quay.</li><li>Nhập góc và có thể hiệu chỉnh lại X/Y điểm gốc.</li><li>Bấm Áp dụng.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Góc dương quay ngược chiều kim đồng hồ theo hệ CAD; góc âm quay theo chiều kim đồng hồ. Rectangle/Square và Ellipse được chuyển thành polyline kín để bảo toàn hình học sau quay.</p>
     </article><article class="command-card" data-group="Hiệu chỉnh" data-search="hiệu chỉnh mi / mirror đối xứng đối tượng c# + pwa chọn đối tượng. chạy mi. bấm hai điểm xác định trục đối xứng. góc chữ và cung được điều chỉnh theo trục đối xứng.">
       <div class="command-head"><div><code>MI / MIRROR</code><h3>Đối xứng đối tượng</h3></div><span class="platform">C# + PWA</span></div>
       <p><b>Chuẩn bị:</b> Chọn đối tượng.</p>
@@ -341,7 +349,27 @@ Trung điểm di chuyển       → Pan
       <div class="command-head"><div><code>SYM / SYMBOL</code><h3>Chèn ký hiệu điện vector</h3></div><span class="platform">C# + PWA</span></div>
       <p><b>Chuẩn bị:</b> Chọn loại, mã thiết bị, tỷ lệ và góc.</p>
       <ol><li>Chạy SYM.</li><li>Bấm vị trí chèn.</li><li>Dùng Snap để nối vào các terminal.</li></ol>
-      <p class="note"><b>Lưu ý:</b> Có 13 loại ký hiệu: thanh cái, máy cắt, dao, MBA, máy phát, tụ, kháng, tải, CT, VT và nối đất.</p>
+      <p class="note"><b>Lưu ý:</b> Ngoài 13 mẫu chuẩn, danh sách còn hiển thị các mẫu người dùng đã lưu.</p>
+    </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện symedit bung chọn nhóm ký hiệu thiết bị để chỉnh sửa c# pwa symbol primitive cổng cyan">
+      <div class="command-head"><div><code>SYMEDIT</code><h3>Mở mẫu thiết bị để chỉnh sửa</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn một ký hiệu điện hoặc một primitive thuộc nhóm ký hiệu.</p>
+      <ol><li>Chạy SYMEDIT.</li><li>PWA bung SYMBOL thành primitive; C# chọn toàn bộ nhóm cùng AutomationGroupId.</li><li>Chỉnh hình học bằng MOVE, ROTATE, SCALE, TRIM và thuộc tính.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Trên PWA, các vòng tròn cyan là dấu cổng; hãy di chuyển chúng tới đúng đầu nối trước khi lưu.</p>
+    </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện symsave lưu lựa chọn thành mẫu thiết bị người dùng localstorage localappdata cổng tên mẫu">
+      <div class="command-head"><div><code>SYMSAVE</code><h3>Lưu lựa chọn thành mẫu thiết bị</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn toàn bộ hình học của một thiết bị đã chỉnh sửa.</p>
+      <ol><li>Chạy SYMSAVE.</li><li>Nhập mã mẫu, tên hiển thị và tên các cổng.</li><li>Xác nhận lưu hoặc ghi đè.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Mẫu được lưu qua các phiên: C# trong LocalAppData; PWA trong LocalStorage và có snapshot trong dự án JSON.</p>
+    </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện symdelete xóa mẫu thiết bị người dùng custom">
+      <div class="command-head"><div><code>SYMDELETE</code><h3>Xóa mẫu thiết bị người dùng</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Chọn một mẫu người dùng trong danh sách loại ký hiệu.</p>
+      <ol><li>Chạy SYMDELETE.</li><li>Xác nhận xóa.</li></ol>
+      <p class="note"><b>Lưu ý:</b> Không xóa được mẫu chuẩn. Các đối tượng đã chèn vẫn giữ hình học; PWA còn giữ snapshot mẫu trong dự án.</p>
+    </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện symimport symexport nhập xuất thư viện mẫu thiết bị json chuyển giữa c# pwa">
+      <div class="command-head"><div><code>SYMIMPORT / SYMEXPORT</code><h3>Nhập hoặc xuất thư viện mẫu</h3></div><span class="platform">C# + PWA</span></div>
+      <p><b>Chuẩn bị:</b> Có thư viện JSON hoặc ít nhất một mẫu người dùng.</p>
+      <ol><li>Chạy SYMEXPORT để sao lưu/chia sẻ.</li><li>Chạy SYMIMPORT để nhập thư viện trên máy khác.</li><li>Kiểm tra các mẫu trong danh sách ký hiệu.</li></ol>
+      <p class="note"><b>Lưu ý:</b> V0.14.28/V0.16.9 hỗ trợ trao đổi thư viện giữa C# và PWA; mẫu trùng mã được cập nhật bằng bản nhập.</p>
     </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện topo / topology / gridjson xuất dữ liệu topology c# + pwa đã chèn ký hiệu và bố trí các cổng gần/chạm nhau. chạy topology. lưu file json. kiểm tra nodes, ports, connections và layout. đây là dữ liệu nền cho giai đoạn sinh sơ đồ lưới tự động.">
       <div class="command-head"><div><code>TOPO / TOPOLOGY / GRIDJSON</code><h3>Xuất dữ liệu topology</h3></div><span class="platform">C# + PWA</span></div>
       <p><b>Chuẩn bị:</b> Đã chèn ký hiệu và bố trí các cổng gần/chạm nhau.</p>
@@ -439,7 +467,7 @@ Trung điểm di chuyển       → Pan
       <p class="note"><b>Lưu ý:</b> PWA dùng các nút Layer/Thuộc tính hoặc bottom sheet trên điện thoại.</p>
     </article></div></section>
 </main></div>
-<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.26 và PWA V0.16.8 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
+<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.28 và PWA V0.16.9 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
 <script>
 const cards=[...document.querySelectorAll('.command-card')], search=document.getElementById('commandSearch'), count=document.getElementById('resultCount');let active='ALL';
 function normalize(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}
