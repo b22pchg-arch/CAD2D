@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.37 / PWA V0.17.7</title>
+<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.40 / PWA V0.18.0</title>
 <meta name="description" content="Hướng dẫn chi tiết sử dụng DWG Sketch C# và PWA, bao gồm toàn bộ lệnh vẽ, chọn, hiệu chỉnh, sửa hình tự động, xuất bản và tự động hóa sơ đồ điện.">
 <style>
 :root{--bg:#0f1419;--panel:#182028;--panel2:#202a34;--text:#ecf2f8;--muted:#a9b6c3;--line:#344350;--accent:#45c4ef;--accent2:#76e3aa;--warn:#ffcc80;--code:#071b24}
@@ -25,7 +25,7 @@ a{color:#76d7f4}code,kbd{font-family:Consolas,monospace}code{background:var(--co
 <header class="hero"><div class="hero-inner">
 <div class="eyebrow">Tài liệu sử dụng tích hợp · Hoạt động offline</div>
 <h1>DWG Sketch — Hướng dẫn sử dụng chi tiết</h1>
-<p class="lead">Dành cho bản C# WPF V0.14.37 và PWA V0.17.7. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
+<p class="lead">Dành cho bản C# WPF V0.14.40 và PWA V0.18.0. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
 <div class="badges"><span class="badge">C# .NET 8 / Windows</span><span class="badge">PWA / Android / Desktop</span><span class="badge">DWG trực tiếp qua LibreDWG 0.7.9</span><span class="badge">Không cần Internet sau khi cài PWA</span></div>
 <div class="hero-actions"><a class="btn" href="./index.html">Mở PWA cùng thư mục</a><a class="btn secondary" href="./HtmlViewer/PWA/index.html">Mở PWA trong gói C#</a><a class="btn secondary" href="#command-reference">Tra cứu lệnh</a><a class="btn secondary" href="javascript:window.print()">In / Lưu PDF hướng dẫn</a></div>
 </div></header>
@@ -507,7 +507,34 @@ Trung điểm di chuyển       → Pan
 </main></div>
 
 <section id="v01437"><h2>V0.14.37 / PWA V0.17.7 — ORTHO F8 và con trỏ CAD</h2><ul><li>F8 hoặc lệnh ORTHO bật/tắt khóa phương ngang/dọc trong LINE, MOVE, COPY, MIRROR, DIM và các thao tác điểm phù hợp.</li><li>OSNAP tổng hợp vẫn hoạt động cùng ORTHO; điểm đặc trưng đúng trục được giữ ưu tiên.</li><li>Con trỏ CAD có tia ngang/dọc kéo dài, pickbox ở tâm; chỉnh được độ dài, độ đậm và màu tự tương phản nền.</li><li>Tia con trỏ chỉ hiển thị khi thao tác, không đi vào PNG/PDF/in.</li></ul></section>
-<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.37 và PWA V0.17.7 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
+<section id="v01438"><h2>V0.14.38 / PWA V0.17.8 — Điều khiển hướng và góc của sơ đồ tự động</h2><ul><li><b>Toàn sơ đồ:</b> chọn dọc xuống, dọc lên, ngang phải, ngang trái hoặc nhập góc CAD tùy chọn; 0° sang phải, 90° lên, -90° xuống.</li><li><b>Từng phần tử:</b> đặt hướng nhánh và góc riêng; phần tử để <code>inherit</code> tiếp tục hướng của nhánh cha.</li><li><b>Từng liên kết:</b> có thể ép hướng/góc riêng và được ưu tiên hơn quy tắc của phần tử đích.</li><li><b>Thứ tự ưu tiên:</b> liên kết → phần tử đích → nhánh cha → toàn sơ đồ.</li><li>Ký hiệu có thể theo hướng nhánh, luôn dọc, luôn ngang hoặc cộng một góc lệch so với chuẩn.</li><li>Dây nối dùng hệ trục xoay nên vẫn vuông góc tương đối khi sơ đồ đặt nghiêng; các quy tắc được lưu trong topology schema 3 và thư viện mẫu học.</li></ul></section>
+<section id="v01439"><h2>V0.14.39 / PWA V0.17.9 — Việt hóa topology và áp dụng cùng loại</h2><ul><li>Các lựa chọn Hướng nhánh và Tư thế ký hiệu hiển thị bằng tiếng Việt nhưng vẫn lưu mã nội bộ tương thích dữ liệu cũ.</li><li>Chọn một thiết bị làm mẫu rồi dùng <b>Áp dụng hướng/tư thế cho cùng loại</b> để sao chép bốn thuộc tính bố trí sang mọi thiết bị cùng loại.</li><li>Không thay đổi ID, nhãn, trạm, cấp điện áp, thứ tự hoặc liên kết.</li></ul></section>
+
+<section id="v01440"><h2>V0.14.40 / PWA V0.18.0 — Phiên học dài hạn và chuẩn hóa từng thành phần</h2>
+<div class="two-col"><div class="panel"><h3>Phiên học có kiểm soát</h3><ul>
+<li>Tạo phiên học từ <b>vùng đang chọn</b> hoặc <b>toàn bản vẽ</b>.</li>
+<li>Phần mềm tách kết quả thành từng thành phần có ID, loại dự đoán, loại chuẩn, nhãn, độ tin cậy, cổng kết nối và trạng thái duyệt.</li>
+<li>Kết quả tự nhận chỉ nằm trong phiên tạm; chưa duyệt thì không ghi vào lõi học lâu dài.</li>
+<li>Mỗi phiên giữ lịch sử các lần chuẩn hóa và phiên bản trung gian để đối chiếu hoặc quay lại.</li>
+</ul></div><div class="panel"><h3>Chuẩn hóa từng phần</h3><ul>
+<li>Chuẩn hóa bí danh thiết bị về loại chuẩn, ví dụ MC/CB về máy cắt, DCL/DS về dao cách ly.</li>
+<li>Gợi ý và lưu mẫu cổng theo bốn phía Bắc–Đông–Nam–Tây.</li>
+<li>Chuẩn hóa góc gần 0°, 90°, 180° và 270° nhưng vẫn cho phép người dùng sửa riêng từng phần tử.</li>
+<li>Cho phép sửa trực tiếp mẫu cổng, góc quay, hướng nhánh và tư thế ký hiệu trên từng hàng.</li>
+<li>Có thể lấy một hàng đã duyệt làm chuẩn và áp dụng cho các thành phần cùng loại trong phiên học.</li>
+<li>Ghi nhận mẫu hình học, mẫu cổng và quy tắc bố trí đã được duyệt để dùng lại với DWG mới.</li>
+</ul></div></div>
+<div class="table-wrap"><table><thead><tr><th>Thao tác</th><th>Kết quả</th></tr></thead><tbody>
+<tr><td>Phiên học vùng chọn</td><td>Chỉ phân tích các đối tượng đang chọn, phù hợp để học một ngăn lộ, một nhánh hoặc một cụm ký hiệu hoàn chỉnh.</td></tr>
+<tr><td>Phiên học toàn bản vẽ</td><td>Phân tích toàn bộ DWG, tách topology và tạo danh sách thành phần cần duyệt.</td></tr>
+<tr><td>Chuẩn hóa tự động từng phần</td><td>Chuẩn hóa loại, góc, tên cổng và đánh dấu các mục đủ độ tin cậy.</td></tr>
+<tr><td>Vẽ lại gần nguyên bản</td><td>Dùng tọa độ tương đối và góc đã học để kiểm tra bản vẽ đã được phân rã đúng hay chưa.</td></tr>
+<tr><td>Xem sơ đồ chuẩn hóa</td><td>Dùng topology đã học để bố trí lại sạch hơn theo quy tắc hướng, cổng và khoảng cách.</td></tr>
+<tr><td>Duyệt vào thư viện học lâu dài</td><td>Chỉ dữ liệu đã duyệt mới cập nhật mẫu thiết bị, mẫu cổng, topology và quy tắc bố trí.</td></tr>
+</tbody></table></div>
+<div class="callout ok"><b>Quy trình khuyến nghị:</b> Tạo phiên học → sửa từng thành phần → kiểm tra vẽ lại gần nguyên bản → xem bản chuẩn hóa → lưu phiên bản → duyệt vào thư viện học lâu dài.</div>
+</section>
+<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.40 và PWA V0.18.0 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
 <script>
 const cards=[...document.querySelectorAll('.command-card')], search=document.getElementById('commandSearch'), count=document.getElementById('resultCount');let active='ALL';
 function normalize(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}

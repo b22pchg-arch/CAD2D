@@ -1,5 +1,5 @@
 'use strict';
-const APP_VERSION='0.17.7';
+const APP_VERSION='0.18.0';
 const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION;
 const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(APP_VERSION);
 const CORE_ASSETS=[
@@ -10,7 +10,7 @@ const CORE_ASSETS=[
   './vendor/libredwg-web-0.7.9/wasm/libredwg-web.wasm',
   './vendor/libredwg-web-0.7.9/package.json',
   './vendor/libredwg-web-0.7.9/INTEGRATION_INFO.json',
-  './electrical-automation-v0173.js','./electrical-auto-learn-v0174.js','./electrical-learning-core-v0175.js','./symbol-template-v0169.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
+  './electrical-automation-v0179.js','./electrical-auto-learn-v0174.js','./electrical-learning-core-v0175.js','./electrical-learning-session-v0180.js','./symbol-template-v0169.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
 ];
 const OPTIONAL_ASSETS=[
   './HUONG_DAN_PWA_V0130_SELECT_FIND_MIRROR.txt','./HUONG_DAN_PWA_V0131_DWG_FIND_REPLACE.txt',
@@ -28,8 +28,8 @@ const OPTIONAL_ASSETS=[
   './BUILD_REPORT_V0151.txt','./BUILD_REPORT_V0152.txt','./BUILD_REPORT_V0153.txt','./BUILD_REPORT_V0154.txt','./BUILD_REPORT_V0155.txt','./BUILD_REPORT_V0156.txt','./BUILD_REPORT_V0157.txt','./BUILD_REPORT_V0158.txt','./BUILD_REPORT_V0159.txt','./BUILD_REPORT_V0160.txt','./BUILD_REPORT_V0161.txt','./BUILD_REPORT_V0162.txt','./BUILD_REPORT_V0163.txt','./BUILD_REPORT_V0164.txt','./BUILD_REPORT_V0165.txt','./BUILD_REPORT_V0166.txt',
   './huong-dan.html',
   './BUILD_REPORT_V0168.txt',
-  './HUONG_DAN_PWA_V0168_AUTO_GRID_GENERATOR.txt','./HUONG_DAN_PWA_V0169_ROTATE_CUSTOM_SYMBOL_TEMPLATES.txt','./BUILD_REPORT_V0169.txt','./HUONG_DAN_PWA_V0170_COMBINED_OSNAP.txt','./BUILD_REPORT_V0170.txt','./HUONG_DAN_PWA_V0171_HATCH_COMPLETENESS.txt','./BUILD_REPORT_V0171.txt','./PWA_HATCH_DWG_TEST_REPORT_V0171.txt','./HUONG_DAN_PWA_V0172_LWPOLYLINE_CLOSURE_FIX.txt','./BUILD_REPORT_V0172.txt','./PWA_LWPOLYLINE_DWG_TEST_REPORT_V0172.txt','./HUONG_DAN_PWA_V0173_TOPOLOGY_LEARNING_A4.txt','./BUILD_REPORT_V0173.txt','./PWA_UI_SMOKE_TEST_V0173.txt','./HUONG_DAN_PWA_V0174_DWG_AUTO_LEARN.txt','./BUILD_REPORT_V0174.txt','./HUONG_DAN_PWA_V0175_LONG_TERM_LEARNING.txt','./BUILD_REPORT_V0175.txt','./HUONG_DAN_PWA_V0176_CURSOR_COORDINATE_FIX.txt','./BUILD_REPORT_V0176.txt','./HUONG_DAN_PWA_V0177_ORTHO_CROSSHAIR.txt','./BUILD_REPORT_V0177.txt',
-  './sample_electrical_grid.topology.json','./sample_custom_symbol_library.json',
+  './HUONG_DAN_PWA_V0168_AUTO_GRID_GENERATOR.txt','./HUONG_DAN_PWA_V0169_ROTATE_CUSTOM_SYMBOL_TEMPLATES.txt','./BUILD_REPORT_V0169.txt','./HUONG_DAN_PWA_V0170_COMBINED_OSNAP.txt','./BUILD_REPORT_V0170.txt','./HUONG_DAN_PWA_V0171_HATCH_COMPLETENESS.txt','./BUILD_REPORT_V0171.txt','./PWA_HATCH_DWG_TEST_REPORT_V0171.txt','./HUONG_DAN_PWA_V0172_LWPOLYLINE_CLOSURE_FIX.txt','./BUILD_REPORT_V0172.txt','./PWA_LWPOLYLINE_DWG_TEST_REPORT_V0172.txt','./HUONG_DAN_PWA_V0173_TOPOLOGY_LEARNING_A4.txt','./BUILD_REPORT_V0173.txt','./PWA_UI_SMOKE_TEST_V0173.txt','./HUONG_DAN_PWA_V0174_DWG_AUTO_LEARN.txt','./BUILD_REPORT_V0174.txt','./HUONG_DAN_PWA_V0175_LONG_TERM_LEARNING.txt','./BUILD_REPORT_V0175.txt','./HUONG_DAN_PWA_V0176_CURSOR_COORDINATE_FIX.txt','./BUILD_REPORT_V0176.txt','./HUONG_DAN_PWA_V0177_ORTHO_CROSSHAIR.txt','./BUILD_REPORT_V0177.txt','./HUONG_DAN_PWA_V0178_DIRECTIONAL_AUTOGRID.txt','./BUILD_REPORT_V0178.txt','./PWA_DIRECTIONAL_AUTOGRID_TEST_V0178.txt','./HUONG_DAN_PWA_V0179_VIETNAMESE_TOPOLOGY_BULK_APPLY.txt','./BUILD_REPORT_V0179.txt','./PWA_TOPOLOGY_VIETNAMESE_BULK_APPLY_TEST_V0179.txt',
+  './sample_electrical_grid.topology.json','./sample_electrical_grid_directional.topology.json','./sample_custom_symbol_library.json',
   './sample_electrical_grid.csv','./HUONG_DAN_PWA_V0167_INTEGRATED_HELP.txt','./BUILD_REPORT_V0167.txt','./THIRD_PARTY_NOTICES.txt','./sample_dxf_r12_unicode.dxf','./sample_color_aci_truecolor.dxf'
 ];
 self.addEventListener('install',event=>{

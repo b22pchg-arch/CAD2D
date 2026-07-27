@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-<title>DWG Sketch PWA Editor V0.17.7</title>
+<title>DWG Sketch PWA Editor V0.18.0</title>
 <style>
 :root{color-scheme:dark;--bg:#202124;--panel:#292a2d;--line:#45464a;--text:#f1f3f4;--muted:#aeb0b4;--accent:#4fc3f7;--orange:#ffb74d;--danger:#ef5350;--ok:#66bb6a}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);touch-action:none;overscroll-behavior:none}
@@ -86,7 +86,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
   <div class="tool-group"><button id="orthoBtn" title="Bật/tắt ORTHO ngang/dọc. Phím F8.">ORTHO F8</button><button id="crosshairBtn" title="Bật/tắt con trỏ CAD có tia kéo dài.">Con trỏ CAD</button></div>
   <div class="tool-group"><button id="fitBtn">Zoom toàn bộ</button><button id="findTextBtn">Tìm chữ</button><button id="leftBtn">Layer</button><button id="rightBtn">Thuộc tính</button><button id="pngBtn">PNG</button><button id="copyPngBtn" title="Sao chép ảnh xuất hiện tại vào Clipboard">PNG → Clipboard</button><button id="printBtn">In</button><button id="pdfBtn">PDF</button><button id="dxfBtn">DXF</button></div>
   <div class="tool-group"><button id="toolbarModeBtn" title="Chuyển thanh công cụ biểu tượng/có chữ">Biểu tượng</button><button id="helpBtn" title="Mở hướng dẫn sử dụng chi tiết">Hướng dẫn</button><button id="installPwaBtn" class="install-hidden">Cài PWA</button><button id="checkUpdateBtn">Kiểm tra phiên bản</button><button id="applyUpdateBtn" class="install-hidden">Cập nhật ngay</button></div>
-  <span class="spacer"></span><span class="version-pill">PWA 0.17.7</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
+  <span class="spacer"></span><span class="version-pill">PWA 0.18.0</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
 </header>
 <div id="drawingTabs" class="drawing-tabs" role="tablist" aria-label="Các bản vẽ đang mở"></div>
 <main id="layout" class="layout">
@@ -170,7 +170,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
       <div class="muted" style="margin-top:6px">Bộ đọc @mlightcad/libredwg-web 0.7.9 và WebAssembly khoảng 10 MB đã được đặt trực tiếp trong dự án. Không dùng CDN; sau khi PWA được tải/cài, máy tính và điện thoại cùng dùng đúng một bộ đọc nội bộ và có thể mở DWG offline.</div>
     </div>
     <div class="section" data-mobile-group="other"><h3>PWA và cập nhật</h3>
-      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.17.7</b></div>
+      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.18.0</b></div>
       <div class="form-grid" style="margin-top:7px"><label class="full">Địa chỉ version.json<input id="updateUrlInput" value="./version.json" autocomplete="off"></label></div>
       <div class="button-row"><button id="saveUpdateUrlBtn">Lưu địa chỉ</button><button id="panelCheckUpdateBtn">Kiểm tra</button><button id="panelApplyUpdateBtn" class="install-hidden">Cập nhật</button></div>
       <div id="updateInfo" class="update-info muted">Chưa kiểm tra phiên bản.</div>
@@ -193,8 +193,10 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
       <div class="muted">Đọc CSV hoặc topology JSON, kiểm tra nút–liên kết, tự bố trí thiết bị theo cấp mạng và tạo ký hiệu cùng tuyến nối vuông góc. Các đối tượng sau khi tạo vẫn sửa được như CAD thông thường.</div>
       <input id="gridTopologyInput" class="grid-automation-file" type="file" accept=".csv,.txt,.json,.topology.json,text/csv,text/plain,application/json">
       <div class="form-grid" style="margin-top:7px">
-        <label>Hướng sơ đồ<select id="gridOrientation"><option value="vertical">Dọc: nguồn trên, tải dưới</option><option value="horizontal">Ngang: nguồn trái, tải phải</option></select></label>
+        <label>Hướng phát triển<select id="gridOrientation"><option value="down">Dọc xuống: nguồn trên, tải dưới</option><option value="up">Dọc lên: nguồn dưới, tải trên</option><option value="right">Ngang phải: nguồn trái, tải phải</option><option value="left">Ngang trái: nguồn phải, tải trái</option><option value="angle">Theo góc CAD tùy chọn</option></select></label>
         <label>Điểm đặt<select id="gridOriginMode"><option value="view">Giữa vùng đang nhìn</option><option value="frame">Phía trên khung xuất</option><option value="custom">Tọa độ nhập</option></select></label>
+        <label>Góc hướng CAD (°)<input id="gridLayoutAngle" type="number" value="-90" step="1" title="0° sang phải, 90° hướng lên"></label><label>Tư thế ký hiệu<select id="gridSymbolOrientation"><option value="follow">Theo hướng nhánh</option><option value="vertical">Luôn nằm dọc chuẩn</option><option value="horizontal">Luôn nằm ngang chuẩn</option><option value="angle">Góc chuẩn + góc lệch</option></select></label>
+        <label>Góc lệch ký hiệu (°)<input id="gridSymbolAngleOffset" type="number" value="0" step="1"></label><label><span>Quy tắc cục bộ</span><span class="muted">Có thể ghi đè trong bảng topology cho từng nút hoặc liên kết.</span></label>
         <label>Khoảng ngang<input id="gridSpacingX" type="number" value="90" min="35" step="5"></label><label>Khoảng dọc<input id="gridSpacingY" type="number" value="85" min="35" step="5"></label>
         <label>Tỷ lệ ký hiệu<input id="gridSymbolScale" type="number" value="1" min="0.2" step="0.1"></label><label>Độ dày dây nối<input id="gridConnectionStroke" type="number" value="1.5" min="0.2" step="0.2"></label>
         <label>Tọa độ X<input id="gridOriginX" type="number" value="0" step="10"></label><label>Tọa độ Y<input id="gridOriginY" type="number" value="0" step="10"></label>
@@ -217,6 +219,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
       <div class="form-grid" style="margin-top:7px"><label class="full">Mẫu đã học<select id="gridLearnedTemplateSelect"><option value="">— Chọn mẫu đã học —</option></select></label><label>Kiểu sinh<select id="gridLearnGenerateMode"><option value="similar">Tự bố trí biến thể gần giống</option><option value="exact">Giữ tương quan vị trí mẫu</option></select></label></div>
       <div class="button-row"><button id="gridLearnSelectionBtn">Học vùng đang chọn</button><button id="gridAutoLearnSelectionBtn" class="primary">Tự nhận topo vùng chọn</button><button id="gridAutoLearnDrawingBtn">Tự nhận toàn bản vẽ</button><button id="gridGenerateLearnedBtn" class="primary">Sinh từ mẫu</button><button id="gridEditLearnedBtn">Sửa topology mẫu</button><button id="gridDeleteLearnedBtn" class="danger">Xóa mẫu</button></div>
       <div class="button-row"><button id="gridLoadLdTinhSamplesBtn">Nạp mẫu thực tế LD Tỉnh</button><button id="gridExportAutoLearnBtn">Xuất gói tự học DWG</button><button id="gridLearningCoreInfoBtn">Trạng thái lõi học</button><button id="gridExportLearningCoreBtn">Sao lưu lõi học V2</button><button id="gridImportLearningCoreBtn">Nạp lõi học V2</button></div>
+      <div class="button-row"><button id="gridLearningSessionSelectionBtn" class="primary">Phiên học vùng chọn</button><button id="gridLearningSessionDrawingBtn">Phiên học toàn bản vẽ</button><button id="gridLearningSessionManageBtn">Quản lý phiên học</button></div>
       <div class="muted">Lõi học V2 tự dò các layer tuyến có quy luật hình học trong DWG mới, đối chiếu mẫu cũ, tránh học trùng và chỉ học quy tắc sau khi người dùng duyệt. Khi người dùng sửa loại thiết bị/layer, bằng chứng sai cũ được giảm trọng số; mỗi lần sửa được lưu thành phiên bản. Có thể sao lưu và nạp lại lõi học giữa các máy.</div>
       <div id="gridAutomationStatus" class="muted grid-automation-status">Chưa nạp dữ liệu. Lệnh: GRIDIMPORT, GRIDPREVIEW, AUTOGRID.</div>
       <div id="gridAutomationPreview" class="grid-automation-preview"><div class="muted">Chưa có bố trí xem trước.</div></div>
@@ -268,12 +271,22 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
 <div id="topologyEditorModal" class="modal"><div class="dialog topology-dialog"><h2>Hiệu chỉnh topology sơ đồ điện</h2>
   <div class="form-grid"><label class="full">Tên sơ đồ<input id="topologyName" value="Sơ đồ điện"></label></div>
   <div class="topology-block-title"><b>Thiết bị / nút</b><span id="topologyEditorSummary" class="muted"></span></div>
-  <div class="topology-table-wrap"><table class="topology-table"><thead><tr><th>ID</th><th>Loại</th><th>Nhãn</th><th>Trạm</th><th>Cấp điện áp</th><th>Thứ tự</th><th></th></tr></thead><tbody id="topologyNodeBody"></tbody></table></div>
-  <div class="topology-toolbar"><button id="topologyAddNode">+ Thêm thiết bị</button></div>
+  <div class="topology-table-wrap"><table class="topology-table"><thead><tr><th>ID</th><th>Loại</th><th>Nhãn</th><th>Trạm</th><th>Cấp điện áp</th><th>Thứ tự</th><th>Hướng nhánh</th><th>Góc hướng</th><th>Tư thế ký hiệu</th><th>Góc lệch</th><th>Thao tác</th></tr></thead><tbody id="topologyNodeBody"></tbody></table></div>
+  <div class="topology-toolbar"><button id="topologyAddNode">+ Thêm thiết bị</button><span class="muted">Nút “Áp dụng cùng loại” sao chép hướng và tư thế từ hàng đó sang mọi thiết bị cùng loại.</span></div>
   <div class="topology-block-title"><b>Liên kết / nhánh</b><span class="muted">Có thể chọn cổng hoặc để trống để tự chọn cổng gần nhất.</span></div>
-  <div class="topology-table-wrap"><table class="topology-table"><thead><tr><th>ID</th><th>Từ thiết bị</th><th>Cổng từ</th><th>Đến thiết bị</th><th>Cổng đến</th><th>Nhãn</th><th></th></tr></thead><tbody id="topologyEdgeBody"></tbody></table></div>
+  <div class="topology-table-wrap"><table class="topology-table"><thead><tr><th>ID</th><th>Từ thiết bị</th><th>Cổng từ</th><th>Đến thiết bị</th><th>Cổng đến</th><th>Nhãn</th><th>Hướng nhánh</th><th>Góc hướng</th><th></th></tr></thead><tbody id="topologyEdgeBody"></tbody></table></div>
   <div class="topology-toolbar"><button id="topologyAddEdge">+ Thêm liên kết</button></div>
   <div class="dialog-actions"><button id="topologyEditorCancel">Hủy</button><button id="topologyEditorClose">Đóng</button><button id="topologyEditorApply" class="primary">Kiểm tra và áp dụng</button></div>
+</div></div>
+
+<div id="learningSessionModal" class="modal"><div class="dialog topology-dialog" style="width:min(1480px,98vw)"><h2>Phiên học bản vẽ và chuẩn hóa từng thành phần</h2>
+  <div class="form-grid"><label class="full">Phiên học<select id="learningSessionSelect"><option value="">— Phiên học mới —</option></select></label><label class="full">Tên phiên<input id="learningSessionName" readonly></label></div>
+  <div class="topology-block-title"><b>Thành phần đã phân rã</b><span id="learningSessionStatus" class="muted"></span></div>
+  <div class="muted">Mỗi hàng là một thành phần logic do phần mềm suy ra. Chọn loại chuẩn, duyệt hoặc bỏ qua; phần mềm chỉ học lâu dài sau khi bấm “Duyệt vào thư viện”.</div>
+  <div class="topology-table-wrap" style="max-height:52vh"><table class="topology-table"><thead><tr><th>Dùng</th><th>ID</th><th>Loại dự đoán</th><th>Loại chuẩn</th><th>Nhãn</th><th>Tin cậy</th><th>Mẫu cổng</th><th>Góc</th><th>Hướng nhánh</th><th>Tư thế ký hiệu</th><th>Trạng thái</th><th>Ghi chú</th><th>Áp dụng</th></tr></thead><tbody id="learningComponentBody"></tbody></table></div>
+  <div id="learningSessionMetrics" class="muted" style="margin-top:8px"></div>
+  <div class="topology-toolbar"><button id="learningSessionStandardize">Chuẩn hóa tự động từng phần</button><button id="learningSessionApproveCertain">Duyệt các mục đủ chắc chắn</button><button id="learningSessionPreviewExact">Vẽ lại gần nguyên bản</button><button id="learningSessionPreviewNormalized">Xem sơ đồ chuẩn hóa</button><button id="learningSessionSaveRevision">Lưu phiên bản trung gian</button><button id="learningSessionExport">Xuất phiên học</button><button id="learningSessionDelete" class="danger">Xóa phiên</button></div>
+  <div class="dialog-actions"><button id="learningSessionCancel">Đóng</button><button id="learningSessionClose">Lưu và đóng</button><button id="learningSessionApprove" class="primary">Duyệt vào thư viện học lâu dài</button></div>
 </div></div>
 <div id="textModal" class="modal"><div class="dialog"><h2>Sửa chữ trực tiếp</h2><textarea id="modalText"></textarea><div class="form-grid" style="margin-top:8px"><label>Chiều cao<input id="modalHeight" type="number" step="0.1"></label><label>Góc xoay<input id="modalRotation" type="number" step="1"></label></div><div class="dialog-actions"><button id="modalCancel">Hủy</button><button id="modalApply">Áp dụng</button></div></div></div>
 <div id="scaleModal" class="modal"><div class="dialog" style="width:min(390px,100%)"><h2>Scale đối tượng</h2>
@@ -299,7 +312,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
 <div id="pwaToast" class="pwa-toast"><span id="pwaToastText"></span><button id="pwaToastAction" class="install-hidden">Cập nhật</button></div>
 <script>
 'use strict';
-const PWA_APP_VERSION='0.17.7';
+const PWA_APP_VERSION='0.18.0';
 const PWA_VERSION_URL_KEY='DwgSketchPwa.VersionUrl.V1';
 let deferredInstallPrompt=null,pwaRegistration=null,latestVersionInfo=null,reloadingForUpdate=false;
 function parseVersion(v){return String(v||'0').trim().replace(/^v/i,'').split(/[.-]/).map(x=>Number.parseInt(x,10)||0)}
@@ -424,7 +437,7 @@ function renderDrawingTabs(){const host=$('drawingTabs');if(!host)return;host.in
 function captureDrawingSession(){if(restoringDrawingSession)return;const s=activeDrawingSession();if(!s||!project)return;syncProject();s.project=clone(project);s.fileName=currentFileName;s.dirty=dirty;s.scale=scale;s.offsetX=offsetX;s.offsetY=offsetY;s.undoStack=clone(undoStack);s.redoStack=clone(redoStack);s.lastSelectionRegion=lastSelectionRegion?clone(lastSelectionRegion):null;s.dxfInfo=$('dxfImportInfo')?.textContent||'';renderDrawingTabs();scheduleWorkspaceSave()}
 function makeDrawingSession(displayName='Bản vẽ mới'){return{id:'tab-'+drawingSessionSequence++,displayName,fileName:displayName,project:createBlankProject(),dirty:false,scale:1,offsetX:0,offsetY:0,undoStack:[],redoStack:[],lastSelectionRegion:null,dxfInfo:''}}
 function beginIncomingDrawingSession(displayName){captureDrawingSession();let session=activeDrawingSession();const reusable=drawingSessions.length===1&&session&&!session.dirty&&entities.length===0&&overlays.length===0;if(!reusable){session=makeDrawingSession(displayName);drawingSessions.push(session);activeDrawingSessionId=session.id}else session.displayName=displayName;renderDrawingTabs();return session}
-function restoreDrawingSession(session){if(!session)return;restoringDrawingSession=true;try{loadProjectObject(clone(session.project),session.fileName,!session.dirty,false);scale=num(session.scale,scale);offsetX=num(session.offsetX,offsetX);offsetY=num(session.offsetY,offsetY);undoStack=clone(session.undoStack||[]);redoStack=clone(session.redoStack||[]);lastSelectionRegion=session.lastSelectionRegion?clone(session.lastSelectionRegion):null;if($('dxfImportInfo')){const stale=isLegacyDwgProject(session.project);$('dxfImportInfo').textContent=stale?'Cảnh báo: tab DWG này được lưu bởi bộ đọc cũ. Hãy mở lại file DWG gốc bằng V0.17.7 để nhận đủ HATCH, đúng màu/font và bộ đọc nội bộ.':(session.dxfInfo||'Chưa mở DWG/DXF.');$('dxfImportInfo').classList.toggle('error',stale);$('dxfImportInfo').classList.toggle('success',!stale&&!!session.dxfInfo)}dirty=!!session.dirty;$('dirtyBadge').textContent=dirty?'Chưa lưu':'Đã lưu';$('dirtyBadge').className='badge '+(dirty?'dirty':'ok');updateHistoryButtons();draw()}finally{restoringDrawingSession=false}renderDrawingTabs();document.title=`${dirty?'* ':''}DWG Sketch PWA — ${session.displayName||session.fileName}`}
+function restoreDrawingSession(session){if(!session)return;restoringDrawingSession=true;try{loadProjectObject(clone(session.project),session.fileName,!session.dirty,false);scale=num(session.scale,scale);offsetX=num(session.offsetX,offsetX);offsetY=num(session.offsetY,offsetY);undoStack=clone(session.undoStack||[]);redoStack=clone(session.redoStack||[]);lastSelectionRegion=session.lastSelectionRegion?clone(session.lastSelectionRegion):null;if($('dxfImportInfo')){const stale=isLegacyDwgProject(session.project);$('dxfImportInfo').textContent=stale?'Cảnh báo: tab DWG này được lưu bởi bộ đọc cũ. Hãy mở lại file DWG gốc bằng V0.18.0 để nhận đủ HATCH, đúng màu/font và bộ đọc nội bộ.':(session.dxfInfo||'Chưa mở DWG/DXF.');$('dxfImportInfo').classList.toggle('error',stale);$('dxfImportInfo').classList.toggle('success',!stale&&!!session.dxfInfo)}dirty=!!session.dirty;$('dirtyBadge').textContent=dirty?'Chưa lưu':'Đã lưu';$('dirtyBadge').className='badge '+(dirty?'dirty':'ok');updateHistoryButtons();draw()}finally{restoringDrawingSession=false}renderDrawingTabs();document.title=`${dirty?'* ':''}DWG Sketch PWA — ${session.displayName||session.fileName}`}
 function switchDrawingSession(id){if(id===activeDrawingSessionId)return;captureDrawingSession();const target=drawingSessions.find(x=>x.id===id);if(!target)return;activeDrawingSessionId=id;restoreDrawingSession(target);status(`Đã chuyển sang tab ${target.displayName||target.fileName}.`)}
 function closeDrawingSession(id){captureDrawingSession();const index=drawingSessions.findIndex(x=>x.id===id);if(index<0)return;const target=drawingSessions[index];if(target.dirty&&!confirm(`Tab “${target.displayName||target.fileName}” có thay đổi chưa lưu. Đóng tab?`))return;drawingSessions.splice(index,1);if(!drawingSessions.length){const blank=makeDrawingSession('Bản vẽ mới');drawingSessions.push(blank);activeDrawingSessionId=blank.id;restoringDrawingSession=true;try{loadProjectObject(createBlankProject(),'BanVeMoi.dwgsketch.json',true,false)}finally{restoringDrawingSession=false}captureDrawingSession();renderDrawingTabs();return}if(activeDrawingSessionId===id){const next=drawingSessions[Math.min(index,drawingSessions.length-1)];activeDrawingSessionId=next.id;restoreDrawingSession(next)}else renderDrawingTabs()}
 function initializeDrawingTabs(){if(drawingSessions.length)return;const s=makeDrawingSession('Bản vẽ mới');drawingSessions.push(s);activeDrawingSessionId=s.id;captureDrawingSession();renderDrawingTabs()}
@@ -1570,9 +1583,10 @@ async function bootApplication(){
 }
 void bootApplication();
 </script>
-<script src="./electrical-automation-v0173.js"></script>
+<script src="./electrical-automation-v0179.js"></script>
 <script src="./electrical-auto-learn-v0174.js"></script>
 <script src="./electrical-learning-core-v0175.js"></script>
+<script src="./electrical-learning-session-v0180.js"></script>
 <script src="./symbol-template-v0169.js"></script>
 </body>
 </html>

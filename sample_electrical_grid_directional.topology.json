@@ -1,0 +1,36 @@
+{
+  "schema": "dwg-sketch-electrical-topology",
+  "schemaVersion": 3,
+  "name": "Mẫu định hướng nhiều nhánh",
+  "layout": {
+    "directionMode": "down",
+    "layoutAngleDeg": -90,
+    "symbolOrientation": "follow",
+    "symbolAngleOffsetDeg": 0,
+    "spacingX": 100,
+    "spacingY": 82
+  },
+  "nodes": [
+    { "id": "BUS110", "type": "BUSBAR", "label": "Thanh cái 110 kV", "order": 1 },
+    { "id": "DCL131", "type": "DISCONNECTOR", "label": "DCL 131-1", "order": 2 },
+    { "id": "MC131", "type": "CIRCUIT_BREAKER", "label": "MC 131", "order": 3 },
+    { "id": "MBA_T1", "type": "TRANSFORMER_2W", "label": "MBA T1", "order": 4 },
+    { "id": "BUS35", "type": "BUSBAR", "label": "Thanh cái 35 kV", "order": 5 },
+    { "id": "MC371", "type": "CIRCUIT_BREAKER", "label": "MC 371", "order": 6, "layoutDirection": "right" },
+    { "id": "LOAD371", "type": "LOAD", "label": "ĐZ 371", "order": 7 },
+    { "id": "MC372", "type": "CIRCUIT_BREAKER", "label": "MC 372", "order": 8, "layoutDirection": "left" },
+    { "id": "LOAD372", "type": "LOAD", "label": "ĐZ 372", "order": 9 },
+    { "id": "DIESEL", "type": "GENERATOR", "label": "Diesel dự phòng", "order": 10, "layoutDirection": "angle", "layoutAngleDeg": 35, "symbolOrientation": "horizontal", "symbolAngleOffsetDeg": 10 }
+  ],
+  "connections": [
+    { "id": "E1", "fromNodeId": "BUS110", "toNodeId": "DCL131" },
+    { "id": "E2", "fromNodeId": "DCL131", "toNodeId": "MC131" },
+    { "id": "E3", "fromNodeId": "MC131", "toNodeId": "MBA_T1" },
+    { "id": "E4", "fromNodeId": "MBA_T1", "toNodeId": "BUS35" },
+    { "id": "E5", "fromNodeId": "BUS35", "toNodeId": "MC371" },
+    { "id": "E6", "fromNodeId": "MC371", "toNodeId": "LOAD371" },
+    { "id": "E7", "fromNodeId": "BUS35", "toNodeId": "MC372" },
+    { "id": "E8", "fromNodeId": "MC372", "toNodeId": "LOAD372" },
+    { "id": "E9", "fromNodeId": "BUS35", "toNodeId": "DIESEL", "directionMode": "angle", "angleDeg": 35 }
+  ]
+}
