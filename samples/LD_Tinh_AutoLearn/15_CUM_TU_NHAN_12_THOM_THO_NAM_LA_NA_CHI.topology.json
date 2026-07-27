@@ -1,0 +1,409 @@
+{
+  "schemaVersion": 2,
+  "name": "Cụm tự nhận 12 - Thơm Thọ - Nậm Là - Nà Chì",
+  "orientation": "vertical",
+  "spacingX": 90,
+  "spacingY": 70,
+  "nodes": [
+    {
+      "id": "BUS_021",
+      "type": "BUSBAR",
+      "label": "Thanh dẫn DZ 35",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 30.139359548324137,
+      "y": 260.86939431654173,
+      "scale": 1,
+      "order": 20,
+      "confidence": 0.9,
+      "sourceKind": "conductor"
+    },
+    {
+      "id": "N1058",
+      "type": "LOAD",
+      "label": "Thơm Thọ",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 37.39946984674316,
+      "y": 307.7816057995078,
+      "scale": 1,
+      "order": 1057,
+      "confidence": 0.939,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N1085",
+      "type": "LOAD",
+      "label": "Nậm Là",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 36.531995975761674,
+      "y": 381.9514413100551,
+      "scale": 1,
+      "order": 1084,
+      "confidence": 0.947,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N1047",
+      "type": "LOAD",
+      "label": "Nà Chì",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 37.008176117553376,
+      "y": 407.9908354668296,
+      "scale": 1,
+      "order": 1046,
+      "confidence": 0.943,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N1032",
+      "type": "LOAD",
+      "label": "Khuôn Lùng",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 37.76344128733035,
+      "y": 65.21120039507514,
+      "scale": 1,
+      "order": 1031,
+      "confidence": 0.936,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N408",
+      "type": "LOAD",
+      "label": "DPT Làng Thượng",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 35.00309628539253,
+      "y": 188.3753542045597,
+      "scale": 1,
+      "order": 407,
+      "confidence": 0.959,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N407",
+      "type": "LOAD",
+      "label": "DPT Khâu Lầu",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 35.29184285167139,
+      "y": 333.2154965753434,
+      "scale": 1,
+      "order": 406,
+      "confidence": 0.957,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N607",
+      "type": "LOAD",
+      "label": "371 Nấm Dẩn",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 0.0,
+      "y": 525.8796218940406,
+      "scale": 1,
+      "order": 606,
+      "confidence": 0.749,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N1059",
+      "type": "LOAD",
+      "label": "Xuân Hòa",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 36.104369059437886,
+      "y": 141.60823419340886,
+      "scale": 1,
+      "order": 1058,
+      "confidence": 0.95,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N1048",
+      "type": "LOAD",
+      "label": "Đo Đếm 87",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 36.446289851213805,
+      "y": 113.41512493864866,
+      "scale": 1,
+      "order": 1047,
+      "confidence": 0.947,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N614",
+      "type": "LOAD",
+      "label": "371 T.Nam",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 37.695620568236336,
+      "y": 0.0,
+      "scale": 1,
+      "order": 613,
+      "confidence": 0.937,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "BUS_226",
+      "type": "BUSBAR",
+      "label": "Thanh dẫn DZ 35",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 83.64435112073988,
+      "y": 244.1996095145587,
+      "scale": 1,
+      "order": 225,
+      "confidence": 0.9,
+      "sourceKind": "conductor"
+    },
+    {
+      "id": "N1049",
+      "type": "LOAD",
+      "label": "Q.Nguyên",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 43.510249919840135,
+      "y": 248.9602507277159,
+      "scale": 1,
+      "order": 1048,
+      "confidence": 0.96,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "BUS_283",
+      "type": "BUSBAR",
+      "label": "Thanh dẫn DZ 35",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 36.93348783755209,
+      "y": 487.4587579357467,
+      "scale": 1,
+      "order": 282,
+      "confidence": 0.9,
+      "sourceKind": "conductor"
+    },
+    {
+      "id": "BUS_275",
+      "type": "BUSBAR",
+      "label": "Thanh dẫn DZ 35",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 71.63710501539754,
+      "y": 444.82086461034487,
+      "scale": 1,
+      "order": 274,
+      "confidence": 0.9,
+      "sourceKind": "conductor"
+    },
+    {
+      "id": "N1052",
+      "type": "LOAD",
+      "label": "Bản Ngò",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 5.532344793784432,
+      "y": 491.41794952441705,
+      "scale": 1,
+      "order": 1051,
+      "confidence": 0.967,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N1046",
+      "type": "LOAD",
+      "label": "Tả Nhìu",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 37.283523362712,
+      "y": 493.8424775296007,
+      "scale": 1,
+      "order": 1045,
+      "confidence": 0.947,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N1053",
+      "type": "LOAD",
+      "label": "Chế Là",
+      "station": "",
+      "voltageLevel": "35",
+      "x": 9.130224834778346,
+      "y": 439.4693776825443,
+      "scale": 1,
+      "order": 1052,
+      "confidence": 0.825,
+      "sourceKind": "text-anchor"
+    }
+  ],
+  "connections": [
+    {
+      "id": "edge-25",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "BUS_226",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-26",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "BUS_283",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-199",
+      "fromNodeId": "BUS_275",
+      "toNodeId": "BUS_283",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-235",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "N407",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-236",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "N408",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-435",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "N607",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-442",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "N614",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-860",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "N1032",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-874",
+      "fromNodeId": "BUS_283",
+      "toNodeId": "N1046",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-875",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "N1047",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-876",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "N1048",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-877",
+      "fromNodeId": "BUS_226",
+      "toNodeId": "N1049",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-880",
+      "fromNodeId": "BUS_283",
+      "toNodeId": "N1052",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-881",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "N1053",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-886",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "N1058",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-887",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "N1059",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-913",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "N1085",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    }
+  ],
+  "source": {
+    "file": "LD Tinh (1)(3).dwg",
+    "bounds": {
+      "minX": 6444.968369062524,
+      "minY": 4778.36092930357,
+      "maxX": 6528.612720183264,
+      "maxY": 5304.24055119761
+    },
+    "method": "DWG_AUTO_LEARN_V1",
+    "inferred": true
+  }
+}

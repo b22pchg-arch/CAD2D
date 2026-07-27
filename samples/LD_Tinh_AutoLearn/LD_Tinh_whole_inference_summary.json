@@ -1,0 +1,88 @@
+{
+  "sourceFile": "LD Tinh (1)(3).dwg",
+  "dwgImport": {
+    "engine": "@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch/lwpolyline adapter 0.17.3",
+    "workerVersion": "0.17.3",
+    "engineVersion": "0.7.9",
+    "engineSource": "local-vendor",
+    "version": "AutoCAD Release 2004",
+    "codepage": "30",
+    "sourceEntityCount": 24024,
+    "convertedEntityCount": 24046,
+    "unknownEntityCount": 0,
+    "blockCount": 52,
+    "layerCount": 34,
+    "textStyleCount": 14,
+    "textStats": {
+      "total": 4853,
+      "tcvn3Converted": 32,
+      "unicodeEscapesDecoded": 1312,
+      "entitiesWithUnicodeEscapes": 874,
+      "styles": {
+        "chu": 4810,
+        "STANDARD": 8,
+        "D_KHTEN1": 8,
+        "STYLE12": 2,
+        "D_KHTEN2": 23,
+        "STYLE5": 2
+      }
+    },
+    "lwPolylineStats": {
+      "total": 617,
+      "closed": 617,
+      "closedFlag512": 617,
+      "closedLegacyFlag1": 0,
+      "closedExplicit": 0
+    },
+    "colorStats": {
+      "layer:raw-dwg-method-c3": 34,
+      "color-index": 4512,
+      "color-index-bylayer": 19430,
+      "color-index-byblock": 82
+    },
+    "rawLayerColorCount": 34,
+    "rawTextStyleCount": 14,
+    "usedRawDwgTableApi": true,
+    "rawTableApiError": "",
+    "directInBrowser": true,
+    "elapsedMs": 6362
+  },
+  "wholeBounds": [
+    640.9626799236613,
+    321.792383715617,
+    16887.308071503467,
+    5721.414645279571
+  ],
+  "duplicateTranslation": {
+    "dx": 8468.055255695177,
+    "dy": -2175.73133939541,
+    "matchingTextOccurrences": 669
+  },
+  "wholeStats": {
+    "sourceItems": 24046,
+    "segments": 3717,
+    "mergedConductors": 3390,
+    "candidateBuses": 456,
+    "activeBuses": 374,
+    "candidateLabels": 800,
+    "attachedLabels": 791,
+    "components": 176,
+    "minBusLength": 64.985,
+    "attachThreshold": 120
+  },
+  "centralStats": {
+    "sourceItems": 493,
+    "segments": 65,
+    "mergedConductors": 63,
+    "candidateBuses": 31,
+    "activeBuses": 29,
+    "candidateLabels": 45,
+    "attachedLabels": 42,
+    "components": 6,
+    "minBusLength": 20,
+    "attachThreshold": 45
+  },
+  "generatedTopologyCount": 18,
+  "generatedPwaTemplateCount": 10,
+  "generatedCSharpTemplateCount": 10
+}

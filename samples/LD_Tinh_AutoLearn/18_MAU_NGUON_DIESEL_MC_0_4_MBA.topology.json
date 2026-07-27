@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 2,
+  "name": "Mẫu nguồn Diesel - MC 0.4 - MBA",
+  "orientation": "vertical",
+  "spacingX": 60,
+  "spacingY": 60,
+  "nodes": [
+    {
+      "id": "GEN",
+      "type": "GENERATOR",
+      "label": "Diesel 450",
+      "x": 0,
+      "y": 0,
+      "order": 0
+    },
+    {
+      "id": "CB04",
+      "type": "CIRCUIT_BREAKER",
+      "label": "MC 0.4",
+      "x": 0,
+      "y": 60,
+      "order": 1
+    },
+    {
+      "id": "TR",
+      "type": "TRANSFORMER_2W",
+      "label": "T.Tâm",
+      "x": 0,
+      "y": 120,
+      "order": 2
+    },
+    {
+      "id": "FEEDER",
+      "type": "LOAD",
+      "label": "473-3",
+      "x": 0,
+      "y": 180,
+      "order": 3
+    }
+  ],
+  "connections": [
+    {
+      "id": "e1",
+      "fromNodeId": "GEN",
+      "toNodeId": "CB04"
+    },
+    {
+      "id": "e2",
+      "fromNodeId": "CB04",
+      "toNodeId": "TR"
+    },
+    {
+      "id": "e3",
+      "fromNodeId": "TR",
+      "toNodeId": "FEEDER"
+    }
+  ],
+  "source": {
+    "file": "LD Tinh (1)(3).dwg",
+    "method": "CURATED_FROM_VISIBLE_TRANSFORMER_BRANCH"
+  }
+}

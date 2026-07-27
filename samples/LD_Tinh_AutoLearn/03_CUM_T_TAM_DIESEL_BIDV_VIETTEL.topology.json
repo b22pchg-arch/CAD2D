@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 2,
+  "name": "Cụm T.Tâm - Diesel - BIDV - Viettel",
+  "orientation": "vertical",
+  "spacingX": 90,
+  "spacingY": 70,
+  "nodes": [
+    {
+      "id": "BUS_006",
+      "type": "BUSBAR",
+      "label": "Thanh dẫn DZ 22+10",
+      "station": "",
+      "voltageLevel": "22",
+      "x": 15.459666271519382,
+      "y": 43.16582712237141,
+      "scale": 1,
+      "order": 5,
+      "confidence": 0.9,
+      "sourceKind": "conductor"
+    },
+    {
+      "id": "BUS_021",
+      "type": "BUSBAR",
+      "label": "Thanh dẫn DZ 22+10",
+      "station": "",
+      "voltageLevel": "22",
+      "x": 30.666340359603055,
+      "y": 45.578273053164594,
+      "scale": 1,
+      "order": 20,
+      "confidence": 0.9,
+      "sourceKind": "conductor"
+    },
+    {
+      "id": "N047",
+      "type": "LOAD",
+      "label": "BIDV",
+      "station": "",
+      "voltageLevel": "22",
+      "x": 77.05518907209625,
+      "y": 39.64051840134198,
+      "scale": 1,
+      "order": 46,
+      "confidence": 0.35,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "BUS_022",
+      "type": "BUSBAR",
+      "label": "Thanh dẫn DZ 22+10",
+      "station": "",
+      "voltageLevel": "22",
+      "x": 30.66634035971947,
+      "y": 60.84001033252571,
+      "scale": 1,
+      "order": 21,
+      "confidence": 0.9,
+      "sourceKind": "conductor"
+    },
+    {
+      "id": "N046",
+      "type": "LOAD",
+      "label": "Viettel",
+      "station": "",
+      "voltageLevel": "22",
+      "x": 76.88560134725412,
+      "y": 55.37872104271082,
+      "scale": 1,
+      "order": 45,
+      "confidence": 0.35,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N053",
+      "type": "CIRCUIT_BREAKER",
+      "label": "MC 0.4",
+      "station": "",
+      "voltageLevel": "22",
+      "x": 34.97453945927555,
+      "y": 0.0,
+      "scale": 1,
+      "order": 52,
+      "confidence": 0.566,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "BUS_020",
+      "type": "BUSBAR",
+      "label": "Thanh dẫn DZ 22+10",
+      "station": "",
+      "voltageLevel": "22",
+      "x": 30.666340359603055,
+      "y": 30.008400862570852,
+      "scale": 1,
+      "order": 19,
+      "confidence": 0.9,
+      "sourceKind": "conductor"
+    },
+    {
+      "id": "N054",
+      "type": "GENERATOR",
+      "label": "Diesel 450",
+      "station": "",
+      "voltageLevel": "22",
+      "x": 28.2228762745508,
+      "y": 18.267955475661438,
+      "scale": 1,
+      "order": 53,
+      "confidence": 0.739,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "N070",
+      "type": "LOAD",
+      "label": "DW-800",
+      "station": "",
+      "voltageLevel": "22",
+      "x": 32.568335231917445,
+      "y": 8.627256895415485,
+      "scale": 1,
+      "order": 69,
+      "confidence": 0.62,
+      "sourceKind": "text-anchor"
+    },
+    {
+      "id": "BUS_019",
+      "type": "BUSBAR",
+      "label": "Thanh dẫn DZ 22+10",
+      "station": "",
+      "voltageLevel": "22",
+      "x": 0.0,
+      "y": 20.581070048676338,
+      "scale": 1,
+      "order": 18,
+      "confidence": 0.9,
+      "sourceKind": "conductor"
+    }
+  ],
+  "connections": [
+    {
+      "id": "edge-16",
+      "fromNodeId": "BUS_006",
+      "toNodeId": "BUS_019",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-17",
+      "fromNodeId": "BUS_006",
+      "toNodeId": "BUS_020",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-18",
+      "fromNodeId": "BUS_006",
+      "toNodeId": "BUS_021",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-19",
+      "fromNodeId": "BUS_006",
+      "toNodeId": "BUS_022",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-41",
+      "fromNodeId": "BUS_022",
+      "toNodeId": "N046",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-42",
+      "fromNodeId": "BUS_021",
+      "toNodeId": "N047",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-48",
+      "fromNodeId": "BUS_006",
+      "toNodeId": "N053",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-49",
+      "fromNodeId": "BUS_020",
+      "toNodeId": "N054",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    },
+    {
+      "id": "edge-65",
+      "fromNodeId": "BUS_006",
+      "toNodeId": "N070",
+      "fromPort": "",
+      "toPort": "",
+      "label": "",
+      "status": "inferred"
+    }
+  ],
+  "source": {
+    "file": "LD Tinh (1)(3).dwg",
+    "bounds": {
+      "minX": 7707.59660380584,
+      "minY": 5125.436144790379,
+      "maxX": 7784.651792877936,
+      "maxY": 5186.276155122905
+    },
+    "method": "DWG_AUTO_LEARN_V1",
+    "inferred": true
+  }
+}

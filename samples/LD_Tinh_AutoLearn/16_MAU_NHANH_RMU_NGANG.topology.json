@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 2,
+  "name": "Mẫu nhánh RMU ngang",
+  "orientation": "horizontal",
+  "spacingX": 55,
+  "spacingY": 55,
+  "nodes": [
+    {
+      "id": "SOURCE",
+      "type": "BUSBAR",
+      "label": "Thanh cái nguồn",
+      "x": 0,
+      "y": 0,
+      "order": 0
+    },
+    {
+      "id": "DCL_IN",
+      "type": "DISCONNECTOR",
+      "label": "DCL đầu vào",
+      "x": 50,
+      "y": 0,
+      "order": 1
+    },
+    {
+      "id": "RMU",
+      "type": "CIRCUIT_BREAKER",
+      "label": "RMU",
+      "x": 100,
+      "y": 0,
+      "order": 2
+    },
+    {
+      "id": "LOAD",
+      "type": "LOAD",
+      "label": "Phụ tải/Trạm",
+      "x": 150,
+      "y": 0,
+      "order": 3
+    }
+  ],
+  "connections": [
+    {
+      "id": "e1",
+      "fromNodeId": "SOURCE",
+      "toNodeId": "DCL_IN"
+    },
+    {
+      "id": "e2",
+      "fromNodeId": "DCL_IN",
+      "toNodeId": "RMU"
+    },
+    {
+      "id": "e3",
+      "fromNodeId": "RMU",
+      "toNodeId": "LOAD"
+    }
+  ],
+  "source": {
+    "file": "LD Tinh (1)(3).dwg",
+    "method": "CURATED_FROM_REPEATED_BRANCH"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 2,
+  "name": "Mẫu nhánh DPT rẽ đứng",
+  "orientation": "vertical",
+  "spacingX": 60,
+  "spacingY": 55,
+  "nodes": [
+    {
+      "id": "BUS",
+      "type": "BUSBAR",
+      "label": "Đường trục",
+      "x": 0,
+      "y": 0,
+      "order": 0
+    },
+    {
+      "id": "DCL",
+      "type": "DISCONNECTOR",
+      "label": "Dao cách ly",
+      "x": 0,
+      "y": 50,
+      "order": 1
+    },
+    {
+      "id": "CB",
+      "type": "CIRCUIT_BREAKER",
+      "label": "Máy cắt/RMU",
+      "x": 0,
+      "y": 100,
+      "order": 2
+    },
+    {
+      "id": "DPT",
+      "type": "LOAD",
+      "label": "DPT",
+      "x": 0,
+      "y": 150,
+      "order": 3
+    }
+  ],
+  "connections": [
+    {
+      "id": "e1",
+      "fromNodeId": "BUS",
+      "toNodeId": "DCL"
+    },
+    {
+      "id": "e2",
+      "fromNodeId": "DCL",
+      "toNodeId": "CB"
+    },
+    {
+      "id": "e3",
+      "fromNodeId": "CB",
+      "toNodeId": "DPT"
+    }
+  ],
+  "source": {
+    "file": "LD Tinh (1)(3).dwg",
+    "method": "CURATED_FROM_REPEATED_BRANCH"
+  }
+}
