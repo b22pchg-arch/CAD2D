@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.32 / PWA V0.17.2</title>
+<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.37 / PWA V0.17.7</title>
 <meta name="description" content="Hướng dẫn chi tiết sử dụng DWG Sketch C# và PWA, bao gồm toàn bộ lệnh vẽ, chọn, hiệu chỉnh, sửa hình tự động, xuất bản và tự động hóa sơ đồ điện.">
 <style>
 :root{--bg:#0f1419;--panel:#182028;--panel2:#202a34;--text:#ecf2f8;--muted:#a9b6c3;--line:#344350;--accent:#45c4ef;--accent2:#76e3aa;--warn:#ffcc80;--code:#071b24}
@@ -25,13 +25,13 @@ a{color:#76d7f4}code,kbd{font-family:Consolas,monospace}code{background:var(--co
 <header class="hero"><div class="hero-inner">
 <div class="eyebrow">Tài liệu sử dụng tích hợp · Hoạt động offline</div>
 <h1>DWG Sketch — Hướng dẫn sử dụng chi tiết</h1>
-<p class="lead">Dành cho bản C# WPF V0.14.32 và PWA V0.17.2. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
+<p class="lead">Dành cho bản C# WPF V0.14.37 và PWA V0.17.7. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
 <div class="badges"><span class="badge">C# .NET 8 / Windows</span><span class="badge">PWA / Android / Desktop</span><span class="badge">DWG trực tiếp qua LibreDWG 0.7.9</span><span class="badge">Không cần Internet sau khi cài PWA</span></div>
 <div class="hero-actions"><a class="btn" href="./index.html">Mở PWA cùng thư mục</a><a class="btn secondary" href="./HtmlViewer/PWA/index.html">Mở PWA trong gói C#</a><a class="btn secondary" href="#command-reference">Tra cứu lệnh</a><a class="btn secondary" href="javascript:window.print()">In / Lưu PDF hướng dẫn</a></div>
 </div></header>
 <div class="shell">
 <aside><b>Mục lục</b>
-<a href="#start">Bắt đầu nhanh</a><a href="#install">Cài đặt và mở phần mềm</a><a href="#interface">Giao diện</a><a href="#open-files">Mở DWG/DXF/JSON</a><a href="#navigate">Pan, zoom, cảm ứng</a><a href="#selection">Chọn đối tượng và Layer</a><a href="#command-line">Sử dụng dòng lệnh</a><a href="#workflows">Quy trình thao tác mẫu</a><a href="#repair">Sửa hình tự động</a><a href="#electrical">Ký hiệu và topology điện</a><a href="#export">Xuất PNG/PDF/DXF/DWG</a><a href="#mobile">Sử dụng trên điện thoại</a><a href="#performance">Bản vẽ lớn và hiệu năng</a><a href="#troubleshooting">Khắc phục lỗi</a><a href="#command-reference">Tra cứu toàn bộ lệnh</a>
+<a href="#start">Bắt đầu nhanh</a><a href="#install">Cài đặt và mở phần mềm</a><a href="#interface">Giao diện</a><a href="#open-files">Mở DWG/DXF/JSON</a><a href="#navigate">Pan, zoom, cảm ứng</a><a href="#selection">Chọn đối tượng và Layer</a><a href="#command-line">Sử dụng dòng lệnh</a><a href="#workflows">Quy trình thao tác mẫu</a><a href="#repair">Sửa hình tự động</a><a href="#electrical">Ký hiệu và topology điện</a><a href="#v01435">Lõi học dài hạn V2</a><a href="#export">Xuất PNG/PDF/DXF/DWG</a><a href="#mobile">Sử dụng trên điện thoại</a><a href="#performance">Bản vẽ lớn và hiệu năng</a><a href="#troubleshooting">Khắc phục lỗi</a><a href="#command-reference">Tra cứu toàn bộ lệnh</a>
 </aside>
 <main>
 <section id="start"><h2>1. Bắt đầu nhanh</h2>
@@ -44,7 +44,7 @@ a{color:#76d7f4}code,kbd{font-family:Consolas,monospace}code{background:var(--co
 <div class="panel"><h3>PWA trên trình duyệt</h3><ol><li>Đưa toàn bộ thư mục PWA lên HTTPS/GitHub Pages hoặc chạy <code>serve_local.cmd</code>.</li><li>Mở <code>index.html</code> qua HTTPS hoặc localhost.</li><li>Bấm <b>Cài PWA</b> để đưa ứng dụng ra màn hình chính.</li><li>Sau lần tải đầu, PWA có thể dùng offline.</li></ol><p class="muted">Mở trực tiếp bằng đường dẫn <code>file://</code> sẽ làm Service Worker, Clipboard và một số chức năng không hoạt động đầy đủ.</p></div></div>
 <div class="callout"><b>Cập nhật PWA:</b> sau khi thay phiên bản trên máy chủ, bấm <b>Kiểm tra phiên bản</b> → <b>Cập nhật ngay</b>. Nếu vẫn thấy bản cũ, xóa cache/Service Worker của trang rồi mở lại với tham số phiên bản mới.</div></section>
 <section id="interface"><h2>3. Giao diện chính</h2><div class="table-wrap"><table><thead><tr><th>Khu vực</th><th>Công dụng</th><th>Lưu ý</th></tr></thead><tbody>
-<tr><td>Thanh công cụ</td><td>Mở file, Undo/Redo, chọn, vẽ, hiệu chỉnh, xuất. C# V0.14.32 dùng ký hiệu/mã gọn riêng cho từng lệnh; rê chuột để xem tên đầy đủ và dùng nút Tên lệnh/Mã gọn để chuyển chế độ.</td><td>Trên điện thoại chỉ hiện nhóm chính; các lệnh còn lại nằm trong nút Thêm.</td></tr>
+<tr><td>Thanh công cụ</td><td>Mở file, Undo/Redo, chọn, vẽ, hiệu chỉnh, xuất. C# V0.14.36 dùng ký hiệu/mã gọn riêng cho từng lệnh; rê chuột để xem tên đầy đủ và dùng nút Tên lệnh/Mã gọn để chuyển chế độ.</td><td>Trên điện thoại chỉ hiện nhóm chính; các lệnh còn lại nằm trong nút Thêm.</td></tr>
 <tr><td>Khung Layer</td><td>Bật/tắt layer, màu DWG/DXF, Snap, bộ lọc chọn, tìm chữ.</td><td>Ẩn layer không cần thiết giúp bản vẽ lớn chạy nhẹ hơn.</td></tr>
 <tr><td>Vùng bản vẽ</td><td>Hiển thị, pan, zoom, chọn, vẽ và xem preview.</td><td>Màu cyan/magenta thường là preview hoặc đề xuất sửa.</td></tr>
 <tr><td>Khung Config/Thuộc tính</td><td>Sửa đối tượng, tạo chữ, Fill/Hatch, ký hiệu điện, cấu hình xuất.</td><td>Các trường chỉ áp dụng sau khi bấm Áp dụng nếu giao diện yêu cầu.</td></tr>
@@ -369,7 +369,7 @@ Trung điểm di chuyển       → Pan
       <div class="command-head"><div><code>SYMIMPORT / SYMEXPORT</code><h3>Nhập hoặc xuất thư viện mẫu</h3></div><span class="platform">C# + PWA</span></div>
       <p><b>Chuẩn bị:</b> Có thư viện JSON hoặc ít nhất một mẫu người dùng.</p>
       <ol><li>Chạy SYMEXPORT để sao lưu/chia sẻ.</li><li>Chạy SYMIMPORT để nhập thư viện trên máy khác.</li><li>Kiểm tra các mẫu trong danh sách ký hiệu.</li></ol>
-      <p class="note"><b>Lưu ý:</b> V0.14.30/V0.17.2 hỗ trợ trao đổi thư viện giữa C# và PWA; mẫu trùng mã được cập nhật bằng bản nhập.</p>
+      <p class="note"><b>Lưu ý:</b> V0.14.35/V0.17.5 hỗ trợ trao đổi thư viện giữa C# và PWA; mẫu trùng mã được cập nhật bằng bản nhập.</p>
     </article><article class="command-card" data-group="Tự động hóa điện" data-search="tự động hóa điện topo / topology / gridjson xuất dữ liệu topology c# + pwa đã chèn ký hiệu và bố trí các cổng gần/chạm nhau. chạy topology. lưu file json. kiểm tra nodes, ports, connections và layout. đây là dữ liệu nền cho giai đoạn sinh sơ đồ lưới tự động.">
       <div class="command-head"><div><code>TOPO / TOPOLOGY / GRIDJSON</code><h3>Xuất dữ liệu topology</h3></div><span class="platform">C# + PWA</span></div>
       <p><b>Chuẩn bị:</b> Đã chèn ký hiệu và bố trí các cổng gần/chạm nhau.</p>
@@ -467,7 +467,21 @@ Trung điểm di chuyển       → Pan
       <p class="note"><b>Lưu ý:</b> PWA dùng các nút Layer/Thuộc tính hoặc bottom sheet trên điện thoại.</p>
     </article></div></section>
 
-<section id="osnap-v01430"><h2>OSNAP tổng hợp C# V0.14.32 và PWA V0.17.2</h2>
+<section id="topology-learning-a4"><h2>Hiệu chỉnh topology, học mẫu và tự động bố trí A4</h2>
+<p>Bản C# V0.14.34 và PWA V0.17.4 bổ sung quy trình biến một sơ đồ đã chọn thành mẫu có thể tái sử dụng. Mẫu ký hiệu điện được chuẩn hóa thành danh sách thiết bị–liên kết; cụm DWG thông thường được giữ nguyên quan hệ hình học và co đồng nhất vào khung A4.</p>
+<table><tr><th>Công việc</th><th>Thao tác</th><th>Kết quả</th></tr>
+<tr><td>Sửa topology</td><td>Bấm <b>Hiệu chỉnh topology</b> hoặc chạy <code>TOPOEDIT</code></td><td>Thêm, xóa, sửa nút và liên kết; kiểm tra ID và đầu nối trước khi áp dụng.</td></tr>
+<tr><td>Học vùng chọn</td><td>Chọn liên kết/kéo vùng rồi bấm <b>Học lựa chọn</b> hoặc chạy <code>GRIDLEARN</code></td><td>SYMBOL điện thành mẫu topology; hình học DWG thành mẫu hình học.</td></tr>
+<tr><td>Sinh biến thể</td><td>Chọn mẫu và chạy <code>GRIDFROMLEARN</code></td><td>Tự bố trí gần tương tự hoặc giữ tương quan tọa độ của mẫu.</td></tr>
+<tr><td>Tạo khung A4</td><td>Chọn đứng/ngang, chiều rộng, lề rồi chạy <code>GRIDA4</code></td><td>Tạo khung xuất đúng tỷ lệ 210:297 hoặc 297:210 và co sơ đồ vào vùng lề.</td></tr></table>
+<p class="note"><b>Lưu ý:</b> Mẫu PWA lưu trong localStorage của đúng trình duyệt/tên miền. Mẫu C# lưu tại thư mục LocalApplicationData của người dùng. Việc co A4 là co đồng nhất để không làm méo ký hiệu hoặc cụm hình học.</p>
+</section>
+
+<section id="v01434"><h2>V0.14.34 / PWA V0.17.4 — tự học topology trực tiếp từ DWG</h2>
+<p>Chương trình có thể phân tích toàn bản vẽ hoặc phần đang chọn, nhận tuyến dẫn theo layer điện, gắn nhãn gần tuyến, tách các thành phần liên kết và nhóm cấu trúc lặp. Kết quả được lưu đồng thời thành topology gợi ý có thể sửa và mẫu hình học giữ nguyên cụm bản vẽ.</p>
+<ul><li><b>Tự nhận topo vùng chọn:</b> dùng cho một trạm, một nhánh hoặc một cụm cần chuẩn hóa.</li><li><b>Tự nhận toàn bản vẽ:</b> tách nhiều cụm và ghi số lần cấu trúc lặp.</li><li><b>Nạp mẫu thực tế LD Tỉnh:</b> nạp thư viện đã học từ file LD Tinh (1)(3).dwg.</li><li><b>Xuất gói tự học DWG:</b> lưu toàn bộ mẫu tự nhận để chuyển sang máy khác.</li></ul>
+<p class="note"><b>Lưu ý:</b> dữ liệu tự nhận là gợi ý hình học. Cần mở Trình biên tập topology để duyệt lại loại thiết bị và liên kết trước khi dùng làm mẫu chuẩn.</p></section>
+<section id="osnap-v01430"><h2>OSNAP tổng hợp C# V0.14.34 và PWA V0.17.4</h2>
 <p>Các chế độ bắt điểm có thể hoạt động đồng thời. Điểm bất kỳ trên đường là lớp bắt nền; khi con trỏ đi vào vùng hút của điểm đặc trưng, chương trình tự ưu tiên đầu mút, trung điểm, tâm, giao điểm hoặc chân vuông góc mà không cần tắt chế độ khác.</p>
 <table><tr><th>Loại bắt điểm</th><th>Ký hiệu</th><th>Phạm vi</th></tr>
 <tr><td>Đầu mút / đầu cung</td><td>Hình vuông</td><td>Đường, polyline, cung</td></tr>
@@ -478,8 +492,22 @@ Trung điểm di chuyển       → Pan
 <tr><td>Điểm bất kỳ trên đường</td><td>Hình thoi</td><td>Đường thẳng, polyline, tròn, cung, elip</td></tr></table>
 <p class="note"><b>Thao tác nhanh:</b> trong bảng cấu hình C# hoặc PWA, mở mục Bắt điểm và nhấn <b>Bật đồng thời tất cả chế độ</b>. Vuông góc chỉ xuất hiện khi thao tác đã có điểm gốc, chẳng hạn đang vẽ đường, DIM, MOVE, COPY, MIRROR hoặc kéo sửa đầu đường.</p>
 </section>
+<section id="v01435"><h2>V0.14.35 / PWA V0.17.5 — lõi nhận dạng và học dài hạn V2</h2>
+<div class="two-col"><div class="panel"><h3>Đọc DWG mới</h3><ul><li>Thống kê LINE/POLYLINE theo layer, tổng chiều dài và hướng ngang/đứng để phát hiện tạm các layer tuyến điện chưa từng gặp.</li><li>Loại trừ layer khung, chữ, DIM, HATCH, bản đồ và đường viền.</li><li>So sánh topology bằng dấu vân tay WL2 không phụ thuộc ID, thứ tự hoặc tọa độ.</li><li>Gặp lại cấu trúc cũ sẽ tăng số lần quan sát thay vì tạo bản sao; bản đã duyệt được giữ làm chuẩn và hấp thụ bản gợi ý cùng topology.</li></ul></div>
+<div class="panel"><h3>Học có kiểm soát</h3><ul><li>Mẫu tự nhận chỉ là gợi ý; chưa duyệt thì không huấn luyện.</li><li>Khi sửa loại thiết bị, bằng chứng sai cũ được giảm trước khi học loại đúng.</li><li>Khi sửa BUSBAR/layer, layer cũ nhận bằng chứng âm và layer đúng nhận bằng chứng dương.</li><li>Mỗi topology giữ tối đa 10 phiên bản trước sửa; mẫu bị xóa được ghi nhớ để tránh đề xuất lặp.</li></ul></div></div>
+<div class="callout ok"><b>Quy trình nên dùng:</b> Tự nhận toàn bản vẽ hoặc vùng chọn → mở <b>Sửa topology mẫu</b> → kiểm tra thiết bị và liên kết → bấm áp dụng. Chỉ bước áp dụng mới đưa kiến thức vào lần đọc DWG sau.</div>
+<div class="table-wrap"><table><thead><tr><th>Nút</th><th>Tác dụng</th></tr></thead><tbody><tr><td>Trạng thái lõi học</td><td>Xem mẫu đã duyệt/chờ duyệt, số từ và layer đã học, lịch sử sửa và mẫu bị từ chối.</td></tr><tr><td>Sao lưu lõi học V2</td><td>Xuất knowledge base và toàn bộ thư viện mẫu thành JSON.</td></tr><tr><td>Nạp lõi học V2</td><td>Hợp nhất dữ liệu từ máy khác hoặc bản sao lưu; tự chuyển cấu trúc JSON giữa C# và PWA, không xóa kiến thức hiện tại và tự khử topology trùng.</td></tr></tbody></table></div>
+</section>
+
+<section id="v01436"><h2>V0.14.36 / PWA V0.17.6 — sửa hệ tọa độ con trỏ</h2>
+<p>Các thao tác chuột được chuyển về cùng hệ tọa độ với bề mặt CAD trước khi chọn, bắt điểm, kéo vùng, pan hoặc zoom tại con trỏ.</p>
+<ul><li><b>C#:</b> chuyển tọa độ WPF theo DIP sang pixel vật lý của Skia, có xét tỷ lệ hiển thị Windows và khi chuyển cửa sổ giữa các màn hình.</li><li><b>PWA:</b> chuyển tọa độ PointerEvent trong khung CSS sang viewport logic của canvas, kể cả khi panel thay đổi kích thước hoặc trình duyệt áp dụng tỷ lệ hiển thị.</li><li><b>Ký hiệu OSNAP:</b> nhãn HTML được chuyển ngược từ tọa độ canvas sang CSS để nằm đúng cạnh dấu bắt điểm.</li></ul>
+<p class="note"><b>Kiểm thử:</b> thử chọn và bắt đúng một đầu mút ở các mức hiển thị 100%, 125%, 150%, 175% và 200%; sau đó zoom tại con trỏ và giữ con lăn để pan.</p>
+</section>
 </main></div>
-<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.32 và PWA V0.17.2 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
+
+<section id="v01437"><h2>V0.14.37 / PWA V0.17.7 — ORTHO F8 và con trỏ CAD</h2><ul><li>F8 hoặc lệnh ORTHO bật/tắt khóa phương ngang/dọc trong LINE, MOVE, COPY, MIRROR, DIM và các thao tác điểm phù hợp.</li><li>OSNAP tổng hợp vẫn hoạt động cùng ORTHO; điểm đặc trưng đúng trục được giữ ưu tiên.</li><li>Con trỏ CAD có tia ngang/dọc kéo dài, pickbox ở tâm; chỉnh được độ dài, độ đậm và màu tự tương phản nền.</li><li>Tia con trỏ chỉ hiển thị khi thao tác, không đi vào PNG/PDF/in.</li></ul></section>
+<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.37 và PWA V0.17.7 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
 <script>
 const cards=[...document.querySelectorAll('.command-card')], search=document.getElementById('commandSearch'), count=document.getElementById('resultCount');let active='ALL';
 function normalize(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}

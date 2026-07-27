@@ -1,11 +1,12 @@
 {
-  "version": "0.17.2",
-  "releasedAt": "2026-07-24T13:30:00+07:00",
-  "notes": "Sửa mất nét LWPOLYLINE khi đọc DWG: nhận đúng cờ khép kín bit 512 của libredwg-web, phục hồi cạnh đóng cuối cùng; giữ HATCH, màu/font và OSNAP tổng hợp.",
+  "version": "0.17.7",
+  "releasedAt": "2026-07-27T07:30:00+07:00",
+  "notes": "Bổ sung ORTHO F8 và con trỏ CAD có tia ngang/dọc kéo dài; lưu cấu hình theo dự án.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
-  }
+  },
+  "title": "DWG Sketch PWA V0.17.7"
 }

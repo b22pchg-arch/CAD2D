@@ -1,0 +1,20 @@
+DWG SKETCH PWA V0.17.3 - HEADLESS UI SMOKE TEST
+Ngày: 2026-07-24
+
+MÔI TRƯỜNG
+- Chromium headless.
+- index.html được nạp với các script cục bộ nhúng trực tiếp để tránh chính sách chặn điều hướng của môi trường kiểm thử.
+- localStorage được giả lập cho kiểm thử thư viện mẫu.
+
+KẾT QUẢ
+1. Trang nạp đúng phiên bản 0.17.3, không có page error: ĐẠT.
+2. Mở topology editor: ĐẠT.
+3. Thêm thiết bị, thêm liên kết, kiểm tra và áp dụng: ĐẠT.
+4. Tạo khung A4 trên bản vẽ mới: ĐẠT; khung được đặt quanh vùng làm việc ổn định.
+5. Sinh topology 2 thiết bị / 1 liên kết: ĐẠT; tạo 3 overlay tự động.
+6. Học mẫu topology và sinh lại: ĐẠT.
+7. Học mẫu hình học gồm LINE + CIRCLE và sinh lại vào A4: ĐẠT.
+8. Không ghi nhận lỗi JavaScript trong các luồng trên: ĐẠT.
+
+LƯU Ý
+- Đây là smoke test chức năng chính, không thay thế kiểm thử đầy đủ trên Chrome/GitHub Pages với chuột, cảm ứng và Service Worker thật.
