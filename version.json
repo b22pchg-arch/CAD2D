@@ -1,13 +1,13 @@
 {
-  "version": "0.18.5",
+  "version": "0.18.6",
   "releasedAt": "2026-07-28T12:00:00+07:00",
-  "notes": "Đồng bộ V0.18.5 với C# V0.14.45: mặc định tự chuẩn hóa đối tượng DWG nhưng vẫn ghi nhớ lựa chọn tắt; giữ đầy đủ màu, nét, HATCH, ELLIPSE và LWPOLYLINE kín.",
+  "notes": "Tối ưu bản vẽ lớn: tự chuẩn hóa theo ngưỡng, chuẩn hóa toàn bộ O(n), lưu/nạp cấu hình mặc định giữa các lần mở.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.18.5",
-  "build": "layer-color-json-auto-native-v4"
+  "title": "DWG Sketch PWA V0.18.6",
+  "build": "large-dwg-performance-user-profile-v1"
 }
