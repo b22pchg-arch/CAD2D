@@ -1,13 +1,13 @@
 {
-  "version": "0.18.0",
-  "releasedAt": "2026-07-27T13:00:00+07:00",
-  "notes": "Bổ sung phiên học vùng chọn/toàn bản vẽ, chuẩn hóa từng thành phần, kiểm tra vẽ lại và chỉ ghi dữ liệu đã duyệt vào lõi học lâu dài.",
+  "version": "0.18.5",
+  "releasedAt": "2026-07-28T12:00:00+07:00",
+  "notes": "Đồng bộ V0.18.5 với C# V0.14.45: mặc định tự chuẩn hóa đối tượng DWG nhưng vẫn ghi nhớ lựa chọn tắt; giữ đầy đủ màu, nét, HATCH, ELLIPSE và LWPOLYLINE kín.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.18.0",
-  "build": "learning-session-standardization-v4"
+  "title": "DWG Sketch PWA V0.18.5",
+  "build": "layer-color-json-auto-native-v4"
 }

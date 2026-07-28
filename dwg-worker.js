@@ -1,10 +1,10 @@
-/* DWG Sketch PWA V0.17.5 - direct DWG reader worker.
+/* DWG Sketch PWA V0.18.5 - direct DWG reader worker.
  * LibreDWG WebAssembly is loaded in this Worker, so parsing never calls a desktop converter.
  * Upstream: @mlightcad/libredwg-web 0.7.9 (GPL-3.0)
  */
 import { Dwg_File_Type, LibreDwg } from './vendor/libredwg-web-0.7.9/dist/libredwg-web.js';
 
-const DWG_WORKER_VERSION = '0.17.5';
+const DWG_WORKER_VERSION = '0.18.5';
 const DWG_ENGINE_VERSION = '0.7.9';
 const DWG_ENGINE_PACKAGE = '@mlightcad/libredwg-web';
 const DWG_ENGINE_SOURCE = 'local-vendor';
@@ -128,6 +128,8 @@ function extractRawCadTables(engine, dwgPtr) {
           name,
           fontFile: String(read('font_file') ?? read('font') ?? '').trim(),
           bigFontFile: String(read('bigfont_file') ?? read('bigfont') ?? '').trim(),
+          widthFactor: rawNumber(read('width_factor') ?? read('widthFactor')),
+          obliqueAngle: rawNumber(read('oblique_angle') ?? read('obliqueAngle')),
           handle: handleKey(read('handle'))
         });
       }
@@ -332,14 +334,20 @@ function cleanCadText(value, isMText = false, stats = null) {
   return text.replace(/\r/g, '').normalize('NFC');
 }
 function decodeTcvn3(value, uppercaseFont = false) {
+  const source = String(value ?? '');
   let changed = false, output = '';
-  for (const ch of String(value ?? '')) {
-    let mapped = TCVN3_MAP.get(ch);
-    if (mapped !== undefined) {
-      changed = true;
-      if (uppercaseFont) mapped = mapped.toLocaleUpperCase('vi-VN');
-      output += mapped;
-    } else output += ch;
+  for (const ch of source) {
+    const mapped = TCVN3_MAP.get(ch);
+    if (mapped !== undefined) { changed = true; output += mapped; }
+    else output += ch;
+  }
+  // Font VH thường là bộ chữ hoa, nhưng nhiều hồ sơ dùng cùng font cho câu thường.
+  // Chỉ ép hoa khi chính chuỗi nguồn có dạng tiêu đề, tránh biến "Ghi chó" thành "GHI CHÚ".
+  if (changed && uppercaseFont) {
+    const letters = [...source].filter(ch => /[A-Za-z]/.test(ch));
+    const upper = letters.filter(ch => /[A-Z]/.test(ch)).length;
+    const lower = letters.filter(ch => /[a-z]/.test(ch)).length;
+    if (letters.length >= 3 && upper >= 3 && upper >= Math.max(1, lower * 2)) output = output.toLocaleUpperCase('vi-VN');
   }
   return { text: output.normalize('NFC'), changed };
 }
@@ -352,7 +360,7 @@ function styleBigFontFile(entry) {
 function detectTextEncoding(styleName, fontFile) {
   const key = upper(`${styleName} ${fontFile}`);
   if (/VNI[-_. ]/.test(key)) return 'VNI';
-  if (/(^|[ ._\/-])\.?VN[A-Z0-9]|VNTIME|VNARIAL|VHARIAL|VHMEMO|VHELV|VNSWISS/.test(key)) return 'TCVN3';
+  if (/(^|[ ._\/-])\.?VN[A-Z0-9]|VNTIME|VNARIAL|VH[A-Z0-9]+|VNSWISS/.test(key)) return 'TCVN3';
   return 'Unicode';
 }
 function isLegacyUppercaseFont(styleName, fontFile) {
@@ -380,6 +388,8 @@ function buildTextStyleMaps(database, rawTables) {
       name, fontFile, bigFontFile, encoding,
       uppercaseLegacy: encoding === 'TCVN3' && isLegacyUppercaseFont(name, fontFile),
       fontCss: cssFontFamily(name, fontFile),
+      widthFactor: Math.max(.05, Math.min(20, n(source.widthFactor ?? source.width_factor ?? raw?.widthFactor, 1))),
+      obliqueDeg: (()=>{const v=n(source.obliqueAngle ?? source.oblique_angle ?? raw?.obliqueAngle,0);return Math.abs(v)<=Math.PI*2+1e-6?v*DEG:v})(),
       handle: handleKey(source.handle || raw?.handle)
     };
     byName.set(upper(name), item);
@@ -404,7 +414,7 @@ function resolveTextStyle(entity, ctx) {
   }
   if (!style && name) {
     const encoding = detectTextEncoding(name, name);
-    style = { name, fontFile: name, bigFontFile: '', encoding, uppercaseLegacy: encoding === 'TCVN3' && isLegacyUppercaseFont(name, name), fontCss: cssFontFamily(name, name), handle: '' };
+    style = { name, fontFile: name, bigFontFile: '', encoding, uppercaseLegacy: encoding === 'TCVN3' && isLegacyUppercaseFont(name, name), fontCss: cssFontFamily(name, name), widthFactor: 1, obliqueDeg: 0, handle: '' };
   }
   return style || ctx.textStyles.byName.get('STANDARD');
 }
@@ -429,7 +439,9 @@ function decodedTextRecord(entity, ctx, isMText = false, rawValue = '') {
     sourceFontFile: style.fontFile,
     sourceBigFontFile: style.bigFontFile,
     sourceTextEncoding: style.encoding,
-    sourceTextConverted: converted
+    sourceTextConverted: converted,
+    textWidthFactor: style.widthFactor || 1,
+    textObliqueDeg: style.obliqueDeg || 0
   };
 }
 
@@ -759,10 +771,10 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
       snapCenter: true, snapQuadrant: true, snapIntersection: true, snapPerpendicular: true,
       snapNearest: true, snapCombinedVersion: 1, snapTolerancePixel: 14,
       exportScope: 'full', printFrameBorder: false, exportBgMode: 'white', exportBgColor: '#ffffff',
-      exportStrokeMode: 'original', exportStrokeColor: '#000000'
+      exportStrokeMode: 'original', exportStrokeColor: '#000000', autoPromoteDwgObjects: true
     },
     dwgImport: {
-      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch/lwpolyline adapter 0.17.5',
+      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch/lwpolyline adapter 0.18.5',
       workerVersion: DWG_WORKER_VERSION,
       engineVersion: DWG_ENGINE_VERSION,
       engineSource: DWG_ENGINE_SOURCE,

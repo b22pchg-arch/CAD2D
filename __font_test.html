@@ -1,0 +1,11 @@
+<!doctype html><meta charset="utf-8"><body>WAIT<script>
+(async()=>{try{
+ const buf=await fetch('./__font_test.dwg').then(r=>r.arrayBuffer());
+ const w=new Worker('./dwg-worker.js',{type:'module'});
+ const result=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('timeout')),45000);w.onmessage=e=>{if(e.data.type==='result'){clearTimeout(timer);resolve(e.data.project)}else if(e.data.type==='error'){clearTimeout(timer);reject(new Error(e.data.message))}};w.postMessage({command:'open-dwg',buffer:buf,fileName:'LD Tinh.dwg'},[buf])});
+ const texts=result.entities.filter(e=>['TEXT','MTEXT'].includes(e.type));
+ const pick=style=>texts.filter(e=>e.sourceStyleName===style).slice(0,12).map(e=>({text:e.text,font:e.sourceFontFile,w:e.textWidthFactor,o:e.textObliqueDeg}));
+ document.body.textContent=JSON.stringify({count:result.entities.length,textCount:texts.length,stats:result.dwgImport.textStats,D_KHTEN1:pick('D_KHTEN1'),D_KHTEN2:pick('D_KHTEN2'),chu:pick('chu')});
+ w.terminate();
+}catch(e){document.body.textContent='ERROR:'+e.stack}})();
+</script>

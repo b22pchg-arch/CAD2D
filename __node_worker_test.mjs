@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import { pathToFileURL } from 'node:url';
+globalThis.self = globalThis;
+self.location = { href: pathToFileURL(process.cwd() + '/').href };
+self.postMessage = (m)=>{ if(m.type==='progress') console.error(m.stage,m.percent,m.message); else { console.log(JSON.stringify(m)); process.exit(m.type==='result'?0:1); } };
+await import('./dwg-worker.js');
+const file = process.argv[2];
+const buf = fs.readFileSync(file);
+const ab = buf.buffer.slice(buf.byteOffset, buf.byteOffset+buf.byteLength);
+await self.onmessage({data:{command:'open-dwg',buffer:ab,fileName:file.split('/').pop()}});

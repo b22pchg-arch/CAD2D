@@ -1,7 +1,7 @@
-/* DWG Sketch PWA V0.18.0 - Phiên học bản vẽ và chuẩn hóa từng thành phần.
+/* DWG Sketch PWA V0.18.2 - Phiên học bản vẽ và chuẩn hóa từng thành phần.
  * Quy trình: phân rã -> duyệt thành phần/cổng -> vẽ lại kiểm tra -> chuẩn hóa -> duyệt vào lõi học lâu dài.
  */
-const ELECTRICAL_LEARNING_SESSION_VERSION='0.18.0';
+const ELECTRICAL_LEARNING_SESSION_VERSION='0.18.2';
 const ELECTRICAL_LEARNING_SESSION_KEY='DwgSketchPwa.ElectricalLearningSessions.V4';
 const ELECTRICAL_LEARNING_SESSION_MAX=30;
 let electricalLearningSessions=[];
