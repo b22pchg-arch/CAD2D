@@ -1,13 +1,13 @@
 {
-  "version": "0.18.6",
-  "releasedAt": "2026-07-28T12:00:00+07:00",
-  "notes": "Tối ưu bản vẽ lớn: tự chuẩn hóa theo ngưỡng, chuẩn hóa toàn bộ O(n), lưu/nạp cấu hình mặc định giữa các lần mở.",
+  "version": "0.20.0",
+  "releasedAt": "2026-07-28T15:00:00+07:00",
+  "notes": "Nền ổn định: chế độ an toàn, khóa tính năng thử nghiệm, tự kiểm tra, nhật ký lỗi và phục hồi workspace sau thoát bất thường.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.18.6",
-  "build": "large-dwg-performance-user-profile-v1"
+  "title": "DWG Sketch PWA V0.20.0",
+  "build": "stability-phase2-v1"
 }
