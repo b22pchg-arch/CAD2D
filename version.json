@@ -1,13 +1,13 @@
 {
-  "version": "0.20.0",
-  "releasedAt": "2026-07-28T15:00:00+07:00",
-  "notes": "Nền ổn định: chế độ an toàn, khóa tính năng thử nghiệm, tự kiểm tra, nhật ký lỗi và phục hồi workspace sau thoát bất thường.",
+  "version": "0.20.1",
+  "releasedAt": "2026-07-29T15:33:00+07:00",
+  "notes": "Sửa treo và mất hình khi chọn chữ: giới hạn highlight hàng loạt, rút gọn bảng thuộc tính, và chỉ tạo Undo khi thực sự kéo đối tượng.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.20.0",
-  "build": "stability-phase2-v1"
+  "title": "DWG Sketch PWA V0.20.1",
+  "build": "pwa-text-selection-stability-v01608"
 }

@@ -1,5 +1,5 @@
 'use strict';
-const APP_VERSION='0.20.0';
+const APP_VERSION='0.20.1';
 const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION;
 const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(APP_VERSION);
 const CORE_ASSETS=[
