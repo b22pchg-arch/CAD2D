@@ -1,13 +1,13 @@
 {
-  "version": "0.21.0",
-  "releasedAt": "2026-07-29T17:33:00+07:00",
-  "notes": "V0.17: tách LogicalModel khỏi PlacementModel, hỗ trợ nhiều view cho cùng một mạng điện, hợp đồng ký hiệu và kiểm tra liên kết độc lập hình vẽ.",
+  "version": "0.21.6",
+  "releasedAt": "2026-07-30T14:30:00+07:00",
+  "notes": "V0.17.6: khung A4 là lớp nền xuyên chọn; phần tử bên trong được ưu tiên, có chế độ chọn khung riêng theo đường viền.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.21.0",
-  "build": "network-diagram-separation-v01700"
+  "title": "DWG Sketch PWA V0.21.6",
+  "build": "a4-frame-selection-pass-through-v0176"
 }
