@@ -1,5 +1,5 @@
 'use strict';
-const APP_VERSION='0.20.2';
+const APP_VERSION='0.21.0';
 const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION;
 const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(APP_VERSION);
 const CORE_ASSETS=[
@@ -10,7 +10,7 @@ const CORE_ASSETS=[
   './vendor/libredwg-web-0.7.9/wasm/libredwg-web.wasm',
   './vendor/libredwg-web-0.7.9/package.json',
   './vendor/libredwg-web-0.7.9/INTEGRATION_INFO.json',
-  './interaction-core-v0202.js','./electrical-automation-v0179.js','./electrical-auto-learn-v0174.js','./electrical-learning-core-v0175.js','./electrical-learning-session-v0180.js','./symbol-template-v0169.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
+  './interaction-core-v0202.js','./network-diagram-core-v0210.js','./electrical-automation-v0179.js','./electrical-auto-learn-v0174.js','./electrical-learning-core-v0175.js','./electrical-learning-session-v0180.js','./symbol-template-v0169.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
 ];
 const OPTIONAL_ASSETS=[
   './HUONG_DAN_PWA_V0130_SELECT_FIND_MIRROR.txt','./HUONG_DAN_PWA_V0131_DWG_FIND_REPLACE.txt',
