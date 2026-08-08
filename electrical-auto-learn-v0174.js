@@ -9,7 +9,7 @@ const DWG_AUTO_LEARN_MAX_GEOMETRY_ITEMS=1200;
 function alNum(v,f=0){const n=Number(v);return Number.isFinite(n)?n:f}
 function alClamp(v,a,b){return Math.max(a,Math.min(b,v))}
 function alFold(value){return String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[đĐ]/g,'D').toUpperCase().replace(/[^A-Z0-9]+/g,' ').trim()}
-function alCleanText(value){return String(value??'').replace(/\\P/gi,' ').replace(/\r?\n/g,' ').replace(/\s+/g,' ').trim()}
+function alCleanText(value){return String(value??'').replace(/\\p[^;{}]*;/g,'').replace(/\\P/g,' ').replace(/\r?\n/g,' ').replace(/\s+/g,' ').trim()}
 function alSafeId(value,fallback='NODE'){const s=alFold(value).replace(/\s+/g,'_').replace(/^_+|_+$/g,'');return s||fallback}
 function alPowerLayer(layer){return /(^| )(DZ|TC|CAP|NET|SO|MANH|TIEP DAT|0 4)/.test(alFold(layer))}
 function alPoint(x=0,y=0){return{x:alNum(x),y:alNum(y)}}

@@ -1,10 +1,10 @@
-/* DWG Sketch PWA V0.21.6 - direct DWG reader worker.
+/* DWG Sketch PWA V0.21.8 - direct DWG reader worker.
  * LibreDWG WebAssembly is loaded in this Worker, so parsing never calls a desktop converter.
  * Upstream: @mlightcad/libredwg-web 0.7.9 (GPL-3.0)
  */
 import { Dwg_File_Type, LibreDwg } from './vendor/libredwg-web-0.7.9/dist/libredwg-web.js';
 
-const DWG_WORKER_VERSION = '0.21.6';
+const DWG_WORKER_VERSION = '0.21.8';
 const DWG_ENGINE_VERSION = '0.7.9';
 const DWG_ENGINE_PACKAGE = '@mlightcad/libredwg-web';
 const DWG_ENGINE_SOURCE = 'local-vendor';
@@ -324,7 +324,11 @@ function cleanCadText(value, isMText = false, stats = null) {
     .replace(/%%d/gi, '°').replace(/%%p/gi, '±').replace(/%%c/gi, 'Ø')
     .replace(/\\~/g, ' ');
   if (isMText) {
-    text = text.replace(/\\P/gi, '\n')
+    // AutoCAD MTEXT: \p...; (p thuong) la paragraph properties, con \P
+    // (P hoa) moi la xuong dong. Khong dung /i cho \P, neu khong se ro ri
+    // "\pi1.29249E+005;" thanh "i1.29249E+005;" tren man hinh.
+    text = text.replace(/\\p[^;{}]*;/g, () => { if (stats) stats.paragraphFormatsRemoved++; return ''; })
+      .replace(/\\P/g, '\n')
       .replace(/\\S([^;]*);/gi, (_, body) => String(body).replace(/[#^]/g, '/'))
       .replace(/\\[ACFHQTW][^;]*;/gi, '')
       .replace(/\\[LlOoKk]/g, '')
@@ -421,6 +425,7 @@ function resolveTextStyle(entity, ctx) {
 function decodedTextRecord(entity, ctx, isMText = false, rawValue = '') {
   const style = resolveTextStyle(entity, ctx);
   const beforeEscapes = ctx.textStats.unicodeEscapesDecoded;
+  const beforeParagraphFormats = ctx.textStats.paragraphFormatsRemoved;
   let text = cleanCadText(rawValue, isMText, ctx.textStats);
   let converted = false;
   if (style.encoding === 'TCVN3') {
@@ -429,6 +434,7 @@ function decodedTextRecord(entity, ctx, isMText = false, rawValue = '') {
     if (converted) ctx.textStats.tcvn3Converted++;
   }
   if (beforeEscapes !== ctx.textStats.unicodeEscapesDecoded) ctx.textStats.entitiesWithUnicodeEscapes++;
+  if (beforeParagraphFormats !== ctx.textStats.paragraphFormatsRemoved) ctx.textStats.entitiesWithParagraphFormatting++;
   ctx.textStats.total++;
   ctx.textStats.styles[style.name] = (ctx.textStats.styles[style.name] || 0) + 1;
   return {
@@ -729,7 +735,7 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
   });
   const ctx = {
     blocks, unsupported: {}, blockStack: [], textStyles, colorStats,
-    textStats: { total: 0, tcvn3Converted: 0, unicodeEscapesDecoded: 0, entitiesWithUnicodeEscapes: 0, styles: {} },
+    textStats: { total: 0, tcvn3Converted: 0, unicodeEscapesDecoded: 0, entitiesWithUnicodeEscapes: 0, paragraphFormatsRemoved: 0, entitiesWithParagraphFormatting: 0, styles: {} },
     lwPolylineStats: { total: 0, closed: 0, closedFlag512: 0, closedLegacyFlag1: 0, closedExplicit: 0 }
   };
   const entities = [];
@@ -774,7 +780,7 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
       exportStrokeMode: 'original', exportStrokeColor: '#000000', autoPromoteDwgObjects: true, autoPromoteThreshold: 5000
     },
     dwgImport: {
-      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch/lwpolyline adapter 0.21.6',
+      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch/lwpolyline adapter 0.21.8',
       workerVersion: DWG_WORKER_VERSION,
       engineVersion: DWG_ENGINE_VERSION,
       engineSource: DWG_ENGINE_SOURCE,

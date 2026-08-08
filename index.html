@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-<title>DWG Sketch PWA Editor V0.21.6</title>
+<title>DWG Sketch PWA Editor V0.21.8</title>
 <style>
 :root{color-scheme:dark;--bg:#202124;--panel:#292a2d;--line:#45464a;--text:#f1f3f4;--muted:#aeb0b4;--accent:#4fc3f7;--orange:#ffb74d;--danger:#ef5350;--ok:#66bb6a}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);touch-action:none;overscroll-behavior:none}
@@ -86,7 +86,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
   <div class="tool-group"><button id="orthoBtn" title="Bật/tắt ORTHO ngang/dọc. Phím F8.">ORTHO F8</button><button id="crosshairBtn" title="Bật/tắt con trỏ CAD có tia kéo dài.">Con trỏ CAD</button></div>
   <div class="tool-group"><button id="fitBtn" title="ZOOM ALL: đưa toàn bộ bản vẽ vào màn hình. Lệnh ZA hoặc Z rồi A.">Zoom All</button><button id="zoomWindowBtn" data-tool="zoomWindow" title="ZOOM WINDOW: kéo vùng cần phóng. Lệnh ZW hoặc Z rồi W.">Zoom cửa sổ</button><button id="findTextBtn">Tìm chữ</button><button id="leftBtn">Layer</button><button id="rightBtn">Thuộc tính</button><button id="pngBtn">PNG</button><button id="copyPngBtn" title="Sao chép ảnh xuất hiện tại vào Clipboard">PNG → Clipboard</button><button id="printBtn" title="In chất lượng vector. Phím tắt Ctrl+P.">In Ctrl+P</button><button id="pdfBtn">PDF</button><button id="dxfBtn">DXF</button></div>
   <div class="tool-group"><button id="toolbarModeBtn" title="Chuyển thanh công cụ biểu tượng/có chữ">Biểu tượng</button><button id="helpBtn" title="Mở hướng dẫn sử dụng chi tiết">Hướng dẫn</button><button id="installPwaBtn" class="install-hidden">Cài PWA</button><button id="checkUpdateBtn">Kiểm tra phiên bản</button><button id="applyUpdateBtn" class="install-hidden">Cập nhật ngay</button></div>
-  <span class="spacer"></span><span class="version-pill">PWA 0.21.6</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
+  <span class="spacer"></span><span class="version-pill">PWA 0.21.8</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
 </header>
 <div id="drawingTabs" class="drawing-tabs" role="tablist" aria-label="Các bản vẽ đang mở"></div>
 <main id="layout" class="layout">
@@ -179,7 +179,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
       <div class="muted" style="margin-top:6px">Bộ đọc @mlightcad/libredwg-web 0.7.9 và WebAssembly khoảng 10 MB đã được đặt trực tiếp trong dự án. Không dùng CDN; sau khi PWA được tải/cài, máy tính và điện thoại cùng dùng đúng một bộ đọc nội bộ và có thể mở DWG offline.</div>
     </div>
     <div class="section" data-mobile-group="other"><h3>PWA và cập nhật</h3>
-      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.21.6</b></div>
+      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.21.8</b></div>
       <div class="form-grid" style="margin-top:7px"><label class="full">Địa chỉ version.json<input id="updateUrlInput" value="./version.json" autocomplete="off"></label></div>
       <div class="button-row"><button id="saveUpdateUrlBtn">Lưu địa chỉ</button><button id="panelCheckUpdateBtn">Kiểm tra</button><button id="panelApplyUpdateBtn" class="install-hidden">Cập nhật</button></div>
       <div id="updateInfo" class="update-info muted">Chưa kiểm tra phiên bản.</div>
@@ -346,7 +346,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
 <div id="pwaToast" class="pwa-toast"><span id="pwaToastText"></span><button id="pwaToastAction" class="install-hidden">Cập nhật</button></div>
 <script>
 'use strict';
-const PWA_APP_VERSION='0.21.6';
+const PWA_APP_VERSION='0.21.8';
 const USER_PROFILE_KEY='DwgSketch.UserProfile.V2';
 const PWA_VERSION_URL_KEY='DwgSketchPwa.VersionUrl.V1';
 let deferredInstallPrompt=null,pwaRegistration=null,latestVersionInfo=null,reloadingForUpdate=false;
@@ -488,10 +488,22 @@ function switchDrawingSession(id){if(id===activeDrawingSessionId)return;captureD
 function closeDrawingSession(id){captureDrawingSession();const index=drawingSessions.findIndex(x=>x.id===id);if(index<0)return;const target=drawingSessions[index];if(target.dirty&&!confirm(`Tab “${target.displayName||target.fileName}” có thay đổi chưa lưu. Đóng tab?`))return;drawingSessions.splice(index,1);if(!drawingSessions.length){const blank=makeDrawingSession('Bản vẽ mới');drawingSessions.push(blank);activeDrawingSessionId=blank.id;restoringDrawingSession=true;try{loadProjectObject(createBlankProject(),'BanVeMoi.dwgsketch.json',true,false)}finally{restoringDrawingSession=false}captureDrawingSession();renderDrawingTabs();return}if(activeDrawingSessionId===id){const next=drawingSessions[Math.min(index,drawingSessions.length-1)];activeDrawingSessionId=next.id;restoreDrawingSession(next)}else renderDrawingTabs()}
 function initializeDrawingTabs(){if(drawingSessions.length)return;const s=makeDrawingSession('Bản vẽ mới');drawingSessions.push(s);activeDrawingSessionId=s.id;captureDrawingSession();renderDrawingTabs()}
 function anyDirtyDrawingSession(){captureDrawingSession();return drawingSessions.some(x=>x.dirty)}
+function repairLegacyMTextParagraphLeak(value){
+  return String(value??'').replace(/(^|\n)[ \t]*i[-+]?(?:\d+\.\d+|\d+(?:\.\d+)?[Ee][+-]?\d+);/g,'$1');
+}
+function repairLegacyCadTextArtifacts(p){
+  const source=String(p?.sourceFormat??p?.SourceFormat??'');if(!/DWG|DXF/i.test(source))return 0;let repaired=0;
+  for(const list of [p.entities??p.Entities??[],p.overlays??p.Overlays??[]])for(const e of Array.isArray(list)?list:[]){
+    const t=String(e?.type??e?.Type??'').toUpperCase();if(t!=='TEXT'&&t!=='MTEXT')continue;const key=e.text!==undefined?'text':(e.Text!==undefined?'Text':null);if(!key)continue;
+    const before=String(e[key]??''),after=repairLegacyMTextParagraphLeak(before);if(after!==before){e[key]=after;repaired++;}
+  }
+  return repaired;
+}
 function normalizeProject(p){
   const type=String(p?.projectType??p?.ProjectType??'');
   if(type.toLowerCase()!=='dwgsketchproject')throw new Error('File không phải dự án DWG Sketch (*.dwgsketch.json).');
   const oldVersion=num(p.version??p.Version,3);p.projectType='DwgSketchProject';
+  const legacyTextRepairs=repairLegacyCadTextArtifacts(p);if(legacyTextRepairs){p.textImportRepair={...(p.textImportRepair||{}),legacyParagraphLeaksRepaired:legacyTextRepairs,repairVersion:'0.21.8'};}
   p.entities=Array.isArray(p.entities)?p.entities:Array.isArray(p.Entities)?p.Entities:[];
   p.layerStyles=Array.isArray(p.layerStyles)?p.layerStyles:Array.isArray(p.LayerStyles)?p.LayerStyles:[];
   p.textStyles=Array.isArray(p.textStyles)?p.textStyles:Array.isArray(p.TextStyles)?p.TextStyles:[];
@@ -787,7 +799,8 @@ function dxfDecodeEscapes(value){
     .replace(/%%d/gi,'°').replace(/%%p/gi,'±').replace(/%%c/gi,'Ø')
 }
 function dxfCleanMText(value){
-  let s=dxfDecodeEscapes(value).replace(/\\P/gi,'\n').replace(/\\~/g,' ');
+  // \p...; la paragraph properties; \P moi la line break. Xu ly phan biet hoa/thuong.
+  let s=dxfDecodeEscapes(value).replace(/\\p[^;{}]*;/g,'').replace(/\\P/g,'\n').replace(/\\~/g,' ');
   s=s.replace(/\\[ACFHQTW][^;]*;/gi,'').replace(/\\[LOK]/g,'').replace(/[{}]/g,'');
   return s;
 }
@@ -1760,7 +1773,7 @@ void bootApplication();
 <script src="./interaction-core-v0202.js"></script>
 <script src="./network-diagram-core-v0210.js"></script>
 <script src="./network-learning-core-v0214.js"></script>
-<script src="./a4-diagram-template-core-v0216.js"></script>
+<script src="./a4-diagram-template-core-v0217.js"></script>
 <script src="./electrical-automation-v0179.js"></script>
 <script src="./electrical-auto-learn-v0174.js"></script>
 <script src="./electrical-learning-core-v0175.js"></script>

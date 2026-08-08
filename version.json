@@ -1,13 +1,13 @@
 {
-  "version": "0.21.6",
-  "releasedAt": "2026-07-30T14:30:00+07:00",
-  "notes": "V0.17.6: khung A4 là lớp nền xuyên chọn; phần tử bên trong được ưu tiên, có chế độ chọn khung riêng theo đường viền.",
+  "version": "0.21.8",
+  "releasedAt": "2026-08-08T12:15:00+07:00",
+  "notes": "V0.17.8: sửa triệt để MTEXT \\p paragraph properties bị hiển thị thành i...; trong DWG/DXF, kèm tự sửa project cũ và thống kê bộ đọc.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.21.6",
-  "build": "a4-frame-selection-pass-through-v0176"
+  "title": "DWG Sketch PWA V0.21.8",
+  "build": "mtext-paragraph-format-fix-v0178"
 }
