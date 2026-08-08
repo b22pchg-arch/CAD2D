@@ -1,13 +1,13 @@
 {
-  "version": "0.21.8",
-  "releasedAt": "2026-08-08T12:15:00+07:00",
-  "notes": "V0.17.8: sửa triệt để MTEXT \\p paragraph properties bị hiển thị thành i...; trong DWG/DXF, kèm tự sửa project cũ và thống kê bộ đọc.",
+  "version": "0.21.9",
+  "releasedAt": "2026-08-08T15:45:00+07:00",
+  "notes": "V0.17.9: đồng bộ HATCH C#/PWA, giảm chi tiết HATCH khi zoom xa và mở rộng zoom thu nhỏ.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.21.8",
-  "build": "mtext-paragraph-format-fix-v0178"
+  "title": "DWG Sketch PWA V0.21.9",
+  "build": "hatch-parity-zoomout-v0179"
 }

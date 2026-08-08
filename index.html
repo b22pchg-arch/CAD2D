@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-<title>DWG Sketch PWA Editor V0.21.8</title>
+<title>DWG Sketch PWA Editor V0.21.9</title>
 <style>
 :root{color-scheme:dark;--bg:#202124;--panel:#292a2d;--line:#45464a;--text:#f1f3f4;--muted:#aeb0b4;--accent:#4fc3f7;--orange:#ffb74d;--danger:#ef5350;--ok:#66bb6a}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);touch-action:none;overscroll-behavior:none}
@@ -86,7 +86,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
   <div class="tool-group"><button id="orthoBtn" title="Bật/tắt ORTHO ngang/dọc. Phím F8.">ORTHO F8</button><button id="crosshairBtn" title="Bật/tắt con trỏ CAD có tia kéo dài.">Con trỏ CAD</button></div>
   <div class="tool-group"><button id="fitBtn" title="ZOOM ALL: đưa toàn bộ bản vẽ vào màn hình. Lệnh ZA hoặc Z rồi A.">Zoom All</button><button id="zoomWindowBtn" data-tool="zoomWindow" title="ZOOM WINDOW: kéo vùng cần phóng. Lệnh ZW hoặc Z rồi W.">Zoom cửa sổ</button><button id="findTextBtn">Tìm chữ</button><button id="leftBtn">Layer</button><button id="rightBtn">Thuộc tính</button><button id="pngBtn">PNG</button><button id="copyPngBtn" title="Sao chép ảnh xuất hiện tại vào Clipboard">PNG → Clipboard</button><button id="printBtn" title="In chất lượng vector. Phím tắt Ctrl+P.">In Ctrl+P</button><button id="pdfBtn">PDF</button><button id="dxfBtn">DXF</button></div>
   <div class="tool-group"><button id="toolbarModeBtn" title="Chuyển thanh công cụ biểu tượng/có chữ">Biểu tượng</button><button id="helpBtn" title="Mở hướng dẫn sử dụng chi tiết">Hướng dẫn</button><button id="installPwaBtn" class="install-hidden">Cài PWA</button><button id="checkUpdateBtn">Kiểm tra phiên bản</button><button id="applyUpdateBtn" class="install-hidden">Cập nhật ngay</button></div>
-  <span class="spacer"></span><span class="version-pill">PWA 0.21.8</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
+  <span class="spacer"></span><span class="version-pill">PWA 0.21.9</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
 </header>
 <div id="drawingTabs" class="drawing-tabs" role="tablist" aria-label="Các bản vẽ đang mở"></div>
 <main id="layout" class="layout">
@@ -179,7 +179,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
       <div class="muted" style="margin-top:6px">Bộ đọc @mlightcad/libredwg-web 0.7.9 và WebAssembly khoảng 10 MB đã được đặt trực tiếp trong dự án. Không dùng CDN; sau khi PWA được tải/cài, máy tính và điện thoại cùng dùng đúng một bộ đọc nội bộ và có thể mở DWG offline.</div>
     </div>
     <div class="section" data-mobile-group="other"><h3>PWA và cập nhật</h3>
-      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.21.8</b></div>
+      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.21.9</b></div>
       <div class="form-grid" style="margin-top:7px"><label class="full">Địa chỉ version.json<input id="updateUrlInput" value="./version.json" autocomplete="off"></label></div>
       <div class="button-row"><button id="saveUpdateUrlBtn">Lưu địa chỉ</button><button id="panelCheckUpdateBtn">Kiểm tra</button><button id="panelApplyUpdateBtn" class="install-hidden">Cập nhật</button></div>
       <div id="updateInfo" class="update-info muted">Chưa kiểm tra phiên bản.</div>
@@ -346,7 +346,8 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
 <div id="pwaToast" class="pwa-toast"><span id="pwaToastText"></span><button id="pwaToastAction" class="install-hidden">Cập nhật</button></div>
 <script>
 'use strict';
-const PWA_APP_VERSION='0.21.8';
+const PWA_APP_VERSION='0.21.9';
+const MIN_VIEW_SCALE=1e-9,MAX_VIEW_SCALE=1e6;
 const USER_PROFILE_KEY='DwgSketch.UserProfile.V2';
 const PWA_VERSION_URL_KEY='DwgSketchPwa.VersionUrl.V1';
 let deferredInstallPrompt=null,pwaRegistration=null,latestVersionInfo=null,reloadingForUpdate=false;
@@ -503,7 +504,7 @@ function normalizeProject(p){
   const type=String(p?.projectType??p?.ProjectType??'');
   if(type.toLowerCase()!=='dwgsketchproject')throw new Error('File không phải dự án DWG Sketch (*.dwgsketch.json).');
   const oldVersion=num(p.version??p.Version,3);p.projectType='DwgSketchProject';
-  const legacyTextRepairs=repairLegacyCadTextArtifacts(p);if(legacyTextRepairs){p.textImportRepair={...(p.textImportRepair||{}),legacyParagraphLeaksRepaired:legacyTextRepairs,repairVersion:'0.21.8'};}
+  const legacyTextRepairs=repairLegacyCadTextArtifacts(p);if(legacyTextRepairs){p.textImportRepair={...(p.textImportRepair||{}),legacyParagraphLeaksRepaired:legacyTextRepairs,repairVersion:'0.21.9'};}
   p.entities=Array.isArray(p.entities)?p.entities:Array.isArray(p.Entities)?p.Entities:[];
   p.layerStyles=Array.isArray(p.layerStyles)?p.layerStyles:Array.isArray(p.LayerStyles)?p.LayerStyles:[];
   p.textStyles=Array.isArray(p.textStyles)?p.textStyles:Array.isArray(p.TextStyles)?p.TextStyles:[];
@@ -602,10 +603,10 @@ new ResizeObserver(()=>resize()).observe(viewer);
 function sx(x){return x*scale+offsetX}function sy(y){return-y*scale+offsetY}function world(x,y){return{x:(x-offsetX)/scale,y:-(y-offsetY)/scale}}
 function canvasLogicalToCss(p){const r=canvas.getBoundingClientRect(),w=Math.max(1,viewportWidth||canvas.clientWidth||r.width||1),h=Math.max(1,viewportHeight||canvas.clientHeight||r.height||1);return{x:p.x*(r.width||w)/w,y:p.y*(r.height||h)/h}}
 function eventPos(e){const r=canvas.getBoundingClientRect(),w=Math.max(1,viewportWidth||canvas.clientWidth||r.width||1),h=Math.max(1,viewportHeight||canvas.clientHeight||r.height||1),rw=Math.max(1e-9,r.width),rh=Math.max(1e-9,r.height);return{x:(e.clientX-r.left)*w/rw,y:(e.clientY-r.top)*h/rh}}
-function fitView(){if(!bounds)return;const w=viewportWidth||canvas.clientWidth||1,h=viewportHeight||canvas.clientHeight||1,pad=25;scale=Math.max(.000001,Math.min((w-pad*2)/Math.max(.0001,bounds.maxX-bounds.minX),(h-pad*2)/Math.max(.0001,bounds.maxY-bounds.minY)));offsetX=pad-bounds.minX*scale;offsetY=pad+bounds.maxY*scale;draw()}
-function zoomToWindow(a,b){const region={minX:Math.min(a.x,b.x),minY:Math.min(a.y,b.y),maxX:Math.max(a.x,b.x),maxY:Math.max(a.y,b.y)},pixelW=Math.abs((region.maxX-region.minX)*scale),pixelH=Math.abs((region.maxY-region.minY)*scale);if(pixelW<8||pixelH<8){status('ZOOM WINDOW: cửa sổ quá nhỏ; hãy kéo một vùng lớn hơn.');return false}const w=viewportWidth||canvas.clientWidth||1,h=viewportHeight||canvas.clientHeight||1,pad=12,nextScale=Math.min((w-pad*2)/Math.max(1e-12,region.maxX-region.minX),(h-pad*2)/Math.max(1e-12,region.maxY-region.minY)),cx=(region.minX+region.maxX)/2,cy=(region.minY+region.maxY)/2;scale=Math.max(.000001,Math.min(1e6,nextScale));offsetX=w/2-cx*scale;offsetY=h/2+cy*scale;selectionBox=null;draw();return true}
+function fitView(){if(!bounds)return;const w=viewportWidth||canvas.clientWidth||1,h=viewportHeight||canvas.clientHeight||1,pad=25;scale=Math.max(MIN_VIEW_SCALE,Math.min((w-pad*2)/Math.max(1e-12,bounds.maxX-bounds.minX),(h-pad*2)/Math.max(1e-12,bounds.maxY-bounds.minY)));offsetX=pad-bounds.minX*scale;offsetY=pad+bounds.maxY*scale;draw()}
+function zoomToWindow(a,b){const region={minX:Math.min(a.x,b.x),minY:Math.min(a.y,b.y),maxX:Math.max(a.x,b.x),maxY:Math.max(a.y,b.y)},pixelW=Math.abs((region.maxX-region.minX)*scale),pixelH=Math.abs((region.maxY-region.minY)*scale);if(pixelW<8||pixelH<8){status('ZOOM WINDOW: cửa sổ quá nhỏ; hãy kéo một vùng lớn hơn.');return false}const w=viewportWidth||canvas.clientWidth||1,h=viewportHeight||canvas.clientHeight||1,pad=12,nextScale=Math.min((w-pad*2)/Math.max(1e-12,region.maxX-region.minX),(h-pad*2)/Math.max(1e-12,region.maxY-region.minY)),cx=(region.minX+region.maxX)/2,cy=(region.minY+region.maxY)/2;scale=Math.max(MIN_VIEW_SCALE,Math.min(MAX_VIEW_SCALE,nextScale));offsetX=w/2-cx*scale;offsetY=h/2+cy*scale;selectionBox=null;draw();return true}
 function toggleSnapShortcut(){const input=$('snapCheck');input.checked=!input.checked;syncCadModeButtons();if(project){persistDisplay();setDirty(true)}saveCurrentUserProfile(false);snapPoint=null;status(`F4: đã ${input.checked?'BẬT':'TẮT'} chế độ bắt điểm.`);draw()}
-function zoomAt(screen,factor){const before=world(screen.x,screen.y);scale=Math.max(.000001,Math.min(1e6,scale*factor));offsetX=screen.x-before.x*scale;offsetY=screen.y+before.y*scale}
+function zoomAt(screen,factor){const before=world(screen.x,screen.y);scale=Math.max(MIN_VIEW_SCALE,Math.min(MAX_VIEW_SCALE,scale*factor));offsetX=screen.x-before.x*scale;offsetY=screen.y+before.y*scale}
 function cachedItemBounds(e){let b=itemBoundsCache.get(e);if(b!==undefined)return b;b=getItemBounds(e)||null;itemBoundsCache.set(e,b);return b}
 function itemVisibleInViewport(e,v){const b=cachedItemBounds(e);return !b||!(b.maxX<v.minX||b.minX>v.maxX||b.maxY<v.minY||b.minY>v.maxY)}
 function crosshairEnabled(){return !!$('crosshairCheck')?.checked}
@@ -636,7 +637,7 @@ function resolvedCadColor(e){return resolvedCadColorCore(e,true)}
 function importedCadOverlayColor(e){if(!$('colorCheck').checked)return cadMonochromeColor();const proxy={layer:e.layer,colorIndex:e.sourceCadColorIndex,trueColorArgb:e.sourceCadTrueColorArgb,colorMethod:e.sourceCadColorMethod};return resolvedCadColorCore(proxy,false)}
 function drawClosedPath(points,target=ctx){const pts=(points||[]).map(point);if(pts.length<3)return false;target.beginPath();target.moveTo(sx(pts[0].x),sy(pts[0].y));for(let i=1;i<pts.length;i++)target.lineTo(sx(pts[i].x),sy(pts[i].y));target.closePath();return true}
 function fillAlpha(e){return Math.max(.05,Math.min(1,num(e.opacity,.42)))}
-function drawHatchLinesForPath(e,target=ctx,local=null){const pts=(e.points||[]).map(point);if(pts.length<3)return;const b=getItemBounds(e);if(!b)return;const toX=local?(x=>x*local.scale+local.offsetX):sx,toY=local?(y=>-y*local.scale+local.offsetY):sy,spacingPx=Math.max(3,num(e.hatchSpacing,8)*(local?.scale||scale)),angle=num(e.hatchAngle,45)*Math.PI/180,patterns=e.hatchPattern==='cross'?[angle,angle+Math.PI/2]:[angle];target.save();target.beginPath();target.moveTo(toX(pts[0].x),toY(pts[0].y));for(let i=1;i<pts.length;i++)target.lineTo(toX(pts[i].x),toY(pts[i].y));target.closePath();target.clip();const corners=[{x:toX(b.minX),y:toY(b.minY)},{x:toX(b.maxX),y:toY(b.minY)},{x:toX(b.maxX),y:toY(b.maxY)},{x:toX(b.minX),y:toY(b.maxY)}],cx=corners.reduce((a,p)=>a+p.x,0)/4,cy=corners.reduce((a,p)=>a+p.y,0)/4,diag=Math.hypot(Math.max(...corners.map(p=>p.x))-Math.min(...corners.map(p=>p.x)),Math.max(...corners.map(p=>p.y))-Math.min(...corners.map(p=>p.y)))+spacingPx*4;for(const a of patterns){const dx=Math.cos(a),dy=Math.sin(a),nx=-dy,ny=dx;for(let d=-diag;d<=diag;d+=spacingPx){target.beginPath();target.moveTo(cx+nx*d-dx*diag,cy+ny*d-dy*diag);target.lineTo(cx+nx*d+dx*diag,cy+ny*d+dy*diag);target.stroke()}}target.restore()}
+function drawHatchLinesForPath(e,target=ctx,local=null){const pts=(e.points||[]).map(point);if(pts.length<3)return;const b=getItemBounds(e);if(!b)return;const viewScale=local?.scale||scale,nativeSpacing=Math.max(1e-12,num(e.hatchSpacing,8))*Math.max(MIN_VIEW_SCALE,viewScale),minDetail=1.75;if(nativeSpacing<minDetail)return;const spacingPx=Math.min(240,Math.max(minDetail,nativeSpacing)),toX=local?(x=>x*local.scale+local.offsetX):sx,toY=local?(y=>-y*local.scale+local.offsetY):sy,angle=num(e.hatchAngle,45)*Math.PI/180,patterns=e.hatchPattern==='cross'?[angle,angle+Math.PI/2]:[angle];target.save();target.beginPath();target.moveTo(toX(pts[0].x),toY(pts[0].y));for(let i=1;i<pts.length;i++)target.lineTo(toX(pts[i].x),toY(pts[i].y));target.closePath();target.clip();const corners=[{x:toX(b.minX),y:toY(b.minY)},{x:toX(b.maxX),y:toY(b.minY)},{x:toX(b.maxX),y:toY(b.maxY)},{x:toX(b.minX),y:toY(b.maxY)}],cx=corners.reduce((a,p)=>a+p.x,0)/4,cy=corners.reduce((a,p)=>a+p.y,0)/4,diag=Math.hypot(Math.max(...corners.map(p=>p.x))-Math.min(...corners.map(p=>p.x)),Math.max(...corners.map(p=>p.y))-Math.min(...corners.map(p=>p.y)))+spacingPx*4;if((diag*2/Math.max(spacingPx,1))*patterns.length>1800){target.restore();return}for(const a of patterns){const dx=Math.cos(a),dy=Math.sin(a),nx=-dy,ny=dx;for(let d=-diag;d<=diag;d+=spacingPx){target.beginPath();target.moveTo(cx+nx*d-dx*diag,cy+ny*d-dy*diag);target.lineTo(cx+nx*d+dx*diag,cy+ny*d+dy*diag);target.stroke()}}target.restore()}
 function drawFillItem(e,target=ctx,local=null){const pts=(e.points||[]).map(point);if(pts.length<3)return;const toX=local?(x=>x*local.scale+local.offsetX):sx,toY=local?(y=>-y*local.scale+local.offsetY):sy;target.save();target.globalAlpha=fillAlpha(e);target.beginPath();target.moveTo(toX(pts[0].x),toY(pts[0].y));for(let i=1;i<pts.length;i++)target.lineTo(toX(pts[i].x),toY(pts[i].y));target.closePath();if((e.fillMode||'solid')==='solid')target.fill();else drawHatchLinesForPath(e,target,local);target.globalAlpha=1;target.stroke();target.restore()}
 const ELECTRICAL_SYMBOL_DEFS={
 BUSBAR:{name:'Thanh cái',ports:[[-30,0,'L'],[30,0,'R']],p:[['line',-30,0,30,0]]},
@@ -1098,7 +1099,7 @@ function pointerMove(e){const events=typeof e.getCoalescedEvents==='function'?e.
 function flushPointerMoveNow(){if(pointerMoveFrameHandle){cancelAnimationFrame(pointerMoveFrameHandle);pointerMoveFrameHandle=0}const m=pendingPointerMove;pendingPointerMove=null;if(!m)return;processingPointerFrame=true;try{processPointerMove(m)}finally{processingPointerFrame=false}}
 function processPointerMove(m){
   const s=m.s,w=world(s.x,s.y);lastPointer=s;cadCursor={x:s.x,y:s.y,inside:true};$('coordText').textContent=`X: ${w.x.toFixed(3)} · Y: ${w.y.toFixed(3)}`;
-  if(pinch){let ps=pinchPoints();if(!ps&&pointers.size>=2){startPinchGesture();ps=pinchPoints()}if(!ps)return;const d=dist(ps[0],ps[1]);if(!(d>0))return;const mid=midpoint(ps[0],ps[1]),factor=d/pinch.startDistance,nextScale=Math.max(.000001,Math.min(1e6,pinch.startScale*factor));scale=nextScale;offsetX=mid.x-pinch.anchorWorld.x*nextScale;offsetY=mid.y+pinch.anchorWorld.y*nextScale;pinch.lastMid=mid;pinch.lastDistance=d;draw();return}
+  if(pinch){let ps=pinchPoints();if(!ps&&pointers.size>=2){startPinchGesture();ps=pinchPoints()}if(!ps)return;const d=dist(ps[0],ps[1]);if(!(d>0))return;const mid=midpoint(ps[0],ps[1]),factor=d/pinch.startDistance,nextScale=Math.max(MIN_VIEW_SCALE,Math.min(MAX_VIEW_SCALE,pinch.startScale*factor));scale=nextScale;offsetX=mid.x-pinch.anchorWorld.x*nextScale;offsetY=mid.y+pinch.anchorWorld.y*nextScale;pinch.lastMid=mid;pinch.lastDistance=d;draw();return}
   if(pinchSuppressUntilRelease)return;
   if(!interaction){
     if(tool==='triangle'&&trianglePoints.length){const p=snapOrtho(w,s);preview=trianglePoints.length===1?{type:'LINE',a:trianglePoints[0],b:p,color:hexToArgb($('newColor').value),stroke:num($('newStroke').value,2)}:{type:'TRIANGLE',points:[trianglePoints[0],trianglePoints[1],p],closed:true,color:hexToArgb($('newColor').value),stroke:num($('newStroke').value,2)};draw();return}

@@ -1,10 +1,10 @@
-/* DWG Sketch PWA V0.21.8 - direct DWG reader worker.
+/* DWG Sketch PWA V0.21.9 - direct DWG reader worker.
  * LibreDWG WebAssembly is loaded in this Worker, so parsing never calls a desktop converter.
  * Upstream: @mlightcad/libredwg-web 0.7.9 (GPL-3.0)
  */
 import { Dwg_File_Type, LibreDwg } from './vendor/libredwg-web-0.7.9/dist/libredwg-web.js';
 
-const DWG_WORKER_VERSION = '0.21.8';
+const DWG_WORKER_VERSION = '0.21.9';
 const DWG_ENGINE_VERSION = '0.7.9';
 const DWG_ENGINE_PACKAGE = '@mlightcad/libredwg-web';
 const DWG_ENGINE_SOURCE = 'local-vendor';
@@ -527,38 +527,54 @@ function hatchBoundaryPoints(path, transform) {
   return points;
 }
 
+function polygonSignedArea(points) {
+  let area = 0;
+  for (let i = 0; i < points.length; i++) {
+    const a = points[i], b = points[(i + 1) % points.length];
+    area += a.x * b.y - b.x * a.y;
+  }
+  return area / 2;
+}
+
 function convertHatch(entity, base, transform, ctx) {
-  const result = [];
   const paths = entity?.boundaryPaths || [];
   const solid = int(entity?.solidFill) !== 0 || upper(entity?.patternName) === 'SOLID';
   const line = entity?.definitionLines?.[0];
   const offset = p2(line?.offset);
   const spacing = Math.max(1e-6, Math.hypot(offset.x, offset.y) || Math.abs(n(entity?.patternScale, 1)));
   const angle = n(line?.angle, n(entity?.patternAngle)) * DEG;
+
+  // Desktop LibreDwgJsonParser keeps the largest usable boundary for one HATCH.
+  // Do the same in PWA so holes/secondary paths are not emitted as independent
+  // filled entities and the two viewers receive the same entity count/shape.
+  let best = null;
   for (let i = 0; i < paths.length; i++) {
-    const path = paths[i];
-    const points = hatchBoundaryPoints(path, transform);
+    const points = hatchBoundaryPoints(paths[i], transform);
     if (points.length < 2) continue;
-    const closed = path?.isClosed !== 0 || points.length >= 3;
-    if (points.length >= 3) {
-      result.push({
-        type: 'FILL', points, closed: true,
-        fillMode: solid ? 'solid' : 'hatch',
-        opacity: solid ? 1 : .9,
-        hatchSpacing: spacing * Math.max(1e-12, (Math.abs(transform.scaleX) + Math.abs(transform.scaleY)) / 2),
-        hatchAngle: angle + transform.rotation * DEG,
-        hatchPattern: 'lines',
-        sourceHatchPattern: String(entity?.patternName || ''),
-        sourceHatchPathIndex: i,
-        approximationOf: 'HATCH',
-        ...base
-      });
-    } else {
-      result.push({ type: 'LWPOLYLINE', points, closed, approximationOf: 'HATCH_BOUNDARY', ...base });
-    }
+    const score = points.length >= 3 ? Math.abs(polygonSignedArea(points)) : 0;
+    if (!best || score > best.score) best = { points, path: paths[i], index: i, score };
   }
-  if (!result.length) appendUnsupported(ctx, 'HATCH_EMPTY');
-  return result;
+  if (!best) { appendUnsupported(ctx, 'HATCH_EMPTY'); return []; }
+
+  const points = best.points;
+  const closed = best.path?.isClosed !== 0 || points.length >= 3;
+  if (points.length < 3)
+    return [{ type: 'LWPOLYLINE', points, closed, approximationOf: 'HATCH_BOUNDARY', ...base }];
+
+  return [{
+    type: 'FILL', points, closed: true,
+    fillMode: solid ? 'solid' : 'hatch',
+    // Desktop uses 255 for SOLID and 128 for patterned HATCH. Keep the same
+    // visual weight instead of the old 0.9 alpha which dominated the PWA view.
+    opacity: solid ? 1 : (128 / 255),
+    hatchSpacing: spacing * Math.max(1e-12, (Math.abs(transform.scaleX) + Math.abs(transform.scaleY)) / 2),
+    hatchAngle: angle + transform.rotation * DEG,
+    hatchPattern: 'lines',
+    sourceHatchPattern: String(entity?.patternName || ''),
+    sourceHatchPathIndex: best.index,
+    approximationOf: 'HATCH',
+    ...base
+  }];
 }
 
 function convertEntity(entity, ctx, transform = IDENTITY, inherited = null, depth = 0) {
@@ -780,7 +796,7 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
       exportStrokeMode: 'original', exportStrokeColor: '#000000', autoPromoteDwgObjects: true, autoPromoteThreshold: 5000
     },
     dwgImport: {
-      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch/lwpolyline adapter 0.21.8',
+      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch/lwpolyline adapter 0.21.9',
       workerVersion: DWG_WORKER_VERSION,
       engineVersion: DWG_ENGINE_VERSION,
       engineSource: DWG_ENGINE_SOURCE,
