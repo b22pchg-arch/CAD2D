@@ -1,10 +1,10 @@
-/* DWG Sketch PWA V0.21.9 - direct DWG reader worker.
+/* DWG Sketch PWA V0.21.10 - direct DWG reader worker.
  * LibreDWG WebAssembly is loaded in this Worker, so parsing never calls a desktop converter.
  * Upstream: @mlightcad/libredwg-web 0.7.9 (GPL-3.0)
  */
 import { Dwg_File_Type, LibreDwg } from './vendor/libredwg-web-0.7.9/dist/libredwg-web.js';
 
-const DWG_WORKER_VERSION = '0.21.9';
+const DWG_WORKER_VERSION = '0.21.10';
 const DWG_ENGINE_VERSION = '0.7.9';
 const DWG_ENGINE_PACKAGE = '@mlightcad/libredwg-web';
 const DWG_ENGINE_SOURCE = 'local-vendor';
@@ -233,7 +233,8 @@ function commonProps(entity, inherited = null, ctx = null) {
     sourceHandle: handleKey(entity?.handle),
     sourceType: upper(entity?.type),
     lineType: entity?.lineType || null,
-    lineweight: entity?.lineweight ?? null
+    lineweight: entity?.lineweight ?? null,
+    lineTypeScale: Math.max(.01, n(entity?.lineTypeScale ?? entity?.linetypeScale ?? entity?.ltscale, 1))
   };
 }
 
@@ -796,7 +797,7 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
       exportStrokeMode: 'original', exportStrokeColor: '#000000', autoPromoteDwgObjects: true, autoPromoteThreshold: 5000
     },
     dwgImport: {
-      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch/lwpolyline adapter 0.21.9',
+      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch/lwpolyline adapter 0.21.10',
       workerVersion: DWG_WORKER_VERSION,
       engineVersion: DWG_ENGINE_VERSION,
       engineSource: DWG_ENGINE_SOURCE,
