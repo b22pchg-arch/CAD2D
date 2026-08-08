@@ -1,5 +1,5 @@
 'use strict';
-const APP_VERSION='0.21.10';
+const APP_VERSION='0.21.11';
 const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION;
 const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(APP_VERSION);
 const CORE_ASSETS=[
@@ -10,9 +10,10 @@ const CORE_ASSETS=[
   './vendor/libredwg-web-0.7.9/wasm/libredwg-web.wasm',
   './vendor/libredwg-web-0.7.9/package.json',
   './vendor/libredwg-web-0.7.9/INTEGRATION_INFO.json',
-  './interaction-core-v0202.js','./network-diagram-core-v0210.js','./network-learning-core-v0214.js','./a4-diagram-template-core-v0217.js','./electrical-automation-v0179.js','./electrical-auto-learn-v0174.js','./electrical-learning-core-v0175.js','./electrical-learning-session-v0180.js','./symbol-template-v0169.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
+  './interaction-core-v0202.js','./selection-editing-core-v02111.js','./network-diagram-core-v0210.js','./network-learning-core-v0214.js','./a4-diagram-template-core-v0217.js','./electrical-automation-v0179.js','./electrical-auto-learn-v0174.js','./electrical-learning-core-v0175.js','./electrical-learning-session-v0180.js','./symbol-template-v0169.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
 ];
 const OPTIONAL_ASSETS=[
+  './HUONG_DAN_THU_V01711_SELECTION_EDITING.txt','./RELEASE_NOTES_V01711_PWA_V02111.txt','./SELECTION_EDITING_REGRESSION_V01711.txt','./SELECTION_EDITING_STATIC_TEST_V01711.txt',
   './HUONG_DAN_THU_V01710_RENDERING_PARITY.txt','./RELEASE_NOTES_V01710_PWA_V02110.txt',
   './HUONG_DAN_THU_V0177_A4_TEMPLATE_WORKFLOW.txt','./RELEASE_NOTES_V0177_PWA_V0217.txt','./A4_TEMPLATE_WORKFLOW_TEST_REPORT_V0177.txt',
   './HUONG_DAN_THU_V0176_A4_FRAME_SELECTION.txt','./RELEASE_NOTES_V0176_PWA_V0216.txt','./A4_FRAME_SELECTION_TEST_REPORT_V0176.txt',

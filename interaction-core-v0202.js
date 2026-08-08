@@ -232,6 +232,7 @@
   function isLiveTranslate() {
     return !forceFullInvalidation && (
       interaction?.type === 'move' ||
+      interaction?.type === 'grip' ||
       (tool === 'move' && !!moveBasePoint) ||
       (tool === 'copy' && !!copyBasePoint)
     );

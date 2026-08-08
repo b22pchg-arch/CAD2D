@@ -1,13 +1,13 @@
 {
-  "version": "0.21.10",
-  "releasedAt": "2026-08-08T15:45:00+07:00",
-  "notes": "V0.17.10: đồng nhất lineweight/linetype/cap-join C# và PWA, giữ source entity type và bổ sung báo cáo PARITY.",
+  "version": "0.21.11",
+  "releasedAt": "2026-08-08T17:28:00+07:00",
+  "notes": "V0.17.11: grip point nhẹ, selection cycling cho đối tượng chồng lấn và Undo/Redo chỉnh hình học theo delta một đối tượng.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.21.10",
-  "build": "rendering-parity-v01710"
+  "title": "DWG Sketch PWA V0.21.11",
+  "build": "selection-editing-core-v01711"
 }
