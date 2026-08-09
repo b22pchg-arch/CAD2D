@@ -1,13 +1,13 @@
 {
-  "version": "0.21.12",
-  "releasedAt": "2026-08-09T09:42:00+07:00",
-  "notes": "V0.17.12: Object Snap Core nâng cao với spatial local query, snap hysteresis, khử ứng viên trùng, aperture theo pixel và chẩn đoán OSNAP.",
+  "version": "0.21.13",
+  "releasedAt": "2026-08-09T11:15:00+07:00",
+  "notes": "V0.17.13: Block/Symbol Editing Core với block editable, base point, instance selection, explode, copy/paste remap và bridge sang Network/Symbol.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.21.12",
-  "build": "object-snap-core-v01712"
+  "title": "DWG Sketch PWA V0.21.13",
+  "build": "block-symbol-editing-core-v01713"
 }
