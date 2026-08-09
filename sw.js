@@ -1,5 +1,5 @@
 'use strict';
-const APP_VERSION='0.22.0';
+const APP_VERSION='0.22.1';
 const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION;
 const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(APP_VERSION);
 const CORE_ASSETS=[
@@ -10,10 +10,10 @@ const CORE_ASSETS=[
   './vendor/libredwg-web-0.7.9/wasm/libredwg-web.wasm',
   './vendor/libredwg-web-0.7.9/package.json',
   './vendor/libredwg-web-0.7.9/INTEGRATION_INFO.json',
-  './interaction-core-v0202.js','./cad-interaction-architecture-v0220.js','./selection-editing-core-v02111.js','./render-stability-core-v021113.js','./object-snap-core-v02112.js','./block-symbol-editing-core-v02113.js','./network-diagram-core-v0210.js','./network-learning-core-v0214.js','./a4-diagram-template-core-v02114.js','./electrical-automation-v0179.js','./electrical-auto-learn-v0174.js','./electrical-learning-core-v0175.js','./electrical-learning-session-v0180.js','./symbol-template-v0169.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
+  './interaction-core-v0202.js','./cad-interaction-architecture-v0221.js','./selection-editing-core-v02111.js','./render-stability-core-v021113.js','./object-snap-core-v02112.js','./block-symbol-editing-core-v02113.js','./network-diagram-core-v0210.js','./network-learning-core-v0214.js','./a4-diagram-template-core-v02114.js','./electrical-automation-v0179.js','./electrical-auto-learn-v0174.js','./electrical-learning-core-v0175.js','./electrical-learning-session-v0180.js','./symbol-template-v0169.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
 ];
 const OPTIONAL_ASSETS=[
-  './HUONG_DAN_THU_V0180_INTERACTION_ARCHITECTURE.txt','./RELEASE_NOTES_V0180_PWA_V0220.txt','./INTERACTION_ARCHITECTURE_STATIC_TEST_V0180.txt',
+  './HUONG_DAN_THU_V0181_SERVICE_OWNERSHIP_DELTA.txt','./RELEASE_NOTES_V0181_PWA_V0221.txt','./INTERACTION_ARCHITECTURE_STATIC_TEST_V0181.txt','./HUONG_DAN_THU_V0180_INTERACTION_ARCHITECTURE.txt','./RELEASE_NOTES_V0180_PWA_V0220.txt','./INTERACTION_ARCHITECTURE_STATIC_TEST_V0180.txt',
   './HUONG_DAN_THU_V01713_BLOCK_SYMBOL_EDITING.txt','./RELEASE_NOTES_V01713_PWA_V02113.txt','./BLOCK_SYMBOL_EDITING_STATIC_TEST_V01713.txt','./HUONG_DAN_THU_V01714_A4_TEMPLATE_WORKFLOW.txt','./RELEASE_NOTES_V01714_PWA_V02114.txt','./A4_TEMPLATE_WORKFLOW_STATIC_TEST_V01714.txt',
   './HUONG_DAN_THU_V01712_OBJECT_SNAP.txt','./RELEASE_NOTES_V01712_PWA_V02112.txt','./OBJECT_SNAP_REGRESSION_V01712.txt',
   './HUONG_DAN_THU_V017113_PWA_RENDER_STABILITY.txt','./RELEASE_NOTES_V017113_PWA_V021113.txt','./PWA_LARGE_DRAWING_RENDER_STABILITY_TEST_V017113.txt',

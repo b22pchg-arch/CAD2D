@@ -1,13 +1,13 @@
 {
-  "version": "0.22.0",
-  "releasedAt": "2026-08-09T13:27:00+07:00",
-  "notes": "V0.18.0: CAD Interaction Architecture Phase 1, tách Command/Selection/Render/Entity/Transaction service với revision và health diagnostics.",
+  "version": "0.22.1",
+  "releasedAt": "2026-08-09T13:57:00+07:00",
+  "notes": "V0.18.1: Selection/Entity Service Ownership + Transaction Delta; SCALE/ROTATE delta, MOVE/GRIP telemetry chung, snapshot legacy fallback.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.22.0",
-  "build": "cad-interaction-architecture-v0180"
+  "title": "DWG Sketch PWA V0.22.1",
+  "build": "cad-interaction-architecture-v0181"
 }
