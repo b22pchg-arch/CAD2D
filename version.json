@@ -1,13 +1,13 @@
 {
-  "version": "0.21.11.3",
-  "releasedAt": "2026-08-08T22:20:00+07:00",
-  "notes": "V0.17.11.3: chống nhấp nháy bản vẽ lớn bằng static-scene cache, frame compositing ổn định và pan/zoom dùng frame hoàn chỉnh gần nhất.",
+  "version": "0.21.12",
+  "releasedAt": "2026-08-09T09:42:00+07:00",
+  "notes": "V0.17.12: Object Snap Core nâng cao với spatial local query, snap hysteresis, khử ứng viên trùng, aperture theo pixel và chẩn đoán OSNAP.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.21.11.3",
-  "build": "large-drawing-render-stability-v017113"
+  "title": "DWG Sketch PWA V0.21.12",
+  "build": "object-snap-core-v01712"
 }

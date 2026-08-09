@@ -5,7 +5,7 @@
   "description": "Mở và chỉnh sửa DWG/DXF/JSON 2D; học ký hiệu/topology từ vùng chọn và tự động sinh sơ đồ điện từ Network Model.",
   "lang": "vi",
   "dir": "ltr",
-  "start_url": "./index.html?v=0.21.11.3",
+  "start_url": "./index.html?v=0.21.12",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",

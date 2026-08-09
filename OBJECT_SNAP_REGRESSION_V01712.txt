@@ -1,0 +1,13 @@
+OBJECT SNAP STATIC REGRESSION - V0.17.12 / PWA V0.21.12
+======================================================
+Expected static invariants:
+- C# ObjectSnapCore.V01712.cs exists.
+- GetSnappedWorld uses NormalizeSnapTolerancePixelV01712 and TrySelectStableSnapCandidateV01712.
+- BuildSnapCandidates still uses QueryCadCandidates / QueryOverlayCandidates spatial index.
+- C# supports exact segment-circle and circle-circle OSNAP intersections for circle/arc primitives.
+- C# DrawSnapMarker calls DrawSnapApertureV01712.
+- PWA loads render-stability-core-v021113.js before object-snap-core-v02112.js.
+- PWA object snap builds local geometry grid and calls dynamicIntersectionCandidates with local entries, not the complete geometry list.
+- PWA integrated and standalone object snap cores are byte-identical.
+- Worker/Service Worker/version.json/manifest use PWA 0.21.12.
+- No DWG parser or project schema changes were introduced.
