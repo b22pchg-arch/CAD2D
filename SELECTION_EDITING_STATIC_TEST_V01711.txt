@@ -1,0 +1,13 @@
+DWG SKETCH V0.17.11 / PWA V0.21.11 - STATIC TEST RESULT
+========================================================
+[OK] XML: DwgSketchPrototype.csproj, MainWindow.xaml.
+[OK] JSON: version.json, manifest.webmanifest.
+[OK] C# changed files have balanced braces/parentheses/brackets.
+[OK] No duplicate exact method signature found across MainWindow partial files.
+[OK] PWA inline JavaScript passes node --check.
+[OK] interaction-core-v0202.js passes node --check.
+[OK] selection-editing-core-v02111.js passes node --check.
+[OK] dwg-worker.js and Service Worker pass node --check.
+[OK] Embedded PWA and PWA_Standalone are SHA-256 synchronized for release files.
+[OK] build_release.cmd and build_release_self_contained.cmd have no UTF-8 BOM.
+[INFO] WPF dotnet build cannot be executed in this Linux packaging environment because dotnet/Windows Desktop SDK is unavailable.

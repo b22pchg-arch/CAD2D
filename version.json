@@ -1,13 +1,13 @@
 {
-  "version": "0.21.14",
-  "releasedAt": "2026-08-09T11:15:00+07:00",
-  "notes": "V0.17.14: A4 Template Workflow với thumbnail, tag/phân loại, update/replace instance giữ transform và liên kết Block/Symbol.",
+  "version": "0.22.0",
+  "releasedAt": "2026-08-09T13:27:00+07:00",
+  "notes": "V0.18.0: CAD Interaction Architecture Phase 1, tách Command/Selection/Render/Entity/Transaction service với revision và health diagnostics.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.21.14",
-  "build": "a4-template-workflow-v01714"
+  "title": "DWG Sketch PWA V0.22.0",
+  "build": "cad-interaction-architecture-v0180"
 }

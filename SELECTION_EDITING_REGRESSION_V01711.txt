@@ -1,0 +1,10 @@
+DWG SKETCH V0.17.11 - STATIC REGRESSION CHECK
+==============================================
+[EXPECTED] C# co InteractionMode.GripEdit.
+[EXPECTED] C# co SelectionEditingCore.V01711.cs.
+[EXPECTED] Grip history dung prefix GE1: va khong goi RestoreProject/LoadProject cho Undo grip.
+[EXPECTED] Alt+click/Tab/CYCLE co selection cycling.
+[EXPECTED] PWA co GRIP_HISTORY_KIND_V02111=grip-v02111.
+[EXPECTED] PWA nap selection-editing-core-v02111.js sau interaction-core-v0202.js.
+[EXPECTED] Service Worker cache selection-editing-core-v02111.js.
+[EXPECTED] C# 0.17.11 / PWA 0.21.11 dong bo.
