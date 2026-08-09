@@ -1,13 +1,13 @@
 {
-  "version": "0.22.1",
-  "releasedAt": "2026-08-09T13:57:00+07:00",
-  "notes": "V0.18.1: Selection/Entity Service Ownership + Transaction Delta; SCALE/ROTATE delta, MOVE/GRIP telemetry chung, snapshot legacy fallback.",
+  "version": "0.22.3",
+  "releasedAt": "2026-08-09T15:53:00+07:00",
+  "notes": "V0.18.3: Structural Transaction Delta; COPY/PASTE/DELETE dùng add/remove delta, selection edit tiếp tục dùng delta nhẹ, snapshot legacy làm fallback cho lệnh chưa migrate.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.22.1",
-  "build": "cad-interaction-architecture-v0181"
+  "title": "DWG Sketch PWA V0.22.3",
+  "build": "cad-interaction-architecture-v0183"
 }
