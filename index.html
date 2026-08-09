@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-<title>DWG Sketch PWA Editor V0.21.13</title>
+<title>DWG Sketch PWA Editor V0.21.14</title>
 <style>
 :root{color-scheme:dark;--bg:#202124;--panel:#292a2d;--line:#45464a;--text:#f1f3f4;--muted:#aeb0b4;--accent:#4fc3f7;--orange:#ffb74d;--danger:#ef5350;--ok:#66bb6a}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);touch-action:none;overscroll-behavior:none}
@@ -86,7 +86,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
   <div class="tool-group"><button id="orthoBtn" title="Bật/tắt ORTHO ngang/dọc. Phím F8.">ORTHO F8</button><button id="crosshairBtn" title="Bật/tắt con trỏ CAD có tia kéo dài.">Con trỏ CAD</button></div>
   <div class="tool-group"><button id="fitBtn" title="ZOOM ALL: đưa toàn bộ bản vẽ vào màn hình. Lệnh ZA hoặc Z rồi A.">Zoom All</button><button id="zoomWindowBtn" data-tool="zoomWindow" title="ZOOM WINDOW: kéo vùng cần phóng. Lệnh ZW hoặc Z rồi W.">Zoom cửa sổ</button><button id="findTextBtn">Tìm chữ</button><button id="leftBtn">Layer</button><button id="rightBtn">Thuộc tính</button><button id="pngBtn">PNG</button><button id="copyPngBtn" title="Sao chép ảnh xuất hiện tại vào Clipboard">PNG → Clipboard</button><button id="printBtn" title="In chất lượng vector. Phím tắt Ctrl+P.">In Ctrl+P</button><button id="pdfBtn">PDF</button><button id="dxfBtn">DXF</button></div>
   <div class="tool-group"><button id="toolbarModeBtn" title="Chuyển thanh công cụ biểu tượng/có chữ">Biểu tượng</button><button id="helpBtn" title="Mở hướng dẫn sử dụng chi tiết">Hướng dẫn</button><button id="installPwaBtn" class="install-hidden">Cài PWA</button><button id="checkUpdateBtn">Kiểm tra phiên bản</button><button id="applyUpdateBtn" class="install-hidden">Cập nhật ngay</button></div>
-  <span class="spacer"></span><span class="version-pill">PWA 0.21.13</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
+  <span class="spacer"></span><span class="version-pill">PWA 0.21.14</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
 </header>
 <div id="drawingTabs" class="drawing-tabs" role="tablist" aria-label="Các bản vẽ đang mở"></div>
 <main id="layout" class="layout">
@@ -126,7 +126,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
         <label><input id="snapNearest" type="checkbox" checked> Điểm trên đường</label>
       </div>
       <div class="button-row"><button id="snapAllBtn" type="button">Bật tất cả chế độ</button></div>
-      <div class="snap-mode-note">V0.21.13: Block/Symbol Editing Core. BLOCK/B tạo block; BLOCKCUR/BC chọn base theo con trỏ; BINSERT/BI chèn; BSELECT/BS chọn instance; BEXPLODE/BX bung; B2SYM nối Network/Symbol. OSNAP 0.21.12 và Render Stability được giữ nguyên.</div>
+      <div class="snap-mode-note">V0.21.14: A4 Template Workflow hoàn thiện. Thumbnail vector, tag/phân loại/thư mục, A4UPDATE cập nhật definition từ instance, A4REPLACE thay instance giữ transform và A4LINKBLOCK liên kết Block/Symbol. Block 0.21.13 và OSNAP 0.21.12 được giữ nguyên.</div>
     </div>
     <div class="section" data-mobile-group="select"><h3>Bộ lọc chọn đối tượng</h3>
       <div class="muted">Áp dụng cho cả bấm chọn và chọn vùng Window/Crossing. Có thể bật đồng thời nhiều loại.</div>
@@ -179,7 +179,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
       <div class="muted" style="margin-top:6px">Bộ đọc @mlightcad/libredwg-web 0.7.9 và WebAssembly khoảng 10 MB đã được đặt trực tiếp trong dự án. Không dùng CDN; sau khi PWA được tải/cài, máy tính và điện thoại cùng dùng đúng một bộ đọc nội bộ và có thể mở DWG offline.</div>
     </div>
     <div class="section" data-mobile-group="other"><h3>PWA và cập nhật</h3>
-      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.21.13</b></div>
+      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.21.14</b></div>
       <div class="form-grid" style="margin-top:7px"><label class="full">Địa chỉ version.json<input id="updateUrlInput" value="./version.json" autocomplete="off"></label></div>
       <div class="button-row"><button id="saveUpdateUrlBtn">Lưu địa chỉ</button><button id="panelCheckUpdateBtn">Kiểm tra</button><button id="panelApplyUpdateBtn" class="install-hidden">Cập nhật</button></div>
       <div id="updateInfo" class="update-info muted">Chưa kiểm tra phiên bản.</div>
@@ -346,7 +346,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
 <div id="pwaToast" class="pwa-toast"><span id="pwaToastText"></span><button id="pwaToastAction" class="install-hidden">Cập nhật</button></div>
 <script>
 'use strict';
-const PWA_APP_VERSION='0.21.13';
+const PWA_APP_VERSION='0.21.14';
 const MIN_VIEW_SCALE=1e-9,MAX_VIEW_SCALE=1e6;
 const USER_PROFILE_KEY='DwgSketch.UserProfile.V2';
 const PWA_VERSION_URL_KEY='DwgSketchPwa.VersionUrl.V1';
@@ -513,10 +513,10 @@ function normalizeProject(p){
   p.visibleLayers=Array.isArray(p.visibleLayers)?p.visibleLayers:Array.isArray(p.VisibleLayers)?p.VisibleLayers:[];
   if(oldVersion<4)p.entities.forEach(e=>{const ci=Math.trunc(num(e.colorIndex??e.ColorIndex,256));e.colorIndex=ci;e.trueColorArgb=null;e.colorMethod=ci===0?'ByBlock':ci===256?'ByLayer':'Aci'});
   if(!p.layerStyles.length){const names=[...new Set(p.entities.map(e=>String(e.layer??e.Layer??'0')))];if(!names.length)names.push('0');p.layerStyles=names.map(name=>({name,colorIndex:7,trueColorArgb:null,colorMethod:'Aci',isOff:false}))}
-  p.version=10;p.unsupportedTypes=p.unsupportedTypes||{};p.display=p.display||{};
+  p.version=11;p.unsupportedTypes=p.unsupportedTypes||{};p.display=p.display||{};
   return p;
 }
-function createBlankProject(){return{projectType:'DwgSketchProject',version:10,savedAt:nowIso(),sourceFormat:'HTML Editor / JSON Project',sourceFile:null,intermediateFile:null,unsupportedTypes:{},layerStyles:[{name:'0',colorIndex:7,trueColorArgb:null,colorMethod:'Aci',isOff:false}],entities:[],overlays:[],visibleLayers:['0'],drawingBounds:{minX:0,minY:0,maxX:1000,maxY:700},exportRegion:null,networkWorkspace:null,electricalAutomation:{schemaVersion:1,nodes:[],connections:[],layout:{orientation:'vertical',spacingX:60,spacingY:55}},display:{hideSmallText:false,minimumTextPixel:1,dwgTextScale:1,useDwgColors:false,exportBackground:'White',enableSnap:true,snapEndpoint:true,snapMidpoint:true,snapCenter:true,snapQuadrant:true,snapIntersection:true,snapPerpendicular:true,snapNearest:true,snapCombinedVersion:1,snapTolerancePixel:14,enableOrtho:false,showCrosshair:true,crosshairSizePercent:100,crosshairStrokePixel:1,crosshairColorMode:'auto',crosshairColor:'#ffffff',showCoordinateGrid:true,enableCoordinateGridSnap:true,coordinateGridSpacingX:25,coordinateGridSpacingY:25,coordinateGridOriginX:0,coordinateGridOriginY:0,coordinateGridMajorEvery:5,exportScope:'full',printFrameBorder:false,exportBgMode:'white',exportBgColor:'#ffffff',exportObjectMode:'original',exportObjectColor:'#000000',exportTextMode:'original',exportTextColor:'#000000',exportQuality:2,exportMinStroke:1.5,exportSharpMode:true,exportBoldText:false,copyPngAfterSave:false,printQualityMode:'vector',autoPromoteDwgObjects:true,autoPromoteThreshold:5000,...(readStoredUserProfile()?.display||{})}}}
+function createBlankProject(){return{projectType:'DwgSketchProject',version:11,savedAt:nowIso(),sourceFormat:'HTML Editor / JSON Project',sourceFile:null,intermediateFile:null,unsupportedTypes:{},layerStyles:[{name:'0',colorIndex:7,trueColorArgb:null,colorMethod:'Aci',isOff:false}],entities:[],overlays:[],visibleLayers:['0'],drawingBounds:{minX:0,minY:0,maxX:1000,maxY:700},exportRegion:null,networkWorkspace:null,electricalAutomation:{schemaVersion:1,nodes:[],connections:[],layout:{orientation:'vertical',spacingX:60,spacingY:55}},display:{hideSmallText:false,minimumTextPixel:1,dwgTextScale:1,useDwgColors:false,exportBackground:'White',enableSnap:true,snapEndpoint:true,snapMidpoint:true,snapCenter:true,snapQuadrant:true,snapIntersection:true,snapPerpendicular:true,snapNearest:true,snapCombinedVersion:1,snapTolerancePixel:14,enableOrtho:false,showCrosshair:true,crosshairSizePercent:100,crosshairStrokePixel:1,crosshairColorMode:'auto',crosshairColor:'#ffffff',showCoordinateGrid:true,enableCoordinateGridSnap:true,coordinateGridSpacingX:25,coordinateGridSpacingY:25,coordinateGridOriginX:0,coordinateGridOriginY:0,coordinateGridMajorEvery:5,exportScope:'full',printFrameBorder:false,exportBgMode:'white',exportBgColor:'#ffffff',exportObjectMode:'original',exportObjectColor:'#000000',exportTextMode:'original',exportTextColor:'#000000',exportQuality:2,exportMinStroke:1.5,exportSharpMode:true,exportBoldText:false,copyPngAfterSave:false,printQualityMode:'vector',autoPromoteDwgObjects:true,autoPromoteThreshold:5000,...(readStoredUserProfile()?.display||{})}}}
 function checkUnsaved(){return !dirty||confirm('Phiên hiện tại có thay đổi chưa lưu. Bỏ thay đổi và tiếp tục?')}
 function loadProjectObject(raw,name='Dự án JSON',markClean=true,resetHistory=true){
   const storedAutoPromote=localStorage.getItem('DwgSketch.AutoPromoteDwg.V1');const rememberedAutoPromote=storedAutoPromote===null?true:storedAutoPromote==='1';
@@ -867,7 +867,7 @@ function parseDxfText(text,fileName='BanVe.dxf',encodingInfo={}){
   if(!entitiesOut.length)throw new Error('DXF không có đối tượng 2D được hỗ trợ.');
   const layers=[...new Set(entitiesOut.map(e=>String(e.layer||'0')))];
   const visibleDxfLayers=layers.filter(name=>!(layerStyles.get(String(name).toUpperCase())?.isOff));
-  const projectOut={projectType:'DwgSketchProject',version:10,savedAt:nowIso(),sourceFormat:'DXF ASCII',sourceFile:fileName,intermediateFile:null,unsupportedTypes:unsupported,layerStyles:[...layerStyles.values()],entities:entitiesOut,overlays:[],visibleLayers:visibleDxfLayers.length?visibleDxfLayers:layers,drawingBounds:null,exportRegion:null,networkWorkspace:null,electricalAutomation:{schemaVersion:1,nodes:[],connections:[],layout:{orientation:'vertical',spacingX:60,spacingY:55}},display:{hideSmallText:false,minimumTextPixel:1,dwgTextScale:1,useDwgColors:true,exportBackground:'Dark',enableSnap:true,snapEndpoint:true,snapMidpoint:true,snapCenter:true,snapQuadrant:true,snapIntersection:true,snapPerpendicular:true,snapNearest:true,snapCombinedVersion:1,snapTolerancePixel:14,enableOrtho:false,showCrosshair:true,crosshairSizePercent:100,crosshairStrokePixel:1,crosshairColorMode:'auto',crosshairColor:'#ffffff',showCoordinateGrid:true,enableCoordinateGridSnap:true,coordinateGridSpacingX:25,coordinateGridSpacingY:25,coordinateGridOriginX:0,coordinateGridOriginY:0,coordinateGridMajorEvery:5,exportScope:'full',printFrameBorder:false,exportBgMode:'white',exportBgColor:'#ffffff',exportObjectMode:'original',exportObjectColor:'#000000',exportTextMode:'original',exportTextColor:'#000000',exportQuality:2,exportMinStroke:1.5,exportSharpMode:true,exportBoldText:false,copyPngAfterSave:false},dxfImport:{acadVersion:acadVersion||'không khai báo',codepage:codepage||'không khai báo',encoding:encodingInfo.encoding||'không rõ',pairCount:pairs.length}};
+  const projectOut={projectType:'DwgSketchProject',version:11,savedAt:nowIso(),sourceFormat:'DXF ASCII',sourceFile:fileName,intermediateFile:null,unsupportedTypes:unsupported,layerStyles:[...layerStyles.values()],entities:entitiesOut,overlays:[],visibleLayers:visibleDxfLayers.length?visibleDxfLayers:layers,drawingBounds:null,exportRegion:null,networkWorkspace:null,electricalAutomation:{schemaVersion:1,nodes:[],connections:[],layout:{orientation:'vertical',spacingX:60,spacingY:55}},display:{hideSmallText:false,minimumTextPixel:1,dwgTextScale:1,useDwgColors:true,exportBackground:'Dark',enableSnap:true,snapEndpoint:true,snapMidpoint:true,snapCenter:true,snapQuadrant:true,snapIntersection:true,snapPerpendicular:true,snapNearest:true,snapCombinedVersion:1,snapTolerancePixel:14,enableOrtho:false,showCrosshair:true,crosshairSizePercent:100,crosshairStrokePixel:1,crosshairColorMode:'auto',crosshairColor:'#ffffff',showCoordinateGrid:true,enableCoordinateGridSnap:true,coordinateGridSpacingX:25,coordinateGridSpacingY:25,coordinateGridOriginX:0,coordinateGridOriginY:0,coordinateGridMajorEvery:5,exportScope:'full',printFrameBorder:false,exportBgMode:'white',exportBgColor:'#ffffff',exportObjectMode:'original',exportObjectColor:'#000000',exportTextMode:'original',exportTextColor:'#000000',exportQuality:2,exportMinStroke:1.5,exportSharpMode:true,exportBoldText:false,copyPngAfterSave:false},dxfImport:{acadVersion:acadVersion||'không khai báo',codepage:codepage||'không khai báo',encoding:encodingInfo.encoding||'không rõ',pairCount:pairs.length}};
   return projectOut;
 }
 function loadDxfArrayBuffer(buffer,fileName){const decoded=decodeDxfArrayBuffer(buffer),p=parseDxfText(decoded.text,fileName,decoded);p.drawingBounds=null;const jsonName=String(fileName||'BanVe.dxf').replace(/\.dxf$/i,'')+'.dwgsketch.json';loadProjectObject(p,jsonName,true);updateProjectInfo(fileName);recalcBounds();fitView();const skipped=Object.values(p.unsupportedTypes||{}).reduce((a,b)=>a+b,0),details=Object.entries(p.unsupportedTypes||{}).map(([k,v])=>`${k}: ${v}`).join(', '),trueColorCount=p.entities.filter(e=>e.trueColorArgb!==null&&e.trueColorArgb!==undefined).length,byLayerCount=p.entities.filter(e=>String(e.colorMethod||'').toLowerCase().includes('bylayer')||Number(e.colorIndex)===256).length;$('dxfImportInfo').textContent=`Đã đọc ${p.entities.length.toLocaleString('vi-VN')} đối tượng · ${p.visibleLayers.length} layer · màu lớp ${byLayerCount} · TrueColor ${trueColorCount} · ${p.dxfImport.acadVersion} · ${p.dxfImport.encoding}${skipped?` · bỏ qua ${skipped} (${details})`:''}`;status(`Đã mở DXF và bật màu CAD: ${p.entities.length.toLocaleString('vi-VN')} đối tượng${skipped?`, bỏ qua ${skipped}`:''}.`)}
@@ -1810,7 +1810,7 @@ void bootApplication();
 <script src="./block-symbol-editing-core-v02113.js"></script>
 <script src="./network-diagram-core-v0210.js"></script>
 <script src="./network-learning-core-v0214.js"></script>
-<script src="./a4-diagram-template-core-v0217.js"></script>
+<script src="./a4-diagram-template-core-v02114.js"></script>
 <script src="./electrical-automation-v0179.js"></script>
 <script src="./electrical-auto-learn-v0174.js"></script>
 <script src="./electrical-learning-core-v0175.js"></script>
