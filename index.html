@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-<title>DWG Sketch PWA Editor V0.21.11</title>
+<title>DWG Sketch PWA Editor V0.21.11.3</title>
 <style>
 :root{color-scheme:dark;--bg:#202124;--panel:#292a2d;--line:#45464a;--text:#f1f3f4;--muted:#aeb0b4;--accent:#4fc3f7;--orange:#ffb74d;--danger:#ef5350;--ok:#66bb6a}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);touch-action:none;overscroll-behavior:none}
@@ -86,7 +86,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
   <div class="tool-group"><button id="orthoBtn" title="Bật/tắt ORTHO ngang/dọc. Phím F8.">ORTHO F8</button><button id="crosshairBtn" title="Bật/tắt con trỏ CAD có tia kéo dài.">Con trỏ CAD</button></div>
   <div class="tool-group"><button id="fitBtn" title="ZOOM ALL: đưa toàn bộ bản vẽ vào màn hình. Lệnh ZA hoặc Z rồi A.">Zoom All</button><button id="zoomWindowBtn" data-tool="zoomWindow" title="ZOOM WINDOW: kéo vùng cần phóng. Lệnh ZW hoặc Z rồi W.">Zoom cửa sổ</button><button id="findTextBtn">Tìm chữ</button><button id="leftBtn">Layer</button><button id="rightBtn">Thuộc tính</button><button id="pngBtn">PNG</button><button id="copyPngBtn" title="Sao chép ảnh xuất hiện tại vào Clipboard">PNG → Clipboard</button><button id="printBtn" title="In chất lượng vector. Phím tắt Ctrl+P.">In Ctrl+P</button><button id="pdfBtn">PDF</button><button id="dxfBtn">DXF</button></div>
   <div class="tool-group"><button id="toolbarModeBtn" title="Chuyển thanh công cụ biểu tượng/có chữ">Biểu tượng</button><button id="helpBtn" title="Mở hướng dẫn sử dụng chi tiết">Hướng dẫn</button><button id="installPwaBtn" class="install-hidden">Cài PWA</button><button id="checkUpdateBtn">Kiểm tra phiên bản</button><button id="applyUpdateBtn" class="install-hidden">Cập nhật ngay</button></div>
-  <span class="spacer"></span><span class="version-pill">PWA 0.21.11</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
+  <span class="spacer"></span><span class="version-pill">PWA 0.21.11.3</span><span id="dirtyBadge" class="badge ok">Đã lưu</span>
 </header>
 <div id="drawingTabs" class="drawing-tabs" role="tablist" aria-label="Các bản vẽ đang mở"></div>
 <main id="layout" class="layout">
@@ -179,7 +179,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
       <div class="muted" style="margin-top:6px">Bộ đọc @mlightcad/libredwg-web 0.7.9 và WebAssembly khoảng 10 MB đã được đặt trực tiếp trong dự án. Không dùng CDN; sau khi PWA được tải/cài, máy tính và điện thoại cùng dùng đúng một bộ đọc nội bộ và có thể mở DWG offline.</div>
     </div>
     <div class="section" data-mobile-group="other"><h3>PWA và cập nhật</h3>
-      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.21.11</b></div>
+      <div class="muted">Phiên bản đang dùng: <b id="currentVersionText">0.21.11.3</b></div>
       <div class="form-grid" style="margin-top:7px"><label class="full">Địa chỉ version.json<input id="updateUrlInput" value="./version.json" autocomplete="off"></label></div>
       <div class="button-row"><button id="saveUpdateUrlBtn">Lưu địa chỉ</button><button id="panelCheckUpdateBtn">Kiểm tra</button><button id="panelApplyUpdateBtn" class="install-hidden">Cập nhật</button></div>
       <div id="updateInfo" class="update-info muted">Chưa kiểm tra phiên bản.</div>
@@ -346,7 +346,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
 <div id="pwaToast" class="pwa-toast"><span id="pwaToastText"></span><button id="pwaToastAction" class="install-hidden">Cập nhật</button></div>
 <script>
 'use strict';
-const PWA_APP_VERSION='0.21.11';
+const PWA_APP_VERSION='0.21.11.3';
 const MIN_VIEW_SCALE=1e-9,MAX_VIEW_SCALE=1e6;
 const USER_PROFILE_KEY='DwgSketch.UserProfile.V2';
 const PWA_VERSION_URL_KEY='DwgSketchPwa.VersionUrl.V1';
@@ -397,7 +397,7 @@ async function installPwa(){if(!deferredInstallPrompt){showPwaToast('Trình duy�
 
 const EMBEDDED_PROJECT_BASE64='__EMBEDDED_PROJECT_BASE64__';
 const $=id=>document.getElementById(id);
-const canvas=$('canvas'),ctx=canvas.getContext('2d',{alpha:false,desynchronized:true}),viewer=$('viewer'),layout=$('layout');
+const canvas=$('canvas'),ctx=canvas.getContext('2d',{alpha:false}),viewer=$('viewer'),layout=$('layout');
 let project=null,entities=[],overlays=[],bounds=null,visibleLayers=new Set(),selected=[];
 let scale=1,offsetX=0,offsetY=0,dpr=1,tool='select',dirty=false,currentFileName='BanVe_DaChinhSua.dwgsketch.json';
 let zoomCommandAwaitingOption=false;
@@ -1805,6 +1805,7 @@ void bootApplication();
 </script>
 <script src="./interaction-core-v0202.js"></script>
 <script src="./selection-editing-core-v02111.js"></script>
+<script src="./render-stability-core-v021113.js"></script>
 <script src="./network-diagram-core-v0210.js"></script>
 <script src="./network-learning-core-v0214.js"></script>
 <script src="./a4-diagram-template-core-v0217.js"></script>

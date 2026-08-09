@@ -1,13 +1,13 @@
 {
-  "version": "0.21.11",
-  "releasedAt": "2026-08-08T17:28:00+07:00",
-  "notes": "V0.17.11: grip point nhẹ, selection cycling cho đối tượng chồng lấn và Undo/Redo chỉnh hình học theo delta một đối tượng.",
+  "version": "0.21.11.3",
+  "releasedAt": "2026-08-08T22:20:00+07:00",
+  "notes": "V0.17.11.3: chống nhấp nháy bản vẽ lớn bằng static-scene cache, frame compositing ổn định và pan/zoom dùng frame hoàn chỉnh gần nhất.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.21.11",
-  "build": "selection-editing-core-v01711"
+  "title": "DWG Sketch PWA V0.21.11.3",
+  "build": "large-drawing-render-stability-v017113"
 }
