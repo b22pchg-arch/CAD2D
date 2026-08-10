@@ -1,0 +1,38 @@
+MTEXT LINE SPACING PARITY - DIAGNOSTIC TU FILE DWG MAU
+======================================================
+File kiem tra: So do ket day TQ-HG (1)(1).dwg
+Dinh dang: Autodesk DWG 2010/2011/2012
+So entity doc duoc boi libredwg-web: 77,288
+So TEXT/MTEXT tim thay: 20,547
+So MTEXT 2 dong co extents de phan tich: 528
+
+Nhan dang mau tai khu vuc anh tham chieu:
+HANDLE   TEXT                         H         ACTUAL_H      ATT  STYLE FACTOR  OLD_ADV     FIX2_ADV    DELTA
+82B76    373-7/39 / Xuan Minh         33016.8   89266.4216    1    1     1.0     39620.16    55028.00    15407.84
+88E8A    LBS 374/04 / Xuan Minh       36000.0   97368.0000    1    1     1.0     43200.00    60000.00    16800.00
+88EB4    373-7/28 / Tien Nguyen       33016.8   98412.0752    1    1     1.0     39620.16    55028.00    15407.84
+9DE43    373-7/01 / TD N.Khoa         36000.0   97332.0000    1    1     1.0     43200.00    60000.00    16800.00
+9DED1    LBS 373/01 / Nam Khoa        33016.8   96100.8992    1    1     1.0     39620.16    55028.00    15407.84
+9DF0A    373-7/01 / TD Nam Khoa       33016.8   96067.8824    1    1     1.0     39620.16    55028.00    15407.84
+9DF2F    373-7/01 / T. Son Thanh      33016.8   89695.6400    1    1     1.0     39620.16    55028.00    15407.84
+9DF91    373-7/01 / TD N.Khoa         33016.8   89266.4216    1    1     1.0     39620.16    55028.00    15407.84
+9DFEA    373-7/01 / Thon Q.Son        33016.8   91709.6648    1    1     1.0     39620.16    55028.00    15407.84
+
+Doi chieu hinh hoc handle 9DF2F:
+- MTEXT insertion Y = 28,088,341.3844
+- Bus ngang gan nhat phia tren Y = 28,150,385.6340
+- Nhan la Top-Left, block phat trien xuong duoi theo huong man hinh/CAD inverse Y.
+- FIX1 giu dung top anchor, nhung baseline dong 2 chi cach 1.2H nen dong 2 nam cao hon DWG.
+- FIX2 giu nguyen top anchor va sua rieng baseline advance theo 3-on-5.
+
+Cong thuc:
+  legacy = 1.2 * H
+  FIX2   = (5/3) * H * lineSpacingFactor
+
+Voi factor=1.0 trong file mau:
+  FIX2 - legacy = 0.4666666667 * H
+
+Ngoai line spacing, FIX2 sua them:
+- DXF actual MTEXT height: group 43 (khong dung group 46).
+- LibreDWG rectHeight=0 -> dung extentsHeight neu co.
+- Luu line spacing metadata qua Save/Reopen va Auto-Promote.

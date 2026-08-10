@@ -1,5 +1,5 @@
 'use strict';
-const APP_VERSION='0.22.6';
+const APP_VERSION='0.22.7';
 const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION;
 const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(APP_VERSION);
 const CORE_ASSETS=[
@@ -10,9 +10,10 @@ const CORE_ASSETS=[
   './vendor/libredwg-web-0.7.9/wasm/libredwg-web.wasm',
   './vendor/libredwg-web-0.7.9/package.json',
   './vendor/libredwg-web-0.7.9/INTEGRATION_INFO.json',
-  './vietnamese-text-normalizer-v02253.js','./interaction-core-v0202.js','./cad-interaction-architecture-v0225.js','./symbol-library-catalog-v0226.js','./symbol-instance-link-v0226.js','./macro-library-core-v0226.js','./selection-editing-core-v02111.js','./render-stability-core-v021113.js','./object-snap-core-v02112.js','./block-symbol-editing-core-v02113.js','./network-diagram-core-v0210.js','./network-learning-core-v0214.js','./a4-diagram-template-core-v02114.js','./electrical-automation-v0179.js','./electrical-auto-learn-v0174.js','./electrical-learning-core-v0175.js','./electrical-learning-session-v0180.js','./symbol-template-v0169.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
+  './vietnamese-text-normalizer-v02253.js','./interaction-core-v0202.js','./cad-interaction-architecture-v0225.js','./symbol-library-catalog-v0226.js','./symbol-instance-link-v0226.js','./macro-library-core-v0226.js','./symbol-update-manager-v0227.js','./macro-parameter-profiles-v0227.js','./selection-editing-core-v02111.js','./render-stability-core-v021113.js','./object-snap-core-v02112.js','./block-symbol-editing-core-v02113.js','./network-diagram-core-v0210.js','./network-learning-core-v0214.js','./a4-diagram-template-core-v02114.js','./electrical-automation-v0179.js','./electrical-auto-learn-v0174.js','./electrical-learning-core-v0175.js','./electrical-learning-session-v0180.js','./symbol-template-v0169.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
 ];
 const OPTIONAL_ASSETS=[
+  './RELEASE_NOTES_V0187_PWA_V0227.txt','./HUONG_DAN_THU_V0187_SYMBOL_UPDATE_MACRO_PROFILES.txt','./SYMBOL_UPDATE_MACRO_PROFILE_SCHEMA_V0187.md',
   './RELEASE_NOTES_V01854_PWA_V02254_TEXT_PARAGRAPH_PARITY.txt','./HUONG_DAN_THU_V01854_TEXT_PARAGRAPH_PARITY.txt','./DWG_SAMPLE_TEXT_DIAGNOSTIC_V01854.txt','./TEXT_PARAGRAPH_PARITY_STATIC_TEST_V01854.txt','./MTEXT_CAP_HEIGHT_PARAGRAPH_PARITY_V01854.md',
   './RELEASE_NOTES_V01853_PWA_V02253_TEXT_METRIC_UNICODE.txt','./HUONG_DAN_THU_V01853_TEXT_METRIC_UNICODE.txt','./VIETNAMESE_ENCODING_NORMALIZER_V01853.md','./TEXT_METRIC_UNICODE_STATIC_TEST_V01853.txt','./DWG_SAMPLE_TEXT_DIAGNOSTIC_V01853.txt',
   './RELEASE_NOTES_V01852_PWA_V02252_MTEXT_LINE_SPACING_PARITY.txt','./HUONG_DAN_THU_V01852_MTEXT_LINE_SPACING_PARITY.txt','./MTEXT_LINE_SPACING_PARITY_DIAGNOSTIC_V01852.txt','./TEXT_LAYOUT_PARITY_STATIC_TEST_V01852.txt',

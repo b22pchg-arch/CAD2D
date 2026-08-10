@@ -5,7 +5,7 @@
 import { Dwg_File_Type, LibreDwg } from './vendor/libredwg-web-0.7.9/dist/libredwg-web.js';
 import './vietnamese-text-normalizer-v02253.js';
 
-const DWG_WORKER_VERSION = '0.22.6';
+const DWG_WORKER_VERSION = '0.22.7';
 const DWG_ENGINE_VERSION = '0.7.9';
 const DWG_ENGINE_PACKAGE = '@mlightcad/libredwg-web';
 const DWG_ENGINE_SOURCE = 'local-vendor';
