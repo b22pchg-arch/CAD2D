@@ -1,13 +1,13 @@
 {
-  "version": "0.22.3",
-  "releasedAt": "2026-08-09T15:53:00+07:00",
-  "notes": "V0.18.3: Structural Transaction Delta; COPY/PASTE/DELETE dùng add/remove delta, selection edit tiếp tục dùng delta nhẹ, snapshot legacy làm fallback cho lệnh chưa migrate.",
+  "version": "0.22.6",
+  "releasedAt": "2026-08-10T09:58:00+07:00",
+  "notes": "V0.22.6: Macro Engine Phase 2 parameterized replay-safe + Symbol Instance Version Link; giữ FIX4 TEXT/MTEXT parity, Vietnamese Unicode Normalizer và TX3/TX4/TX5; Project JSON v11.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.22.3",
-  "build": "cad-interaction-architecture-v0183"
+  "title": "DWG Sketch PWA V0.22.6",
+  "build": "macro2-symbol-instance-link-v0186"
 }

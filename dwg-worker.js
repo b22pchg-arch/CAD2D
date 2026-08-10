@@ -3,8 +3,9 @@
  * Upstream: @mlightcad/libredwg-web 0.7.9 (GPL-3.0)
  */
 import { Dwg_File_Type, LibreDwg } from './vendor/libredwg-web-0.7.9/dist/libredwg-web.js';
+import './vietnamese-text-normalizer-v02253.js';
 
-const DWG_WORKER_VERSION = '0.22.3';
+const DWG_WORKER_VERSION = '0.22.6';
 const DWG_ENGINE_VERSION = '0.7.9';
 const DWG_ENGINE_PACKAGE = '@mlightcad/libredwg-web';
 const DWG_ENGINE_SOURCE = 'local-vendor';
@@ -320,6 +321,12 @@ function decodeCadUnicodeEscapes(value, stats = null) {
     return String.fromCodePoint(parseInt(hex, 16));
   });
 }
+function mtextParagraphAlignmentV02254(raw) {
+  const m = String(raw ?? '').match(/\\p[^;{}]*?q([clrdj])[^;{}]*;/i);
+  if (!m) return 'Left';
+  const q = String(m[1]).toLowerCase();
+  return q === 'c' ? 'Center' : q === 'r' ? 'Right' : (q === 'j' || q === 'd') ? 'Justify' : 'Left';
+}
 function cleanCadText(value, isMText = false, stats = null) {
   let text = decodeCadUnicodeEscapes(value, stats)
     .replace(/%%d/gi, '°').replace(/%%p/gi, '±').replace(/%%c/gi, 'Ø')
@@ -428,8 +435,17 @@ function decodedTextRecord(entity, ctx, isMText = false, rawValue = '') {
   const beforeEscapes = ctx.textStats.unicodeEscapesDecoded;
   const beforeParagraphFormats = ctx.textStats.paragraphFormatsRemoved;
   let text = cleanCadText(rawValue, isMText, ctx.textStats);
-  let converted = false;
-  if (style.encoding === 'TCVN3') {
+  let converted = false, detectedEncoding = style.encoding || 'Unicode';
+  const vn = globalThis.DwgVietnameseNormalizerV02253;
+  if (vn) {
+    const result = vn.toUnicode(text, { mode: 'AUTO', styleName: style.name, fontFile: style.fontFile, threshold: .80 });
+    text = result.value; converted = result.changed; detectedEncoding = result.encoding || detectedEncoding;
+    if (converted) {
+      if (detectedEncoding === 'TCVN3') ctx.textStats.tcvn3Converted++;
+      else if (detectedEncoding === 'VNI') ctx.textStats.vniConverted++;
+      else if (detectedEncoding === 'VIQR') ctx.textStats.viqrConverted++;
+    }
+  } else if (style.encoding === 'TCVN3') {
     const result = decodeTcvn3(text, style.uppercaseLegacy);
     text = result.text; converted = result.changed;
     if (converted) ctx.textStats.tcvn3Converted++;
@@ -440,12 +456,12 @@ function decodedTextRecord(entity, ctx, isMText = false, rawValue = '') {
   ctx.textStats.styles[style.name] = (ctx.textStats.styles[style.name] || 0) + 1;
   return {
     text,
-    fontName: style.fontCss,
-    fontCss: style.fontCss,
+    fontName: converted && vn ? vn.recommendFont(style.name, style.fontFile, style.fontCss) : style.fontCss,
+    fontCss: converted && vn ? vn.recommendFont(style.name, style.fontFile, style.fontCss) : style.fontCss,
     sourceStyleName: style.name,
     sourceFontFile: style.fontFile,
     sourceBigFontFile: style.bigFontFile,
-    sourceTextEncoding: style.encoding,
+    sourceTextEncoding: detectedEncoding,
     sourceTextConverted: converted,
     textWidthFactor: style.widthFactor || 1,
     textObliqueDeg: style.obliqueDeg || 0
@@ -649,12 +665,46 @@ function convertEntity(entity, ctx, transform = IDENTITY, inherited = null, dept
     case 'ATTRIB':
     case 'ATTDEF': {
       const textInfo = decodedTextRecord(entity, ctx, false, entity.text ?? entity.value ?? entity.defaultValue);
-      if (textInfo.text) out.push({ type: 'TEXT', position: transform.point(entity.startPoint ?? entity.insertionPoint), height: Math.max(.0001, Math.abs(n(entity.textHeight, 2.5)) * transformedScale), rotationDeg: n(entity.rotation) * DEG + transform.rotation * DEG, ...textInfo, ...base });
+      if (textInfo.text) {
+        const alignmentPoint = entity.endPoint ? transform.point(entity.endPoint) : null;
+        out.push({
+          type: 'TEXT',
+          position: transform.point(entity.startPoint ?? entity.insertionPoint),
+          alignmentPoint,
+          textHAlign: Math.trunc(n(entity.halign)),
+          textVAlign: Math.trunc(n(entity.valign)),
+          height: Math.max(.0001, Math.abs(n(entity.textHeight, 2.5)) * transformedScale),
+          rotationDeg: n(entity.rotation) * DEG + transform.rotation * DEG,
+          ...textInfo,
+          textWidthFactor: Math.max(.05, Math.abs(n(entity.xScale, textInfo.textWidthFactor || 1))),
+          textObliqueDeg: Number.isFinite(Number(entity.obliqueAngle)) ? n(entity.obliqueAngle) * DEG : textInfo.textObliqueDeg,
+          ...base
+        });
+      }
       break;
     }
     case 'MTEXT': {
-      const textInfo = decodedTextRecord(entity, ctx, true, entity.text);
-      if (textInfo.text) out.push({ type: 'MTEXT', position: transform.point(entity.insertionPoint), height: Math.max(.0001, Math.abs(n(entity.textHeight, 2.5)) * transformedScale), rotationDeg: n(entity.rotation) * DEG + transform.rotation * DEG, ...textInfo, ...base });
+      const rawMText = String(entity.text ?? '');
+      const textInfo = decodedTextRecord(entity, ctx, true, rawMText);
+      const mtextParagraphAlignment = mtextParagraphAlignmentV02254(rawMText);
+      if (textInfo.text) out.push({
+        type: 'MTEXT',
+        position: transform.point(entity.insertionPoint),
+        textAttachmentPoint: Math.max(1, Math.min(9, Math.trunc(n(entity.attachmentPoint, 1)) || 1)),
+        textReferenceWidth: Math.max(0, n(entity.rectWidth || entity.extentsWidth) * transformedScale),
+        textReferenceHeight: Math.max(0, n(entity.rectHeight || entity.extentsHeight) * transformedScale),
+        mtextActualWidth: Math.max(0, n(entity.extentsWidth) * transformedScale),
+        mtextActualHeight: Math.max(0, n(entity.extentsHeight) * transformedScale),
+        mtextReferenceWidth: Math.max(0, n(entity.rectWidth || entity.extentsWidth) * transformedScale),
+        mtextParagraphAlignment,
+        mtextLineSpacingStyle: Math.max(1, Math.min(2, Math.trunc(n(entity.lineSpacingStyle, 1)) || 1)),
+        mtextLineSpacingFactor: Math.max(.25, Math.min(4, n(entity.lineSpacing, 1) || 1)),
+        height: Math.max(.0001, Math.abs(n(entity.textHeight, 2.5)) * transformedScale),
+        rotationDeg: (entity.direction && (Math.abs(n(entity.direction.x)-1)>1e-9 || Math.abs(n(entity.direction.y))>1e-9)
+          ? Math.atan2(n(entity.direction.y), n(entity.direction.x)) * DEG
+          : n(entity.rotation) * DEG) + transform.rotation * DEG,
+        ...textInfo, ...base
+      });
       break;
     }
     case 'DIMENSION': {
@@ -752,7 +802,7 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
   });
   const ctx = {
     blocks, unsupported: {}, blockStack: [], textStyles, colorStats,
-    textStats: { total: 0, tcvn3Converted: 0, unicodeEscapesDecoded: 0, entitiesWithUnicodeEscapes: 0, paragraphFormatsRemoved: 0, entitiesWithParagraphFormatting: 0, styles: {} },
+    textStats: { total: 0, tcvn3Converted: 0, vniConverted: 0, viqrConverted: 0, unicodeEscapesDecoded: 0, entitiesWithUnicodeEscapes: 0, paragraphFormatsRemoved: 0, entitiesWithParagraphFormatting: 0, styles: {} },
     lwPolylineStats: { total: 0, closed: 0, closedFlag512: 0, closedLegacyFlag1: 0, closedExplicit: 0 }
   };
   const entities = [];

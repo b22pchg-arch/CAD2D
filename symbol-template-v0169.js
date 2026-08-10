@@ -59,7 +59,8 @@ function sanitizeElectricalTemplate(raw,keyHint=''){
   const rawPrimitives=readTemplateField(raw,'p','P','primitives','Primitives')||[];
   const primitives=(Array.isArray(rawPrimitives)?rawPrimitives:[]).filter(validTemplatePrimitive).map(p=>Array.isArray(p)?clone(p):objectPrimitiveToArray(p)).filter(Boolean);
   if(!primitives.length)return null;
-  return{id,name,ports,p:primitives,custom:true,updatedAt:readTemplateField(raw,'updatedAt','UpdatedAt')||new Date().toISOString()};
+  const version=String(readTemplateField(raw,'version','Version')||'1.0.0').trim()||'1.0.0',revision=Math.max(1,Math.trunc(num(readTemplateField(raw,'revision','Revision'),1))),category=String(readTemplateField(raw,'category','Category')||'Custom').trim()||'Custom',rawTags=readTemplateField(raw,'tags','Tags'),tags=(Array.isArray(rawTags)?rawTags:[]).map(x=>String(x||'').trim()).filter(Boolean);
+  return{id,name,ports,p:primitives,custom:true,updatedAt:readTemplateField(raw,'updatedAt','UpdatedAt')||new Date().toISOString(),version,revision,category,tags};
 }
 function loadElectricalTemplateLibrary(){
   customElectricalSymbolTemplates={};
@@ -126,11 +127,11 @@ insertElectricalSymbolAt=function(p){
   const id=$('electricalSymbolType')?.value||'CIRCUIT_BREAKER',template=customElectricalSymbolTemplates[id];
   if(template)ensureProjectElectricalTemplate(id);
   const e={type:'SYMBOL',symbolType:id,label:$('electricalSymbolLabel')?.value||'',position:point(p),symbolScale:Math.max(.1,num($('electricalSymbolScale')?.value,1)),rotationDeg:num($('electricalSymbolRotation')?.value,0),automationId:'node-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,6),color:hexToArgb($('newColor').value),stroke:Math.max(.2,num($('newStroke').value,2))};
-  if(template)e.symbolTemplateSnapshot=clone(template);
+  if(template){e.symbolTemplateSnapshot=clone(template);window.DwgSketchSymbolInstanceLinkV0226?.stamp?.(e,template)}
   simpleAction('Đã chèn ký hiệu điện',()=>{overlays.push(e);selected=[refFor(e,'overlay')];syncElectricalAutomationFromSymbols()});setTool('select');
 };
 const originalElectricalGridNodeEntity=electricalGridNodeEntity;
-electricalGridNodeEntity=function(node,options){const e=originalElectricalGridNodeEntity(node,options),t=customElectricalSymbolTemplates[node.type];if(t){e.symbolTemplateSnapshot=clone(t);ensureProjectElectricalTemplate(node.type)}return e};
+electricalGridNodeEntity=function(node,options){const e=originalElectricalGridNodeEntity(node,options),t=customElectricalSymbolTemplates[node.type];if(t){e.symbolTemplateSnapshot=clone(t);window.DwgSketchSymbolInstanceLinkV0226?.stamp?.(e,t);ensureProjectElectricalTemplate(node.type)}return e};
 
 function rotateSelectionOpen(){
   if(!selected.length){status('ROTATE: hãy chọn một hoặc nhiều đối tượng trước.');return}
@@ -186,26 +187,29 @@ function openSaveElectricalTemplate(){
   $('symbolTemplateModal').classList.add('show');setTimeout(()=>$('symbolTemplateName').focus(),60);
 }
 function saveSelectedAsElectricalTemplate(){
+  if(window.DwgSketchSymbolCatalogV0226?.isReadOnly?.()){status('Catalog hiện tại là read-only; hãy chuyển sang catalog người dùng để lưu mẫu.');return}
   const items=templateSelectionItems(),b=templateBounds(items);if(!b)return;
   const origin={x:(b.minX+b.maxX)/2,y:(b.minY+b.maxY)/2},id=normalizeTemplateKey($('symbolTemplateKey').value),name=String($('symbolTemplateName').value||id).trim()||id;
   const primitives=items.filter(x=>!x.symbolTemplatePortMarker).map(x=>itemToTemplatePrimitive(x,origin)).filter(Boolean);
   if(!primitives.length){alert('Mẫu không có primitive hợp lệ.');return}
   const requested=String($('symbolTemplatePorts').value||'').split(/[,;\n]+/).map(x=>x.trim()).filter(Boolean);
   const markers=items.filter(x=>x.symbolTemplatePortMarker),ports=markers.map((m,i)=>{const c=point(m.center);return[c.x-origin.x,c.y-origin.y,requested[i]||m.symbolTemplatePortName||('P'+(i+1))]});
-  customElectricalSymbolTemplates[id]={id,name,ports,p:primitives,custom:true,updatedAt:new Date().toISOString()};saveElectricalTemplateLibrary();ensureProjectElectricalTemplate(id);
+  const previous=customElectricalSymbolTemplates[id];customElectricalSymbolTemplates[id]={id,name,ports,p:primitives,custom:true,updatedAt:new Date().toISOString(),version:previous?.version||'1.0.0',revision:Math.max(1,(Number(previous?.revision)||0)+1),category:previous?.category||'Custom',tags:Array.isArray(previous?.tags)?clone(previous.tags):[]};saveElectricalTemplateLibrary();ensureProjectElectricalTemplate(id);
   $('electricalSymbolType').value=id;$('symbolTemplateModal').classList.remove('show');symbolTemplateEditSource={id,name};
   status(`Đã lưu mẫu “${name}” (${primitives.length} primitive, ${ports.length} cổng). Mẫu sẽ còn dùng được ở các phiên sau.`);
 }
 function deleteSelectedElectricalTemplate(){
+  if(window.DwgSketchSymbolCatalogV0226?.isReadOnly?.()){status('Catalog hiện tại là read-only; không thể xóa mẫu.');return}
   const id=$('electricalSymbolType')?.value||'';const t=customElectricalSymbolTemplates[id];if(!t)return;
   if(!confirm(`Xóa mẫu người dùng “${t.name}”? Các ký hiệu đã chèn trong bản vẽ vẫn giữ snapshot mẫu trong dự án.`))return;
   delete customElectricalSymbolTemplates[id];delete ELECTRICAL_SYMBOL_DEFS[id];saveElectricalTemplateLibrary();if(project?.electricalSymbolTemplates)project.electricalSymbolTemplates=project.electricalSymbolTemplates.filter(x=>normalizeTemplateKey(x.id||x.name)!==id);status('Đã xóa mẫu '+t.name);
 }
 function exportElectricalTemplateLibrary(){
-  const payload={schema:'dwg-sketch-electrical-symbol-library',schemaVersion:1,exportedAt:new Date().toISOString(),templates:Object.values(customElectricalSymbolTemplates)};
+  const payload={schema:'dwg-sketch-electrical-symbol-library',schemaVersion:2,libraryVersion:'1.0.0',appVersion:'0.22.6',exportedAt:new Date().toISOString(),templates:Object.values(customElectricalSymbolTemplates)};
   downloadTextFile('DWG_Sketch_Electrical_Symbol_Library.json',JSON.stringify(payload,null,2),'application/json;charset=utf-8');
 }
 async function importElectricalTemplateLibrary(file){
+  if(window.DwgSketchSymbolCatalogV0226?.isReadOnly?.()){status('Catalog hiện tại là read-only; hãy chuyển catalog trước khi nhập mẫu.');return}
   if(!file)return;try{const data=JSON.parse(await file.text()),list=Array.isArray(data)?data:(data.templates||[]);let count=0;for(const raw of list){const t=sanitizeElectricalTemplate(raw);if(t){customElectricalSymbolTemplates[t.id]=t;count++}}saveElectricalTemplateLibrary();status(`Đã nhập ${count} mẫu thiết bị.`)}catch(err){alert('Không nhập được thư viện mẫu: '+err.message)}finally{file.value=''}
 }
 
