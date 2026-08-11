@@ -1,0 +1,42 @@
+HƯỚNG DẪN THỬ V0.18.11 - MACRO INPUT BINDING
+============================================================
+
+A. Thử Source / Target
+1. Mở bản vẽ, chọn nhóm A. Trong Macro > Input Binding Roles chọn Source, bấm Gán tập chọn vào role.
+2. Chọn nhóm B, chọn Target, bấm Gán tập chọn vào role.
+3. Tạo/ghi macro. Trong Step Editor đặt một step Input Role=Source, một step khác Input Role=Target.
+4. Bấm Kiểm tra macro hoặc gõ MACROCHECK.
+5. Nếu báo OK, bấm Phát macro. Kiểm tra đúng step tác động đúng nhóm A/B.
+6. Khi phát xong, tập chọn người dùng trước playback phải được khôi phục.
+
+B. Thử Reference Role độc lập
+1. Chọn một nhóm/hình dùng làm mốc và gán Reference.
+2. Với RROTATE/RSCALE/RMIRROR đặt Input Role=Source hoặc Target, Reference Role=Reference.
+3. Chạy MACROCHECK rồi MACROPLAY.
+4. Kiểm tra đối tượng bị biến đổi là InputRole, còn tâm/trục adaptive anchor được dựng theo bounds của ReferenceRole.
+
+C. Thử hợp đồng role
+1. Chọn macro, chọn Source. Đặt Kind=CAD, Minimum=2, Required=true và Lưu role contract.
+2. Gán Source chỉ có Overlay rồi MACROCHECK: phải FAIL.
+3. Gán lại Source có ít nhất 2 CAD rồi MACROCHECK: phải PASS nếu các role khác cũng hợp lệ.
+4. Bỏ binding một ReferenceRole đang được step dùng: MACROCHECK phải FAIL.
+
+D. Tương thích ngược
+1. Mở macro V0.18.10 hoặc cũ hơn.
+2. Step không có role phải hiện CurrentSelection / SameAsInput.
+3. MACROCHECK/MACROPLAY phải chạy như trước.
+
+Lệnh nhanh
+- MACROSOURCE: gán tập chọn hiện tại vào Source.
+- MACROTARGET: gán tập chọn hiện tại vào Target.
+- MACROREF hoặc MACROREFERENCE: gán tập chọn hiện tại vào Reference.
+- MACROBIND: gán theo role đang chọn trên UI.
+- MACROCHECK: preflight, không thay đổi bản vẽ.
+- MACROPLAY: phát macro sau khi preflight đạt.
+
+Bài test khuyến nghị
+- Source = 2 thiết bị; Target = 3 đường; Reference = khung/nhóm mốc ở vị trí khác.
+- Step1 RMOVE InputRole=Source.
+- Step2 RROTATE InputRole=Target, ReferenceRole=Reference.
+- Step3 RSCALE InputRole=Source, ReferenceRole=Reference.
+- MACROCHECK -> MACROPLAY -> Ctrl+Z/Redo.

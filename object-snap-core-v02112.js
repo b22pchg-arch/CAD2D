@@ -116,8 +116,11 @@
     return best?best.point:gridPoint;
   };
 
+  // V0.22.13 FIX1: keep OSNAP hit tolerance but hide the always-visible cyan aperture ring.
+  // Real snap markers are still rendered by originalDrawSnap(s).
+  const SHOW_SNAP_APERTURE=false;
   drawSnap=function drawSnapV02112(s){
-    if(project&&$('snapCheck')?.checked&&cadCursor?.inside&&tool!=='pan'){
+    if(SHOW_SNAP_APERTURE&&project&&$('snapCheck')?.checked&&cadCursor?.inside&&tool!=='pan'){
       const tol=clampTol($('snapTolerance').value);
       ctx.save();ctx.strokeStyle='rgba(0,229,255,.28)';ctx.lineWidth=1;ctx.setLineDash([]);ctx.beginPath();ctx.arc(cadCursor.x,cadCursor.y,tol,0,Math.PI*2);ctx.stroke();ctx.restore();
     }

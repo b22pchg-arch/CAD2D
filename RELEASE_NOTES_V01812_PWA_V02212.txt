@@ -1,0 +1,30 @@
+DWG SKETCH PROTOTYPE V0.18.12.0 / PWA V0.22.12
+ROLE-DERIVED OUTPUTS + CHAINED RESULT ROLES
+============================================================
+
+MUC TIEU
+- Cho phep macro tao ra mot tap doi tuong ket qua va dung ngay tap do cho cac buoc sau.
+- Bo sung runtime role Result va OutputRole cho tung macro step.
+- Giam nhu cau chon/giao lai doi tuong thu cong giua cac buoc cua mot macro CAD phuc hop.
+
+THAY DOI CHINH
+1. Macro step co them OutputRole: None / Result / Target.
+2. RCOPY moi mac dinh OutputRole=Result.
+3. Cac relative step RMOVE/RCOPY/RROTATE/RSCALE/RMIRROR co the publish tap chon sau khi thanh cong vao Result hoac Target.
+4. Step sau co the dung InputRole=Result va/hoac ReferenceRole=Result.
+5. Result la runtime-derived role: khong cho gan thu cong; tu dong xoa truoc moi MACROPLAY de khong dung nham ket qua cu.
+6. MACROCHECK kiem tra chuoi theo thu tu. Neu Result duoc dung truoc producer, preflight FAIL va khong thay doi ban ve.
+7. OutputRole=Target cho phep chuoi tao lai Target runtime cho cac buoc sau.
+8. Sau playback, selection ban dau cua nguoi dung van duoc khoi phuc; Result van duoc giu de kiem tra bang MACRORESULT.
+9. Lenh moi: MACRORESULT / MACROSELECTRESULT / MACRORESULTCLEAR / MACROCLEARRESULT.
+10. Macro JSON tang len schemaVersion 6 / engineVersion 0.18.12.0. Macro cu khong co OutputRole van tuong thich.
+
+TUONG THICH VA ON DINH
+- Project JSON van version 11.
+- Khong luu entity ID cua Source/Target/Reference/Result vao macro JSON.
+- FIX4 TEXT/MTEXT, cap-height/em, paragraph alignment, 3-on-5 line spacing va Vietnamese Unicode Normalizer khong thay doi.
+- TX3/TX4/TX5, SM1, GE1 va Symbol Update Manager duoc giu nguyen.
+
+CHUOI THU KHUYEN NGHI
+Source -> RCOPY(out=Result) -> RROTATE(in=Result,out=Result) -> RMOVE(in=Result,out=Target)
+Sau do: MACROCHECK -> MACROPLAY -> MACRORESULT -> Ctrl+Z/Ctrl+Y.

@@ -1,0 +1,66 @@
+HUONG DAN THU V0.18.12 - ROLE-DERIVED OUTPUTS + CHAINED RESULT ROLES
+===================================================================
+
+A. KHAI NIEM MOI
+- Source / Target / Reference: runtime role co the gan tu tap chon nhu V0.18.11.
+- Result: runtime role DAN XUAT. Nguoi dung khong gan Result bang MACROBIND; Result chi duoc tao boi OutputRole cua mot relative step.
+- OutputRole:
+  * None   : khong publish tap chon sau step.
+  * Result : tap chon sau step tro thanh Result.
+  * Target : tap chon sau step tro thanh Target runtime.
+
+B. BAI THU NHANH - RCOPY -> RESULT -> RROTATE
+1. Mo ban ve va chon 2-5 doi tuong ro rang.
+2. Gan Source bang nut role hoac lenh MACROSOURCE.
+3. Tao/ghi macro co it nhat hai step:
+   Step 1: RCOPY, InputRole=Source, OutputRole=Result, deltaX/deltaY khac 0.
+   Step 2: RROTATE, InputRole=Result, ReferenceRole=SameAsInput (hoac Reference), OutputRole=Result.
+4. Chay MACROCHECK. Mong doi PASS.
+5. Chay MACROPLAY.
+6. Mong doi:
+   - Step 1 tao ban sao.
+   - Step 2 CHI quay cac ban sao vua tao.
+   - Doi tuong Source goc khong bi quay.
+7. Chay MACRORESULT. Mong doi tap ban sao sau bien doi duoc chon.
+8. Ctrl+Z/Ctrl+Y de kiem tra history.
+
+C. BAI THU CHUOI RESULT -> TARGET
+1. Them Step 3: RMOVE, InputRole=Result, OutputRole=Target.
+2. MACROCHECK -> PASS.
+3. MACROPLAY.
+4. Sau playback, Target runtime phai tro vao tap ket qua cua Step 3.
+5. Mot step thu 4 co InputRole=Target phai dung duoc tap vua publish ma khong can MACROTARGET lai.
+
+D. BAI THU PREFLIGHT BAT BUOC
+1. Dat Step 1: RROTATE, InputRole=Result.
+2. Khong co step producer Result o truoc.
+3. MACROCHECK phai FAIL voi y nghia: Result duoc dung truoc khi duoc tao.
+4. MACROPLAY cung phai bi chan truoc khi thay doi ban ve.
+5. Chuyen RCOPY(out=Result) len truoc RROTATE. MACROCHECK phai PASS neu cac dieu kien khac hop le.
+
+E. BAI THU RESULT STALE
+1. Phat macro thanh cong de tao Result.
+2. MACRORESULT phai chon duoc Result.
+3. Thay doi Source va phat lai macro.
+4. Result cu phai bi xoa ngay khi bat dau playback; ket qua sau cung chi la Result cua lan phat moi.
+5. MACRORESULTCLEAR phai xoa Result runtime.
+
+F. BAI THU REFERENCE=RESULT
+1. Step 1: RCOPY Source -> Result.
+2. Step 2: RSCALE InputRole=Source, ReferenceRole=Result, OutputRole=None.
+3. MACROCHECK phai PASS vi Result da co producer o Step 1.
+4. Step 2 phai dung bounds/anchor cua Result lam reference geometry, nhung bien doi Source.
+
+G. BAI THU TUONG THICH MACRO CU
+1. Import/mo macro V0.18.11 hoac cu hon.
+2. OutputRole trong cac step cu duoc coi la None.
+3. CurrentSelection / Source / Target / Reference va adaptive anchors phai hoat dong nhu ban cu.
+4. Project JSON van version 11.
+
+H. DIEU KIEN DAT
+- MACROCHECK chan Result-before-producer.
+- RCOPY publish dung cac ban sao, khong publish Source goc.
+- Result co the duoc chain qua nhieu relative step.
+- OutputRole=Target co the tao Target runtime moi.
+- Selection truoc playback duoc khoi phuc sau playback.
+- Result khong duoc serialize thanh entity IDs trong macro file.

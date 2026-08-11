@@ -1,0 +1,30 @@
+DWG SKETCH PROTOTYPE V0.18.11.0 / PWA V0.22.11
+MACRO INPUT BINDING + MULTI-SELECTION ROLES
+============================================================
+
+Mục tiêu
+- Cho một macro làm việc với nhiều tập đối tượng độc lập thay vì chỉ một CurrentSelection.
+- Ba vai trò runtime: Source, Target, Reference.
+- Mỗi step có InputRole riêng; RROTATE/RSCALE/RMIRROR có thể có ReferenceRole riêng.
+- Không ghi ID đối tượng runtime vào file macro, giữ macro portable giữa bản vẽ/máy.
+
+Nội dung mới
+1. Macro JSON schema v5, engineVersion 0.18.11.0.
+2. CadMacroStep: InputRole + ReferenceRole.
+3. Macro Input Role Contract: Name, MinimumCount, Kind (Any/Overlay/Cad/Mixed), Required.
+4. Runtime binding Source/Target/Reference, tự loại bỏ đối tượng đã bị xóa.
+5. MACROCHECK kiểm tra mọi role được step tham chiếu trước khi chạy.
+6. Playback chuyển tập chọn theo InputRole trước từng step và khôi phục tập chọn trước playback khi kết thúc.
+7. ReferenceRole cung cấp bounds riêng cho adaptive anchor của Relative Geometry Phase 3.
+8. Lệnh: MACROSOURCE, MACROTARGET, MACROREF/MACROREFERENCE, MACROBIND.
+9. PWA và C# cùng semantics; PWA lưu role contracts cùng macro nhưng bindings chỉ ở memory.
+
+Tương thích
+- Macro cũ không có InputRole => CurrentSelection.
+- Macro cũ SelectionBoundsCenter/SelectionBoundsAnchor vẫn hoạt động.
+- Project JSON vẫn v11.
+- FIX4 TEXT/MTEXT, Unicode Normalizer, Symbol Update Manager, Macro Profiles, TX3/TX4/TX5 giữ nguyên.
+
+Lưu ý
+- Runtime role binding phải gán lại sau khi mở phiên/bản vẽ khác.
+- RCOPY chưa tự đưa bản sao mới vào một Result role; đây là hướng V0.18.12.
