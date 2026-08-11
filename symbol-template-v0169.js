@@ -205,7 +205,7 @@ function deleteSelectedElectricalTemplate(){
   delete customElectricalSymbolTemplates[id];delete ELECTRICAL_SYMBOL_DEFS[id];saveElectricalTemplateLibrary();if(project?.electricalSymbolTemplates)project.electricalSymbolTemplates=project.electricalSymbolTemplates.filter(x=>normalizeTemplateKey(x.id||x.name)!==id);status('Đã xóa mẫu '+t.name);
 }
 function exportElectricalTemplateLibrary(){
-  const payload={schema:'dwg-sketch-electrical-symbol-library',schemaVersion:2,libraryVersion:'1.0.0',appVersion:'0.22.7',exportedAt:new Date().toISOString(),templates:Object.values(customElectricalSymbolTemplates)};
+  const payload={schema:'dwg-sketch-electrical-symbol-library',schemaVersion:2,libraryVersion:'1.0.0',appVersion:'0.22.12',exportedAt:new Date().toISOString(),templates:Object.values(customElectricalSymbolTemplates)};
   downloadTextFile('DWG_Sketch_Electrical_Symbol_Library.json',JSON.stringify(payload,null,2),'application/json;charset=utf-8');
 }
 async function importElectricalTemplateLibrary(file){
