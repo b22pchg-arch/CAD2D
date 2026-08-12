@@ -1,0 +1,12 @@
+HƯỚNG DẪN THỬ V0.18.16 / PWA V0.22.16
+
+1. Build C# bằng CSharp_Source\DwgSketchPrototype\build_release.cmd.
+2. Mở Macro Control Center.
+3. Tạo hoặc chọn vài macro, đặt Nhóm và Tag rồi bấm Lưu nhóm/tag.
+4. Gõ từ khóa trong Tìm macro; thử lọc Yêu thích và lọc theo Nhóm.
+5. Chọn một macro, bấm Nhân bản. Bản sao phải có tên mới, revision=1 và các StepId mới.
+6. Phát macro; phần tóm tắt phải tăng RunCount và cập nhật lần chạy cuối.
+7. Tạo một macro có Branch/Condition rồi phát để có Trace. Double-click một dòng Trace trong C# để nhảy tới step tương ứng.
+8. Chạy Kiểm tra macro với lỗi có dạng Bước N rồi bấm Đi tới bước lỗi.
+9. Xác nhận Config chính vẫn gọn, Macro Control Center độc lập.
+10. Kiểm tra PAN/SELECT mặc định FIX3 và OSNAP không hiện vòng aperture xanh.

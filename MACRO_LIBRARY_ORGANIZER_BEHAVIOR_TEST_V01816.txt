@@ -1,0 +1,19 @@
+MACRO LIBRARY ORGANIZER + TRACE NAVIGATION BEHAVIOR TEST V0.18.16 / PWA V0.22.16
+RESULT: 13/13 PASS
+
+[PASS] API version
+[PASS] search by name
+[PASS] search by tag
+[PASS] favorite filter
+[PASS] category filter
+[PASS] duplicate adds macro
+[PASS] duplicate resets favorite/stats
+[PASS] duplicate keeps category/tags
+[PASS] duplicate remaps step ids
+RESULT 9/9
+
+[PASS] trace renders one row
+[PASS] row carries step index
+[PASS] selected trace remembers step
+[PASS] trace status fail count
+RESULT 4/4

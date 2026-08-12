@@ -1,0 +1,18 @@
+DWG SKETCH V0.18.16.0 FIX1 / PWA V0.22.16 FIX1 - CREATE TRACE BUTTON
+
+Mục tiêu
+- Bổ sung nút Tạo Trace/Tracer rõ ràng trong Macro Trace.
+- C# và PWA dùng chung nguyên tắc: Tạo Trace gọi chính luồng Phát macro/MACROPLAY.
+- Không tạo engine Trace riêng, tránh sai khác giữa kết quả chạy macro và Trace.
+
+C#
+- Macro Control Center > Macro Trace có nút Tạo Trace.
+- Nút gọi PlaySelectedMacroV0185Click và giữ nguyên Preflight, cảnh báo thao tác phá hủy, input roles, branch/condition và result sets.
+- Sau khi chạy, danh sách Trace hiển thị RUN/SKIP/SKIP_DISABLED/SKIP_UNSAFE/FAIL và có thể double-click để nhảy tới step.
+
+PWA
+- Macro Control Center > Macro Trace có nút Tạo Trace.
+- Nút kích hoạt cadMacroPlayBtn, vì vậy chạy đúng cùng engine macro-library-core-v02216.js.
+
+Lưu ý
+- Tạo Trace có thể làm thay đổi bản vẽ nếu macro chứa thao tác chỉnh sửa; cảnh báo hiện có của MACROPLAY vẫn được giữ nguyên.

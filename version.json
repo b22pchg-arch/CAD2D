@@ -1,13 +1,13 @@
 {
-  "version": "0.22.15",
-  "releasedAt": "2026-08-12T07:28:00+07:00",
-  "notes": "V0.22.15: Macro Control Center độc lập khỏi Config; giữ Branch Groups/Else, Trace, Result labels, OSNAP aperture hidden, FIX4 TEXT/MTEXT và Project JSON v11.",
+  "version": "0.22.16",
+  "releasedAt": "2026-08-12T18:16:00+07:00",
+  "notes": "V0.22.16 FIX2: sửa metadata title trong version.json để vượt kiểm tra release; giữ nguyên FIX1 bổ sung nút Tạo Trace và toàn bộ chức năng V0.22.16.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.22.15",
-  "build": "macro-control-center-independent-workspace-v01815"
+  "title": "DWG Sketch PWA V0.22.16",
+  "build": "macro-control-center-phase2-create-trace-fix2"
 }

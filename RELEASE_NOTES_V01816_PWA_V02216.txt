@@ -1,0 +1,13 @@
+DWG SKETCH C# V0.18.16.0 / PWA V0.22.16
+MACRO CONTROL CENTER PHASE 2 - LIBRARY ORGANIZER + TRACE NAVIGATION
+
+- Search/filter macros by name, ID, category and tags.
+- Favorites and category grouping are portable macro metadata.
+- Duplicate macro creates new macro ID and new StepId values.
+- RunCount/LastRunAt provide quick usage statistics.
+- Double-click C# Macro Trace to jump to the corresponding step.
+- Preflight “Đi tới bước lỗi” parses a reported step number and selects that step.
+- PWA has the same library organizer and preflight navigation.
+- Macro storage schema is v9; V0.18.15/v8 files remain readable.
+- Project JSON stays v11.
+- V0.18.15 FIX3 default Select/Pan and hidden OSNAP aperture are retained.
