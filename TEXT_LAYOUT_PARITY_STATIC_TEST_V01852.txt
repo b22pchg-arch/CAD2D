@@ -1,0 +1,605 @@
+DWG SKETCH V0.18.5.3 / PWA V0.22.5.3 - TEXT LAYOUT PARITY STATIC TEST
+==============================================================================
+RESULT: 599/599 PASS
+XAML handlers checked: 186
+C# files checked: 87
+
+[OK] Ton tai CSharp_Source/DwgSketchPrototype/DwgSketchPrototype.csproj
+[OK] Ton tai CSharp_Source/DwgSketchPrototype/MainWindow.xaml
+[OK] Ton tai CSharp_Source/DwgSketchPrototype/MainWindow.xaml.cs
+[OK] Ton tai CSharp_Source/DwgSketchPrototype/Models.cs
+[OK] Ton tai CSharp_Source/DwgSketchPrototype/CadTextLayoutParity.V01852.cs
+[OK] Ton tai CSharp_Source/DwgSketchPrototype/MainWindow.TextAnchorParity.V01851.cs
+[OK] Ton tai CSharp_Source/DwgSketchPrototype/DxfParser.cs
+[OK] Ton tai CSharp_Source/DwgSketchPrototype/LibreDwgJsonParser.cs
+[OK] Ton tai CSharp_Source/DwgSketchPrototype/ProjectStorage.cs
+[OK] Ton tai PWA_Standalone/index.html
+[OK] Ton tai PWA_Standalone/dwg-worker.js
+[OK] Ton tai PWA_Standalone/sw.js
+[OK] Ton tai PWA_Standalone/version.json
+[OK] C# Version=0.18.5.3
+[OK] C# FileVersion=0.18.5.3
+[OK] C# AssemblyVersion=0.18.5.3
+[OK] WPF title hien thi V0.18.5.3
+[OK] build_release PWA_VERSION=0.22.5.3
+[OK] csproj XML hop le
+[OK] XAML XML hop le
+[OK] Content ton tai: RELEASE_NOTES_V01852_PWA_V02252_MTEXT_LINE_SPACING_PARITY.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01852_MTEXT_LINE_SPACING_PARITY.txt
+[OK] Content ton tai: MTEXT_LINE_SPACING_PARITY_DIAGNOSTIC_V01852.txt
+[OK] Content ton tai: TEXT_LAYOUT_PARITY_STATIC_TEST_V01852.txt
+[OK] Content ton tai: RELEASE_NOTES_V0185_PWA_V0225.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0185_MACRO_LIBRARY_CATALOG.txt
+[OK] Content ton tai: INTERACTION_ARCHITECTURE_STATIC_TEST_V0185.txt
+[OK] Content ton tai: MACRO_LIBRARY_CATALOG_SCHEMA_V0185.md
+[OK] Content ton tai: RELEASE_NOTES_V0184_PWA_V0224.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0184_CURVE_EDIT_DELTA.txt
+[OK] Content ton tai: INTERACTION_ARCHITECTURE_STATIC_TEST_V0184.txt
+[OK] Content ton tai: VERSIONED_SYMBOL_LIBRARY_SCHEMA_V0184.md
+[OK] Content ton tai: RELEASE_NOTES_V0183_PWA_V0223.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0183_STRUCTURAL_TRANSACTION_DELTA.txt
+[OK] Content ton tai: INTERACTION_ARCHITECTURE_STATIC_TEST_V0183.txt
+[OK] Content ton tai: RELEASE_NOTES_V0182_PWA_V0222.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0182_TRANSACTION_DELTA_EXPANSION.txt
+[OK] Content ton tai: INTERACTION_ARCHITECTURE_STATIC_TEST_V0182.txt
+[OK] Content ton tai: RELEASE_NOTES_V0181_PWA_V0221.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0181_SERVICE_OWNERSHIP_DELTA.txt
+[OK] Content ton tai: INTERACTION_ARCHITECTURE_STATIC_TEST_V0181.txt
+[OK] Content ton tai: RELEASE_NOTES_V0180_PWA_V0220.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0180_INTERACTION_ARCHITECTURE.txt
+[OK] Content ton tai: INTERACTION_ARCHITECTURE_STATIC_TEST_V0180.txt
+[OK] Content ton tai: RELEASE_NOTES_V01713_PWA_V02113.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01713_BLOCK_SYMBOL_EDITING.txt
+[OK] Content ton tai: BLOCK_SYMBOL_EDITING_STATIC_TEST_V01713.txt
+[OK] Content ton tai: RELEASE_NOTES_V01711_PWA_V02111.txt
+[OK] Content ton tai: BUILD_FIX_V01711_SELECTION_EDITING_CORE.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01711_SELECTION_EDITING.txt
+[OK] Content ton tai: SELECTION_EDITING_REGRESSION_V01711.txt
+[OK] Content ton tai: SELECTION_EDITING_STATIC_TEST_V01711.txt
+[OK] Content ton tai: RELEASE_NOTES_V01710_PWA_V02110.txt
+[OK] Content ton tai: BUILD_FIX_V01710_RENDERING_PARITY.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01710_RENDERING_PARITY.txt
+[OK] Content ton tai: RENDERING_PARITY_REGRESSION_V01710.txt
+[OK] Content ton tai: RELEASE_NOTES_V0179_PWA_V0219.txt
+[OK] Content ton tai: DWG_HATCH_PARITY_TEST_V0179.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0179_HATCH_ZOOM_PARITY.txt
+[OK] Content ton tai: BUILD_FIX_V0177_A4_TEMPLATE_WORKFLOW_POLISH.txt
+[OK] Content ton tai: RELEASE_NOTES_V0177_PWA_V0217.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0177_A4_TEMPLATE_WORKFLOW.txt
+[OK] Content ton tai: A4_TEMPLATE_WORKFLOW_TEST_REPORT_V0177.txt
+[OK] Content ton tai: BUILD_FIX_V0176_A4_FRAME_SELECTION_PASS_THROUGH.txt
+[OK] Content ton tai: RELEASE_NOTES_V0176_PWA_V0216.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0176_A4_FRAME_SELECTION.txt
+[OK] Content ton tai: A4_FRAME_SELECTION_TEST_REPORT_V0176.txt
+[OK] Content ton tai: BUILD_FIX_V0175_A4_EDITABLE_TEMPLATES.txt
+[OK] Content ton tai: RELEASE_NOTES_V0175_PWA_V0215.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0175_A4_EDITABLE_TEMPLATES.txt
+[OK] Content ton tai: A4_EDITABLE_TEMPLATE_SCHEMA_V0175.md
+[OK] Content ton tai: A4_EDITABLE_TEMPLATE_TEST_REPORT_V0175.txt
+[OK] Content ton tai: BUILD_FIX_V0174_FAST_TRACK.txt
+[OK] Content ton tai: RELEASE_NOTES_V0174_PWA_V0214.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0174_FAST_TRACK.txt
+[OK] Content ton tai: NETWORK_LEARNING_SCHEMA_V0174.md
+[OK] Content ton tai: NETWORK_LEARNING_TEST_REPORT_V0174.txt
+[OK] Content ton tai: BUILD_FIX_V01700_NETWORK_DIAGRAM.txt
+[OK] Content ton tai: NETWORK_DIAGRAM_TEST_REPORT_V01700.txt
+[OK] Content ton tai: RELEASE_NOTES_V01700_PWA_V0210.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01700_NETWORK_DIAGRAM.txt
+[OK] Content ton tai: NETWORK_DIAGRAM_SCHEMA_V0170.md
+[OK] Content ton tai: RELEASE_NOTES_V0149.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0149_COLOR_FONT_PWA_TABS.txt
+[OK] Content ton tai: BUILD_FIX_V01461.txt
+[OK] Content ton tai: RELEASE_NOTES_V0147.txt
+[OK] Content ton tai: RELEASE_NOTES_V0148.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0148_MULTI_TAB_DWG.txt
+[OK] Content ton tai: kiem_tra_dwg2dxf.cmd
+[OK] Content ton tai: HUONG_DAN_THU_V0147_DWG_COLOR_DXF_FONT.txt
+[OK] Content ton tai: sample.dxf
+[OK] Content ton tai: sample_libredwg.json
+[OK] Content ton tai: sample_dwgsketch_project.json
+[OK] Content ton tai: HUONG_DAN_THU_V07.txt
+[OK] Content ton tai: HUONG_DAN_THU_V08.txt
+[OK] Content ton tai: RELEASE_NOTES_V08.txt
+[OK] Content ton tai: HUONG_DAN_THU_V081.txt
+[OK] Content ton tai: RELEASE_NOTES_V081.txt
+[OK] Content ton tai: HtmlViewer\DwgSketchViewer.html
+[OK] Content ton tai: HtmlViewer\sample_dwgsketch_viewer.html
+[OK] Content ton tai: HtmlViewer\sample_dwgsketch_editor.html
+[OK] Content ton tai: HUONG_DAN_THU_V010_HTML_EDITOR.txt
+[OK] Content ton tai: RELEASE_NOTES_V010.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0103_COMMAND_HISTORY.txt
+[OK] Content ton tai: HUONG_DAN_XUAT_DXF_DWG_V0120.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0130_SELECT_FIND_MIRROR.txt
+[OK] Content ton tai: RELEASE_NOTES_V0130.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0131_DWG_FIND_REPLACE.txt
+[OK] Content ton tai: RELEASE_NOTES_V0131.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0132_OPEN_SELECT_FIX.txt
+[OK] Content ton tai: RELEASE_NOTES_V0132.txt
+[OK] Content ton tai: BUILD_FIX_V01321.txt
+[OK] Content ton tai: RELEASE_NOTES_V0133.txt
+[OK] Content ton tai: RELEASE_NOTES_V0134.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0134_DWG_TEXT_UNICODE.txt
+[OK] Content ton tai: RELEASE_NOTES_V0135.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0141_MOVE.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0142_CAD_COMMANDS.txt
+[OK] Content ton tai: RELEASE_NOTES_V0142.txt
+[OK] Content ton tai: BUILD_FIX_V01421.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0143_COLOR.txt
+[OK] Content ton tai: RELEASE_NOTES_V0143.txt
+[OK] Content ton tai: BUILD_FIX_V01431.txt
+[OK] Content ton tai: BUILD_FIX_PWA_COLOR_V01432.txt
+[OK] Content ton tai: sample_color_aci_truecolor.dxf
+[OK] Content ton tai: RELEASE_NOTES_V0141.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0135_DXF_TEXT_FAST_DWG.txt
+[OK] Content ton tai: kiem_tra_dxf2dwg.cmd
+[OK] Content ton tai: mo_html_viewer.cmd
+[OK] Content ton tai: mo_html_editor.cmd
+[OK] Content ton tai: HUONG_DAN_THU_V09.txt
+[OK] Content ton tai: RELEASE_NOTES_V09.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0144_ICON_SELECTION_FILTER.txt
+[OK] Content ton tai: RELEASE_NOTES_V0144.txt
+[OK] Content ton tai: RELEASE_NOTES_V0145.txt
+[OK] Content ton tai: HUONG_DAN_THU_V0145_SPACE_LINKED_SELECTION.txt
+[OK] Content ton tai: RELEASE_NOTES_V0146.txt
+[OK] Content ton tai: RELEASE_NOTES_V01410.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01410_COLOR_FONT_SELECTION_FRAME.txt
+[OK] Content ton tai: RELEASE_NOTES_V01411.txt
+[OK] Content ton tai: RELEASE_NOTES_V01412.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01412.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01411_FONT_COLOR_LAYOUT.txt
+[OK] Content ton tai: RELEASE_NOTES_V01413.txt
+[OK] Content ton tai: BUILD_FIX_V014131.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01413_DXF_FONT_DWG_CONVERTER.txt
+[OK] Content ton tai: sample_v01413_unicode_escape.dxf
+[OK] Content ton tai: kiem_tra_libredwg_v01413.cmd
+[OK] Content ton tai: PHAN_TICH_FILE_NGUOI_DUNG_V01413.txt
+[OK] Content ton tai: RELEASE_NOTES_V01414.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01414_EXPORT_COLOR_CLIPBOARD.txt
+[OK] Content ton tai: BUILD_REPORT_V01414.txt
+[OK] Content ton tai: RELEASE_NOTES_V01415.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01415_PNG_SHARP_QUALITY.txt
+[OK] Content ton tai: BUILD_REPORT_V01415.txt
+[OK] Content ton tai: RELEASE_NOTES_V01416.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01416_SMOOTH_INTERACTION.txt
+[OK] Content ton tai: BUILD_REPORT_V01416.txt
+[OK] Content ton tai: RELEASE_NOTES_V01417.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01417_ADAPTIVE_PERFORMANCE.txt
+[OK] Content ton tai: BUILD_REPORT_V01417.txt
+[OK] Content ton tai: RELEASE_NOTES_V01418.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01418_TRIM_CURVES_SCALE_AREA.txt
+[OK] Content ton tai: BUILD_REPORT_V01418.txt
+[OK] Content ton tai: RELEASE_NOTES_V01419.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01419_GEOMETRY_REPAIR.txt
+[OK] Content ton tai: BUILD_REPORT_V01419.txt
+[OK] Content ton tai: RELEASE_NOTES_V01420.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01420_TEXT_PLACEMENT_REPAIR.txt
+[OK] Content ton tai: BUILD_REPORT_V01420.txt
+[OK] Content ton tai: RELEASE_NOTES_V01421.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01421_REPAIR_EXPORT_FRAME_SCOPE.txt
+[OK] Content ton tai: BUILD_REPORT_V01421.txt
+[OK] Content ton tai: RELEASE_NOTES_V01422.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01422_REPAIR_SCOPE_BACKGROUND_SCAN.txt
+[OK] Content ton tai: BUILD_REPORT_V01422.txt
+[OK] Content ton tai: RELEASE_NOTES_V01423.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01423_TEXT_OVERLAP_FIX.txt
+[OK] Content ton tai: BUILD_REPORT_V01423.txt
+[OK] Content ton tai: RELEASE_NOTES_V01424.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01424_TRIANGLE_FILL_ELECTRICAL_AUTOMATION.txt
+[OK] Content ton tai: BUILD_REPORT_V01424.txt
+[OK] Content ton tai: huong-dan.html
+[OK] Content ton tai: RELEASE_NOTES_V01425.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01425_INTEGRATED_HELP.txt
+[OK] Content ton tai: BUILD_REPORT_V01425.txt
+[OK] Content ton tai: RELEASE_NOTES_V01426.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01426_AUTO_GRID_GENERATOR.txt
+[OK] Content ton tai: BUILD_REPORT_V01426.txt
+[OK] Content ton tai: BUILD_FIX_V01426_1_CS0121.txt
+[OK] Content ton tai: sample_electrical_grid.csv
+[OK] Content ton tai: sample_electrical_grid.topology.json
+[OK] Content ton tai: sample_custom_symbol_library.json
+[OK] Content ton tai: RELEASE_NOTES_V01427.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01427_ROTATE_CUSTOM_SYMBOL_TEMPLATES.txt
+[OK] Content ton tai: BUILD_REPORT_V01427.txt
+[OK] Content ton tai: RELEASE_NOTES_V01428.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01428_ALWAYS_SELECT_NEAREST_SNAP.txt
+[OK] Content ton tai: BUILD_REPORT_V01428.txt
+[OK] Content ton tai: RELEASE_NOTES_V01429.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01429_UNIQUE_TOOLBAR_GLYPHS.txt
+[OK] Content ton tai: BUILD_REPORT_V01429.txt
+[OK] Content ton tai: BANG_KY_HIEU_THANH_CONG_CU_V01429.txt
+[OK] Content ton tai: RELEASE_NOTES_V01430.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01430_COMBINED_OSNAP.txt
+[OK] Content ton tai: BUILD_REPORT_V01430.txt
+[OK] Content ton tai: RELEASE_NOTES_V01431.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01431_TEXT_OVERLAP.txt
+[OK] Content ton tai: BUILD_REPORT_V01431.txt
+[OK] Content ton tai: PATCH_V01431_TEXT_OVERLAP.diff
+[OK] Content ton tai: TEXT_OVERLAP_DWG_TEST_REPORT_V01431.txt
+[OK] Content ton tai: RELEASE_NOTES_V01432.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01432_PWA_HATCH_SCREEN_BACKGROUND_SNAP_NEAREST.txt
+[OK] Content ton tai: BUILD_REPORT_V01432_PWA_V0171.txt
+[OK] Content ton tai: PATCH_V01432_PWA_HATCH_BACKGROUND_SNAP.diff
+[OK] Content ton tai: RELEASE_NOTES_V01433.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01433_TOPOLOGY_LEARNING_A4.txt
+[OK] Content ton tai: BUILD_REPORT_V01433.txt
+[OK] Content ton tai: RELEASE_NOTES_V01434.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01434_DWG_AUTO_LEARN.txt
+[OK] Content ton tai: BUILD_REPORT_V01434.txt
+[OK] Content ton tai: RELEASE_NOTES_V01435.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01435_LONG_TERM_LEARNING.txt
+[OK] Content ton tai: BUILD_REPORT_V01435.txt
+[OK] Content ton tai: RELEASE_NOTES_V01436.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01436_CURSOR_COORDINATE_DPI.txt
+[OK] Content ton tai: BUILD_REPORT_V01436.txt
+[OK] Content ton tai: RELEASE_NOTES_V01437.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01437_ORTHO_CROSSHAIR.txt
+[OK] Content ton tai: BUILD_REPORT_V01437.txt
+[OK] Content ton tai: RELEASE_NOTES_V01438.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01438_DIRECTIONAL_AUTOGRID.txt
+[OK] Content ton tai: BUILD_REPORT_V01438.txt
+[OK] Content ton tai: RELEASE_NOTES_V01439.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01439_VIETNAMESE_TOPOLOGY_BULK_APPLY.txt
+[OK] Content ton tai: BUILD_REPORT_V01439.txt
+[OK] Content ton tai: sample_electrical_grid_directional.topology.json
+[OK] Content ton tai: RELEASE_NOTES_V01441.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01441_GRID_AUTOCONNECT_FONT_DOTNET.txt
+[OK] Content ton tai: BUILD_REPORT_V01441.txt
+[OK] Content ton tai: GRID_AUTOCONNECT_FONT_TEST_REPORT_V01441_V0181.txt
+[OK] Content ton tai: RELEASE_NOTES_V01442.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01442_VECTOR_PRINT_NATIVE_DWG.txt
+[OK] Content ton tai: BUILD_REPORT_V01442.txt
+[OK] Content ton tai: PRINT_NATIVE_DWG_TEST_REPORT_V01442_V0182.txt
+[OK] Content ton tai: RELEASE_NOTES_V01444.txt
+[OK] Content ton tai: BUILD_REPORT_V01444.txt
+[OK] Content ton tai: DWG_COLOR_LINE_TEST_REPORT_V01444_V0184.txt
+[OK] Content ton tai: RELEASE_NOTES_V01445.txt
+[OK] Content ton tai: HUONG_DAN_THU_V01445_LAYER_COLOR_JSON_AUTONATIVE.txt
+[OK] Content ton tai: BUILD_REPORT_V01445.txt
+[OK] Content ton tai: sample_libredwg_wrapped_color_v01445.json
+[OK] Content ton tai: DWG_LAYER_COLOR_JSON_TEST_REPORT_V01445_V0185.txt
+[OK] C# helper co he so 3-on-5 = 5/3
+[OK] C# model luu MTEXT line spacing
+[OK] C# model luu MTEXT actual extents
+[OK] DXF C# doc group 43 actual height
+[OK] DXF C# doc group 44 line spacing factor
+[OK] DXF C# doc group 73 line spacing style
+[OK] DXF C# doc group 42 actual width
+[OK] DXF C# khong con dung group 46 lam MTEXT actual height
+[OK] LibreDWG C# fallback rectHeight=0 sang extentsHeight
+[OK] LibreDWG C# doc line spacing metadata
+[OK] Anchor normalizer dung FIX2 line advance
+[OK] Renderer/selection C# dung FIX2 line advance
+[OK] Save/Reopen C# khoi phuc line spacing metadata
+[OK] Save/Reopen C# khoi phuc actual height
+[OK] Vector print C# dung MTEXT line advance
+[OK] DXF/vectorized export C# dung MTEXT line advance
+[OK] Precise text hit dung line advance
+[OK] TEXTFIX geometry repair dung line advance
+[OK] Project storage van version 11
+[OK] PWA version.json=0.22.5.3
+[OK] PWA_APP_VERSION=0.22.5.3
+[OK] DWG worker=0.22.5.3
+[OK] Service Worker=0.22.5.3
+[OK] PWA co MTEXT line advance helper
+[OK] PWA helper dung 5/3
+[OK] PWA DXF doc group 44/43
+[OK] PWA DWG worker giu line spacing
+[OK] PWA DWG worker giu actual extents
+[OK] PWA khong con multiline legacy pattern: i*size*1.2
+[OK] PWA khong con multiline legacy pattern: (lineCount-1)*h*1.2
+[OK] PWA khong con multiline legacy pattern: spacing=height*1.2
+[OK] PWA render/bounds/hit/export cung dung FIX2 helper
+[OK] PWA song song co index.html
+[OK] PWA embedded/standalone trung hash: index.html
+[OK] PWA song song co dwg-worker.js
+[OK] PWA embedded/standalone trung hash: dwg-worker.js
+[OK] PWA song song co sw.js
+[OK] PWA embedded/standalone trung hash: sw.js
+[OK] PWA song song co manifest.webmanifest
+[OK] PWA embedded/standalone trung hash: manifest.webmanifest
+[OK] PWA song song co version.json
+[OK] PWA embedded/standalone trung hash: version.json
+[OK] PWA song song co symbol-template-v0169.js
+[OK] PWA embedded/standalone trung hash: symbol-template-v0169.js
+[OK] PWA song song co cad-interaction-architecture-v0225.js
+[OK] PWA embedded/standalone trung hash: cad-interaction-architecture-v0225.js
+[OK] PWA song song co symbol-library-catalog-v0225.js
+[OK] PWA embedded/standalone trung hash: symbol-library-catalog-v0225.js
+[OK] PWA song song co macro-library-core-v0225.js
+[OK] PWA embedded/standalone trung hash: macro-library-core-v0225.js
+[OK] node --check dwg-worker.js
+[OK] node --check cad-interaction-architecture-v0225.js
+[OK] node --check symbol-library-catalog-v0225.js
+[OK] node --check macro-library-core-v0225.js
+[OK] node --check pwa_Standalone_v02252_inline.js
+[OK] node --check pwa_v02252_inline.js
+[OK] XAML handler ton tai: A4DiagramTemplateSearchChanged
+[OK] XAML handler ton tai: A4DiagramTemplateSelectFrameChanged
+[OK] XAML handler ton tai: A4DiagramTemplateSelectionChanged
+[OK] XAML handler ton tai: AddArcToolClick
+[OK] XAML handler ton tai: AddCircleToolClick
+[OK] XAML handler ton tai: AddEllipseToolClick
+[OK] XAML handler ton tai: AddLineToolClick
+[OK] XAML handler ton tai: AddRectToolClick
+[OK] XAML handler ton tai: AddSquareToolClick
+[OK] XAML handler ton tai: AddTextToolClick
+[OK] XAML handler ton tai: AddTriangleToolClick
+[OK] XAML handler ton tai: ApplyDisplayClick
+[OK] XAML handler ton tai: ApplyNetworkDiagramClick
+[OK] XAML handler ton tai: ApplySelectedClick
+[OK] XAML handler ton tai: AutoConnectSelectedDevicesClick
+[OK] XAML handler ton tai: AutoLearnSelectedDwgClick
+[OK] XAML handler ton tai: AutoLearnWholeDwgClick
+[OK] XAML handler ton tai: AutoSelectLinkedScopeClick
+[OK] XAML handler ton tai: BuildNetworkWorkspaceClick
+[OK] XAML handler ton tai: CalculateAreaClick
+[OK] XAML handler ton tai: CanvasMouseDown
+[OK] XAML handler ton tai: CanvasMouseMove
+[OK] XAML handler ton tai: CanvasMouseUp
+[OK] XAML handler ton tai: CanvasMouseWheel
+[OK] XAML handler ton tai: ClearObjectSelectionClick
+[OK] XAML handler ton tai: ClearRegionClick
+[OK] XAML handler ton tai: CloneNetworkDiagramClick
+[OK] XAML handler ton tai: ColorComboSelectionChanged
+[OK] XAML handler ton tai: CoordinateGridSettingsChanged
+[OK] XAML handler ton tai: CoordinateGridTextChanged
+[OK] XAML handler ton tai: CopyClick
+[OK] XAML handler ton tai: CopyPngToClipboardClick
+[OK] XAML handler ton tai: CreateA4ElectricalFrameClick
+[OK] XAML handler ton tai: CrosshairSettingsChanged
+[OK] XAML handler ton tai: CrosshairSettingsSelectionChanged
+[OK] XAML handler ton tai: CrosshairToolClick
+[OK] XAML handler ton tai: DeleteA4DiagramTemplateClick
+[OK] XAML handler ton tai: DeleteElectricalLibraryV0185Click
+[OK] XAML handler ton tai: DeleteElectricalTemplateClick
+[OK] XAML handler ton tai: DeleteLearnedElectricalDiagramClick
+[OK] XAML handler ton tai: DeleteSelectedClick
+[OK] XAML handler ton tai: DeleteSelectedMacroV0185Click
+[OK] XAML handler ton tai: DimToolClick
+[OK] XAML handler ton tai: DrawingTabsSelectionChanged
+[OK] XAML handler ton tai: EditLearnedElectricalDiagramClick
+[OK] XAML handler ton tai: EditQuickCommandsClick
+[OK] XAML handler ton tai: ElectricalLibraryCatalogChangedV0185
+[OK] XAML handler ton tai: ElectricalSymbolToolClick
+[OK] XAML handler ton tai: ElectricalSymbolTypeChanged
+[OK] XAML handler ton tai: EnableAllSnapModesClick
+[OK] XAML handler ton tai: ExpandLinkedSelectionClick
+[OK] XAML handler ton tai: ExportA4DiagramTemplateLibraryClick
+[OK] XAML handler ton tai: ExportAutoLearnPackageClick
+[OK] XAML handler ton tai: ExportCadMacrosV0185Click
+[OK] XAML handler ton tai: ExportClick
+[OK] XAML handler ton tai: ExportDwgClick
+[OK] XAML handler ton tai: ExportDxfClick
+[OK] XAML handler ton tai: ExportElectricalCatalogV0185Click
+[OK] XAML handler ton tai: ExportElectricalTemplateLibraryClick
+[OK] XAML handler ton tai: ExportElectricalTopologyClick
+[OK] XAML handler ton tai: ExportHtmlViewerClick
+[OK] XAML handler ton tai: ExportLearningCoreClick
+[OK] XAML handler ton tai: ExportNetworkLearningCatalogClick
+[OK] XAML handler ton tai: ExportNetworkWorkspaceClick
+[OK] XAML handler ton tai: ExportNormalizedElectricalGridClick
+[OK] XAML handler ton tai: ExportPdfClick
+[OK] XAML handler ton tai: ExtendToolClick
+[OK] XAML handler ton tai: FindTextClick
+[OK] XAML handler ton tai: FindTextFocusClick
+[OK] XAML handler ton tai: FitClick
+[OK] XAML handler ton tai: GenerateElectricalGridClick
+[OK] XAML handler ton tai: GenerateLearnedElectricalDiagramClick
+[OK] XAML handler ton tai: GenerateNetworkLearnedDiagramClick
+[OK] XAML handler ton tai: GeometryAuditClick
+[OK] XAML handler ton tai: GeometryRepairClick
+[OK] XAML handler ton tai: GlobalCommandKeyDown
+[OK] XAML handler ton tai: GlobalCommandPreviewKeyDown
+[OK] XAML handler ton tai: HatchFillClick
+[OK] XAML handler ton tai: IconToolbarToggleClick
+[OK] XAML handler ton tai: ImportA4DiagramTemplateLibraryClick
+[OK] XAML handler ton tai: ImportCadMacrosV0185Click
+[OK] XAML handler ton tai: ImportElectricalCatalogV0185Click
+[OK] XAML handler ton tai: ImportElectricalTemplateLibraryClick
+[OK] XAML handler ton tai: ImportLearningCoreClick
+[OK] XAML handler ton tai: ImportNetworkLearningCatalogClick
+[OK] XAML handler ton tai: ImportNetworkWorkspaceClick
+[OK] XAML handler ton tai: InsertA4DiagramTemplateClick
+[OK] XAML handler ton tai: InsertNetworkLearnedSymbolClick
+[OK] XAML handler ton tai: LayerSelectionChanged
+[OK] XAML handler ton tai: LearnNetworkSymbolClick
+[OK] XAML handler ton tai: LearnNetworkTopologyClick
+[OK] XAML handler ton tai: LearnNetworkWholeDrawingClick
+[OK] XAML handler ton tai: LearnSelectedElectricalDiagramClick
+[OK] XAML handler ton tai: LearningCoreStatusClick
+[OK] XAML handler ton tai: LinkA4TemplateToSelectedBlockV01714Click
+[OK] XAML handler ton tai: LinkedScopeChanged
+[OK] XAML handler ton tai: LinkedSelectionToolClick
+[OK] XAML handler ton tai: LoadBundledLdTinhTemplatesClick
+[OK] XAML handler ton tai: LoadElectricalGridSampleClick
+[OK] XAML handler ton tai: LoadSavedPreferencesClick
+[OK] XAML handler ton tai: ManageLearningSessionsClick
+[OK] XAML handler ton tai: MatchPropToolClick
+[OK] XAML handler ton tai: MigrateLegacyLearningClick
+[OK] XAML handler ton tai: MirrorToolClick
+[OK] XAML handler ton tai: MoveToolClick
+[OK] XAML handler ton tai: NetworkDiagramSelectionChanged
+[OK] XAML handler ton tai: NewDrawingClick
+[OK] XAML handler ton tai: NewElectricalLibraryV0185Click
+[OK] XAML handler ton tai: NextTextResultClick
+[OK] XAML handler ton tai: OpenClick
+[OK] XAML handler ton tai: OpenElectricalGridDataClick
+[OK] XAML handler ton tai: OpenLearningSessionSelectionClick
+[OK] XAML handler ton tai: OpenLearningSessionWholeClick
+[OK] XAML handler ton tai: OpenStabilityFolderClick
+[OK] XAML handler ton tai: OpenTopologyEditorClick
+[OK] XAML handler ton tai: OpenUserGuideClick
+[OK] XAML handler ton tai: OrthoToolClick
+[OK] XAML handler ton tai: PanToolClick
+[OK] XAML handler ton tai: PasteClick
+[OK] XAML handler ton tai: PerformanceModeChanged
+[OK] XAML handler ton tai: PerformanceSettingsChanged
+[OK] XAML handler ton tai: PlaySelectedMacroV0185Click
+[OK] XAML handler ton tai: PreviewElectricalGridClick
+[OK] XAML handler ton tai: PreviousTextResultClick
+[OK] XAML handler ton tai: PrintClick
+[OK] XAML handler ton tai: PromoteAllCadObjectsClick
+[OK] XAML handler ton tai: PromoteSelectedCadObjectsClick
+[OK] XAML handler ton tai: QuickCommandSelectionChanged
+[OK] XAML handler ton tai: QuickRotateDevicesLeftClick
+[OK] XAML handler ton tai: QuickRotateDevicesRightClick
+[OK] XAML handler ton tai: RecallLastCommandClick
+[OK] XAML handler ton tai: RedoClick
+[OK] XAML handler ton tai: RenameA4DiagramTemplateClick
+[OK] XAML handler ton tai: RepeatLastCommandClick
+[OK] XAML handler ton tai: ReplaceAllTextClick
+[OK] XAML handler ton tai: ReplaceCurrentTextClick
+[OK] XAML handler ton tai: ReplaceSelectedA4InstanceV01714Click
+[OK] XAML handler ton tai: ReportClick
+[OK] XAML handler ton tai: ResetSavedPreferencesClick
+[OK] XAML handler ton tai: RotateLeftClick
+[OK] XAML handler ton tai: RotateRightClick
+[OK] XAML handler ton tai: RotateToolClick
+[OK] XAML handler ton tai: RunQuickCommandClick
+[OK] XAML handler ton tai: RunSelectedQuickCommandClick
+[OK] XAML handler ton tai: RunStabilityHealthCheckClick
+[OK] XAML handler ton tai: SaveA4TemplateMetadataV01714Click
+[OK] XAML handler ton tai: SaveCurrentPreferencesClick
+[OK] XAML handler ton tai: SaveDrawingA4DiagramTemplateClick
+[OK] XAML handler ton tai: SaveElectricalTemplateClick
+[OK] XAML handler ton tai: SaveProjectClick
+[OK] XAML handler ton tai: SaveRecoveryNowClick
+[OK] XAML handler ton tai: SaveSelectedA4DiagramTemplateClick
+[OK] XAML handler ton tai: ScaleToolClick
+[OK] XAML handler ton tai: SelectA4TemplateInstanceClick
+[OK] XAML handler ton tai: SelectAllObjectsClick
+[OK] XAML handler ton tai: SelectElectricalSymbolGroupForEditClick
+[OK] XAML handler ton tai: SelectInExportFrameClick
+[OK] XAML handler ton tai: SelectMatchingFilterClick
+[OK] XAML handler ton tai: SelectNonTextClick
+[OK] XAML handler ton tai: SelectRegionClick
+[OK] XAML handler ton tai: SelectToolClick
+[OK] XAML handler ton tai: SelectionFilterChanged
+[OK] XAML handler ton tai: SelectionKindCheckChanged
+[OK] XAML handler ton tai: SelectionScopeChanged
+[OK] XAML handler ton tai: SnapSelectedDevicesToGridClick
+[OK] XAML handler ton tai: SnapToolClick
+[OK] XAML handler ton tai: SolidFillClick
+[OK] XAML handler ton tai: StabilityProfileChanged
+[OK] XAML handler ton tai: StabilitySettingsChanged
+[OK] XAML handler ton tai: StartMacroRecordingV0185Click
+[OK] XAML handler ton tai: StopMacroRecordingV0185Click
+[OK] XAML handler ton tai: SyncNetworkDiagramClick
+[OK] XAML handler ton tai: TextFixClick
+[OK] XAML handler ton tai: TextSearchBoxKeyDown
+[OK] XAML handler ton tai: TextSearchResultSelectionChanged
+[OK] XAML handler ton tai: ToggleConfigPanelClick
+[OK] XAML handler ton tai: ToggleLayerPanelClick
+[OK] XAML handler ton tai: TrimToolClick
+[OK] XAML handler ton tai: UndoClick
+[OK] XAML handler ton tai: UpdateA4TemplateFromSelectedInstanceV01714Click
+[OK] XAML handler ton tai: ValidateNetworkWorkspaceClick
+[OK] XAML handler ton tai: WindowClosing
+[OK] XAML handler ton tai: WindowKeyDown
+[OK] XAML handler ton tai: WindowPreviewKeyDown
+[OK] XAML handler ton tai: WindowSelectToolClick
+[OK] XAML handler ton tai: ZoomWindowClick
+[OK] C# delimiter balance: A4DiagramTemplateModels.cs
+[OK] C# delimiter balance: A4DiagramTemplateService.cs
+[OK] C# delimiter balance: A4TemplateWorkflow.V01714.cs
+[OK] C# delimiter balance: App.xaml.cs
+[OK] C# delimiter balance: BlockDefinitionModels.V01713.cs
+[OK] C# delimiter balance: BlockEditingCore.V01713.cs
+[OK] C# delimiter balance: CadColorSupport.cs
+[OK] C# delimiter balance: CadInteractionArchitecture.V0183.cs
+[OK] C# delimiter balance: CadMacroStorage.V0185.cs
+[OK] C# delimiter balance: CadRenderStyleSupport.cs
+[OK] C# delimiter balance: CadTextFormatting.cs
+[OK] C# delimiter balance: CadTextLayoutParity.V01852.cs
+[OK] C# delimiter balance: CommandHistoryStorage.cs
+[OK] C# delimiter balance: CoreHistory.cs
+[OK] C# delimiter balance: DwgExportService.cs
+[OK] C# delimiter balance: DxfExporter.cs
+[OK] C# delimiter balance: DxfParser.cs
+[OK] C# delimiter balance: ElectricalLibraryDialog.V0185.cs
+[OK] C# delimiter balance: ElectricalSymbolLibraryCatalog.V0185.cs
+[OK] C# delimiter balance: ElectricalSymbolTemplateDialog.cs
+[OK] C# delimiter balance: ElectricalSymbolTemplateStorage.cs
+[OK] C# delimiter balance: EntityRepository.cs
+[OK] C# delimiter balance: GlobalUsings.cs
+[OK] C# delimiter balance: LegacyVietnameseText.cs
+[OK] C# delimiter balance: LibreDwgConverter.cs
+[OK] C# delimiter balance: LibreDwgJsonParser.cs
+[OK] C# delimiter balance: LibreDwgJsonSanitizer.cs
+[OK] C# delimiter balance: MainWindow.TextAnchorParity.V01851.cs
+[OK] C# delimiter balance: MainWindow.V012.cs
+[OK] C# delimiter balance: MainWindow.V013.cs
+[OK] C# delimiter balance: MainWindow.V01415.cs
+[OK] C# delimiter balance: MainWindow.V01416.cs
+[OK] C# delimiter balance: MainWindow.V01417.cs
+[OK] C# delimiter balance: MainWindow.V01418.cs
+[OK] C# delimiter balance: MainWindow.V01419.cs
+[OK] C# delimiter balance: MainWindow.V0142.cs
+[OK] C# delimiter balance: MainWindow.V01420.cs
+[OK] C# delimiter balance: MainWindow.V01424.cs
+[OK] C# delimiter balance: MainWindow.V01425.cs
+[OK] C# delimiter balance: MainWindow.V01426.cs
+[OK] C# delimiter balance: MainWindow.V01427.cs
+[OK] C# delimiter balance: MainWindow.V01433.cs
+[OK] C# delimiter balance: MainWindow.V01434.cs
+[OK] C# delimiter balance: MainWindow.V01435.cs
+[OK] C# delimiter balance: MainWindow.V01436.cs
+[OK] C# delimiter balance: MainWindow.V01437.cs
+[OK] C# delimiter balance: MainWindow.V0144.cs
+[OK] C# delimiter balance: MainWindow.V01440.cs
+[OK] C# delimiter balance: MainWindow.V01441.cs
+[OK] C# delimiter balance: MainWindow.V01443.cs
+[OK] C# delimiter balance: MainWindow.V01444.cs
+[OK] C# delimiter balance: MainWindow.V01446.cs
+[OK] C# delimiter balance: MainWindow.V0145.cs
+[OK] C# delimiter balance: MainWindow.V0146.cs
+[OK] C# delimiter balance: MainWindow.V0148.cs
+[OK] C# delimiter balance: MainWindow.V0160.cs
+[OK] C# delimiter balance: MainWindow.V01605.cs
+[OK] C# delimiter balance: MainWindow.V01606.cs
+[OK] C# delimiter balance: MainWindow.V01607.cs
+[OK] C# delimiter balance: MainWindow.V0170.cs
+[OK] C# delimiter balance: MainWindow.V01710.cs
+[OK] C# delimiter balance: MainWindow.V0174.cs
+[OK] C# delimiter balance: MainWindow.V0175.cs
+[OK] C# delimiter balance: MainWindow.V0183.cs
+[OK] C# delimiter balance: MainWindow.V0184.cs
+[OK] C# delimiter balance: MainWindow.V0185.cs
+[OK] C# delimiter balance: MainWindow.V05.cs
+[OK] C# delimiter balance: MainWindow.V06.cs
+[OK] C# delimiter balance: MainWindow.V07.cs
+[OK] C# delimiter balance: MainWindow.V09.cs
+[OK] C# delimiter balance: MainWindow.xaml.cs
+[OK] C# delimiter balance: Models.cs
+[OK] C# delimiter balance: NetworkDiagramModels.cs
+[OK] C# delimiter balance: NetworkDiagramService.cs
+[OK] C# delimiter balance: NetworkLearningModels.cs
+[OK] C# delimiter balance: NetworkLearningService.cs
+[OK] C# delimiter balance: ObjectSnapCore.V01712.cs
+[OK] C# delimiter balance: ProjectStorage.cs
+[OK] C# delimiter balance: QuickCommandConfig.cs
+[OK] C# delimiter balance: QuickCommandEditorDialog.cs
+[OK] C# delimiter balance: RotateSelectionDialog.cs
+[OK] C# delimiter balance: ScaleFactorDialog.cs
+[OK] C# delimiter balance: SelectionEditingCore.V01711.cs
+[OK] C# delimiter balance: SpatialHashIndex.cs
+[OK] C# delimiter balance: StabilityRuntime.cs
+[OK] C# delimiter balance: TextEditDialog.cs
+[OK] C# delimiter balance: UserPreferencesStorage.cs
+[OK] DWG mau: >=500 MTEXT hai dong co extents :: 528
+[OK] DWG mau tim thay MTEXT handle 88E8A
+[OK] 88E8A: TopLeft + spacing style/factor dung
+[OK] 88E8A: FIX2 line advance = 5/3*H*factor
+[OK] 88E8A: dong 2 duoc ha xuong so voi FIX1
+[OK] DWG mau tim thay MTEXT handle 9DF2F
+[OK] 9DF2F: TopLeft + spacing style/factor dung
+[OK] 9DF2F: FIX2 line advance = 5/3*H*factor
+[OK] 9DF2F: dong 2 duoc ha xuong so voi FIX1
+[OK] DWG mau tim thay MTEXT handle 9DF0A
+[OK] 9DF0A: TopLeft + spacing style/factor dung
+[OK] 9DF0A: FIX2 line advance = 5/3*H*factor
+[OK] 9DF0A: dong 2 duoc ha xuong so voi FIX1
+[OK] DWG mau tim thay MTEXT handle 88EB4
+[OK] 88EB4: TopLeft + spacing style/factor dung
+[OK] 88EB4: FIX2 line advance = 5/3*H*factor
+[OK] 88EB4: dong 2 duoc ha xuong so voi FIX1

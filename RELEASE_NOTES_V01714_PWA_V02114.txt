@@ -1,0 +1,13 @@
+DWG SKETCH V0.17.14 / PWA V0.21.14 - A4 TEMPLATE WORKFLOW
+=========================================================
+- Thumbnail vector nhe cho mau A4 dang chon.
+- Metadata thu vien: Category, Folder, Tags.
+- Tim kiem mo rong theo ten, keyword, tag, nhom, thu muc, Symbol type.
+- Luu transform cho tung A4 instance: definition id, ten mau, X/Y chen, scale, rotation.
+- A4UPDATE: dua cac sua doi cua instance ve definition mau bang phep bien doi nguoc.
+- A4REPLACE: thay instance bang mau hien tai nhung giu X/Y, scale, rotation.
+- A4LINKBLOCK: lien ket mau voi BlockDefinition/Symbol metadata.
+- Khi chen mau chua block, BlockInstanceId duoc remap rieng de cac lan chen khong lien ket cheo.
+- Project JSON nang len version 11 de luu metadata instance A4.
+- PWA va C# cung workflow va lenh tuong ung.
+- Giu nguyen Render Stability, Object Snap V0.17.12 va Block/Symbol Core V0.17.13.

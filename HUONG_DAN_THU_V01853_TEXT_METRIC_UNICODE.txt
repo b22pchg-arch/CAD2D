@@ -1,0 +1,26 @@
+HUONG DAN THU V0.18.5.3 / PWA V0.22.5.3 FIX3
+
+A. KIEM TRA VI TRI CHU
+1. Build bang build_release.cmd.
+2. Mo truc tiep file DWG goc So do ket day TQ-HG (1)(1).dwg, KHONG mo project da save bang FIX1/FIX2 de danh gia lan dau.
+3. Zoom vao cac nhanh co nhan 2 dong va chu sat duong day/thiet bi.
+4. So sanh cac nhan nhu LBS 374/04 - Xuan Minh, 373-7/01 - T. Son Thanh, TD Nam Khoa, Tan Quang...
+5. Kiem tra dong 1, dong 2, khoang cach dong va khoang ho so voi duong day/thiet bi.
+6. Save Project, dong tab, mo lai Project va kiem tra vi tri khong thay doi.
+
+B. QUET/CHUYEN BANG MA TIENG VIET - C#
+1. Mo khu vuc Tim/Thay the chu -> Chuan hoa bang ma tieng Viet.
+2. De AUTO, nguong 80%, bam Quet + xem truoc.
+3. Xem thong ke Unicode/TCVN3/VNI/VIQR va toi da 6 mau truoc -> sau.
+4. Neu style/font cu bi khai bao sai, co the ep TCVN3, VNI-Windows hoac VIQR roi Quet + xem truoc lai.
+5. Bam Chuyen chu dang chon hoac Chuyen tat ca -> Unicode.
+6. Neu ket qua khong dung, Ctrl+Z de hoan tac.
+
+C. PWA
+- Cong cu tuong duong nam trong khu Tim/Thay the chu.
+- Co AUTO/TCVN3/VNI/VIQR/Unicode, nguong 70/80/90%, xem truoc, chuyen selected/all va Undo.
+
+D. NGUYEN TAC AN TOAN
+- AUTO 80% la mac dinh khuyen nghi.
+- Luon Quet + xem truoc truoc khi Chuyen tat ca doi voi ban ve cu khong ro font/bang ma.
+- Chu Unicode dang dung nhu TUYEN QUANG, CHIEM HOA, Tan Quang khong duoc phep bi map lai trong AUTO.

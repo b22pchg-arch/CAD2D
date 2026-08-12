@@ -1,0 +1,395 @@
+DWG SKETCH V0.18.5 / PWA V0.22.5 - STATIC + BEHAVIOR TEST
+Date: 2026-08-09
+TOTAL: 386 | PASS: 386 | FAIL: 0
+XAML unique handlers: 186 / event bindings: 239
+C# source files structural checked: 85
+
+[PASS] C# required: DwgSketchPrototype.csproj
+[PASS] C# required: MainWindow.xaml
+[PASS] C# required: MainWindow.xaml.cs
+[PASS] C# required: MainWindow.V0185.cs
+[PASS] C# required: CadMacroStorage.V0185.cs
+[PASS] C# required: ElectricalSymbolLibraryCatalog.V0185.cs
+[PASS] C# required: ElectricalLibraryDialog.V0185.cs
+[PASS] C# required: MainWindow.V0184.cs
+[PASS] C# required: CadInteractionArchitecture.V0183.cs
+[PASS] C# required: ProjectStorage.cs
+[PASS] C# required: verify_release.ps1
+[PASS] C# required: build_release.cmd
+[PASS] C# required: RELEASE_NOTES_V0185_PWA_V0225.txt
+[PASS] C# required: HUONG_DAN_THU_V0185_MACRO_LIBRARY_CATALOG.txt
+[PASS] C# required: MACRO_LIBRARY_CATALOG_SCHEMA_V0185.md
+[PASS] PWA required: index.html
+[PASS] PWA required: version.json
+[PASS] PWA required: manifest.webmanifest
+[PASS] PWA required: sw.js
+[PASS] PWA required: dwg-worker.js
+[PASS] PWA required: cad-interaction-architecture-v0225.js
+[PASS] PWA required: macro-library-core-v0225.js
+[PASS] PWA required: symbol-library-catalog-v0225.js
+[PASS] PWA required: symbol-template-v0169.js
+[PASS] XML valid: DwgSketchPrototype.csproj
+[PASS] XML valid: MainWindow.xaml
+[PASS] JSON valid: version.json
+[PASS] JSON valid: manifest.webmanifest
+[PASS] <Version>0.18.5</Version>
+[PASS] <FileVersion>0.18.5</FileVersion>
+[PASS] <AssemblyVersion>0.18.5</AssemblyVersion>
+[PASS] WPF title/UI V0.18.5
+[PASS] WPF initializes V0185 features
+[PASS] C# Project JSON remains v11
+[PASS] PWA version.json = 0.22.5
+[PASS] PWA_APP_VERSION = 0.22.5
+[PASS] Service Worker version = 0.22.5
+[PASS] PWA Project JSON remains v11
+[PASS] XAML handler resolved: A4DiagramTemplateSearchChanged
+[PASS] XAML handler resolved: A4DiagramTemplateSelectFrameChanged
+[PASS] XAML handler resolved: A4DiagramTemplateSelectionChanged
+[PASS] XAML handler resolved: AddArcToolClick
+[PASS] XAML handler resolved: AddCircleToolClick
+[PASS] XAML handler resolved: AddEllipseToolClick
+[PASS] XAML handler resolved: AddLineToolClick
+[PASS] XAML handler resolved: AddRectToolClick
+[PASS] XAML handler resolved: AddSquareToolClick
+[PASS] XAML handler resolved: AddTextToolClick
+[PASS] XAML handler resolved: AddTriangleToolClick
+[PASS] XAML handler resolved: ApplyDisplayClick
+[PASS] XAML handler resolved: ApplyNetworkDiagramClick
+[PASS] XAML handler resolved: ApplySelectedClick
+[PASS] XAML handler resolved: AutoConnectSelectedDevicesClick
+[PASS] XAML handler resolved: AutoLearnSelectedDwgClick
+[PASS] XAML handler resolved: AutoLearnWholeDwgClick
+[PASS] XAML handler resolved: AutoSelectLinkedScopeClick
+[PASS] XAML handler resolved: BuildNetworkWorkspaceClick
+[PASS] XAML handler resolved: CalculateAreaClick
+[PASS] XAML handler resolved: CanvasMouseDown
+[PASS] XAML handler resolved: CanvasMouseMove
+[PASS] XAML handler resolved: CanvasMouseUp
+[PASS] XAML handler resolved: CanvasMouseWheel
+[PASS] XAML handler resolved: ClearObjectSelectionClick
+[PASS] XAML handler resolved: ClearRegionClick
+[PASS] XAML handler resolved: CloneNetworkDiagramClick
+[PASS] XAML handler resolved: ColorComboSelectionChanged
+[PASS] XAML handler resolved: CoordinateGridSettingsChanged
+[PASS] XAML handler resolved: CoordinateGridTextChanged
+[PASS] XAML handler resolved: CopyClick
+[PASS] XAML handler resolved: CopyPngToClipboardClick
+[PASS] XAML handler resolved: CreateA4ElectricalFrameClick
+[PASS] XAML handler resolved: CrosshairSettingsChanged
+[PASS] XAML handler resolved: CrosshairSettingsSelectionChanged
+[PASS] XAML handler resolved: CrosshairToolClick
+[PASS] XAML handler resolved: DeleteA4DiagramTemplateClick
+[PASS] XAML handler resolved: DeleteElectricalLibraryV0185Click
+[PASS] XAML handler resolved: DeleteElectricalTemplateClick
+[PASS] XAML handler resolved: DeleteLearnedElectricalDiagramClick
+[PASS] XAML handler resolved: DeleteSelectedClick
+[PASS] XAML handler resolved: DeleteSelectedMacroV0185Click
+[PASS] XAML handler resolved: DimToolClick
+[PASS] XAML handler resolved: DrawingTabsSelectionChanged
+[PASS] XAML handler resolved: EditLearnedElectricalDiagramClick
+[PASS] XAML handler resolved: EditQuickCommandsClick
+[PASS] XAML handler resolved: ElectricalLibraryCatalogChangedV0185
+[PASS] XAML handler resolved: ElectricalSymbolToolClick
+[PASS] XAML handler resolved: ElectricalSymbolTypeChanged
+[PASS] XAML handler resolved: EnableAllSnapModesClick
+[PASS] XAML handler resolved: ExpandLinkedSelectionClick
+[PASS] XAML handler resolved: ExportA4DiagramTemplateLibraryClick
+[PASS] XAML handler resolved: ExportAutoLearnPackageClick
+[PASS] XAML handler resolved: ExportCadMacrosV0185Click
+[PASS] XAML handler resolved: ExportClick
+[PASS] XAML handler resolved: ExportDwgClick
+[PASS] XAML handler resolved: ExportDxfClick
+[PASS] XAML handler resolved: ExportElectricalCatalogV0185Click
+[PASS] XAML handler resolved: ExportElectricalTemplateLibraryClick
+[PASS] XAML handler resolved: ExportElectricalTopologyClick
+[PASS] XAML handler resolved: ExportHtmlViewerClick
+[PASS] XAML handler resolved: ExportLearningCoreClick
+[PASS] XAML handler resolved: ExportNetworkLearningCatalogClick
+[PASS] XAML handler resolved: ExportNetworkWorkspaceClick
+[PASS] XAML handler resolved: ExportNormalizedElectricalGridClick
+[PASS] XAML handler resolved: ExportPdfClick
+[PASS] XAML handler resolved: ExtendToolClick
+[PASS] XAML handler resolved: FindTextClick
+[PASS] XAML handler resolved: FindTextFocusClick
+[PASS] XAML handler resolved: FitClick
+[PASS] XAML handler resolved: GenerateElectricalGridClick
+[PASS] XAML handler resolved: GenerateLearnedElectricalDiagramClick
+[PASS] XAML handler resolved: GenerateNetworkLearnedDiagramClick
+[PASS] XAML handler resolved: GeometryAuditClick
+[PASS] XAML handler resolved: GeometryRepairClick
+[PASS] XAML handler resolved: GlobalCommandKeyDown
+[PASS] XAML handler resolved: GlobalCommandPreviewKeyDown
+[PASS] XAML handler resolved: HatchFillClick
+[PASS] XAML handler resolved: IconToolbarToggleClick
+[PASS] XAML handler resolved: ImportA4DiagramTemplateLibraryClick
+[PASS] XAML handler resolved: ImportCadMacrosV0185Click
+[PASS] XAML handler resolved: ImportElectricalCatalogV0185Click
+[PASS] XAML handler resolved: ImportElectricalTemplateLibraryClick
+[PASS] XAML handler resolved: ImportLearningCoreClick
+[PASS] XAML handler resolved: ImportNetworkLearningCatalogClick
+[PASS] XAML handler resolved: ImportNetworkWorkspaceClick
+[PASS] XAML handler resolved: InsertA4DiagramTemplateClick
+[PASS] XAML handler resolved: InsertNetworkLearnedSymbolClick
+[PASS] XAML handler resolved: LayerSelectionChanged
+[PASS] XAML handler resolved: LearnNetworkSymbolClick
+[PASS] XAML handler resolved: LearnNetworkTopologyClick
+[PASS] XAML handler resolved: LearnNetworkWholeDrawingClick
+[PASS] XAML handler resolved: LearnSelectedElectricalDiagramClick
+[PASS] XAML handler resolved: LearningCoreStatusClick
+[PASS] XAML handler resolved: LinkA4TemplateToSelectedBlockV01714Click
+[PASS] XAML handler resolved: LinkedScopeChanged
+[PASS] XAML handler resolved: LinkedSelectionToolClick
+[PASS] XAML handler resolved: LoadBundledLdTinhTemplatesClick
+[PASS] XAML handler resolved: LoadElectricalGridSampleClick
+[PASS] XAML handler resolved: LoadSavedPreferencesClick
+[PASS] XAML handler resolved: ManageLearningSessionsClick
+[PASS] XAML handler resolved: MatchPropToolClick
+[PASS] XAML handler resolved: MigrateLegacyLearningClick
+[PASS] XAML handler resolved: MirrorToolClick
+[PASS] XAML handler resolved: MoveToolClick
+[PASS] XAML handler resolved: NetworkDiagramSelectionChanged
+[PASS] XAML handler resolved: NewDrawingClick
+[PASS] XAML handler resolved: NewElectricalLibraryV0185Click
+[PASS] XAML handler resolved: NextTextResultClick
+[PASS] XAML handler resolved: OpenClick
+[PASS] XAML handler resolved: OpenElectricalGridDataClick
+[PASS] XAML handler resolved: OpenLearningSessionSelectionClick
+[PASS] XAML handler resolved: OpenLearningSessionWholeClick
+[PASS] XAML handler resolved: OpenStabilityFolderClick
+[PASS] XAML handler resolved: OpenTopologyEditorClick
+[PASS] XAML handler resolved: OpenUserGuideClick
+[PASS] XAML handler resolved: OrthoToolClick
+[PASS] XAML handler resolved: PanToolClick
+[PASS] XAML handler resolved: PasteClick
+[PASS] XAML handler resolved: PerformanceModeChanged
+[PASS] XAML handler resolved: PerformanceSettingsChanged
+[PASS] XAML handler resolved: PlaySelectedMacroV0185Click
+[PASS] XAML handler resolved: PreviewElectricalGridClick
+[PASS] XAML handler resolved: PreviousTextResultClick
+[PASS] XAML handler resolved: PrintClick
+[PASS] XAML handler resolved: PromoteAllCadObjectsClick
+[PASS] XAML handler resolved: PromoteSelectedCadObjectsClick
+[PASS] XAML handler resolved: QuickCommandSelectionChanged
+[PASS] XAML handler resolved: QuickRotateDevicesLeftClick
+[PASS] XAML handler resolved: QuickRotateDevicesRightClick
+[PASS] XAML handler resolved: RecallLastCommandClick
+[PASS] XAML handler resolved: RedoClick
+[PASS] XAML handler resolved: RenameA4DiagramTemplateClick
+[PASS] XAML handler resolved: RepeatLastCommandClick
+[PASS] XAML handler resolved: ReplaceAllTextClick
+[PASS] XAML handler resolved: ReplaceCurrentTextClick
+[PASS] XAML handler resolved: ReplaceSelectedA4InstanceV01714Click
+[PASS] XAML handler resolved: ReportClick
+[PASS] XAML handler resolved: ResetSavedPreferencesClick
+[PASS] XAML handler resolved: RotateLeftClick
+[PASS] XAML handler resolved: RotateRightClick
+[PASS] XAML handler resolved: RotateToolClick
+[PASS] XAML handler resolved: RunQuickCommandClick
+[PASS] XAML handler resolved: RunSelectedQuickCommandClick
+[PASS] XAML handler resolved: RunStabilityHealthCheckClick
+[PASS] XAML handler resolved: SaveA4TemplateMetadataV01714Click
+[PASS] XAML handler resolved: SaveCurrentPreferencesClick
+[PASS] XAML handler resolved: SaveDrawingA4DiagramTemplateClick
+[PASS] XAML handler resolved: SaveElectricalTemplateClick
+[PASS] XAML handler resolved: SaveProjectClick
+[PASS] XAML handler resolved: SaveRecoveryNowClick
+[PASS] XAML handler resolved: SaveSelectedA4DiagramTemplateClick
+[PASS] XAML handler resolved: ScaleToolClick
+[PASS] XAML handler resolved: SelectA4TemplateInstanceClick
+[PASS] XAML handler resolved: SelectAllObjectsClick
+[PASS] XAML handler resolved: SelectElectricalSymbolGroupForEditClick
+[PASS] XAML handler resolved: SelectInExportFrameClick
+[PASS] XAML handler resolved: SelectMatchingFilterClick
+[PASS] XAML handler resolved: SelectNonTextClick
+[PASS] XAML handler resolved: SelectRegionClick
+[PASS] XAML handler resolved: SelectToolClick
+[PASS] XAML handler resolved: SelectionFilterChanged
+[PASS] XAML handler resolved: SelectionKindCheckChanged
+[PASS] XAML handler resolved: SelectionScopeChanged
+[PASS] XAML handler resolved: SnapSelectedDevicesToGridClick
+[PASS] XAML handler resolved: SnapToolClick
+[PASS] XAML handler resolved: SolidFillClick
+[PASS] XAML handler resolved: StabilityProfileChanged
+[PASS] XAML handler resolved: StabilitySettingsChanged
+[PASS] XAML handler resolved: StartMacroRecordingV0185Click
+[PASS] XAML handler resolved: StopMacroRecordingV0185Click
+[PASS] XAML handler resolved: SyncNetworkDiagramClick
+[PASS] XAML handler resolved: TextFixClick
+[PASS] XAML handler resolved: TextSearchBoxKeyDown
+[PASS] XAML handler resolved: TextSearchResultSelectionChanged
+[PASS] XAML handler resolved: ToggleConfigPanelClick
+[PASS] XAML handler resolved: ToggleLayerPanelClick
+[PASS] XAML handler resolved: TrimToolClick
+[PASS] XAML handler resolved: UndoClick
+[PASS] XAML handler resolved: UpdateA4TemplateFromSelectedInstanceV01714Click
+[PASS] XAML handler resolved: ValidateNetworkWorkspaceClick
+[PASS] XAML handler resolved: WindowClosing
+[PASS] XAML handler resolved: WindowKeyDown
+[PASS] XAML handler resolved: WindowPreviewKeyDown
+[PASS] XAML handler resolved: WindowSelectToolClick
+[PASS] XAML handler resolved: ZoomWindowClick
+[PASS] XAML handler inventory >=186 (actual 186)
+[PASS] C# brace balance: MainWindow.V0148.cs
+[PASS] C# brace balance: MainWindow.V01424.cs
+[PASS] C# brace balance: ElectricalSymbolLibraryCatalog.V0185.cs
+[PASS] C# brace balance: BlockEditingCore.V01713.cs
+[PASS] C# brace balance: DwgExportService.cs
+[PASS] C# brace balance: MainWindow.V013.cs
+[PASS] C# brace balance: MainWindow.V0185.cs
+[PASS] C# brace balance: MainWindow.V0174.cs
+[PASS] C# brace balance: CoreHistory.cs
+[PASS] C# brace balance: QuickCommandEditorDialog.cs
+[PASS] C# brace balance: ElectricalLibraryDialog.V0185.cs
+[PASS] C# brace balance: MainWindow.V01436.cs
+[PASS] C# brace balance: MainWindow.V01434.cs
+[PASS] C# brace balance: ObjectSnapCore.V01712.cs
+[PASS] C# brace balance: MainWindow.V01440.cs
+[PASS] C# brace balance: NetworkDiagramService.cs
+[PASS] C# brace balance: MainWindow.V0160.cs
+[PASS] C# brace balance: MainWindow.V0145.cs
+[PASS] C# brace balance: DxfExporter.cs
+[PASS] C# brace balance: NetworkLearningService.cs
+[PASS] C# brace balance: A4TemplateWorkflow.V01714.cs
+[PASS] C# brace balance: GlobalUsings.cs
+[PASS] C# brace balance: MainWindow.V01427.cs
+[PASS] C# brace balance: A4DiagramTemplateModels.cs
+[PASS] C# brace balance: MainWindow.xaml.cs
+[PASS] C# brace balance: MainWindow.V0183.cs
+[PASS] C# brace balance: MainWindow.V012.cs
+[PASS] C# brace balance: MainWindow.V01415.cs
+[PASS] C# brace balance: CadTextFormatting.cs
+[PASS] C# brace balance: MainWindow.V01437.cs
+[PASS] C# brace balance: MainWindow.V01446.cs
+[PASS] C# brace balance: SelectionEditingCore.V01711.cs
+[PASS] C# brace balance: MainWindow.V01606.cs
+[PASS] C# brace balance: MainWindow.V0170.cs
+[PASS] C# brace balance: MainWindow.V01607.cs
+[PASS] C# brace balance: CommandHistoryStorage.cs
+[PASS] C# brace balance: ScaleFactorDialog.cs
+[PASS] C# brace balance: MainWindow.V07.cs
+[PASS] C# brace balance: StabilityRuntime.cs
+[PASS] C# brace balance: A4DiagramTemplateService.cs
+[PASS] C# brace balance: CadInteractionArchitecture.V0183.cs
+[PASS] C# brace balance: MainWindow.V01441.cs
+[PASS] C# brace balance: LibreDwgJsonParser.cs
+[PASS] C# brace balance: MainWindow.V01420.cs
+[PASS] C# brace balance: MainWindow.V01433.cs
+[PASS] C# brace balance: MainWindow.V01443.cs
+[PASS] C# brace balance: LibreDwgConverter.cs
+[PASS] C# brace balance: TextEditDialog.cs
+[PASS] C# brace balance: MainWindow.V01417.cs
+[PASS] C# brace balance: LibreDwgJsonSanitizer.cs
+[PASS] C# brace balance: NetworkLearningModels.cs
+[PASS] C# brace balance: ProjectStorage.cs
+[PASS] C# brace balance: BlockDefinitionModels.V01713.cs
+[PASS] C# brace balance: CadMacroStorage.V0185.cs
+[PASS] C# brace balance: MainWindow.V0144.cs
+[PASS] C# brace balance: MainWindow.V01418.cs
+[PASS] C# brace balance: MainWindow.V01426.cs
+[PASS] C# brace balance: LegacyVietnameseText.cs
+[PASS] C# brace balance: MainWindow.V01710.cs
+[PASS] C# brace balance: SpatialHashIndex.cs
+[PASS] C# brace balance: RotateSelectionDialog.cs
+[PASS] C# brace balance: CadRenderStyleSupport.cs
+[PASS] C# brace balance: MainWindow.V0142.cs
+[PASS] C# brace balance: ElectricalSymbolTemplateDialog.cs
+[PASS] C# brace balance: MainWindow.V0146.cs
+[PASS] C# brace balance: MainWindow.V09.cs
+[PASS] C# brace balance: QuickCommandConfig.cs
+[PASS] C# brace balance: Models.cs
+[PASS] C# brace balance: MainWindow.V0175.cs
+[PASS] C# brace balance: MainWindow.V01435.cs
+[PASS] C# brace balance: DxfParser.cs
+[PASS] C# brace balance: ElectricalSymbolTemplateStorage.cs
+[PASS] C# brace balance: CadColorSupport.cs
+[PASS] C# brace balance: MainWindow.V06.cs
+[PASS] C# brace balance: MainWindow.V01419.cs
+[PASS] C# brace balance: MainWindow.V01416.cs
+[PASS] C# brace balance: NetworkDiagramModels.cs
+[PASS] C# brace balance: MainWindow.V01444.cs
+[PASS] C# brace balance: EntityRepository.cs
+[PASS] C# brace balance: MainWindow.V01425.cs
+[PASS] C# brace balance: MainWindow.V0184.cs
+[PASS] C# brace balance: UserPreferencesStorage.cs
+[PASS] C# brace balance: MainWindow.V01605.cs
+[PASS] C# brace balance: MainWindow.V05.cs
+[PASS] C# brace balance: App.xaml.cs
+[PASS] Macro replay-safe allowlist
+[PASS] Macro alias canonicalization
+[PASS] Macro record
+[PASS] Macro playback
+[PASS] Macro destructive confirmation
+[PASS] Macro schema
+[PASS] Macro schema v1
+[PASS] Macro revision metadata
+[PASS] Catalog schema
+[PASS] Single library schema v3
+[PASS] Library ID export
+[PASS] Namespace export
+[PASS] Schema3 revision import
+[PASS] Read-only metadata
+[PASS] C# read-only guard
+[PASS] C# unique import namespace
+[PASS] Legacy active-library mirror
+[PASS] BLOCK/B excluded from C# replay-safe list
+[PASS] TX3 preserved
+[PASS] TX4 preserved
+[PASS] TX5 preserved
+[PASS] PWA Macro API
+[PASS] PWA macro canonical aliases
+[PASS] PWA replay-safe guard
+[PASS] PWA destructive guard
+[PASS] BLOCK/B excluded from PWA replay-safe list
+[PASS] PWA Catalog API
+[PASS] PWA single library schema v3
+[PASS] PWA revision bump only on content change
+[PASS] PWA unique imported namespace
+[PASS] PWA read-only API
+[PASS] PWA symbol edits obey read-only catalog
+[PASS] PWA architecture API V0225
+[PASS] PWA TX3 delta V0225
+[PASS] PWA TX4 delta V0225
+[PASS] PWA TX5 delta V0225
+[PASS] PWA loads cad-interaction-architecture-v0225.js
+[PASS] SW caches cad-interaction-architecture-v0225.js
+[PASS] PWA loads macro-library-core-v0225.js
+[PASS] SW caches macro-library-core-v0225.js
+[PASS] PWA loads symbol-library-catalog-v0225.js
+[PASS] SW caches symbol-library-catalog-v0225.js
+[PASS] PWA does not load old V0224 architecture
+[PASS] PWA parity: index.html
+[PASS] PWA parity: version.json
+[PASS] PWA parity: manifest.webmanifest
+[PASS] PWA parity: sw.js
+[PASS] PWA parity: dwg-worker.js
+[PASS] PWA parity: cad-interaction-architecture-v0225.js
+[PASS] PWA parity: macro-library-core-v0225.js
+[PASS] PWA parity: symbol-library-catalog-v0225.js
+[PASS] PWA parity: symbol-template-v0169.js
+[PASS] node --check: dwg-worker.js
+[PASS] node --check: interaction-core-v0202.js
+[PASS] node --check: cad-interaction-architecture-v0225.js
+[PASS] node --check: macro-library-core-v0225.js
+[PASS] node --check: symbol-library-catalog-v0225.js
+[PASS] node --check: selection-editing-core-v02111.js
+[PASS] node --check: render-stability-core-v021113.js
+[PASS] node --check: object-snap-core-v02112.js
+[PASS] node --check: block-symbol-editing-core-v02113.js
+[PASS] node --check: network-diagram-core-v0210.js
+[PASS] node --check: network-learning-core-v0214.js
+[PASS] node --check: a4-diagram-template-core-v02114.js
+[PASS] node --check: symbol-template-v0169.js
+[PASS] node --check inline script #0
+[PASS] PWA macro/catalog behavior simulation
+[PASS] build C# version
+[PASS] build PWA version
+[PASS] build release name
+[PASS] verify V0225 architecture
+[PASS] verify macro core
+[PASS] verify catalog core
+[PASS] verify PWA symbol app version
+[PASS] verify has no stale TX5 V0224 marker
+[PASS] No merge conflict markers
+
+RESULT: ALL CHECKS PASSED.
+Note: environment does not contain Windows .NET Desktop SDK; actual WPF compile/publish must be confirmed on Windows with build_release.cmd.

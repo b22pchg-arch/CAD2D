@@ -1,0 +1,43 @@
+HUONG DAN THU V0.18.5.4 / PWA V0.22.5.4 FIX4
+MTEXT CAP-HEIGHT + FIRST-BASELINE + PARAGRAPH ALIGNMENT PARITY
+
+1. BUILD
+- Giai nen source vao thu muc moi.
+- Chay: CSharp_Source\DwgSketchPrototype\build_release.cmd
+
+2. THU BAT BUOC BANG DWG GOC
+- Mo truc tiep: So do ket day TQ-HG (1)(1).dwg
+- Khong dung project da Save boi FIX1/FIX2/FIX3 cho lan so sanh dau tien.
+
+3. CAC CUM CHU NEN QUAN SAT
+- LBS 373/01 / Quang Vinh
+- 373-7/26 / Ho Thau
+- 373-7/126 / Tan Quang
+- 373-7/01 / T3 Nam Dich
+- Cac nhan 2 dong gan nhanh dung, thanh cai va dao/cau dao.
+
+4. NOI DUNG CAN XAC NHAN
+- Chu khong con bi thu nho do CAD Height bi coi la font em-size.
+- Dong 1 khong bi day ca block len tren.
+- Khoang dong van duoc mo rong dung theo ActualHeight/AtLeast.
+- Hai dong co paragraph Center nam giua reference rectangle, khong bi lech trai.
+- Chu khong de len duong day/thiet bi nhu cac ban truoc.
+
+5. SAVE / REOPEN
+- Save Project.
+- Dong tab.
+- Mo lai project vua luu.
+- Vi tri, can giua, khoang dong va font size phai giu nguyen.
+
+6. UNICODE NORMALIZER
+- Chuc nang FIX3 van giu nguyen.
+- Nen Quet + xem truoc truoc khi Chuyen Unicode.
+- AUTO 80% la cau hinh mac dinh an toan.
+
+7. PWA
+- Hard Refresh/Ctrl+F5 sau khi cap nhat de Service Worker 0.22.5.4 thay cache cu.
+- Mo cung DWG, so sanh C# va PWA tai cung khu vuc.
+
+8. NEU VAN CON LECH
+- Chup cung mot khu vuc tren AutoCAD/DWG goc va tren V0.18.5.4 o cung muc zoom gan nhat co the.
+- Uu tien cac nhan 1 dong, 2 dong va nhan co dau tieng Viet de tach loi font style khoi loi MTEXT layout.

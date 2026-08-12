@@ -1,0 +1,191 @@
+DWG SKETCH V0.18.4 / PWA V0.22.4 - STATIC + BEHAVIORAL VALIDATION
+=================================================================
+
+Result: 179/179 checks passed.
+
+[OK] 001. csproj XML
+[OK] 002. XAML XML
+[OK] 003. integrated version JSON
+[OK] 004. integrated manifest JSON
+[OK] 005. standalone version JSON
+[OK] 006. standalone manifest JSON
+[OK] 007. integrated sample library JSON
+[OK] 008. standalone sample library JSON
+[OK] 009. C# Version 0.18.4
+[OK] 010. C# FileVersion 0.18.4
+[OK] 011. C# AssemblyVersion 0.18.4
+[OK] 012. WPF title V0.18.4
+[OK] 013. PWA version 0.22.4
+[OK] 014. Project JSON remains v11
+[OK] 015. C# MainWindow V0184 exists
+[OK] 016. TX5 curve history prefix
+[OK] 017. TX5 begin curve edit
+[OK] 018. TX5 commit curve edit
+[OK] 019. TX5 Undo
+[OK] 020. TX5 Redo
+[OK] 021. TX5 state application
+[OK] 022. TX5 overlay before payload
+[OK] 023. TX5 overlay after payload
+[OK] 024. TX5 CAD before payload
+[OK] 025. TX5 CAD after payload
+[OK] 026. C# curve TRIM begins TX5
+[OK] 027. C# curve TRIM commits 1-to-N TX5
+[OK] 028. C# TRIM snapshot fallback retained
+[OK] 029. C# TRIM replacement retained
+[OK] 030. C# EXTEND begins TX5
+[OK] 031. C# EXTEND commits 1-to-1 TX5
+[OK] 032. C# legacy line TRIM also uses TX5
+[OK] 033. C# reset includes TX5
+[OK] 034. C# TX5 prune guard
+[OK] 035. C# TX5 live history scan
+[OK] 036. C# Undo dispatches TX5 first
+[OK] 037. C# Redo dispatches TX5 first
+[OK] 038. TX4 structural history retained
+[OK] 039. TX3 selection history retained
+[OK] 040. C# COPY retains TX4
+[OK] 041. C# PASTE retains TX4
+[OK] 042. C# DELETE retains TX4
+[OK] 043. C# MIRROR retains TX3
+[OK] 044. C# PROPERTIES retains TX3
+[OK] 045. C# GRIP editing core retained
+[OK] 046. C# template Version metadata
+[OK] 047. C# template Revision metadata
+[OK] 048. C# template Category metadata
+[OK] 049. C# template Tags metadata
+[OK] 050. C# symbol export schema v2
+[OK] 051. C# symbol library version
+[OK] 052. C# symbol export app version
+[OK] 053. C# PWA import initializer has no duplicate Name
+[OK] 054. C# imports PWA template Version
+[OK] 055. C# imports PWA template Revision
+[OK] 056. C# imports PWA template Category
+[OK] 057. C# imports PWA template Tags
+[OK] 058. C# overwrite increments template Revision
+[OK] 059. C# overwrite preserves template Version
+[OK] 060. PWA symbol export schema v2
+[OK] 061. PWA symbol library version
+[OK] 062. PWA symbol export app version
+[OK] 063. PWA overwrite increments Revision
+[OK] 064. PWA overwrite preserves Version
+[OK] 065. PWA overwrite preserves Category
+[OK] 066. PWA overwrite preserves Tags
+[OK] 067. Versioned Symbol Library schema document
+[OK] 068. PWA v0224 architecture active
+[OK] 069. PWA v0223 architecture global inactive
+[OK] 070. PWA API 0.22.4
+[OK] 071. PWA selection delta v0224
+[OK] 072. PWA structural delta v0224
+[OK] 073. PWA curve edit delta v0224
+[OK] 074. PWA beginCurveEdit
+[OK] 075. PWA commitCurveEdit
+[OK] 076. PWA cancelCurveEdit
+[OK] 077. PWA applyCurveEdit
+[OK] 078. PWA architecture Undo
+[OK] 079. PWA architecture Redo
+[OK] 080. PWA TRIM uses TX5
+[OK] 081. PWA TRIM commits 1-to-N
+[OK] 082. PWA EXTEND uses TX5
+[OK] 083. PWA EXTEND commits 1-to-1
+[OK] 084. PWA TX5 snapshot/action fallback retained
+[OK] 085. PWA COPY retains structural delta
+[OK] 086. PWA PASTE retains structural delta
+[OK] 087. PWA DELETE retains structural delta
+[OK] 088. PWA history size object-aware
+[OK] 089. PWA UI label 0.22.4
+[OK] 090. Service Worker 0.22.4
+[OK] 091. Worker 0.22.4
+[OK] 092. Manifest start_url 0.22.4
+[OK] 093. Service Worker caches v0224 architecture
+[OK] 094. Service Worker includes library schema doc
+[OK] 095. PWA integrated/standalone sync index.html
+[OK] 096. PWA integrated/standalone sync interaction-core-v0202.js
+[OK] 097. PWA integrated/standalone sync cad-interaction-architecture-v0224.js
+[OK] 098. PWA integrated/standalone sync selection-editing-core-v02111.js
+[OK] 099. PWA integrated/standalone sync render-stability-core-v021113.js
+[OK] 100. PWA integrated/standalone sync object-snap-core-v02112.js
+[OK] 101. PWA integrated/standalone sync block-symbol-editing-core-v02113.js
+[OK] 102. PWA integrated/standalone sync network-diagram-core-v0210.js
+[OK] 103. PWA integrated/standalone sync network-learning-core-v0214.js
+[OK] 104. PWA integrated/standalone sync a4-diagram-template-core-v02114.js
+[OK] 105. PWA integrated/standalone sync symbol-template-v0169.js
+[OK] 106. PWA integrated/standalone sync dwg-worker.js
+[OK] 107. PWA integrated/standalone sync sw.js
+[OK] 108. PWA integrated/standalone sync version.json
+[OK] 109. PWA integrated/standalone sync manifest.webmanifest
+[OK] 110. PWA integrated/standalone sync sample_custom_symbol_library.json
+[OK] 111. PWA integrated/standalone sync VERSIONED_SYMBOL_LIBRARY_SCHEMA_V0184.md
+[OK] 112. Root doc RELEASE_NOTES_V0184_PWA_V0224.txt
+[OK] 113. Project doc RELEASE_NOTES_V0184_PWA_V0224.txt
+[OK] 114. Integrated PWA doc RELEASE_NOTES_V0184_PWA_V0224.txt
+[OK] 115. Standalone PWA doc RELEASE_NOTES_V0184_PWA_V0224.txt
+[OK] 116. Root doc HUONG_DAN_THU_V0184_CURVE_EDIT_DELTA.txt
+[OK] 117. Project doc HUONG_DAN_THU_V0184_CURVE_EDIT_DELTA.txt
+[OK] 118. Integrated PWA doc HUONG_DAN_THU_V0184_CURVE_EDIT_DELTA.txt
+[OK] 119. Standalone PWA doc HUONG_DAN_THU_V0184_CURVE_EDIT_DELTA.txt
+[OK] 120. Root doc INTERACTION_ARCHITECTURE_STATIC_TEST_V0184.txt
+[OK] 121. Project doc INTERACTION_ARCHITECTURE_STATIC_TEST_V0184.txt
+[OK] 122. Integrated PWA doc INTERACTION_ARCHITECTURE_STATIC_TEST_V0184.txt
+[OK] 123. Standalone PWA doc INTERACTION_ARCHITECTURE_STATIC_TEST_V0184.txt
+[OK] 124. Root doc VERSIONED_SYMBOL_LIBRARY_SCHEMA_V0184.md
+[OK] 125. Project doc VERSIONED_SYMBOL_LIBRARY_SCHEMA_V0184.md
+[OK] 126. Integrated PWA doc VERSIONED_SYMBOL_LIBRARY_SCHEMA_V0184.md
+[OK] 127. Standalone PWA doc VERSIONED_SYMBOL_LIBRARY_SCHEMA_V0184.md
+[OK] 128. build_release versions V0184/V0224
+[OK] 129. build_release release name
+[OK] 130. self-contained versions V0184/V0224
+[OK] 131. verify_release defaults V0184/V0224
+[OK] 132. verify_release requires V0184/V0224 core
+[OK] 133. verify_release checks TX5
+[OK] 134. verify_release checks PWA curve delta
+[OK] 135. build_release.cmd no UTF-8 BOM
+[OK] 136. build_release_self_contained.cmd no UTF-8 BOM
+[OK] 137. verify_release.ps1 no UTF-8 BOM
+[OK] 138. node --check integrated cad-interaction-architecture-v0224.js
+[OK] 139. node --check integrated interaction-core-v0202.js
+[OK] 140. node --check integrated selection-editing-core-v02111.js
+[OK] 141. node --check integrated render-stability-core-v021113.js
+[OK] 142. node --check integrated object-snap-core-v02112.js
+[OK] 143. node --check integrated block-symbol-editing-core-v02113.js
+[OK] 144. node --check integrated network-diagram-core-v0210.js
+[OK] 145. node --check integrated network-learning-core-v0214.js
+[OK] 146. node --check integrated a4-diagram-template-core-v02114.js
+[OK] 147. node --check integrated symbol-template-v0169.js
+[OK] 148. node --check integrated dwg-worker.js
+[OK] 149. node --check integrated sw.js
+[OK] 150. inline JS integrated
+[OK] 151. node --check standalone cad-interaction-architecture-v0224.js
+[OK] 152. node --check standalone interaction-core-v0202.js
+[OK] 153. node --check standalone selection-editing-core-v02111.js
+[OK] 154. node --check standalone render-stability-core-v021113.js
+[OK] 155. node --check standalone object-snap-core-v02112.js
+[OK] 156. node --check standalone block-symbol-editing-core-v02113.js
+[OK] 157. node --check standalone network-diagram-core-v0210.js
+[OK] 158. node --check standalone network-learning-core-v0214.js
+[OK] 159. node --check standalone a4-diagram-template-core-v02114.js
+[OK] 160. node --check standalone symbol-template-v0169.js
+[OK] 161. node --check standalone dwg-worker.js
+[OK] 162. node --check standalone sw.js
+[OK] 163. inline JS standalone
+[OK] 164. PWA TX5 TRIM/EXTEND behavioral simulation
+[OK] 165. XAML handlers resolved (179)
+[OK] 166. No merge conflict markers
+[OK] 167. brace balance CadInteractionArchitecture.V0183.cs
+[OK] 168. brace balance MainWindow.V0183.cs
+[OK] 169. brace balance MainWindow.V0184.cs
+[OK] 170. brace balance MainWindow.xaml.cs
+[OK] 171. brace balance MainWindow.V06.cs
+[OK] 172. brace balance MainWindow.V01418.cs
+[OK] 173. brace balance MainWindow.V0142.cs
+[OK] 174. brace balance MainWindow.V01427.cs
+[OK] 175. brace balance ElectricalSymbolTemplateStorage.cs
+[OK] 176. csproj Content/Resource paths exist (229)
+[OK] 177. Service Worker referenced assets exist (168)
+[OK] 178. No stale active C# V0.18.3 version label
+[OK] 179. No stale active PWA V0.22.3 version label
+
+Notes:
+- XML/XAML/JSON, version labels, TX5 C# hooks, TX3/TX4 regression hooks, Versioned Symbol Library schema v2, PWA parity hashes and active JavaScript syntax were validated.
+- 179 XAML event handlers were resolved against C# methods; changed C# partial files passed structural brace checks; all csproj Content/Resource paths exist.
+- Node behavioral simulation validated TRIM 1->N, sequential TRIM with stacked Undo/Redo, EXTEND 1->1, correct array order and preservation of boundary selection.
+- Integrated and standalone PWA active artifacts match by SHA-256.
+- This environment does not contain the Windows .NET Desktop SDK/PowerShell runtime, so the real WPF compile/publish and verify_release.ps1 execution must still be confirmed on Windows by build_release.cmd.

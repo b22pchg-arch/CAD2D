@@ -1,0 +1,43 @@
+HUONG DAN THU V0.18.7 / PWA V0.22.7
+===================================
+
+A. KIEM TRA KHONG REGRESSION
+1. Mo DWG mau da dung de sua TEXT/MTEXT.
+2. Xac nhan vi tri chu van dung nhu V0.18.6 FIX4.
+3. Save Project -> dong -> mo lai va xac nhan text khong dich.
+
+B. SYMBOL UPDATE MANAGER
+1. Chen 2-3 instance tu cung mot symbol template.
+2. Sua template va luu de tang Revision.
+3. Bam "Quet cap nhat".
+4. Danh sach phai hien cac instance cu o trang thai "Co cap nhat".
+5. Bo chon 1 instance, de 1-2 instance duoc chon.
+6. Bam "Cap nhat hang loat" va xac nhan.
+7. Chi cac instance duoc chon duoc cap nhat.
+8. Vi tri, ty le, goc xoay va nhan thiet bi phai giu nguyen.
+9. Ctrl+Z mot lan phai hoan tac ca batch.
+10. Thu lenh: SYMSCAN, SYMMANAGER, SYMBATCH.
+
+C. MISSING SOURCE
+1. Import/chen symbol tu catalog A.
+2. Xoa catalog A hoac mo project tren may khong co catalog A.
+3. Quet cap nhat.
+4. Instance phai hien "Thieu nguon" va khong duoc batch update.
+
+D. MACRO PARAMETER PROFILES
+1. Chon macro co DEVICE_ANGLE/HATCH/GRID.
+2. Dien tham so, vi du:
+   DEVICE_ANGLE=45; GRID_X=25; GRID_Y=25; GRID_MAJOR=5
+3. Dat ten Profile "Goc45 Luoi25" -> Luu profile.
+4. Doi tham so:
+   DEVICE_ANGLE=90; GRID_X=50; GRID_Y=50; GRID_MAJOR=10
+5. Luu profile "Goc90 Luoi50".
+6. Chuyen qua lai hai profile va bam "Nap profile".
+7. O tham so phat phai thay doi dung theo profile.
+8. Bam "Phat macro" va xac nhan profile khong lam thay doi UI vinh vien sau playback.
+9. Dong/mo lai ung dung: C# profile van ton tai; PWA profile van ton tai trong cung browser profile.
+
+E. PWA
+- Kiem tra cac nut Quet cap nhat / Chon tat ca / Bo chon / Cap nhat hang loat.
+- Kiem tra Parameter Profiles.
+- Lam moi PWA neu service worker cu: Ctrl+F5 hoac reload sau khi SW 0.22.7 active.

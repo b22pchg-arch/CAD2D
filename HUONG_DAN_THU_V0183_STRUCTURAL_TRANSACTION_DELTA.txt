@@ -1,0 +1,37 @@
+HUONG DAN THU V0.18.3 / PWA V0.22.3 - STRUCTURAL TRANSACTION DELTA
+
+A. BUILD C#
+1. Giai nen bo source vao thu muc moi (khuyen nghi).
+2. Chay CSharp_Source\DwgSketchPrototype\build_release.cmd.
+3. Xac nhan verify_release.ps1 PASS, build Release va publish thanh cong.
+
+B. TEST COPY
+1. Mo ban ve co nhieu loai doi tuong (line/polyline/text/circle va overlay neu co).
+2. Chon nhieu doi tuong -> COPY theo diem goc/diem dich.
+3. Ctrl+Z: chi ban sao bien mat, ban goc giu nguyen va tap chon truoc COPY duoc khoi phuc.
+4. Ctrl+Y: ban sao tro lai dung vi tri/thu tu va duoc chon lai.
+5. Dang o buoc preview COPY, bam Esc: ban sao preview phai bi huy va khong tao history.
+
+C. TEST PASTE
+1. Copy tap doi tuong co layer/style khac nhau.
+2. Paste vao vi tri moi; thu ca paste trong cung tab va khac tab.
+3. Ctrl+Z: doi tuong vua paste bien mat; layer/style moi do paste tao ra khong de lai rac; selection truoc Paste duoc khoi phuc.
+4. Ctrl+Y: doi tuong va layer/style duoc khoi phuc.
+5. Dang preview Paste bam Esc: project tro ve trang thai truoc Paste.
+
+D. TEST DELETE
+1. Chon cac doi tuong nam o nhieu vi tri trong thu tu entity.
+2. DELETE -> Ctrl+Z -> Ctrl+Y nhieu lan.
+3. Xac nhan thu tu ve, selection va noi dung khong bi nhay/sai doi tuong.
+
+E. REGRESSION
+- SCALE, ROTATE, MIRROR, PROPERTIES: Undo/Redo TX3 van hoat dong.
+- MOVE: Undo/Redo SM1 van hoat dong.
+- GRIP: Undo/Redo GE1 van hoat dong.
+- TRIM/EXTEND va cac lenh chua migrate: snapshot legacy van hoat dong.
+- Mo/lưu project JSON v11, DWG/DXF, PWA offline va refresh cache.
+
+F. BAN VE LON
+- Thu COPY/PASTE/DELETE 100-1000 doi tuong.
+- Theo doi TXINFO/ARCHINFO (C#) hoac console architecture PWA.
+- Xac nhan Undo/Redo khong reload toan project va khong nhap nhay bat thuong.

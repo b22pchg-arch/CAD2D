@@ -1,0 +1,43 @@
+DWG SKETCH C# V0.18.5.3 / PWA V0.22.5.3
+FIX2 - MTEXT 3-ON-5 LINE SPACING PARITY
+============================================================
+
+Muc tieu
+- Sua loi chu MTEXT nhieu dong bi nen len tren so voi DWG goc, dan den dong thu hai co the de len duong day/thiet bi.
+- Giu nguyen FIX1 Text Anchor Parity, Project JSON v11, Macro Engine Phase 1, Library Catalog va TX3/TX4/TX5.
+
+Nguyen nhan xac dinh tu file DWG mau thuc te
+- Cac nhan trong vung kiem tra chu yeu la MTEXT Attachment=Top Left, LineSpacingStyle=1, LineSpacingFactor=1.0.
+- V0.18.5.1 ve nhieu dong voi baseline advance = 1.2 * textHeight.
+- AutoCAD MTEXT group 44 dung he so cua line spacing mac dinh 3-on-5. FIX2 chuyen baseline advance co so sang (5/3) * textHeight * factor.
+- V0.18.5.1 cung dung nham DXF group 46 lam reference height; FIX2 dung group 43 (actual MTEXT height).
+- LibreDWG co truong hop rectHeight=0 trong khi extentsHeight co gia tri that; FIX2 fallback sang extentsHeight.
+
+Vi du tu file DWG mau
+- MTEXT handle 88E8A: Height=36000, LineSpacing=1, ActualHeight=97368.
+  + V0.18.5.1: line advance 43200.
+  + V0.18.5.3: line advance 60000.
+  + Dong thu hai duoc dua xuong dung them 16800 don vi CAD.
+- MTEXT handle 9DF2F: Height=33016.8, LineSpacing=1, ActualHeight=89695.64.
+  + V0.18.5.1: line advance 39620.16.
+  + V0.18.5.3: line advance 55028.0.
+  + Dong thu hai duoc dua xuong dung them 15407.84 don vi CAD.
+
+C#
+- Them CadTextLayoutParity.V01852.cs.
+- CadText/OverlayTextEntity luu MTextLineSpacingStyle, MTextLineSpacingFactor, MTextActualWidth, MTextActualHeight.
+- DxfParser doc group 42/43/44/73 dung ngu nghia MTEXT.
+- LibreDwgJsonParser doc lineSpacing/lineSpacingStyle va extentsWidth/extentsHeight.
+- Renderer Skia, selection bounds, precise text hit, TEXTFIX geometry repair, vector print va DXF export dung cung line advance.
+- Metadata line spacing duoc luu qua Save Project / Reopen; Project JSON van version 11 (chi them truong tuy chon backward-compatible).
+
+PWA
+- DWG worker giu extentsHeight/extentsWidth, lineSpacingStyle, lineSpacing.
+- DXF parser PWA doc group 42/43/44/73.
+- Canvas render, selection/hit bounds, export canvas, SVG va DXF export dung cadMTextLineAdvanceFactorV02252().
+- Service Worker/version tang 0.22.5.3 de khong bi cache ban FIX1.
+
+Tuong thich
+- TEXT mot dong/native text khong phai MTEXT van giu he so legacy 1.2.
+- Project cu thieu metadata line spacing mac dinh factor=1; neu SourceType/SourceCadType=MTEXT van nhan 3-on-5 khi mo bang FIX2.
+- De danh gia chinh xac nhat voi project da import qua ban cu, nen mo lai DWG goc va Save Project lai mot lan.

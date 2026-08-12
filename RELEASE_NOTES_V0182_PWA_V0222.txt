@@ -1,0 +1,19 @@
+DWG SKETCH V0.18.2 / PWA V0.22.2 - TRANSACTION DELTA EXPANSION
+================================================================
+
+- Nang CAD Interaction Architecture len V0.18.2 / API PWA V0.22.2.
+- C# dung TX3 selection delta cho SCALE, ROTATE, MIRROR va PROPERTIES.
+- MIRROR khong con PushUndoSnapshot toan project truoc khi doi xung.
+- Apply Properties cho doi tuong/tap chon phu hop khong con snapshot toan project.
+- MOVE SM1 va GRIP GE1 tiep tuc la delta nhe, duoc thong ke trong Transaction Service.
+- Undo/Redo uu tien TX3, sau do GE1/SM1, cuoi cung moi fallback snapshot legacy.
+- PWA selection-delta-v0222 mo rong cho MIRROR va PROPERTIES; MIRROR khong con beginAction snapshot.
+- TXINFO/HISTORYINFO/DELTAINFO tiep tuc thong ke delta count, bytes, transaction va kind.
+- ARCHINFO/ARCHCHECK tiep tuc kiem tra Entity/Selection revision, owned mutation va render invalidation.
+- Project JSON van v11; khong doi schema du lieu, khong lam mat tuong thich file hien tai.
+- A4 0.21.14, Block 0.21.13, OSNAP 0.21.12 va Render Stability 0.21.11.3 duoc giu nguyen.
+- COPY/PASTE/DELETE/TRIM/EXTEND va structural edit chua migrate van giu snapshot fallback de uu tien on dinh.
+
+Dinh huong tiep theo:
+- Khi TX3 duoc xac nhan on dinh tren DWG lon, tiep tuc structural delta cho COPY/PASTE/DELETE.
+- Sau do chuyen sang Macro/Library contract cua nhanh V0.18: Built-in read-only, User versioned, Project embedded.

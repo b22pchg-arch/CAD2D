@@ -1,0 +1,162 @@
+DWG SKETCH V0.18.3 / PWA V0.22.3 - STATIC + BEHAVIORAL VALIDATION
+============================================================
+
+Result: 152/152 checks passed.
+
+[OK] 001. csproj XML
+[OK] 002. XAML XML
+[OK] 003. integrated version JSON
+[OK] 004. integrated manifest JSON
+[OK] 005. standalone version JSON
+[OK] 006. standalone manifest JSON
+[OK] 007. C# Version 0.18.3
+[OK] 008. C# FileVersion 0.18.3
+[OK] 009. C# AssemblyVersion 0.18.3
+[OK] 010. WPF title V0.18.3
+[OK] 011. PWA version 0.22.3
+[OK] 012. Project JSON remains v11
+[OK] 013. C# architecture V0183 exists
+[OK] 014. C# MainWindow V0183 exists
+[OK] 015. Old C# architecture V0182 absent in clean package
+[OK] 016. Old MainWindow V0182 absent in clean package
+[OK] 017. csproj excludes stale CadInteractionArchitecture.V0181.cs
+[OK] 018. csproj excludes stale MainWindow.V0181.cs
+[OK] 019. csproj excludes stale CadInteractionArchitecture.V0182.cs
+[OK] 020. csproj excludes stale MainWindow.V0182.cs
+[OK] 021. CadCommandService
+[OK] 022. CadSelectionService
+[OK] 023. CadEntityService
+[OK] 024. CadRenderService
+[OK] 025. CadTransactionService
+[OK] 026. Selection OwnedMutations
+[OK] 027. Entity NotifyChanged
+[OK] 028. Transaction delta telemetry
+[OK] 029. TX3 selection history prefix
+[OK] 030. TX4 structural history prefix
+[OK] 031. Structural add commit
+[OK] 032. Structural remove commit
+[OK] 033. Structural Undo
+[OK] 034. Structural Redo
+[OK] 035. Undo dispatches TX4 before TX3
+[OK] 036. Redo dispatches TX4 before TX3
+[OK] 037. TX3/TX4 prune guard
+[OK] 038. Structural remove descending index
+[OK] 039. Structural insert ascending index
+[OK] 040. Paste layer metadata delta
+[OK] 041. C# COPY begins structural transaction
+[OK] 042. C# COPY no full-project snapshot begin
+[OK] 043. C# COPY commits structural add
+[OK] 044. C# PASTE begins structural transaction
+[OK] 045. C# PASTE no full-project snapshot begin
+[OK] 046. C# PASTE commits structural add
+[OK] 047. C# PASTE records layer style changes
+[OK] 048. C# DELETE begins structural transaction
+[OK] 049. C# DELETE commits structural remove
+[OK] 050. C# DELETE no full-project snapshot
+[OK] 051. C# COPY cancel rolls back structural transaction
+[OK] 052. C# PASTE cancel rolls back structural transaction
+[OK] 053. C# SCALE retains TX3
+[OK] 054. C# ROTATE retains TX3
+[OK] 055. C# MIRROR retains TX3
+[OK] 056. C# PROPERTIES retains TX3
+[OK] 057. C# GRIP GE1 retained
+[OK] 058. PWA v0223 script active
+[OK] 059. PWA v0222 script inactive
+[OK] 060. PWA API 0.22.3
+[OK] 061. PWA selection delta v0223
+[OK] 062. PWA structural delta v0223
+[OK] 063. PWA beginStructuralAdd
+[OK] 064. PWA commitStructuralAdd
+[OK] 065. PWA cancelStructuralAdd
+[OK] 066. PWA beginStructuralRemove
+[OK] 067. PWA commitStructuralRemove
+[OK] 068. PWA applyStructural
+[OK] 069. PWA undoArchitectureDelta
+[OK] 070. PWA redoArchitectureDelta
+[OK] 071. PWA COPY structural add
+[OK] 072. PWA PASTE structural add
+[OK] 073. PWA DELETE structural remove
+[OK] 074. PWA COPY cancel structural rollback
+[OK] 075. PWA structural ADD preserves previous selection
+[OK] 076. PWA historyBytes object-aware
+[OK] 077. PWA PASTE legacy fallback retained
+[OK] 078. PWA DELETE legacy fallback retained
+[OK] 079. PWA MIRROR selection delta retained
+[OK] 080. PWA PROPERTIES selection delta retained
+[OK] 081. PWA Render Stability retained
+[OK] 082. PWA Object Snap retained
+[OK] 083. PWA Block editing retained
+[OK] 084. PWA A4 workflow retained
+[OK] 085. PWA index label 0.22.3
+[OK] 086. Service Worker 0.22.3
+[OK] 087. Worker 0.22.3
+[OK] 088. Manifest start_url 0.22.3
+[OK] 089. PWA standalone/integrated sync index.html
+[OK] 090. PWA standalone/integrated sync interaction-core-v0202.js
+[OK] 091. PWA standalone/integrated sync cad-interaction-architecture-v0223.js
+[OK] 092. PWA standalone/integrated sync selection-editing-core-v02111.js
+[OK] 093. PWA standalone/integrated sync render-stability-core-v021113.js
+[OK] 094. PWA standalone/integrated sync object-snap-core-v02112.js
+[OK] 095. PWA standalone/integrated sync block-symbol-editing-core-v02113.js
+[OK] 096. PWA standalone/integrated sync network-diagram-core-v0210.js
+[OK] 097. PWA standalone/integrated sync network-learning-core-v0214.js
+[OK] 098. PWA standalone/integrated sync a4-diagram-template-core-v02114.js
+[OK] 099. PWA standalone/integrated sync dwg-worker.js
+[OK] 100. PWA standalone/integrated sync sw.js
+[OK] 101. PWA standalone/integrated sync version.json
+[OK] 102. PWA standalone/integrated sync manifest.webmanifest
+[OK] 103. Project doc RELEASE_NOTES_V0183_PWA_V0223.txt
+[OK] 104. Standalone PWA doc RELEASE_NOTES_V0183_PWA_V0223.txt
+[OK] 105. Integrated PWA doc RELEASE_NOTES_V0183_PWA_V0223.txt
+[OK] 106. Project doc HUONG_DAN_THU_V0183_STRUCTURAL_TRANSACTION_DELTA.txt
+[OK] 107. Standalone PWA doc HUONG_DAN_THU_V0183_STRUCTURAL_TRANSACTION_DELTA.txt
+[OK] 108. Integrated PWA doc HUONG_DAN_THU_V0183_STRUCTURAL_TRANSACTION_DELTA.txt
+[OK] 109. Project doc INTERACTION_ARCHITECTURE_STATIC_TEST_V0183.txt
+[OK] 110. Standalone PWA doc INTERACTION_ARCHITECTURE_STATIC_TEST_V0183.txt
+[OK] 111. Integrated PWA doc INTERACTION_ARCHITECTURE_STATIC_TEST_V0183.txt
+[OK] 112. build_release versions V0183/V0223
+[OK] 113. build_release cleanup V0182
+[OK] 114. self-contained versions V0183/V0223
+[OK] 115. self-contained cleanup V0182
+[OK] 116. Overlay cleanup CMD exists
+[OK] 117. Overlay cleanup PowerShell exists
+[OK] 118. verify_release defaults V0183/V0223
+[OK] 119. verify_release checks structural release
+[OK] 120. verify_release.ps1 delimiter balance
+[OK] 121. node --check standalone cad-interaction-architecture-v0223.js
+[OK] 122. node --check standalone dwg-worker.js
+[OK] 123. node --check standalone sw.js
+[OK] 124. inline JS standalone
+[OK] 125. node --check integrated cad-interaction-architecture-v0223.js
+[OK] 126. node --check integrated dwg-worker.js
+[OK] 127. node --check integrated sw.js
+[OK] 128. inline JS integrated
+[OK] 129. PWA structural/selection behavioral simulation
+[OK] 130. XAML handlers resolved (179)
+[OK] 131. No merge conflict markers
+[OK] 132. No active V0182 architecture source files
+[OK] 133. build_release.cmd ASCII/no BOM
+[OK] 134. build_release_self_contained.cmd ASCII/no BOM
+[OK] 135. APPLY_BUILD_FIX_V01830.cmd ASCII/no BOM
+[OK] 136. APPLY_BUILD_FIX_V01830.ps1 ASCII/no BOM
+[OK] 137. verify_release.ps1 ASCII/no BOM
+[OK] 138. brace balance CadInteractionArchitecture.V0183.cs
+[OK] 139. brace balance MainWindow.V0183.cs
+[OK] 140. brace balance MainWindow.xaml.cs
+[OK] 141. brace balance MainWindow.V06.cs
+[OK] 142. brace balance MainWindow.V0146.cs
+[OK] 143. brace balance SelectionEditingCore.V01711.cs
+[OK] 144. brace balance MainWindow.V01416.cs
+[OK] 145. brace balance MainWindow.V01418.cs
+[OK] 146. brace balance MainWindow.V01427.cs
+[OK] 147. brace balance MainWindow.V07.cs
+[OK] 148. brace balance all active C# (80 files)
+[OK] 149. csproj Content/Resource paths exist (225)
+[OK] 150. Service Worker core assets exist (27)
+[OK] 151. No active C# V0.18.2 version label
+[OK] 152. No active PWA V0.22.2 version/script label
+
+Notes:
+- XML/XAML/JSON structure, active version labels, C# structural hooks, PWA parity hashes, JavaScript syntax, 179 XAML handlers, brace balance for 80 active C# files, Service Worker assets and overlay-build cleanup were validated.
+- Node behavioral simulation validated structural ADD/REMOVE with mixed CAD/overlay arrays, non-contiguous delete indices, exact Undo/Redo order, previous-selection restore on Undo ADD, created-selection restore on Redo ADD, and selection-delta Undo/Redo.
+- The current environment has Node.js but no Windows .NET Desktop SDK / PowerShell runtime, so the real WPF build and verify_release.ps1 execution must still be confirmed on Windows by build_release.cmd.

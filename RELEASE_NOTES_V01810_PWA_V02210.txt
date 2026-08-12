@@ -1,0 +1,27 @@
+DWG Sketch Prototype V0.18.10.0 / PWA V0.22.10
+RELATIVE GEOMETRY PHASE 3 - ADAPTIVE BOUNDS ANCHORS + MACRO INPUT CONTRACT
+
+1. Adaptive multi-point reference
+- RROTATE/RSCALE/RMIRROR no longer need to reference only SelectionBoundsCenter.
+- New recordings choose the nearest of 9 bounds anchors: Center, TopLeft, TopCenter, TopRight, CenterLeft, CenterRight, BottomLeft, BottomCenter, BottomRight.
+- Only residual offsets from the chosen anchor are saved; absolute DWG coordinates are never persisted.
+- Legacy SelectionBoundsCenter steps remain compatible.
+
+2. Macro Input Contract
+- Each macro schema v4 stores inputContract: CurrentSelection, minimumCount, kind (Any/Overlay/Cad/Mixed), recorded counts, referenceStrategy.
+- Relative macros force minimumCount >= 1.
+- Playback validates the current selection before any step executes.
+
+3. MACROCHECK / preflight
+- Validates input contract, enabled steps, replay-safe actions, relative vector arguments, relative transform arguments and reference anchor/mode.
+- Preflight does not change drawing geometry.
+- Destructive actions are reported as warnings and keep the existing playback confirmation.
+
+4. Step Editor
+- Adds Reference Anchor selector for RROTATE/RSCALE/RMIRROR.
+- Saving a transform step upgrades its reference to SelectionBoundsAnchor.
+
+5. Compatibility / stability
+- Project JSON remains v11.
+- FIX4 TEXT/MTEXT parity and Vietnamese Unicode Normalizer are unchanged.
+- TX3/TX4/TX5, RMOVE/RCOPY and Symbol Update Manager/Profile systems are preserved.

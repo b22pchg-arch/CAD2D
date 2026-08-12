@@ -1,0 +1,78 @@
+DWG SKETCH C# V0.18.5.4 / PWA V0.22.5.4
+FIX4 MTEXT CAP-HEIGHT + FIRST-BASELINE + PARAGRAPH ALIGNMENT PARITY
+Date: 2026-08-10
+
+MUC TIEU
+- Tiep tuc sua sai vi tri chu con lai sau FIX1/FIX2/FIX3 tren chinh file DWG mau cua nguoi dung.
+- Khong dung mot he so dich Y co dinh cho moi TEXT/MTEXT.
+- Giu nguyen Vietnamese Unicode Normalizer, Macro Engine, Library Catalog, TX3/TX4/TX5 va Project JSON v11.
+
+NGUYEN NHAN BO SUNG XAC DINH TU DWG MAU
+1. CAD Height khong tuong duong truc tiep voi font em-size cua Skia/Canvas.
+   - FIX3 van dat paint.TextSize = CAD Height.
+   - Voi font Arial/Arial substitute, chieu cao cap glyph "H" chi chiem mot phan em-box.
+   - FIX4 do cap-height cua "H" va tang em-size sao cho cap-height hien thi = CAD Height.
+2. Nhieu MTEXT hai dong trong DWG co paragraph format \pxqc; (q=c, Center).
+   - Parser cu bo toan bo \p...; truoc khi luu model nen mat can giua doan van.
+   - Sau khi mat q=c, hai dong bi ve tu mep trai cua reference rectangle, tao cam giac sai vi tri ro ret.
+3. MTEXT LineSpacingStyle=AtLeast can giu baseline dau on dinh.
+   - FIX3 chia residual ActualHeight len tren va xuong duoi, co the lam ca block chu dich theo Y.
+   - FIX4 giu first baseline theo cap-height/glyph top; phan chenh ActualHeight duoc dua vao baseline gap khi AtLeast.
+
+THAY DOI C#
+- Them CadTextMetricParity.V01854.cs:
+  + ResolveEmPerCadHeight(): map em-size -> CAD cap-height bang glyph H.
+  + BuildLayout(): first baseline + actual extents + AtLeast baseline gap.
+  + ResolveParagraphLocalX(): Left/Center/Right theo MTEXT reference width.
+- Them MainWindow.TextRenderParity.V01854.cs:
+  + render CadText va OverlayText imported bang metric FIX4.
+  + selection bounds dung cung metric voi renderer.
+- MainWindow.TextAnchorParity.V01851.cs:
+  + import anchor dung metric V01854.
+  + MTEXT attachment rectangle khong con bi nhan WidthFactor nhu glyph.
+- CadTextFormatting.cs:
+  + trich paragraph q-alignment truoc khi bo formatting.
+- LibreDwgJsonParser.cs / DxfParser.cs:
+  + giu MTextReferenceWidth.
+  + giu MTextParagraphAlignment.
+- Models.cs / ProjectStorage.cs / promotion/clone:
+  + round-trip hai metadata tren qua Save Project -> Reopen.
+- DrawCadTextForOutput va print/raster path dung metric FIX4.
+
+THAY DOI PWA
+- cadTextEmPerHeightV02254(): cap-height/em-size normalization.
+- cadTextLayoutV02254(): first baseline + AtLeast actual extents.
+- cadTextParagraphXLocalV02254(): Center/Right trong reference rectangle.
+- DWG worker va DXF parser giu mtextParagraphAlignment + mtextReferenceWidth.
+- Screen render, raster export va SVG export dung cung metric FIX4.
+- Worker/Service Worker/PWA version tang 0.22.5.4 de khong dung cache cu.
+
+KIEM TRA TREN DWG MAU CUA NGUOI DUNG
+- Converted entities: 77,297.
+- TEXT: 10,503.
+- MTEXT: 9,960.
+- Paragraph Center khoi phuc duoc: 471 MTEXT.
+- Mau LBS 373/01 / Quang Vinh:
+  + H=36,000; ActualH=107,772.
+  + ReferenceW=358,602.063; ActualW=257,178.240.
+  + Center margin xap xi 50,711.912 CAD unit moi ben.
+- Mau 373-7/26 / Ho Thau:
+  + H=36,000; ActualH=105,972.
+  + Center margin xap xi 83,304.692 CAD unit.
+- Mau 373-7/126 / Tan Quang:
+  + H=33,016.8; ActualH=98,808.2768.
+  + Center margin xap xi 44,857.946 CAD unit.
+- Mau 373-7/01 / T3 Nam Dich:
+  + H=36,000; ActualH=104,748.
+  + Center margin xap xi 75,807.750 CAD unit.
+
+TUONG THICH
+- Project JSON van version 11.
+- Project cu khong co MTextReferenceWidth/MTextParagraphAlignment van mo duoc; gia tri mac dinh Left/0.
+- De danh gia chinh xac FIX4, nen mo lai DWG/DXF goc mot lan. Project da luu boi ban cu co the da mat paragraph q-alignment tu luc import.
+
+MOI TRUONG KIEM TRA
+- Static + behavior checks: 628/628 PASS truoc khi dong goi tai thoi diem phat hanh.
+- Node syntax checks: PASS.
+- Worker doc truc tiep file DWG mau: PASS.
+- Moi truong container khong co Windows .NET Desktop SDK; build WPF cuoi cung can chay build_release.cmd tren Windows.

@@ -1,0 +1,80 @@
+DWG SKETCH V0.18.1 / PWA V0.22.1 - STATIC VALIDATION
+============================================================
+
+Result: 73/73 checks passed.
+
+[OK] 01. csproj XML
+[OK] 02. XAML XML
+[OK] 03. CSharp_Source/DwgSketchPrototype/HtmlViewer/PWA/version.json JSON
+[OK] 04. CSharp_Source/DwgSketchPrototype/HtmlViewer/PWA/manifest.webmanifest JSON
+[OK] 05. PWA_Standalone/version.json JSON
+[OK] 06. PWA_Standalone/manifest.webmanifest JSON
+[OK] 07. C# version 0.18.1
+[OK] 08. PWA version 0.22.1
+[OK] 09. Project JSON remains v11
+[OK] 10. New C# architecture exists
+[OK] 11. New MainWindow architecture exists
+[OK] 12. Old C# architecture removed
+[OK] 13. Old MainWindow architecture removed
+[OK] 14. CadSelectionService
+[OK] 15. CadEntityService
+[OK] 16. CadRenderService
+[OK] 17. CadTransactionService
+[OK] 18. Selection OwnedMutations
+[OK] 19. Entity NotifyChanged
+[OK] 20. Transaction delta telemetry
+[OK] 21. TX2 prefix
+[OK] 22. Undo TX2 first
+[OK] 23. Redo TX2 first
+[OK] 24. Initializer V0181
+[OK] 25. TXINFO command
+[OK] 26. ARCHCHECK command
+[OK] 27. SCALE uses TX2
+[OK] 28. ROTATE base uses TX2
+[OK] 29. Quick ROTATE uses TX2
+[OK] 30. MOVE telemetry
+[OK] 31. GRIP telemetry
+[OK] 32. PWA v0221 script active
+[OK] 33. PWA v0220 script inactive
+[OK] 34. PWA API V0221
+[OK] 35. PWA selection delta
+[OK] 36. PWA owned mutation telemetry
+[OK] 37. PWA TXINFO
+[OK] 38. PWA Render Stability remains
+[OK] 39. PWA Object Snap remains
+[OK] 40. PWA Block remains
+[OK] 41. PWA A4 remains
+[OK] 42. PWA sync index.html
+[OK] 43. PWA sync interaction-core-v0202.js
+[OK] 44. PWA sync cad-interaction-architecture-v0221.js
+[OK] 45. PWA sync selection-editing-core-v02111.js
+[OK] 46. PWA sync render-stability-core-v021113.js
+[OK] 47. PWA sync object-snap-core-v02112.js
+[OK] 48. PWA sync block-symbol-editing-core-v02113.js
+[OK] 49. PWA sync network-diagram-core-v0210.js
+[OK] 50. PWA sync network-learning-core-v0214.js
+[OK] 51. PWA sync a4-diagram-template-core-v02114.js
+[OK] 52. PWA sync dwg-worker.js
+[OK] 53. PWA sync sw.js
+[OK] 54. PWA sync version.json
+[OK] 55. PWA sync manifest.webmanifest
+[OK] 56. node --check integrated
+[OK] 57. node --check standalone
+[OK] 58. inline JS integrated
+[OK] 59. inline JS standalone
+[OK] 60. XAML handlers resolved (176)
+[OK] 61. build_release.cmd no UTF8 BOM
+[OK] 62. build_release_self_contained.cmd no UTF8 BOM
+[OK] 63. verify_release UTF8 BOM
+[OK] 64. brace CadInteractionArchitecture.V0181.cs | 53/53
+[OK] 65. brace MainWindow.V0181.cs | 61/61
+[OK] 66. brace MainWindow.V06.cs | 119/119
+[OK] 67. brace MainWindow.xaml.cs | 276/276
+[OK] 68. brace MainWindow.V01418.cs | 78/78
+[OK] 69. brace MainWindow.V01427.cs | 75/75
+[OK] 70. brace MainWindow.V01606.cs | 72/72
+[OK] 71. brace SelectionEditingCore.V01711.cs | 127/127
+[OK] 72. brace MainWindow.V01416.cs | 55/55
+[OK] 73. brace MainWindow.V07.cs | 67/67
+
+Note: This environment does not provide the Windows .NET Desktop SDK, so a real WPF dotnet build must still be confirmed on Windows.

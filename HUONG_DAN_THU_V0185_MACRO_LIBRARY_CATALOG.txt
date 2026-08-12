@@ -1,0 +1,82 @@
+HUONG DAN THU V0.18.5 / PWA V0.22.5
+MACRO ENGINE PHASE 1 + VERSIONED LIBRARY CATALOG
+
+A. BUILD C# TREN WINDOWS
+1. Giai nen source vao thu muc moi.
+2. Chay:
+   CSharp_Source\DwgSketchPrototype\build_release.cmd
+3. Kiem tra verify_release.ps1 phai bao KIEM TRA DAT truoc khi publish.
+
+B. THU MACRO ENGINE - KHONG PHA HUY DU LIEU
+1. Mo mot ban ve mau.
+2. Dat ten Macro: TEST_VIEW.
+3. Bam "Bat dau ghi" hoac go MACROREC.
+4. Chay lan luot cac lenh an toan, vi du:
+   GRIDON
+   GRIDOFF
+   F8
+   ZALL
+   F4
+5. Thu chay LINE hoac BLOCK trong luc dang ghi. Hai lenh nay KHONG duoc dua vao macro vi can tuong tac/hop thoai.
+6. Bam "Dung & luu" hoac MACROSTOP.
+7. Chon macro TEST_VIEW va bam "Phat macro".
+8. Kiem tra cac lenh an toan duoc phat dung thu tu.
+
+C. THU CHUAN HOA ALIAS
+1. Tao macro moi.
+2. Trong luc ghi, chay SELECTALL, DEL tren mot file test co the hoan tac.
+3. Dung va xuat macro JSON.
+4. Mo file JSON, action phai duoc chuan hoa thanh ALL va DELETE.
+5. Khi phat macro co DELETE, he thong phai hoi xac nhan truoc.
+
+D. THU IMPORT / EXPORT MACRO C# <-> PWA
+1. Xuat file *.cad-macros.json tu C#.
+2. Nhap file vao PWA V0.22.5.
+3. Macro phai hien dung Name, Version, Revision va so Steps.
+4. Phat macro chi chay cac action nam trong replay-safe chung.
+5. Lam nguoc lai PWA -> C#.
+
+E. THU VERSIONED LIBRARY CATALOG
+1. Kiem tra lan dau V0.18.5: cac template nguoi dung cu phai nam trong user.local.
+2. Tao collection moi:
+   Name: Thu vien Tram 110kV
+   Namespace: user.station110
+   Version: 1.0.0
+3. Luu mot template vao user.station110.
+4. Ghi lai Revision.
+5. Chuyen sang user.local roi quay lai user.station110.
+   - Template phai cach ly dung theo collection.
+   - Revision KHONG duoc tang chi vi chuyen collection.
+6. Xuat catalog.
+   - Revision KHONG duoc tang.
+7. Sua/luu de mot template.
+   - Revision collection phai tang 1.
+8. Xuat "Thu vien mau" cua collection active.
+   - JSON phai co schemaVersion 3.
+   - Co libraryId, namespace, libraryVersion, revision, readOnly, sourceKind.
+9. Nhap file schema v3 bang nut "Nhap catalog".
+   - Metadata phai duoc giu.
+   - Neu namespace trung, phai tao namespace *.imported.* thay vi ghi de.
+
+F. THU TUONG THICH NGUOC
+1. Nhap mot file electrical symbol library schema v1/v2 cu.
+2. Template phai duoc nhap vao collection active khi dung nut "Nhap thu vien mau".
+3. Project cu version 11 phai mo va luu lai binh thuong.
+4. Khong duoc phat sinh migration project moi.
+
+G. REGRESSION BAT BUOC
+- SCALE -> Undo -> Redo (TX3)
+- ROTATE -> Undo -> Redo (TX3)
+- MIRROR -> Undo -> Redo (TX3)
+- COPY -> Undo -> Redo (TX4)
+- PASTE -> Undo -> Redo (TX4)
+- DELETE nhieu doi tuong -> Undo -> Redo (TX4)
+- TRIM 1->N -> Undo -> Redo (TX5)
+- EXTEND -> Undo -> Redo (TX5)
+- MOVE (SM1) va GRIP (GE1)
+
+H. PWA CACHE
+Neu trinh duyet van hien V0.22.4:
+1. Reload manh Ctrl+F5.
+2. Neu can, xoa site cache/Service Worker cua ban PWA cu.
+3. Kiem tra version.json phai la 0.22.5.

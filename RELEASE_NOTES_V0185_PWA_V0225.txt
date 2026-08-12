@@ -1,0 +1,58 @@
+DWG SKETCH C# V0.18.5 / PWA V0.22.5
+MACRO ENGINE PHASE 1 + VERSIONED LIBRARY CATALOG
+Release date: 2026-08-09
+
+1. MACRO ENGINE PHASE 1
+- Ghi va phat lai chuoi lenh CAD duoc danh dau replay-safe.
+- Khong ghi cac lenh can bam diem, keo chuot hoac mo hop thoai de tranh phat sai ngu canh.
+- Chuan hoa alias sang action canonical de tang kha nang trao doi macro C# <-> PWA, vi du:
+  SELECTALL -> ALL; DEL -> DELETE; FILL -> SOLID; H -> HATCH; BX -> BEXPLODE;
+  SELFRAME -> SELF; F8 -> ORTHO; CURSOR/CONTROR -> CROSSHAIR; OS/SNAP -> F4;
+  ZALL/ZOOMALL/ZOOMEXTENTS/FIT -> ZA.
+- BLOCK/B bi loai khoi replay-safe vi can hop thoai dat ten.
+- Macro co Id, Name, Version, Revision, UpdatedAt, Parameters (du phong Phase 2) va Steps.
+- Khi luu de cung Id, Revision tu tang.
+- Macro co buoc DELETE/BEXPLODE/B2SYM yeu cau xac nhan truoc khi phat.
+- C# luu tai LocalAppData/DwgSketchPrototype/cad-macros-v1.json.
+- PWA luu tai localStorage DwgSketchPwa.CadMacros.V1.
+- Ho tro import/export JSON schema dwg-sketch-cad-macros, schemaVersion 1.
+- Lenh: MACROREC, MACROSTOP, MACROPLAY, MACRODELETE, MACROIMPORT, MACROEXPORT.
+
+2. VERSIONED SYMBOL LIBRARY CATALOG
+- Quan ly nhieu collection thu vien ky hieu; mot collection nguoi dung duoc kich hoat tai mot thoi diem.
+- Moi collection co Id/Namespace/Name/Version/Revision/ReadOnly/SourceKind/UpdatedAt/Templates.
+- Namespace duoc chuan hoa de lam dinh danh on dinh va tranh xung dot ID.
+- Tu dong migrate thu vien nguoi dung V0.18.4 vao collection user.local lan dau.
+- Revision collection CHI tang khi noi dung template thay doi; chuyen collection hoac export khong lam tang revision.
+- Khi import trung namespace, he thong tao namespace imported duy nhat, khong ghi de collection hien co.
+- Catalog read-only duoc chan luu/xoa/nhap template vao collection.
+- C# mirror collection active ve storage thu vien cu de giu tuong thich nguoc.
+- PWA mirror collection active ve local storage thu vien cu khi chuyen catalog.
+
+3. FORMAT
+- Full catalog: dwg-sketch-electrical-symbol-catalog, schemaVersion 1, catalogVersion 1.0.0.
+- Single active library: dwg-sketch-electrical-symbol-library, schemaVersion 3.
+- Schema v3 giu: libraryId, namespace, name, libraryVersion, revision, readOnly, sourceKind, templates.
+- Van import duoc file thu vien schema v1/v2 cu.
+- Project JSON van VERSION 11; khong can migration project.
+
+4. STABILITY / TRANSACTION
+- TX3: SCALE / ROTATE / MIRROR / PROPERTIES giu nguyen.
+- TX4: COPY / PASTE / DELETE giu nguyen.
+- TX5: TRIM / EXTEND giu nguyen.
+- SM1 MOVE va GE1 GRIP giu nguyen.
+- Macro Engine va Library Catalog khong thay doi transaction schema cua project.
+
+5. PWA
+- PWA_APP_VERSION = 0.22.5.
+- Architecture API = DwgSketchCadArchitectureV0225.
+- Macro API = DwgSketchMacroEngineV0225.
+- Catalog API = DwgSketchSymbolCatalogV0225.
+- Service Worker cache v0.22.5 nap macro-library-core-v0225.js va symbol-library-catalog-v0225.js.
+- Integrated PWA va Standalone PWA duoc dong bo cung noi dung.
+
+6. GIOI HAN CO CHU DICH CUA PHASE 1
+- Chua ghi toa do/click/drag cua LINE, MOVE, COPY, SCALE, ROTATE, MIRROR, TRIM, EXTEND...
+- Chua tham so hoa macro; truong Parameters da duoc du phong cho Phase 2.
+- Moi buoc macro giu Undo/Redo cua chinh lenh; chua gom ca macro thanh mot atomic transaction duy nhat.
+- Catalog chua cap nhat instance da chen theo version moi cua template; day la buoc tiep theo.

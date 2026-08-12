@@ -1,0 +1,61 @@
+DWG SKETCH V0.17.14 / PWA V0.21.14 - STATIC VALIDATION
+==============================================================
+KET QUA: 55/55 DAT
+
+[OK] C# version 0.17.14
+[OK] PWA version 0.21.14
+[OK] Project JSON C# v11
+[OK] Project JSON PWA v11
+[OK] C# initialize V01714
+[OK] C# thumbnail
+[OK] C# tags
+[OK] C# update definition
+[OK] C# replace instance
+[OK] C# link block
+[OK] C# definition metadata
+[OK] C# scale metadata
+[OK] C# rotation metadata
+[OK] C# block instance remap
+[OK] ProjectStorage A4TemplateDefinitionId = entity.
+[OK] ProjectStorage entity.A4TemplateDefinitionId = 
+[OK] ProjectStorage A4TemplateScale = entity.A4Templ
+[OK] ProjectStorage entity.A4TemplateScale = dto.A4T
+[OK] XAML A4DiagramTemplateThumbnailCanvas
+[OK] XAML A4DiagramTemplateCategoryText
+[OK] XAML A4DiagramTemplateFolderText
+[OK] XAML A4DiagramTemplateTagsText
+[OK] XAML UpdateA4TemplateFromSelectedInstanceV01714Click
+[OK] XAML ReplaceSelectedA4InstanceV01714Click
+[OK] XAML LinkA4TemplateToSelectedBlockV01714Click
+[OK] Command A4UPDATE
+[OK] Command A4REPLACE
+[OK] Command A4LINKBLOCK
+[OK] PWA API
+[OK] PWA thumbnail
+[OK] PWA category
+[OK] PWA tags
+[OK] PWA update
+[OK] PWA replace
+[OK] PWA link
+[OK] PWA transform stamp
+[OK] PWA block remap
+[OK] PWA A4UPDATE command
+[OK] PWA A4REPLACE command
+[OK] mirror index.html
+[OK] mirror a4-diagram-template-core-v02114.js
+[OK] mirror dwg-worker.js
+[OK] mirror sw.js
+[OK] mirror version.json
+[OK] mirror manifest.webmanifest
+[OK] mirror block-symbol-editing-core-v02113.js
+[OK] mirror object-snap-core-v02112.js
+[OK] mirror render-stability-core-v021113.js
+[OK] inline JS PWA_Standalone
+[OK] inline JS PWA
+[OK] inverse transform numerical error <1e-9
+[OK] JS exists a4-diagram-template-core-v02114.js
+[OK] JS exists dwg-worker.js
+[OK] JS exists sw.js
+[OK] all XAML handlers resolved
+
+Ghi chu: moi truong dong goi khong co .NET Windows Desktop SDK, vi vay dotnet build WPF thuc te can xac nhan tren may Windows.

@@ -1,0 +1,42 @@
+DWG SKETCH C# V0.18.8.0 / PWA V0.22.8
+MACRO STEP EDITOR + RELATIVE REFERENCE POINT PHASE 1
+============================================================
+
+Mục tiêu
+- Làm Macro Engine dễ kiểm soát và chỉnh sửa sau khi ghi.
+- Bắt đầu hỗ trợ thao tác hình học có điểm bằng tọa độ tương đối, không lưu tọa độ tuyệt đối của bản vẽ.
+
+Nội dung mới
+1. Macro Step Editor
+   - Hiển thị toàn bộ bước của macro đang chọn.
+   - Bật/tắt từng bước mà không cần xóa.
+   - Sửa Action, Command, Arguments.
+   - Đổi thứ tự bước lên/xuống.
+   - Xóa một bước; macro phải còn ít nhất một bước.
+   - Mỗi bước có StepId ổn định và Enabled.
+
+2. Relative Reference Point Phase 1
+   - MOVE hoàn tất trong lúc ghi macro -> RMOVE.
+   - COPY hoàn tất trong lúc ghi macro -> RCOPY.
+   - Chỉ lưu deltaX/deltaY = điểm đích - điểm gốc.
+   - Không lưu X/Y tuyệt đối của DWG.
+   - Khi phát, RMOVE/RCOPY tác động lên tập đối tượng đang được chọn lúc phát.
+   - RMOVE dùng lightweight selection move delta.
+   - RCOPY dùng structural add delta.
+
+3. Parameter integration
+   - RMOVE/RCOPY tự tạo tham số MOVE1_DX/MOVE1_DY, COPY1_DX/COPY1_DY...
+   - Có thể lưu các giá trị này trong Parameter Profiles.
+   - Sửa delta trong Step Editor đồng bộ lại default parameter của macro.
+
+4. Tương thích
+   - Macro schema nâng từ v2 lên v3; macro v1/v2 vẫn nạp được.
+   - Project JSON vẫn v11.
+   - Giữ Symbol Update Manager V0.18.7/PWA V0.22.7.
+   - Giữ Macro Parameter Profiles.
+   - Giữ FIX4 TEXT/MTEXT, Unicode Normalizer, TX3/TX4/TX5, SM1 MOVE, GE1 GRIP.
+
+Giới hạn Phase 1
+- Chỉ MOVE/COPY được ghi tương đối sau khi hoàn tất thao tác điểm gốc/điểm đích.
+- LINE/RECT/CIRCLE/MIRROR/DIM và các lệnh hình học nhiều điểm chưa được ghi vào macro ở V0.18.8.
+- Macro không tự tìm đối tượng theo tọa độ. Người dùng phải chuẩn bị tập chọn trước khi phát RMOVE/RCOPY.

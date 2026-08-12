@@ -1,0 +1,41 @@
+DWG Sketch Prototype V0.18.9.0 / PWA V0.22.9
+RELATIVE GEOMETRY PHASE 2
+
+1. Macro relative geometry Phase 2
+- Giữ RMOVE/RCOPY của V0.18.8.
+- ROTATE hoàn tất khi đang ghi macro -> RROTATE.
+- SCALE hoàn tất khi đang ghi macro -> RSCALE.
+- MIRROR hoàn tất khi đang ghi macro -> RMIRROR.
+- Không lưu tọa độ tuyệt đối. ReferencePoint mặc định là tâm bounds của tập chọn (SelectionBoundsCenter).
+- RROTATE lưu pivotOffsetX/pivotOffsetY + angleDeg.
+- RSCALE lưu pivotOffsetX/pivotOffsetY + factor.
+- RMIRROR lưu axisAOffsetX/axisAOffsetY + axisBOffsetX/axisBOffsetY.
+
+2. Playback
+- Khi phát, phần mềm tính lại SelectionBoundsCenter từ tập chọn hiện tại.
+- Pivot/trục được dựng lại bằng offset đã ghi rồi áp transform lên tập chọn hiện tại.
+- RROTATE/RSCALE/RMIRROR dùng selection transaction delta; Ctrl+Z/Redo vẫn nhẹ và theo đối tượng.
+
+3. Macro Step Editor / Profiles
+- Step Editor nhận thêm RROTATE/RSCALE/RMIRROR và ReplayMode=RelativeTransform.
+- Arguments có thể sửa trực tiếp.
+- Parameter Profiles tự dùng các tham số ROTATEn_*, SCALEn_*, MIRRORn_*.
+
+4. Parity
+- C# và PWA cùng dùng SelectionBoundsCenter.
+- PWA ghi relative transform từ transaction wrappers của ROTATE/SCALE/MIRROR.
+- PWA embedded/standalone được đồng bộ.
+
+5. Không thay đổi
+- Project JSON v11.
+- FIX4 TEXT/MTEXT, 3-on-5 spacing, cap-height/paragraph parity.
+- Vietnamese Unicode Normalizer.
+- Symbol Update Manager / Symbol Instance Version Link.
+- TX3/TX4/TX5, SM1 MOVE, GE1 GRIP.
+
+6. QA
+- Static checks: 81/81 PASS.
+- Relative geometry behavior simulation: 14/14 PASS.
+- Final package validation: 71/71 PASS.
+- Node syntax: 33/33 external PWA JS + inline index.html PASS.
+- Môi trường phát triển hiện tại không có .NET Windows Desktop SDK; WPF compile cuối được xác nhận trên máy Windows bằng build_release.cmd.

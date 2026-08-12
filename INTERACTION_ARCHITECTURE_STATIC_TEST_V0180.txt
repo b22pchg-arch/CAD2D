@@ -1,0 +1,44 @@
+DWG SKETCH V0.18.0 / PWA V0.22.0 - STATIC VALIDATION
+====================================================
+
+Version / packaging
+[OK] C# Version/FileVersion/AssemblyVersion = 0.18.0
+[OK] PWA app/version.json/worker/service-worker/manifest = 0.22.0
+[OK] PWA integrated va PWA standalone dong bo SHA-256 cho cac file active V0.22.0
+[OK] csproj va MainWindow.xaml parse XML thanh cong
+[OK] version.json va manifest parse JSON thanh cong
+
+C# architecture
+[OK] CadCommandService ton tai; co registry alias/handler va telemetry
+[OK] CadSelectionService ton tai; co selection revision
+[OK] CadRenderService ton tai; co render request / geometry invalidation counter
+[OK] CadTransactionService ton tai; co begin/commit/cancel contract
+[OK] CadInteractionArchitecture dung EntityRepository lam Entity revision source
+[OK] MainWindow khoi tao V0.18.0 sau A4/Block/Selection core V0.17
+[OK] ExecuteBuiltInCommand thu Command Service truoc va giu switch cu lam fallback
+[OK] SyncLegacySelection cap nhat Selection Service
+[OK] RequestCanvasRender cap nhat Render Service nhung van dung scheduler CompositionTarget cu
+[OK] PushUndoSnapshot / BeginEditTransaction / EndEditTransaction noi vao Transaction diagnostics
+[OK] ARCHINFO va ARCHCHECK ton tai
+
+PWA architecture
+[OK] cad-interaction-architecture-v0220.js qua node --check
+[OK] inline JavaScript index.html integrated qua node --check
+[OK] inline JavaScript index.html standalone qua node --check
+[OK] Harness Node gia lap command/draw/invalidate/undo/redo chay thanh cong
+[OK] ARCHCHECK tra Health=OK tren harness
+[OK] Command khong thuoc registry van fallback ve command pipeline cu
+[OK] PWA co selection/entity/render/history/transaction diagnostics
+[OK] Module architecture duoc nap sau cac wrapper command cu de quan sat toan bo pipeline
+
+Compatibility
+[OK] Project JSON van version 11; khong thay schema du lieu
+[OK] A4 core 0.21.14 duoc giu nguyen
+[OK] Block/Symbol core 0.21.13 duoc giu nguyen
+[OK] Object Snap core 0.21.12 duoc giu nguyen
+[OK] Render Stability core 0.21.11.3 duoc giu nguyen
+[OK] Khong co duplicate exact method signature trong cac tep MainWindow*.cs khi quet tinh
+
+Build limitation
+[SKIP] Moi truong dong goi khong co .NET Windows Desktop SDK, nen khong chay duoc dotnet build WPF thuc te.
+       verify_release.ps1 va build Release can duoc xac nhan lan cuoi tren may Windows cua nguoi dung.

@@ -1,0 +1,21 @@
+HUONG DAN THU DWG SKETCH V0.18.0 / PWA V0.22.0
+================================================
+
+1. Mo lai DWG lon da dung de regression o cac ban truoc.
+2. Thu pan/zoom, chon, grip, OSNAP, Block va A4 de xac nhan khong regression.
+3. C# go ARCHINFO. Status phai co CAD_ARCH_V0180 va Health=OK.
+4. C# go ARCHCHECK. Entity/Selection count phai dong bo.
+5. PWA go ARCHINFO va ARCHCHECK.
+6. Tren Console PWA co the chay:
+   window.DwgSketchCadArchitectureV0220.snapshot()
+   window.DwgSketchCadArchitectureV0220.health()
+7. Thu UNDO/REDO, ZA/ZOOMALL, SNAPINFO, BINFO, ALL. C# cac lenh nay phai chay qua registry V0.18 ma hanh vi khong thay doi.
+8. PWA thu cac lenh cu va lenh symbol/A4 de xac nhan command fallback khong bi mat.
+9. Luu/mo lai project JSON cu. Schema van version 11.
+
+Tieu chi dat
+- Khong mat lenh cu.
+- ARCHCHECK = Health=OK trong trang thai binh thuong.
+- Entity revision tang khi geometry thay doi.
+- Selection revision tang khi tap chon thay doi.
+- Pan/zoom/selection tren PWA khong tang muc nhap nhay so voi V0.21.14.

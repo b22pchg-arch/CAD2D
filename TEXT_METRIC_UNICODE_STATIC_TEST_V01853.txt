@@ -1,0 +1,54 @@
+DWG SKETCH C# V0.18.5.3 / PWA V0.22.5.3
+FIX3 TEXT METRIC PARITY + VIETNAMESE UNICODE NORMALIZER
+STATIC + BEHAVIOR TEST REPORT
+Date: 2026-08-10
+
+RESULT: 679 / 679 PASS
+
+GROUPS CHECKED
+- C# version / FileVersion / AssemblyVersion: PASS
+- MainWindow.xaml XML: PASS
+- 236 XAML event references / 187 unique handlers: all resolved in C# source
+- 90 C# source files: lexical termination + (), {}, [] structural balance: PASS
+- PWA integrated vs standalone hashes: index/worker/sw/manifest/version/normalizer/architecture/macro/catalog/selection/render/snap: PASS
+- JavaScript node --check: normalizer, DWG worker, service worker, architecture, macro, catalog, integrated inline, standalone inline: PASS
+- Vietnamese AUTO conversion behavior: PASS
+  * TCVN3: T«i ®i häc -> Tôi đi học
+  * VNI-Windows: Toâi ñi hoïc -> Tôi đi học
+  * VIQR: To^i ddi ho.c -> Tôi đi học
+  * 373-7/01 remains unchanged
+  * Tân Quang remains unchanged
+  * CÔNG TY ĐIỆN LỰC TUYÊN QUANG remains unchanged
+  * E14.2 (CHIÊM HÓA) remains unchanged
+- Source style/font/encoding round-trip fields in C# ProjectStorage: PASS
+- Quét + xem trước / convert selected / convert all Unicode UI in C# and PWA: PASS
+- PWA Service Worker includes Vietnamese normalizer + FIX3 docs: PASS
+- build_release.cmd APP_VERSION_TAG=01853: PASS
+
+DIRECT USER DWG TEST
+Input used only for validation: So do ket day TQ-HG (1)(1).dwg
+The user DWG is NOT included in the release package.
+- Source entity count: 77,288
+- Converted entity count: 77,297
+- TEXT: 10,503
+- MTEXT: 9,960
+- Total TEXT/MTEXT: 20,463
+- MTEXT Attachment Top-Left: 9,888 / 9,960
+- AUTO false TCVN3 conversions: 0
+- AUTO false VNI conversions: 0
+- AUTO false VIQR conversions: 0
+- LBS 374/04 / Xuân Minh: H=36,000; ActualHeight=97,368
+- 373-7/01 / T. Sơn Thành: H=33,016.8; ActualHeight=89,695.64
+- 373-7/01 / TĐ Nậm Khòa: actual extents differ from the previous label, confirming that one global Y offset cannot faithfully place every MTEXT block.
+
+FIX3 TEXT METRIC MODEL
+- Baseline advance remains AutoCAD 3-on-5 from FIX2.
+- Actual MTEXT block height from DWG/DXF is authoritative when available.
+- residual = ActualHeight - (lineCount - 1) * LineAdvance.
+- The host font is used only for the first-glyph-ascent / last-glyph-descent RATIO.
+- That ratio splits the CAD residual above/below the baseline; host em-box no longer determines the absolute DWG attachment rectangle.
+- This makes placement content-sensitive for Vietnamese diacritics instead of applying one constant Y shift to all labels.
+
+LIMITATION OF THIS ENVIRONMENT
+- dotnet/.NET Windows Desktop SDK is not installed here, so WPF compile/publish cannot be executed in this container.
+- The package's verify_release.ps1 and build_release.cmd are prepared for the final Windows compile test.

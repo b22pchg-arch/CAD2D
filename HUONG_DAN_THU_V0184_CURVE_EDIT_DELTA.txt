@@ -1,0 +1,45 @@
+HUONG DAN THU V0.18.4 / PWA V0.22.4 - CURVE EDIT DELTA
+
+A. BUILD C#
+1. Giai nen bo source vao thu muc moi (khuyen nghi).
+2. Chay CSharp_Source\DwgSketchPrototype\build_release.cmd.
+3. Xac nhan verify_release.ps1 PASS, build Release va publish thanh cong.
+
+B. TEST TRIM TX5
+1. Mo ban ve co LINE, POLYLINE, CIRCLE/ARC va cac bien cat.
+2. Thu TRIM LINE: cat dau/giua -> Ctrl+Z -> Ctrl+Y nhieu lan.
+3. Thu TRIM POLYLINE/ARC/CIRCLE o truong hop 1 doi tuong tao thanh 2 hoac nhieu manh.
+4. Sau Ctrl+Z, doi tuong goc phai quay lai dung vi tri trong thu tu entity.
+5. Sau Ctrl+Y, cac manh cat phai tro lai dung thu tu, mau/layer/stroke khong thay doi.
+6. Lap lai TRIM lien tiep tren cac manh vua tao de kiem tra history xep chong.
+
+C. TEST EXTEND TX5
+1. Chon bien gioi roi EXTEND nhieu LINE o ca hai dau.
+2. Ctrl+Z/ Ctrl+Y tung buoc.
+3. Xac nhan chi line dich thay doi; cac bien gioi da chon khong mat selection.
+4. Kiem tra layer, mau, true color va stroke cua line khong bi doi.
+
+D. TEST REGRESSION HISTORY
+- COPY/PASTE/DELETE: TX4 structural delta van dung.
+- SCALE/ROTATE/MIRROR/PROPERTIES: TX3 selection delta van dung.
+- MOVE: SM1 delta van dung.
+- GRIP: GE1 delta van dung.
+- Thu xen ke: COPY -> TRIM -> EXTEND -> ROTATE -> DELETE -> Undo tat ca -> Redo tat ca.
+
+E. TEST VERSIONED SYMBOL LIBRARY
+1. Luu mot mau thiet bi moi: Revision phai la 1.
+2. Sua va luu de cung Id: Revision tang len 2, 3...
+3. Export thu vien: schemaVersion=2, libraryVersion=1.0.0; template co Version/Revision/Category/Tags.
+4. Nhap lai file schema v2 vao C# va PWA; metadata phai duoc giu.
+5. Nhap file thu vien schema v1 cu; mau van phai su dung duoc, metadata mac dinh Version=1.0.0, Revision=1, Category=Custom.
+
+F. PWA / CACHE
+1. Mo PWA va xac nhan hien V0.22.4.
+2. Hard refresh mot lan neu trinh duyet dang giu Service Worker V0.22.3.
+3. Thu TRIM/EXTEND -> Undo/Redo trong PWA.
+4. Tat mang, reload PWA va lap lai mot bai test ngan de kiem tra cache offline.
+
+G. BAN VE LON
+- Thu TRIM/EXTEND lien tiep tren ban ve lon.
+- Dung TXINFO/ARCHINFO neu can kiem tra delta/snapshot.
+- Quan sat Undo/Redo khong reload toan project va khong nhap nhay bat thuong.

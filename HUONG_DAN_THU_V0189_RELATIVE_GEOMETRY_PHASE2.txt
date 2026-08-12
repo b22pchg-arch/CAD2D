@@ -1,0 +1,33 @@
+HUONG DAN THU V0.18.9.0 / PWA V0.22.9
+
+A. RROTATE
+1. Chon mot nhom A.
+2. Bat dau ghi macro.
+3. ROTATE nhom A quanh mot diem goc bat ky, vi du +30 do.
+4. Dung va luu macro.
+5. Trong Step Editor phai thay RROTATE, referenceMode=SelectionBoundsCenter,
+   pivotOffsetX/pivotOffsetY va angleDeg.
+6. Chon nhom B o vi tri khac va phat macro.
+7. Nhom B phai quay +30 do quanh pivot co cung do lech so voi tam bounds cua B.
+8. Ctrl+Z/Redo phai hoan tac/phuc hoi dung mot transform.
+
+B. RSCALE
+1. Ghi SCALE x1.5 quanh mot diem khong trung tam tap chon.
+2. Phat tren tap chon khac.
+3. Kiem tra pivot duoc tai tao tu SelectionBoundsCenter + offset va scale dung x1.5.
+
+C. RMIRROR
+1. Ghi MIRROR theo mot truc hai diem.
+2. Step Editor phai co 4 offset cua A/B so voi SelectionBoundsCenter.
+3. Phat tren nhom khac o vi tri khac.
+4. Truc phai di theo nhom moi, khong quay ve toa do ban ve luc ghi.
+
+D. PARAMETER PROFILE
+- Thu sua ROTATE1_ANGLE, SCALE1_FACTOR hoac MIRROR1_AX/AY/BX/BY trong profile.
+- Phat lai va kiem tra hinh hoc thay doi theo profile.
+
+E. REGRESSION
+- Mo DWG mau da dung de sua text: vi tri TEXT/MTEXT phai giu nguyen.
+- Thu RMOVE/RCOPY V0.18.8.
+- Thu Symbol Update Manager.
+- Save Project -> reopen: Project JSON van v11.

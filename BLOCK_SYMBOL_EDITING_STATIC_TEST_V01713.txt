@@ -1,0 +1,80 @@
+DWG SKETCH V0.17.13 / PWA V0.21.13
+BLOCK / SYMBOL EDITING CORE - STATIC VALIDATION
+============================================================
+Thoi diem kiem tra: 2026-08-09
+Nen nguon: V0.17.12 / PWA V0.21.12
+
+KET QUA: DAT
+
+[01] PASS C# Version = 0.17.13
+[02] PASS FileVersion = 0.17.13
+[03] PASS AssemblyVersion = 0.17.13
+[04] PASS PWA version.json = 0.21.13
+[05] PASS MainWindow XAML XML hop le
+[06] PASS csproj XML hop le
+[07] PASS PWA version.json JSON hop le
+[08] PASS PWA manifest JSON hop le
+[09] PASS Entity Core co BlockDefinitionId
+[10] PASS Entity Core co BlockInstanceId
+[11] PASS Entity Core co BlockName
+[12] PASS Entity Core co BlockMemberIndex
+[13] PASS CloneOverlay giu metadata block
+[14] PASS Project JSON ghi BlockDefinitionId
+[15] PASS Project JSON ghi BlockInstanceId
+[16] PASS Project JSON ghi BlockName
+[17] PASS Project JSON ghi BlockMemberIndex
+[18] PASS Project JSON khoi phuc metadata block
+[19] PASS Mau A4 giu metadata block khi luu/chen
+[20] PASS C# co EditableBlockDefinition
+[21] PASS C# thu vien block luu LocalAppData
+[22] PASS C# BLOCK tao definition tu tap chon
+[23] PASS C# BLOCKCUR ho tro base point tai con tro
+[24] PASS C# CAD goc duoc chuyen thanh primitive editable trong definition
+[25] PASS C# BINSERT tao BlockInstanceId moi
+[26] PASS C# BINSERT gan member index
+[27] PASS C# BSELECT chon theo BlockInstanceId
+[28] PASS C# BEXPLODE chi go metadata, khong xoa primitive
+[29] PASS C# B2SYM giu PORT/LABEL hien co
+[30] PASS C# B2SYM gan AutomationGroupId cho block chua co metadata
+[31] PASS C# COPY remap BlockInstanceId
+[32] PASS C# PASTE remap BlockInstanceId
+[33] PASS C# khoi tao Block Core trong MainWindow
+[34] PASS C# command BLOCK/B
+[35] PASS C# command BINSERT/BI
+[36] PASS C# command BSELECT/BS
+[37] PASS C# command BEXPLODE/BX
+[38] PASS C# command B2SYM
+[39] PASS C# command BLOCKINFO/BINFO
+[40] PASS C# command BDELETE
+[41] PASS PWA nap block-symbol-editing-core-v02113.js
+[42] PASS PWA cong bo DwgSketchBlockSymbolCoreV02113
+[43] PASS PWA BLOCK tao definition editable
+[44] PASS PWA BLOCKCUR base point theo con tro
+[45] PASS PWA BINSERT tao instance moi
+[46] PASS PWA BSELECT chon instance
+[47] PASS PWA BEXPLODE giu primitive
+[48] PASS PWA B2SYM bridge sang automation metadata
+[49] PASS PWA COPY remap instance
+[50] PASS PWA PASTE remap instance
+[51] PASS PWA block core qua node --check
+[52] PASS PWA inline JavaScript qua node --check
+[53] PASS PWA dwg-worker.js qua node --check
+[54] PASS PWA sw.js qua node --check
+[55] PASS Service Worker cache block core V0.21.13
+[56] PASS PWA integrated/standalone index.html dong bo SHA-256
+[57] PASS PWA integrated/standalone block core dong bo SHA-256
+[58] PASS PWA integrated/standalone sw/version/manifest/worker dong bo SHA-256
+[59] PASS Tat ca 167 XAML event handler tim thay trong C# partial source
+[60] PASS Khong co merge marker trong source
+[61] PASS BlockEditingCore can bang braces/parentheses
+[62] PASS BlockDefinitionModels can bang braces
+[63] PASS Khong trung method signature V01713
+[64] PASS Unit test remapItems: giu member cung group, tach group khac, doi ID cu
+
+GHI CHU:
+- Moi truong dong goi khong co .NET Windows Desktop SDK, nen khong thay the duoc buoc
+  dotnet build WPF tren may Windows. verify_release.ps1 da duoc bo sung guard cho cac
+  thanh phan moi va Node.js kiem tra PWA neu Node co san.
+- Block V0.17.13 la "editable block": khi insert van la cac primitive rieng. BSELECT chon
+  ca instance; BEXPLODE chi go lien ket. Kien truc nay tranh tao mot entity dong kin moi
+  lam hong Grip/OSNAP/Selection da on dinh o V0.17.11-0.17.12.

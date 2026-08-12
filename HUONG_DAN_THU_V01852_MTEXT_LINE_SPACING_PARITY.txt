@@ -1,0 +1,30 @@
+HUONG DAN THU V0.18.5.3 / PWA V0.22.5.3 - MTEXT LINE SPACING PARITY
+===================================================================
+
+1. Build C# bang:
+   CSharp_Source\DwgSketchPrototype\build_release.cmd
+
+2. Mo truc tiep file DWG goc bi loi, KHONG mo project da save bang ban cu truoc.
+
+3. Kiem tra cac nhan MTEXT 2 dong, uu tien:
+   - LBS 374/04 / Xuan Minh
+   - 373-7/01 / T. Son Thanh
+   - 373-7/01 / TD Nam Khoa
+   - LBS 373/01 / Nam Khoa
+   - 373-7/28 / Tien Nguyen
+
+4. Ket qua mong doi:
+   - Dong thu hai cach dong dau nhu DWG goc, khong bi keo len tren.
+   - Chu khong de len duong day/thiet bi neu DWG goc khong de.
+   - Cac nhan mot dong (01, 02, 08, 20, 23, 28, 29, 42...) khong bi thay doi bat thuong.
+
+5. Save Project -> dong chuong trinh -> mo lai project.
+   Vi tri va khoang dong phai giu nguyen nhu luc vua mo DWG.
+
+6. Thu PWA sau khi refresh hard/reload de Service Worker 0.22.5.3 duoc kich hoat.
+
+7. Thu them rotate/move/copy text va export SVG/DXF/print de xac nhan line spacing khong bi quay lai 1.2.
+
+Luu y:
+- Project cu da bi Auto-Promote/luu bang ban truoc co the thieu metadata nguon; mo lai DWG goc mot lan la cach test chuan nhat.
+- FIX2 khong thay doi Project JSON version (van v11).

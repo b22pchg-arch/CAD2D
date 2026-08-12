@@ -1,0 +1,48 @@
+HƯỚNG DẪN THỬ V0.18.8 / PWA V0.22.8
+======================================
+
+A. Kiểm tra không regression
+1. Mở DWG mẫu đã dùng để kiểm tra FIX4 TEXT/MTEXT.
+2. Xác nhận chữ vẫn đúng vị trí.
+3. Save Project -> đóng -> mở lại.
+
+B. Ghi RMOVE tương đối
+1. Chọn một hoặc nhiều đối tượng.
+2. Nhập tên macro: Test Relative Move.
+3. Bấm Bắt đầu ghi.
+4. Gõ MOVE hoặc bấm công cụ MOVE.
+5. Chọn điểm gốc và điểm đích, ví dụ dịch +100 theo X và +50 theo Y.
+6. Bấm Dừng & lưu.
+7. Trong Step Editor phải thấy bước RMOVE [RelativeVector].
+8. Arguments phải có deltaX và deltaY; macro Parameter Defaults có MOVE1_DX/MOVE1_DY.
+
+C. Phát RMOVE lên tập chọn khác
+1. Chọn một tập đối tượng khác.
+2. Chọn macro Test Relative Move.
+3. Bấm Phát macro.
+4. Tập chọn mới phải dịch cùng vector, không quay về tọa độ của tập lúc ghi.
+5. Ctrl+Z phải hoàn tác được một bước MOVE delta.
+
+D. Ghi RCOPY tương đối
+1. Chọn đối tượng.
+2. Bắt đầu ghi macro mới.
+3. Thực hiện COPY bằng điểm gốc/điểm đích.
+4. Dừng & lưu.
+5. Step Editor phải có RCOPY và deltaX/deltaY.
+6. Phát trên tập chọn khác -> tạo bản sao theo cùng vector.
+7. Ctrl+Z phải xóa lô bản sao bằng structural delta.
+
+E. Step Editor
+- Chọn macro và một bước.
+- Bấm Bật/Tắt: bước bị tắt không được phát.
+- Dùng Lên/Xuống để đổi thứ tự.
+- Sửa deltaX/deltaY rồi Lưu bước.
+- Phát lại để xác nhận vector mới có hiệu lực.
+- Xóa bước; không cho xóa nếu macro chỉ còn một bước.
+
+F. Parameter Profiles
+- Sau khi ghi RMOVE/RCOPY, các tham số kiểu MOVE1_DX/MOVE1_DY hoặc COPY1_DX/COPY1_DY xuất hiện.
+- Có thể lưu nhiều Profile với vector khác nhau rồi phát cùng macro.
+
+G. PWA
+Thực hiện lại B-F trên PWA. Kết quả logic phải tương đương C#.

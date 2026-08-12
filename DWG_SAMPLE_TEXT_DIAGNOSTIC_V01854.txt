@@ -1,0 +1,65 @@
+DWG SAMPLE TEXT DIAGNOSTIC V0.18.5.4 FIX4
+Input: So do ket day TQ-HG (1)(1).dwg
+Input file is NOT included in the release package.
+
+CURRENT WORKER RESULT
+- Converted entities: 77,297
+- TEXT: 10,503
+- MTEXT: 9,960
+- MTEXT paragraph Center recovered: 471
+
+ROOT CAUSE ADDED IN FIX4
+A. CAD Height vs host font em-size
+- Renderer V0.18.5.3 used font em-size = CAD Height.
+- Measurement on the active Arial-compatible renderer gives EmPerCadHeight about 1.423 for the sample.
+- FIX4 measures capital H and chooses font em-size so cap-height = CAD Height.
+
+B. MTEXT paragraph alignment
+- Raw DWG contains paragraph commands such as \\pxqc;.
+- q=c means the paragraph lines are centered in the MTEXT reference rectangle.
+- Older parser stripped the whole \\p...; command and lost this information.
+- FIX4 extracts alignment first, then strips formatting for plain-text editing.
+
+C. AtLeast line spacing
+- First baseline is no longer moved by distributing ActualHeight residual above/below the block.
+- For AtLeast, extra ActualHeight is absorbed into baseline-to-baseline gaps.
+
+SAMPLE BEHAVIOR
+LBS 373/01 / Quang Vinh
+- H=36,000
+- ActualH=107,772
+- ActualW=257,178.240
+- ReferenceW=358,602.063
+- Paragraph=Center
+- EmPerCadHeight ~= 1.4230
+- FirstTop/H ~= 1.0005
+- BaselineAdvance/H ~= 1.7041
+- Reconstructed ActualHeight error = 0
+- Center margin ~= 50,711.912
+
+373-7/26 / Ho Thau
+- H=36,000
+- ActualH=105,972
+- ReferenceW=358,602.063
+- Paragraph=Center
+- BaselineAdvance/H ~= 1.9209
+- Reconstructed ActualHeight error = 0
+- Center margin ~= 83,304.692
+
+373-7/126 / Tan Quang
+- H=33,016.8
+- ActualH=98,808.2768
+- ReferenceW=313,848.128
+- Paragraph=Center
+- BaselineAdvance/H ~= 1.9699
+- Reconstructed ActualHeight error = 0
+- Center margin ~= 44,857.946
+
+373-7/01 / T3 Nam Dich
+- H=36,000
+- ActualH=104,748
+- ReferenceW=437,305.741
+- Paragraph=Center
+- BaselineAdvance/H ~= 1.8869
+- Reconstructed ActualHeight error = 0
+- Center margin ~= 75,807.750

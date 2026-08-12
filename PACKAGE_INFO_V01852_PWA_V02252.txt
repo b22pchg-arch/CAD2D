@@ -1,0 +1,24 @@
+DWG SKETCH RELEASE PACKAGE
+==========================
+C#: 0.18.5.3
+PWA: 0.22.5.3
+Release: FIX2 MTEXT 3-on-5 Line Spacing Parity
+Project JSON: v11 (khong doi schema version; bo sung optional metadata)
+DWG engine PWA: @mlightcad/libredwg-web 0.7.9 local vendor
+
+Nguon sua: V0.18.5.1 / PWA V0.22.5.1 FIX1 Text Anchor Parity.
+File DWG dung de chan doan: So do ket day TQ-HG (1)(1).dwg (chi dung de test, KHONG dong goi vao release).
+
+Ket qua chan doan:
+- 77,288 entity trong database LibreDWG.
+- 20,547 TEXT/MTEXT.
+- 528 MTEXT 2 dong co extents phan tich duoc.
+- Cac nhan mau trong anh la MTEXT Top-Left, lineSpacingStyle=1, lineSpacingFactor=1.0.
+- FIX1 dung 1.2H; FIX2 dung (5/3)H*factor va doc group 43/44/73 dung nghia.
+
+Static/regression test: 599/599 PASS.
+Node syntax: PASS.
+PWA embedded/standalone active files: SHA-256 parity PASS.
+XAML handlers checked: 186/186.
+C# source delimiter/static structure: 87 files PASS.
+WPF compile/publish: can xac nhan tren Windows .NET 8 Desktop SDK bang build_release.cmd.

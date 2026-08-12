@@ -1,0 +1,33 @@
+DWG SKETCH PROTOTYPE V0.18.3 / PWA V0.22.3
+STRUCTURAL TRANSACTION DELTA
+Ngay phat hanh: 2026-08-09
+
+1. MUC TIEU
+- Giam snapshot toan project tren cac thao tac thay doi cau truc thuong dung.
+- Dua COPY, PASTE va DELETE sang structural add/remove delta.
+- Giu nguyen selection delta cho SCALE/ROTATE/MIRROR/PROPERTIES, MOVE delta SM1 va GRIP delta GE1.
+- Snapshot legacy tiep tuc la fallback cho cac lenh chua migrate nhu TRIM/EXTEND va mot so thao tac tao/sua cau truc phuc tap.
+- Khong thay doi Project JSON schema: van version 11.
+
+2. C# V0.18.3
+- Bo sung TX4 structural history trong MainWindow.V0183.cs.
+- COPY: ghi lai chinh cac overlay/CAD vua tao, Undo xoa theo index giam dan, Redo chen lai theo index tang dan.
+- PASTE: ghi structural add delta cho doi tuong vua chen; dong thoi luu layer style/layer visibility delta de Undo khong de lai layer rac.
+- DELETE: ghi structural remove delta cua tap doi tuong truoc khi xoa; Undo khoi phuc dung thu tu.
+- Kho TX3/TX4 duoc prune chung de tranh tich luy payload khong con nam trong Undo/Redo stack.
+- Structural ADD luu selection truoc thao tac: Undo COPY/PASTE khoi phuc tap chon cu, Redo chon lai doi tuong vua tao.
+- build_release.cmd tu dong vo hieu hoa source V0.18.1/V0.18.2 neu giai nen de len thu muc cu.
+
+3. PWA V0.22.3
+- cad-interaction-architecture-v0223.js bo sung structural-delta-v0223.
+- COPY/PASTE dung beginStructuralAdd/commitStructuralAdd.
+- DELETE dung beginStructuralRemove/commitStructuralRemove.
+- Undo/Redo architecture xu ly chung selection-delta-v0223 va structural-delta-v0223.
+- historyBytes tinh kich thuoc entry object bang JSON.stringify de gioi han history chinh xac hon tren ban ve lon.
+- Service Worker/Manifest/Worker/version.json dong bo V0.22.3.
+
+4. TUONG THICH VA AN TOAN
+- Khong doi schema project.
+- Neu structural service khong san sang tren PWA, COPY/PASTE/DELETE tu dong roi ve snapshot/simpleAction cu.
+- C# van giu snapshot history cho cac lenh chua migrate.
+- Ban nay la buoc dem truoc Structural Delta cho nhom lenh phuc tap va Macro/Versioned Library.

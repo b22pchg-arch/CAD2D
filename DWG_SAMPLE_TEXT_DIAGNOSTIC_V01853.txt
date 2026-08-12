@@ -1,0 +1,36 @@
+DWG SAMPLE TEXT DIAGNOSTIC - V0.18.5.3 FIX3
+Sample: So do ket day TQ-HG (1)(1).dwg
+Sample is NOT included in the release package.
+
+Direct libredwg-web worker test:
+- Source entities: 77,288
+- Converted entities: 77,297
+- TEXT: 10,503
+- MTEXT: 9,960
+- Total text: 20,463
+- MTEXT attachment TopLeft: 9,888
+- AUTO false legacy conversions on this sample: TCVN3=0, VNI=0, VIQR=0
+
+Representative MTEXT:
+1) LBS 374/04 / Xuan Minh
+   Height = 36,000
+   ActualHeight = 97,368
+   LineSpacingFactor = 1
+   Attachment = TopLeft
+
+2) 373-7/01 / T. Son Thanh
+   Height = 33,016.8
+   ActualHeight = 89,695.64
+   LineSpacingFactor = 1
+   Attachment = TopLeft
+
+3) 373-7/01 / TD Nam Khoa
+   Height = 33,016.8
+   ActualHeight = 96,067.8824
+   LineSpacingFactor = 1
+   Attachment = TopLeft
+
+Observation:
+- Labels with the same nominal H can have different ActualHeight because glyphs/diacritics differ.
+- Therefore a single global Y shift or a fixed first-baseline factor cannot reproduce the DWG consistently.
+- FIX3 uses ActualHeight as the absolute block extent and splits the residual around the first/last baseline using the rendered glyph ascent/descent ratio.

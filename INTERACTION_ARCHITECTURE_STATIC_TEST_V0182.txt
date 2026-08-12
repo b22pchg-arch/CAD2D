@@ -1,0 +1,116 @@
+DWG SKETCH V0.18.2 / PWA V0.22.2 - STATIC VALIDATION
+============================================================
+
+Result: 108/108 checks passed.
+
+[OK] 01. csproj XML
+[OK] 02. XAML XML
+[OK] 03. integrated version JSON
+[OK] 04. integrated manifest JSON
+[OK] 05. standalone version JSON
+[OK] 06. standalone manifest JSON
+[OK] 07. C# Version 0.18.2
+[OK] 08. C# FileVersion 0.18.2
+[OK] 09. C# AssemblyVersion 0.18.2
+[OK] 10. PWA version 0.22.2
+[OK] 11. Project JSON remains v11
+[OK] 12. C# architecture V0182 exists
+[OK] 13. C# MainWindow V0182 exists
+[OK] 14. Old C# architecture V0181 absent
+[OK] 15. Old MainWindow V0181 absent
+[OK] 16. csproj excludes stale architecture V0181
+[OK] 17. csproj excludes stale MainWindow V0181
+[OK] 18. CadSelectionService
+[OK] 19. CadEntityService
+[OK] 20. CadRenderService
+[OK] 21. CadTransactionService
+[OK] 22. Selection OwnedMutations
+[OK] 23. Entity NotifyChanged
+[OK] 24. Transaction delta telemetry
+[OK] 25. TX3 prefix
+[OK] 26. Undo TX3 first
+[OK] 27. Redo TX3 first
+[OK] 28. Initializer V0182
+[OK] 29. TXINFO command
+[OK] 30. ARCHCHECK command
+[OK] 31. C# SCALE uses TX3
+[OK] 32. C# ROTATE uses TX3
+[OK] 33. C# MIRROR uses TX3
+[OK] 34. C# PROPERTIES uses TX3
+[OK] 35. C# MIRROR no snapshot immediately before
+[OK] 36. C# PROPERTIES no project snapshot
+[OK] 37. C# delta apply restores selection
+[OK] 38. C# MOVE telemetry retained
+[OK] 39. C# GRIP telemetry retained
+[OK] 40. PWA v0222 script active
+[OK] 41. PWA v0221 script inactive
+[OK] 42. PWA API 0.22.2
+[OK] 43. PWA selection delta v0222
+[OK] 44. PWA SCALE delta
+[OK] 45. PWA ROTATE delta
+[OK] 46. PWA MIRROR delta
+[OK] 47. PWA PROPERTIES delta
+[OK] 48. PWA MIRROR pointer start avoids snapshot
+[OK] 49. PWA properties bypasses simpleAction snapshot
+[OK] 50. PWA owned mutation telemetry
+[OK] 51. PWA TXINFO
+[OK] 52. PWA Render Stability remains
+[OK] 53. PWA Object Snap remains
+[OK] 54. PWA Block editing remains
+[OK] 55. PWA A4 workflow remains
+[OK] 56. PWA index label 0.22.2
+[OK] 57. Service Worker 0.22.2
+[OK] 58. Worker 0.22.2
+[OK] 59. Manifest start_url 0.22.2
+[OK] 60. PWA sync index.html
+[OK] 61. PWA sync interaction-core-v0202.js
+[OK] 62. PWA sync cad-interaction-architecture-v0222.js
+[OK] 63. PWA sync selection-editing-core-v02111.js
+[OK] 64. PWA sync render-stability-core-v021113.js
+[OK] 65. PWA sync object-snap-core-v02112.js
+[OK] 66. PWA sync block-symbol-editing-core-v02113.js
+[OK] 67. PWA sync network-diagram-core-v0210.js
+[OK] 68. PWA sync network-learning-core-v0214.js
+[OK] 69. PWA sync a4-diagram-template-core-v02114.js
+[OK] 70. PWA sync dwg-worker.js
+[OK] 71. PWA sync sw.js
+[OK] 72. PWA sync version.json
+[OK] 73. PWA sync manifest.webmanifest
+[OK] 74. Project doc RELEASE_NOTES_V0182_PWA_V0222.txt
+[OK] 75. Integrated PWA doc RELEASE_NOTES_V0182_PWA_V0222.txt
+[OK] 76. Standalone PWA doc RELEASE_NOTES_V0182_PWA_V0222.txt
+[OK] 77. Project doc HUONG_DAN_THU_V0182_TRANSACTION_DELTA_EXPANSION.txt
+[OK] 78. Integrated PWA doc HUONG_DAN_THU_V0182_TRANSACTION_DELTA_EXPANSION.txt
+[OK] 79. Standalone PWA doc HUONG_DAN_THU_V0182_TRANSACTION_DELTA_EXPANSION.txt
+[OK] 80. Overlay cleanup PowerShell exists
+[OK] 81. Overlay cleanup CMD exists
+[OK] 82. build_release cleanup V0181
+[OK] 83. self-contained cleanup V0181
+[OK] 84. node --check integrated cad-interaction-architecture-v0222.js
+[OK] 85. node --check integrated dwg-worker.js
+[OK] 86. node --check integrated sw.js
+[OK] 87. inline JS integrated
+[OK] 88. node --check standalone cad-interaction-architecture-v0222.js
+[OK] 89. node --check standalone dwg-worker.js
+[OK] 90. node --check standalone sw.js
+[OK] 91. inline JS standalone
+[OK] 92. XAML handlers resolved (179)
+[OK] 93. No merge conflict markers
+[OK] 94. No active V0181 identifiers in C#
+[OK] 95. build_release.cmd ASCII/no BOM
+[OK] 96. build_release_self_contained.cmd ASCII/no BOM
+[OK] 97. APPLY_BUILD_FIX_V01820.cmd ASCII/no BOM
+[OK] 98. APPLY_BUILD_FIX_V01820.ps1 ASCII/no BOM
+[OK] 99. brace balance CadInteractionArchitecture.V0182.cs | 53/53
+[OK] 100. brace balance MainWindow.V0182.cs | 71/71
+[OK] 101. brace balance MainWindow.xaml.cs | 316/316
+[OK] 102. brace balance MainWindow.V06.cs | 128/128
+[OK] 103. brace balance MainWindow.V01418.cs | 92/92
+[OK] 104. brace balance MainWindow.V01427.cs | 88/88
+[OK] 105. brace balance MainWindow.V01606.cs | 74/74
+[OK] 106. brace balance SelectionEditingCore.V01711.cs | 144/144
+[OK] 107. brace balance MainWindow.V01416.cs | 55/55
+[OK] 108. brace balance MainWindow.V07.cs | 75/75
+
+Note: Node.js syntax, XML/JSON structure, PWA parity, event handlers and transaction-delta hooks were validated in this environment.
+Note: This environment does not provide the Windows .NET Desktop SDK, so a real WPF dotnet build must still be confirmed on Windows with build_release.cmd.

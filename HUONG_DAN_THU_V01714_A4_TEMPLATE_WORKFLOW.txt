@@ -1,0 +1,23 @@
+DWG SKETCH V0.17.14 / PWA V0.21.14
+HUONG DAN THU A4 TEMPLATE WORKFLOW
+====================================
+
+1. Mo mot ban ve DWG, chon mot cum doi tuong va bam "Luu vung chon".
+2. Nhap Nhom/loai, Thu muc va Tag. Chon lai mau va kiem tra thumbnail vector.
+3. Chen mau tai vi tri bat ky voi ty le/goc khac 1/0.
+4. Sua rieng mot vai TEXT/LINE trong instance vua chen.
+5. Chon mot member cua instance -> "Cap nhat mau tu instance". Xac nhan. Mau definition phai nhan cac sua doi.
+6. Chen lai mau o vi tri khac de xac nhan definition moi.
+7. Chon mot instance moi (duoc tao tu V0.17.14), chon mot mau khac -> "Thay instance". Vi tri X/Y, ty le va goc phai duoc giu.
+8. Tao/chon mot Block instance -> chon mau A4 -> "Lien ket Block/Symbol". Kiem tra dong lien ket hien Block/Symbol.
+9. Thu tim bang ten, tag, nhom va thu muc co dau/khong dau.
+10. Luu project, dong/mo lai. A4TemplateDefinitionId va transform instance phai con de A4UPDATE/A4REPLACE hoat dong.
+
+LENH:
+- A4UPDATE / A4UP: cap nhat definition tu instance dang chon.
+- A4REPLACE / A4RP: thay instance dang chon bang mau hien tai, giu transform.
+- A4LINKBLOCK / A4LB: lien ket mau hien tai voi Block/Symbol dang chon.
+- A4INSTSEL / A4IS: chon ca instance.
+
+LUU Y:
+Instance da chen bang V0.17.13 tro ve truoc khong co metadata transform V0.17.14, vi vay A4UPDATE/A4REPLACE tu choi xu ly tu dong de tranh lam lech so do. Chen lai mau bang V0.17.14 de co day du metadata.

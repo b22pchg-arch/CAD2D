@@ -1,0 +1,54 @@
+DWG SKETCH C# V0.18.5.4 / PWA V0.22.5.4
+FIX4 MTEXT CAP-HEIGHT + FIRST-BASELINE + PARAGRAPH ALIGNMENT PARITY
+STATIC + BEHAVIOR TEST REPORT
+Date: 2026-08-10
+
+RESULT: 628 / 628 PASS
+
+GROUPS CHECKED
+- C# Version / FileVersion / AssemblyVersion = 0.18.5.4: PASS
+- MainWindow.xaml and csproj XML: PASS
+- PWA version.json / manifest JSON: PASS
+- 92 C# source files: lexical termination + (), {}, [] structural balance: PASS
+- 243 XAML event references / 190 unique handlers: all resolved in C# source
+- C# FIX4 cap-height/em-size mapper: PASS
+- C# AtLeast ActualHeight baseline-gap model: PASS
+- C# MTEXT paragraph Center/Right renderer: PASS
+- C# MTEXT reference-width + paragraph-alignment project round-trip: PASS
+- C# DXF/LibreDWG paragraph q-alignment extraction before formatting removal: PASS
+- C# attachment rectangle is not double-scaled by WidthFactor: PASS
+- WPF render + selection bounds use the same FIX4 metric core: PASS
+- PWA cap-height/em-size + first-baseline + paragraph alignment core: PASS
+- PWA integrated inline JavaScript node --check: PASS
+- PWA DWG worker / Service Worker / normalizer / architecture / macro / catalog node --check: PASS
+- PWA integrated vs standalone active runtime hashes: PASS
+- verify_release.ps1 remains ASCII-only for Windows PowerShell 5.1: PASS
+
+DIRECT USER DWG TEST
+Input: So do ket day TQ-HG (1)(1).dwg
+The user DWG is NOT included in the release package.
+- Converted entities: 77,297: PASS
+- TEXT: 10,503: PASS
+- MTEXT: 9,960: PASS
+- MTEXT paragraph Center recovered: 471: PASS
+- LBS 373/01 / Quang Vinh: Center + ReferenceWidth > ActualWidth: PASS
+- 373-7/26 / Ho Thau: Center + ReferenceWidth > ActualWidth: PASS
+- 373-7/126 / Tan Quang: Center + ReferenceWidth > ActualWidth: PASS
+- 373-7/01 / T3 Nam Dich: Center + ReferenceWidth > ActualWidth: PASS
+
+FIX4 METRIC BEHAVIOR ON SAMPLE LABELS
+- Active Arial-compatible renderer EmPerCadHeight ~= 1.4230.
+- LBS 373/01 / Quang Vinh: FirstTop/H ~= 1.0005; BaselineAdvance/H ~= 1.7041; reconstructed ActualHeight error = 0.
+- 373-7/26 / Ho Thau: BaselineAdvance/H ~= 1.9209; reconstructed ActualHeight error = 0.
+- 373-7/126 / Tan Quang: BaselineAdvance/H ~= 1.9699; reconstructed ActualHeight error = 0.
+- 373-7/01 / T3 Nam Dich: BaselineAdvance/H ~= 1.8869; reconstructed ActualHeight error = 0.
+
+IMPORTANT DIFFERENCE FROM FIX3
+- FIX3 used host font at em-size = CAD Height and divided ActualHeight residual above/below the first/last baseline.
+- FIX4 maps host font em-size so visible cap-height = CAD Height.
+- FIX4 keeps first baseline stable and puts AtLeast residual into baseline gaps.
+- FIX4 preserves paragraph Center/Right and reference rectangle through Save/Reopen.
+
+LIMITATION OF THIS ENVIRONMENT
+- dotnet/.NET Windows Desktop SDK is not installed in this container.
+- Final WPF compile/publish must still be executed with build_release.cmd on Windows.

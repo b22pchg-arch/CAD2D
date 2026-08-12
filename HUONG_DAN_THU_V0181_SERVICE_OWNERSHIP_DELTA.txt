@@ -1,0 +1,38 @@
+DWG SKETCH V0.18.1 / PWA V0.22.1
+HUONG DAN THU - SERVICE OWNERSHIP + TRANSACTION DELTA
+=====================================================
+
+1. Mo mot DWG lon da dung on dinh o V0.18.0.
+2. Chay ARCHCHECK.
+   - Mong doi: Health=OK.
+   - Selection revision va Owned selection mutations tang khi chon/bo chon.
+3. Thu SCALE:
+   - Chon 1 hoac nhieu doi tuong.
+   - SCALE theo base point, he so bat ky khac 1.
+   - Ctrl+Z va Ctrl+Y.
+   - Hinh hoc phai tro ve/tien toi ma khong nap lai toan bo project.
+4. Thu ROTATE:
+   - Xoay nhanh +/-15 do va ROTATE theo base point.
+   - Undo/Redo phai giu dung layer, mau, text, block/A4 metadata.
+5. Thu MOVE va GRIP:
+   - Cac delta cu van hoat dong nhu V0.17.x.
+   - Chay TXINFO de thay MOVE/GRIP/SCALE/ROTATE duoc thong ke chung.
+6. Thu Selection Service:
+   - Click don, Ctrl/Shift toggle, Clear Selection, selection cycling.
+   - ARCHINFO phai cho Selection rev tang va so selected khop giao dien.
+7. Thu DWG lon tren PWA:
+   - Pan/zoom, OSNAP, grip, selection, SCALE/ROTATE.
+   - Khong duoc lam mat Render Stability V0.21.11.3.
+8. Kiem tra fallback:
+   - Them text, trim, mirror, paste/copy va cac lenh chua migrate van Undo/Redo bang co che legacy.
+   - Khong mat du lieu project JSON v11.
+
+Lenh chan doan:
+  ARCHINFO / ARCHCHECK
+  TXINFO / HISTORYINFO / DELTAINFO
+
+Muc tieu V0.18.1:
+- Selection co gateway mutation thuoc service.
+- SCALE/ROTATE khong snapshot toan project.
+- MOVE/GRIP delta cu duoc quy ve cung telemetry transaction.
+- Legacy snapshot van duoc giu lam fallback an toan.

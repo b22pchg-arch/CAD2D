@@ -1,0 +1,45 @@
+DWG SKETCH V0.18.2 / PWA V0.22.2
+HUONG DAN THU - TRANSACTION DELTA EXPANSION
+===========================================
+
+A. C# / WPF
+1. Mo lai DWG lon da chay on dinh o V0.18.1.
+2. Chay ARCHCHECK.
+   - Mong doi: Health=OK.
+3. Chay TXINFO truoc khi thu de ghi nhan Snapshot/Delta ban dau.
+4. Thu SCALE:
+   - Chon 1 va nhieu doi tuong, SCALE theo base point.
+   - Ctrl+Z/Ctrl+Y phai phuc hoi dung hinh hoc, layer, mau, text va metadata.
+5. Thu ROTATE:
+   - Thu +/-15 do va ROTATE theo base point.
+   - TXINFO phai co ROTATE.
+6. Thu MIRROR:
+   - Chon nhieu loai LINE/TEXT/POLYLINE/CIRCLE/ARC/DIMENSION.
+   - Ve truc hai diem, sau do Ctrl+Z/Ctrl+Y.
+   - TXINFO phai co MIRROR va Snapshot khong tang do rieng lenh MIRROR.
+7. Thu PROPERTIES:
+   - Sua toa do, text, kich thuoc, goc, mau/net tren doi tuong ho tro.
+   - Ctrl+Z/Ctrl+Y phai phuc hoi dung.
+   - TXINFO phai co PROPERTIES va Snapshot khong tang do rieng Apply Properties.
+8. Thu MOVE/GRIP:
+   - Van hoat dong nhu ban truoc; TXINFO tiep tuc co MOVE/GRIP.
+9. Thu fallback:
+   - COPY/PASTE/DELETE/TRIM/EXTEND van Undo/Redo duoc bang snapshot legacy.
+10. Thu DWG lon:
+   - Pan/zoom, select, OSNAP, grip, SCALE/ROTATE/MIRROR lien tuc.
+   - Khong duoc xuat hien nhap nhay hoac regression render.
+
+B. PWA
+1. Hard refresh; neu giao dien van bao 0.22.1 thi xoa Service Worker/cache cu va nap lai.
+2. Xac nhan giao dien hien PWA 0.22.2.
+3. Thu MIRROR tren tap chon lon va Ctrl+Z/Ctrl+Y.
+4. Thu Apply Properties tren LINE/TEXT/CIRCLE/ARC/POLYLINE/SYMBOL/DIMENSION.
+5. Chay TXINFO; phai thay MIRROR/PROPERTIES trong Kinds.
+6. Chay ARCHCHECK; Health phai OK.
+7. Thu SCALE/ROTATE/MOVE/GRIP de xac nhan khong regression.
+
+Lenh chan doan:
+  ARCHINFO / ARCHCHECK
+  TXINFO / HISTORYINFO / DELTAINFO
+
+Project JSON van v11; khong can chuyen doi du lieu.

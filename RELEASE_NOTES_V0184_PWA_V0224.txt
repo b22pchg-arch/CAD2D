@@ -1,0 +1,40 @@
+DWG SKETCH PROTOTYPE V0.18.4 / PWA V0.22.4
+CURVE EDIT DELTA + VERSIONED SYMBOL LIBRARY FOUNDATION
+Ngay phat hanh: 2026-08-09
+
+1. MUC TIEU
+- Tiep tuc giam snapshot toan project tren cac lenh chinh sua thuong dung.
+- Dua TRIM va EXTEND sang TX5 Curve Edit Delta.
+- Xu ly an toan TRIM co the thay 1 doi tuong thanh nhieu doan (1 -> N) va EXTEND thay hinh hoc tai cho (1 -> 1).
+- Dat nen metadata cho Versioned Device/Symbol Library de chuan bi Macro/Library giai doan tiep theo.
+- Giu nguyen Project JSON schema version 11.
+
+2. C# V0.18.4 - TX5 CURVE EDIT DELTA
+- Them MainWindow.V0184.cs va history prefix TX5:.
+- TRIM curve: chi luu doi tuong truoc khi cat va cac manh sau khi cat tai cung vi tri container; Undo/Redo khong nap lai toan project.
+- EXTEND: chi luu geometry truoc/sau cua line dich.
+- TX5 ho tro ca OverlayEntity va CadEntity.
+- History prune quan ly chung TX3/TX4/TX5; payload het tham chieu trong Undo/Redo duoc thu gom.
+- Neu TX5 khong khoi tao duoc, TRIM/EXTEND van roi ve snapshot legacy de dam bao an toan.
+
+3. PWA V0.22.4
+- Them cad-interaction-architecture-v0224.js.
+- Them curve-edit-delta-v0224 va transaction API beginCurveEdit/commitCurveEdit/cancelCurveEdit.
+- TRIM dung curve delta de Undo/Redo truong hop 1 -> N.
+- EXTEND dung curve delta cho 1 -> 1.
+- COPY/PASTE/DELETE tiep tuc TX4 structural delta; SCALE/ROTATE/MIRROR/PROPERTIES tiep tuc selection delta.
+- Service Worker, Worker, Manifest va version.json dong bo V0.22.4.
+
+4. VERSIONED SYMBOL LIBRARY FOUNDATION
+- ElectricalSymbolTemplate them Version, Revision, Category va Tags.
+- Moi lan luu de cung Id tang Revision, dong thoi giu Version/Category/Tags.
+- Export thu vien moi dung envelope schemaVersion 2, libraryVersion 1.0.0.
+- C# va PWA van nhap duoc schema v1; metadata thieu duoc gan gia tri mac dinh.
+- PWA localStorage/project snapshot giu metadata version/revision/category/tags.
+- Chua doi semantic Version tu dong; V0.18.4 chi dat nen cho catalog, macro va history revision o cac ban sau.
+
+5. TUONG THICH VA AN TOAN
+- Project JSON van version 11; khong migration project.
+- Thu vien symbol schema v1 tiep tuc doc duoc.
+- Cac history cu TX3/TX4, MOVE SM1, GRIP GE1 tiep tuc duoc giu.
+- Snapshot legacy con ton tai cho cac lenh chua migrate hoac fallback.

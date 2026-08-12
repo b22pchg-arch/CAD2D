@@ -1,0 +1,12 @@
+DWG SKETCH V0.18.1 / PWA V0.22.1 - SERVICE OWNERSHIP + TRANSACTION DELTA
+========================================================================
+
+- CadSelectionService bat dau so huu gateway Clear/Single/Toggle va identity revision.
+- C# SCALE va ROTATE dung transaction delta TX2 thay vi snapshot toan project.
+- MOVE SM1 va GRIP GE1 tiep tuc la delta nhe, nay duoc thong ke chung trong Transaction Service.
+- Them TXINFO/HISTORYINFO/DELTAINFO.
+- ARCHINFO/ARCHCHECK bo sung Owned selection mutations, Snapshot va Delta telemetry.
+- Undo/Redo uu tien TX2, sau do GE1/SM1, cuoi cung moi fallback snapshot legacy.
+- PWA V0.22.1 co selection service API, selection-delta-v0221 cho SCALE/ROTATE va cung diagnostics TXINFO.
+- Project JSON van v11; khong doi schema du lieu.
+- A4 0.21.14, Block 0.21.13, OSNAP 0.21.12 va Render Stability 0.21.11.3 duoc giu nguyen.

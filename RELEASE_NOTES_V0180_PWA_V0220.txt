@@ -1,0 +1,29 @@
+DWG SKETCH V0.18.0 / PWA V0.22.0 - CAD INTERACTION ARCHITECTURE PHASE 1
+=====================================================================
+
+Muc tieu
+- Bat dau tach kien truc tu MainWindow/index.html lon thanh cac service ro rang.
+- Khong viet lai toan bo mot lan; giu cac core V0.17 lam fallback de bao toan do on dinh.
+- Tao nen revision/diagnostics cho ban ve lon va cac buoc sinh so do tu dong ve sau.
+
+C#
+- CadCommandService: registry alias/handler, telemetry thoi gian lenh.
+- CadSelectionService: selection revision va so luong CAD/Overlay.
+- CadRenderService: thong ke yeu cau render va geometry invalidation.
+- CadTransactionService: hop dong transaction cho Undo/Redo delta, snapshot cu van fallback.
+- EntityRepository tiep tuc la nguon Entity revision dung chung.
+- Mot nhom lenh nen da chay qua registry moi: UNDO/REDO, ZOOM ALL, SNAPINFO, BLOCKINFO, SELECTALL.
+- ARCHINFO / ARCHCHECK cho phep kiem tra nhanh tinh dong bo cua kien truc moi.
+
+PWA
+- Them cad-interaction-architecture-v0220.js.
+- Command registry co fallback ve command pipeline cu.
+- Theo doi entity revision, selection revision, render request va invalidation.
+- Transaction API duoc cong bo cho cac module tiep theo.
+- ARCHINFO / ARCHCHECK co tren PWA.
+- Khong thay doi Render Stability, Object Snap, Block/Symbol, A4 Template da on dinh.
+
+Tuong thich
+- Project JSON van version 11; khong doi schema du lieu.
+- A4 API van 0.21.14, Block 0.21.13, OSNAP 0.21.12.
+- V0.18.0 la Phase 1: chua xoa switch lenh cu va chua chuyen quyen so huu entity/selection khoi MainWindow.

@@ -1,0 +1,31 @@
+HUONG DAN THU V0.18.10.0 / PWA V0.22.10
+
+A. BUILD
+Run: CSharp_Source\DwgSketchPrototype\build_release.cmd
+Target: Build succeeded, 0 Error.
+
+B. TEST ADAPTIVE ANCHOR
+1. Select a group with a clear rectangular bounds.
+2. MACROREC.
+3. ROTATE around a point close to TopLeft (not at the center), then SCALE around a point near BottomRight, optionally MIRROR.
+4. MACROSTOP.
+5. Open Step Editor. New transform steps should show referenceMode=SelectionBoundsAnchor and a referenceAnchor such as TopLeft/BottomRight.
+6. Select a second group at a different position and preferably different size; MACROPLAY.
+Expected: pivot/axis follows the corresponding bounds anchor on the second group, not the absolute location of group 1.
+
+C. TEST INPUT CONTRACT
+1. Set input kind=Any, minimum=2, record/save a relative macro.
+2. Select only 1 object and press Check macro / command MACROCHECK.
+Expected: FAIL and macro does not execute.
+3. Select >=2 objects and MACROCHECK again.
+Expected: OK.
+4. Repeat with Overlay/Cad/Mixed if needed.
+
+D. LEGACY
+Import/open a V0.18.9 macro containing referenceMode=SelectionBoundsCenter.
+Expected: preflight OK and playback remains center-based.
+
+E. REGRESSION
+- Open the original DWG used for TEXT/MTEXT verification: positions must remain identical to FIX4.
+- Test RMOVE/RCOPY + Ctrl+Z/Redo.
+- Test Symbol Update Manager and Macro Parameter Profiles.

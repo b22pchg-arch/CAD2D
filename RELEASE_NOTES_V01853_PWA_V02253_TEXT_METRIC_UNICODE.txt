@@ -1,0 +1,41 @@
+DWG SKETCH C# V0.18.5.3 / PWA V0.22.5.3
+FIX3 TEXT METRIC PARITY + VIETNAMESE UNICODE NORMALIZER
+Ngay: 2026-08-10
+
+1. TEXT/MTEXT POSITION - FIX3
+- FIX2 da sua line advance MTEXT theo 3-on-5. FIX3 sua tiep vi tri ca cum chu.
+- Khong con dung FontMetrics/em-box cua font Windows lam kich thuoc tuyet doi de dich diem neo DWG.
+- Neu DWG/DXF co MTextActualHeight/extentsHeight, tong chieu cao actual cua CAD la gia tri tuyet doi.
+- Khoang baseline giua cac dong van theo FIX2: (5/3) * H * LineSpacingFactor.
+- Phan du actualHeight - baseline advances duoc chia cho top/bottom theo ty le glyph thuc cua dong dau/cuoi.
+- Vi vay cac chu co dau cao/thap khac nhau (vi du Nam Khoa, Son Thanh...) khong con bi ep chung mot baseline offset.
+- MTEXT attachment 1..9, TEXT justification, width factor, oblique va rotation tiep tuc duoc giu.
+
+2. VIETNAMESE ENCODING NORMALIZER
+- Them AUTO detect + batch conversion cho TCVN3/ABC, VNI-Windows, VIQR va Unicode/NFC.
+- Co che AUTO uu tien an toan: chu Unicode tieng Viet dang dung khong bi tu dong map lai chi vi ky tu nhu E/O co the trung voi bang ma cu.
+- Co Quet + xem truoc, chuyen vung chon, chuyen toan bo TEXT/MTEXT va nguong tin cay 70/80/90%.
+- Co tuy chon doi font legacy sang font Unicode tuong duong.
+- Batch conversion co Undo/Ctrl+Z.
+- C# luu goi y source style/font/encoding trong Project JSON v11 bang cac truong tuy chon, nen Save/Reopen van co the quet lai.
+- PWA giu sourceStyleName/sourceFontFile/sourceTextEncoding va cung co cong cu tuong duong.
+
+3. KIEM TRA TREN DWG MAU NGUOI DUNG
+- File mau: So do ket day TQ-HG (1)(1).dwg (chi dung de test, KHONG dong goi vao release).
+- Source entities: 77,288; converted entities: 77,297.
+- TEXT: 10,503; MTEXT: 9,960; tong TEXT/MTEXT: 20,463.
+- MTEXT Top-Left attachment: 9,888 / 9,960.
+- AUTO Unicode scan tren chinh file mau: 0 chu bi convert nham TCVN3/VNI/VIQR.
+- Vi du extents: LBS 374/04 / Xuan Minh: H=36000, ActualHeight=97368.
+- Vi du extents: 373-7/01 / T. Son Thanh: H=33016.8, ActualHeight=89695.64.
+- Nhung noi dung co dau tieng Viet co ActualHeight khac nhau; FIX3 dung chinh actual extents de tinh baseline thay vi mot he so Y chung.
+
+4. TUONG THICH
+- Project JSON van v11.
+- TX3/TX4/TX5, MOVE SM1, GRIP GE1, Macro Engine Phase 1 va Versioned Library Catalog khong thay doi.
+- Service Worker/PWA cache version: 0.22.5.3.
+- De danh gia position FIX3 chinh xac, mo lai DWG/DXF goc bang ban nay roi Save Project lai. Project da save bang FIX1/FIX2 da mat metadata anchor tam thoi nen khong nen dung lam mau chuan position.
+
+5. BUILD
+- Chay CSharp_Source\DwgSketchPrototype\build_release.cmd tren Windows co .NET 8 SDK.
+- Moi truong dong goi khong co .NET Desktop SDK nen compile WPF thuc te phai duoc xac nhan tren may Windows.

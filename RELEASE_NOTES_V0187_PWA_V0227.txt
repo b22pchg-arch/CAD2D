@@ -1,0 +1,34 @@
+DWG SKETCH C# V0.18.7.0 / PWA V0.22.7
+SYMBOL UPDATE MANAGER + BATCH INSTANCE UPGRADE + MACRO PARAMETER PROFILES
+======================================================================
+
+1. GIU NGUYEN CAC PHAN DA ON DINH
+- FIX4 TEXT/MTEXT paragraph + cap-height parity giu nguyen.
+- Vietnamese Unicode Normalizer giu nguyen.
+- TX3/TX4/TX5, SM1 MOVE, GE1 GRIP giu nguyen.
+- Macro Engine Phase 2 va Symbol Instance Version Link V0.18.6 tiep tuc tuong thich.
+- Project JSON van schema v11, khong migration.
+
+2. SYMBOL UPDATE MANAGER
+- Quet tat ca linked symbol instance tren ban ve.
+- Phan loai: Moi nhat / Co cap nhat / Thieu nguon.
+- Mac dinh danh dau cac instance co ban mau moi.
+- Cho phep chon/bỏ chon tung instance, chon tat ca ban cu, chon instance tren ban ve.
+- Cap nhat hang loat co xac nhan.
+- Batch update giu position, scale, rotation va label; label style cu duoc giu.
+- Mot batch tao mot moc Undo de Ctrl+Z hoan tac ca lo.
+- Lenh C#: SYMSCAN / SYMMANAGER / SYMBATCH.
+- PWA: co Symbol Update Manager tuong ung va lenh SYMSCAN/SYMMANAGER/SYMBATCH.
+
+3. MACRO PARAMETER PROFILES
+- Moi macro co the luu nhieu bo NAME=value.
+- Profile duoc luu rieng, khong sua macro goc.
+- Luu / Nap / Xoa profile.
+- Profile chi chua tham so, khong ghi toa do click.
+- C# luu tai LocalAppData/DwgSketchPrototype/cad-macro-parameter-profiles-v1.json.
+- PWA luu localStorage rieng.
+
+4. TUONG THICH
+- Macro JSON van schema v2.
+- Symbol catalog/library van schema V0.18.5/V0.18.6.
+- Project JSON v11.
