@@ -1,4 +1,4 @@
-/* DWG Sketch PWA V0.21.11 - direct DWG reader worker.
+/* DWG Sketch PWA V0.22.19 FIX1 - direct DWG reader + color/text parity adapter.
  * LibreDWG WebAssembly is loaded in this Worker, so parsing never calls a desktop converter.
  * Upstream: @mlightcad/libredwg-web 0.7.9 (GPL-3.0)
  */
@@ -86,6 +86,14 @@ function handleKey(value) {
   return String(value).trim().toUpperCase();
 }
 
+function rawDwgHandleKey(value) {
+  if (value === undefined || value === null) return '';
+  if (typeof value === 'object') return rawDwgHandleKey(value.value ?? value.handle ?? value.id ?? '');
+  if (typeof value === 'bigint') return value.toString(16).toUpperCase();
+  if (typeof value === 'number' && Number.isFinite(value) && value >= 0) return Math.trunc(value).toString(16).toUpperCase();
+  return handleKey(value);
+}
+
 /* libredwg-web <= 0.7.9 may lose old-format layer ACI colors while converting
  * the raw DWG database. Read the original LAYER/STYLE objects through the
  * exposed WASM API when it is available, then use the converted database only
@@ -96,8 +104,10 @@ function extractRawCadTables(engine, dwgPtr) {
     (typeof engine?.[name] === 'function' ? engine[name].bind(engine) : null);
   const getCount = fn('dwg_get_num_objects'), getObject = fn('dwg_get_object');
   const getType = fn('dwg_object_get_fixedtype'), toTio = fn('dwg_object_to_object_tio');
+  const toEntity = fn('dwg_object_to_entity'), getEntityColor = fn('dwg_object_entity_get_color_object');
+  const getEntityHandle = fn('dwg_object_entity_get_handle_object');
   const dynValue = fn('dwg_dynapi_entity_value');
-  const result = { layers: new Map(), styles: new Map(), usedRawApi: false, error: '' };
+  const result = { layers: new Map(), styles: new Map(), entityColors: new Map(), usedRawApi: false, error: '' };
   if (!getCount || !getObject || !getType || !toTio || !dynValue) return result;
   try {
     const count = Math.max(0, Math.min(10_000_000, int(getCount(dwgPtr))));
@@ -105,6 +115,26 @@ function extractRawCadTables(engine, dwgPtr) {
       const objectPtr = getObject(dwgPtr, i);
       if (!objectPtr) continue;
       const fixedType = int(getType(objectPtr));
+      // Preserve entity TrueColor before the high-byte method marker is discarded by
+      // libredwg-web's converted JS database. Store only packed C2 colors, keyed by
+      // the DWG handle, so normal ACI/ByLayer entities keep the fast converter path.
+      if (toEntity && getEntityColor && getEntityHandle) {
+        try {
+          const entityPtr = toEntity(objectPtr);
+          if (entityPtr) {
+            const rawEntityColor = getEntityColor(entityPtr);
+            const packed = rawNumber(rawEntityColor?.rgb);
+            const packedMethod = packed === null ? -1 : ((packed >>> 24) & 0xff);
+            if (packedMethod === 0xc2 || int(rawEntityColor?.method, -1) === 0xc2) {
+              const key = rawDwgHandleKey(getEntityHandle(entityPtr));
+              if (key) result.entityColors.set(key, {
+                index: int(rawEntityColor?.index, NaN), method: int(rawEntityColor?.method, NaN),
+                rgb: packed, flag: int(rawEntityColor?.flag, 0), handle: key
+              });
+            }
+          }
+        } catch { /* some non-entity object types do not expose an entity TIO */ }
+      }
       if (fixedType !== 51 && fixedType !== 53) continue; // LAYER / STYLE
       const tio = toTio(objectPtr);
       if (!tio) continue;
@@ -135,7 +165,7 @@ function extractRawCadTables(engine, dwgPtr) {
         });
       }
     }
-    result.usedRawApi = result.layers.size > 0 || result.styles.size > 0;
+    result.usedRawApi = result.layers.size > 0 || result.styles.size > 0 || result.entityColors.size > 0;
   } catch (error) {
     result.error = error?.message || String(error);
   }
@@ -173,12 +203,15 @@ function normalizeCadColor(colorIndex, color, kind = 'entity', rawColor = null, 
   if (declared === 'ByBlock' && kind !== 'layer') return make('ByBlock', 0, null, 'reported-byblock');
   if (declared === 'ByLayer' && kind !== 'layer') return make('ByLayer', 256, null, 'reported-bylayer');
 
-  if (ci >= 1 && ci <= 255) return make('Aci', ci, null, 'color-index');
+  // FIX V0.18.19-FIX1: libredwg-web may expose both colorIndex and a packed
+  // C2/C3 color value. The packed DWG method is authoritative; otherwise a real
+  // TrueColor can be flattened incorrectly to ACI 1..255.
   if (packedMethod === 0xc3) {
     const aci = packageLow & 0xff;
     if (aci >= 1 && aci <= 255) return make('Aci', aci, null, 'packed-method-c3');
   }
   if (packedMethod === 0xc2) return make('TrueColor', 256, packageLow, 'packed-method-c2');
+  if (ci >= 1 && ci <= 255) return make('Aci', ci, null, 'color-index');
 
   // Some libredwg-web versions expose an ACI as a small integer in `color`.
   if (packageRgb !== null && packageRgb >= 1 && packageRgb <= 255) return make('Aci', packageRgb, null, 'small-color-value-as-aci');
@@ -193,6 +226,58 @@ function normalizeCadColor(colorIndex, color, kind = 'entity', rawColor = null, 
   if (kind === 'layer') return make('Aci', 7, null, 'layer-default-aci7');
   if (packageLow !== null && packageLow > 255) return make('TrueColor', 256, packageLow, 'entity-rgb-fallback');
   return make('ByLayer', 256, null, 'entity-default-bylayer');
+}
+
+// FIX V0.18.19-FIX1: libredwg-web 0.7.9 / LibreDWG AC1032 can expose
+// MTEXT extents with width/height semantics reversed. Resolve the vertical extent
+// by comparing both candidates with AutoCAD's nominal 3-on-5 line-height model,
+// then use the other candidate as horizontal extent. This is deliberately confined
+// to the browser DWG adapter; the native C# importer keeps its own validated path.
+function resolveWebMTextExtentsV02219(entity, decodedText, transformedScale) {
+  const scale = Math.max(1e-18, Math.abs(n(transformedScale, 1)));
+  const h0 = Math.max(.0000001, Math.abs(n(entity?.textHeight, 2.5)));
+  const ew0 = Math.max(0, Math.abs(n(entity?.extentsWidth, 0)));
+  const eh0 = Math.max(0, Math.abs(n(entity?.extentsHeight, 0)));
+  const rw0 = Math.max(0, Math.abs(n(entity?.rectWidth, 0)));
+  const rh0 = Math.max(0, Math.abs(n(entity?.rectHeight, 0)));
+  const spacing = Math.max(.25, Math.min(4, n(entity?.lineSpacing, 1) || 1));
+  const lines = String(decodedText ?? '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+  while (lines.length > 1 && !String(lines.at(-1) ?? '').trim()) lines.pop();
+  const lineCount = Math.max(1, lines.length);
+  const expectedHeight = h0 * (1 + Math.max(0, lineCount - 1) * (5 / 3) * spacing);
+  const scoreHeight = value => value > 0 ? Math.abs(Math.log(Math.max(1e-12, value / Math.max(1e-12, expectedHeight)))) : Infinity;
+
+  let actualHeight0 = eh0, actualWidth0 = ew0, mode = 'declared';
+  if (ew0 > 0 && eh0 > 0) {
+    const scoreEwAsHeight = scoreHeight(ew0);
+    const scoreEhAsHeight = scoreHeight(eh0);
+    // A small hysteresis avoids swapping truly square/tiny MTEXT only because of
+    // insignificant floating point differences. The AC1032 field diagnostic selects
+    // extentsWidth as the vertical extent for virtually all normal MTEXT in the sample.
+    if (scoreEwAsHeight + 0.03 < scoreEhAsHeight) {
+      actualHeight0 = ew0; actualWidth0 = eh0; mode = 'web-extents-swapped';
+    } else if (scoreEhAsHeight + 0.03 < scoreEwAsHeight) {
+      actualHeight0 = eh0; actualWidth0 = ew0; mode = 'declared';
+    } else if (rw0 > 0) {
+      const ewWidthScore = Math.abs(Math.log(Math.max(1e-12, ew0 / rw0)));
+      const ehWidthScore = Math.abs(Math.log(Math.max(1e-12, eh0 / rw0)));
+      if (ehWidthScore + 0.03 < ewWidthScore) {
+        actualHeight0 = ew0; actualWidth0 = eh0; mode = 'web-extents-swapped-width-evidence';
+      }
+    }
+  } else if (ew0 > 0 && !eh0) {
+    actualHeight0 = ew0; actualWidth0 = rw0; mode = 'web-height-from-extents-width';
+  }
+
+  const referenceWidth0 = rw0 > 0 ? rw0 : actualWidth0;
+  const referenceHeight0 = rh0 > 0 ? rh0 : actualHeight0;
+  return {
+    actualWidth: actualWidth0 * scale,
+    actualHeight: actualHeight0 * scale,
+    referenceWidth: referenceWidth0 * scale,
+    referenceHeight: referenceHeight0 * scale,
+    mode
+  };
 }
 
 function makeTransform(parent = null, insertion = { x: 0, y: 0 }, sx = 1, sy = 1, rotation = 0, base = { x: 0, y: 0 }) {
@@ -213,7 +298,9 @@ const IDENTITY = makeTransform();
 function commonProps(entity, inherited = null, ctx = null) {
   let layer = String(entity?.layer || inherited?.layer || '0');
   if (layer === '0' && inherited?.layer) layer = inherited.layer;
-  let spec = normalizeCadColor(entity?.colorIndex, entity?.color, 'entity', (entity?.color && typeof entity.color === 'object') ? entity.color : null, entity?.colorMethod);
+  const sourceHandle = handleKey(entity?.handle);
+  const rawEntityColor = ctx?.rawEntityColors?.get?.(sourceHandle) || null;
+  let spec = normalizeCadColor(entity?.colorIndex, entity?.color, 'entity', rawEntityColor || ((entity?.color && typeof entity.color === 'object') ? entity.color : null), entity?.colorMethod);
   if (spec.colorMethod === 'ByBlock' && inherited) {
     spec = {
       ...spec,
@@ -231,7 +318,10 @@ function commonProps(entity, inherited = null, ctx = null) {
     colorMethod: spec.colorMethod,
     sourceColorReason: spec.sourceColorReason,
     sourceColorRaw: spec.sourceColorRaw,
-    sourceHandle: handleKey(entity?.handle),
+    sourceHandle,
+    rawDwgEntityColorIndex: rawEntityColor?.index ?? null,
+    rawDwgEntityColorMethod: rawEntityColor?.method ?? null,
+    rawDwgEntityColorRgb: rawEntityColor?.rgb ?? null,
     sourceType: upper(entity?.type),
     lineType: entity?.lineType || null,
     lineweight: entity?.lineweight ?? null,
@@ -687,15 +777,18 @@ function convertEntity(entity, ctx, transform = IDENTITY, inherited = null, dept
       const rawMText = String(entity.text ?? '');
       const textInfo = decodedTextRecord(entity, ctx, true, rawMText);
       const mtextParagraphAlignment = mtextParagraphAlignmentV02254(rawMText);
+      const webExtents = resolveWebMTextExtentsV02219(entity, textInfo.text, transformedScale);
+      if (ctx?.mtextExtentsStats) ctx.mtextExtentsStats[webExtents.mode] = (ctx.mtextExtentsStats[webExtents.mode] || 0) + 1;
       if (textInfo.text) out.push({
         type: 'MTEXT',
         position: transform.point(entity.insertionPoint),
         textAttachmentPoint: Math.max(1, Math.min(9, Math.trunc(n(entity.attachmentPoint, 1)) || 1)),
-        textReferenceWidth: Math.max(0, n(entity.rectWidth || entity.extentsWidth) * transformedScale),
-        textReferenceHeight: Math.max(0, n(entity.rectHeight || entity.extentsHeight) * transformedScale),
-        mtextActualWidth: Math.max(0, n(entity.extentsWidth) * transformedScale),
-        mtextActualHeight: Math.max(0, n(entity.extentsHeight) * transformedScale),
-        mtextReferenceWidth: Math.max(0, n(entity.rectWidth || entity.extentsWidth) * transformedScale),
+        textReferenceWidth: webExtents.referenceWidth,
+        textReferenceHeight: webExtents.referenceHeight,
+        mtextActualWidth: webExtents.actualWidth,
+        mtextActualHeight: webExtents.actualHeight,
+        mtextReferenceWidth: webExtents.referenceWidth,
+        mtextWebExtentsMode: webExtents.mode,
         mtextParagraphAlignment,
         mtextLineSpacingStyle: Math.max(1, Math.min(2, Math.trunc(n(entity.lineSpacingStyle, 1)) || 1)),
         mtextLineSpacingFactor: Math.max(.25, Math.min(4, n(entity.lineSpacing, 1) || 1)),
@@ -801,8 +894,9 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
     };
   });
   const ctx = {
-    blocks, unsupported: {}, blockStack: [], textStyles, colorStats,
+    blocks, unsupported: {}, blockStack: [], textStyles, colorStats, rawEntityColors: rawTables?.entityColors || new Map(),
     textStats: { total: 0, tcvn3Converted: 0, vniConverted: 0, viqrConverted: 0, unicodeEscapesDecoded: 0, entitiesWithUnicodeEscapes: 0, paragraphFormatsRemoved: 0, entitiesWithParagraphFormatting: 0, styles: {} },
+    mtextExtentsStats: {},
     lwPolylineStats: { total: 0, closed: 0, closedFlag512: 0, closedLegacyFlag1: 0, closedExplicit: 0 }
   };
   const entities = [];
@@ -847,7 +941,7 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
       exportStrokeMode: 'original', exportStrokeColor: '#000000', autoPromoteDwgObjects: true, autoPromoteThreshold: 5000
     },
     dwgImport: {
-      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA color/font/hatch/lwpolyline adapter 0.21.11',
+      engine: '@mlightcad/libredwg-web 0.7.9 local + PWA DWG parity adapter 0.22.19 FIX1',
       workerVersion: DWG_WORKER_VERSION,
       engineVersion: DWG_ENGINE_VERSION,
       engineSource: DWG_ENGINE_SOURCE,
@@ -860,10 +954,12 @@ function convertDatabase(database, fileName, meta = {}, rawTables = null) {
       layerCount: layerEntries.length,
       textStyleCount: textStyles.entries.length,
       textStats: ctx.textStats,
+      mtextExtentsStats: ctx.mtextExtentsStats,
       lwPolylineStats: ctx.lwPolylineStats,
       colorStats: ctx.colorStats,
       rawLayerColorCount: rawTables?.layers?.size || 0,
       rawTextStyleCount: rawTables?.styles?.size || 0,
+      rawEntityTrueColorCount: rawTables?.entityColors?.size || 0,
       usedRawDwgTableApi: !!rawTables?.usedRawApi,
       rawTableApiError: rawTables?.error || '',
       directInBrowser: true

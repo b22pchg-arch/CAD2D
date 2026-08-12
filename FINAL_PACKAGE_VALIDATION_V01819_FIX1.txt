@@ -1,0 +1,26 @@
+FINAL PACKAGE VALIDATION - V0.18.19.0 FIX1 / PWA V0.22.19 FIX1
+================================================================
+Scope: PWA DWG color + MTEXT placement + live MOVE/GRIP render parity.
+Reference DWG SHA-256: cffeb320314e7c156cb1bea81835af71b76670087c09d7fac1ff8695f30d0530
+
+[PASS] DwgSketchPrototype.csproj XML valid.
+[PASS] MainWindow.xaml XML valid.
+[PASS] C# version remains 0.18.19.0.
+[PASS] PWA version/title remain 0.22.19 / DWG Sketch PWA V0.22.19.
+[PASS] Service Worker cache key changed for FIX1.
+[PASS] 66 embedded PWA JavaScript files passed node --check.
+[PASS] 66 standalone PWA JavaScript files passed node --check.
+[PASS] 292 common top-level PWA files compared: 0 mismatch.
+[PASS] Patched worker opened the supplied AC1032 DWG directly with libredwg-web 0.7.9.
+[PASS] Supplied DWG: 23,066 drawable entities; 4,547 MTEXT.
+[PASS] Raw packed TrueColor recovery: 4/4 entities restored.
+       68B1C #FECC66; 68B31 #FECC66; 9E5C0 #F89B20; 9E5D5 #CD6928.
+[PASS] MTEXT extent resolver: web-extents-swapped=4,544; declared=3.
+[PASS] Sample 373-7/133: actualHeight=25,783.020; actualWidth=152,192.050.
+[PASS] Small/new drawing MOVE harness: full-render fallback used when spatial index unavailable.
+       renders=1; invalidations=1; spatialReady=false; entityCells=0.
+[PASS] ZIP integrity check.
+
+Environment limitation:
+- .NET SDK / PowerShell build was not available in the packaging environment, therefore
+  the final Windows dotnet publish/build_release.cmd must still be run on the user's machine.

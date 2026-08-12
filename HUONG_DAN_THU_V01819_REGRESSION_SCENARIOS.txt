@@ -1,0 +1,48 @@
+HƯỚNG DẪN THỬ V0.18.19 / PWA V0.22.19 - REGRESSION SCENARIO SETS
+================================================================
+
+A. Tạo cấu trúc kiểm thử
+1. Mở Macro Control Center, chọn macro cần kiểm thử.
+2. Tạo các Parameter Profile cần dùng (ví dụ: Bình thường, Nhánh A, Nhánh B, Không có Reference...).
+3. Tại Regression Scenario Sets, nhập tên Set và bấm Tạo Set.
+4. Nhập tên Scenario, chọn Parameter Profile, bật "Tính Scenario này vào Acceptance", bấm Thêm Scenario.
+5. Lặp lại cho các trường hợp cần kiểm thử.
+
+B. Tạo Baseline cho một Scenario
+1. Chọn Scenario và bấm Nạp kịch bản.
+2. Chuẩn bị đúng Source/Target/Reference nếu macro yêu cầu.
+3. Bấm MACROCHECK/Preflight.
+4. Bấm Tạo Trace hoặc Phát macro trên bản vẽ thử đã xác nhận.
+5. Chọn Trace Session vừa tạo trong Lịch sử Trace.
+6. Bấm Đặt Baseline kịch bản.
+7. Trạng thái Scenario trở về NOT_RUN vì cần một lần chạy mới hơn Baseline để nghiệm thu.
+
+C. Chạy Regression
+1. Chọn Scenario -> Nạp kịch bản.
+2. Chuẩn bị input role đúng kịch bản.
+3. Bấm Tạo Trace/Phát macro.
+4. Trace Session mới được gắn ScenarioId tự động.
+5. Nếu Scenario đã có Baseline, phần mềm Auto Compare và cập nhật PASS/FAIL.
+6. Có thể chọn một Trace Session và bấm So sánh kịch bản để Compare thủ công.
+
+D. Acceptance Summary
+- PASS: lần chạy mới khớp Baseline.
+- FAIL: có Diff so với Baseline.
+- NO_BASELINE: chưa có/mất Baseline.
+- NOT_RUN: đã có Baseline nhưng chưa có lần chạy mới.
+- STALE: Last Run không mới hơn Baseline.
+- PROFILE_MISSING: profile liên kết đã bị xóa.
+- BASELINE_MISMATCH: Baseline không cùng macro.
+- DISABLED: Scenario không tính vào Acceptance.
+- Overall PASS chỉ khi mọi Scenario đang bật đều PASS.
+- Overall FAIL khi có ít nhất một Scenario FAIL.
+- Các trạng thái chưa đủ dữ liệu tạo Overall INCOMPLETE.
+
+E. Test bảo vệ lịch sử
+1. Tạo Scenario Baseline.
+2. Chạy hơn 50 Trace Session.
+3. Kiểm tra phiên Baseline Scenario vẫn còn và hiển thị ◆ SCEN-BASE.
+
+F. Lưu ý an toàn
+- Tạo Trace là playback thật; dùng bản vẽ test hoặc Undo phù hợp.
+- Scenario không lưu Source/Target/Reference object cụ thể; người dùng vẫn phải gán input đúng ngữ cảnh trước khi chạy.

@@ -1,0 +1,36 @@
+DWG SKETCH C# V0.18.19.0 / PWA V0.22.19
+REGRESSION SCENARIO SETS + ACCEPTANCE SUMMARY
+============================================================
+
+1. Mục tiêu
+- Nâng Macro Regression từ 1 Baseline chung/macro thành nhiều kịch bản kiểm thử có tổ chức.
+- Mỗi Scenario có thể liên kết 1 Parameter Profile và 1 Baseline Trace riêng.
+- Tự gắn lần chạy mới với Scenario đang ACTIVE và tự Compare sau khi Trace hoàn tất.
+- Tạo Acceptance Summary tổng hợp PASS/FAIL/INCOMPLETE cho cả Scenario Set.
+
+2. Chức năng mới
+- Scenario Set theo từng Macro.
+- Thêm/Cập nhật/Xóa/Bật-Tắt Scenario.
+- Liên kết Parameter Profile đã lưu.
+- Nạp Scenario: chọn đúng macro + nạp profile + đặt Scenario ACTIVE.
+- Đặt Baseline riêng từ Trace Session đang chọn.
+- So sánh thủ công hoặc Auto Compare sau lần chạy mới.
+- Acceptance states: PASS, FAIL, NO_BASELINE, NOT_RUN, STALE, PROFILE_MISSING, BASELINE_MISMATCH, DISABLED.
+- Xuất Acceptance JSON và sao chép tóm tắt.
+- Trace Session lưu ScenarioId/ScenarioName/ParameterProfileId.
+- Scenario Baseline được bảo vệ khi lịch sử Trace trim còn 50 phiên.
+
+3. Tương thích
+- Giữ Macro storage schema v9.
+- Giữ Project JSON v11.
+- Giữ Baseline chung V0.18.18 và Trace History V0.18.17.
+- Trace History schema metadata nâng lên v3 nhưng đọc được dữ liệu cũ thiếu Scenario fields.
+
+4. PWA
+- Module mới: macro-regression-scenarios-v02219.js.
+- localStorage: dwg-sketch-macro-regression-scenario-sets-v1.
+- Service Worker cache key mới cho V0.22.19.
+
+5. Lưu ý
+- Tạo Trace/Phát macro vẫn là playback thật, không phải dry-run.
+- Scenario chỉ tự gắn vào Trace khi đã bấm Nạp kịch bản và Scenario đang ACTIVE.

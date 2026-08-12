@@ -1,0 +1,15 @@
+HUONG DAN THU V0.18.19 FIX1 - PWA DWG PARITY
+============================================================
+1. Build source bang build_release.cmd nhu binh thuong.
+2. PWA: sau khi deploy/copy ban moi, dong tat ca tab PWA cu va mo lai. Cache key FIX1 da doi; neu van thay giao dien cu, reload mot lan.
+3. Mo file So do ket day TQ-HG-BinhHG.dwg tren C# va PWA.
+4. Bat Mau DWG goc (colorCheck/useDwgColors). So sanh cac duong/ky hieu mau.
+5. So sanh cac MTEXT dai nhu '373-7/133', '-76', '373', tieu de va chu nhieu dong. Chu khong con bi dich do actualHeight lay nham be rong dong.
+6. Tao ban ve moi voi 5-20 doi tuong LINE/RECTANGLE/TEXT. Di chuyen va keo GRIP lien tuc. Cac doi tuong khac phai luon hien, khong bien mat tam thoi.
+7. Tren file DWG lon, ve them 3-5 overlay moi lien tiep roi di chuyen mot overlay ngay. Cac overlay moi con lai phai van hien trong khi keo.
+8. Ket thuc MOVE/GRIP, thu Undo/Redo va Zoom/Pan de xac nhan khong co mat du lieu.
+
+Neu can chan doan, project.dwgImport se co:
+- rawEntityTrueColorCount
+- mtextExtentsStats
+Va moi MTEXT co mtextWebExtentsMode.

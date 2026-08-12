@@ -194,8 +194,12 @@
     } else buildHandle = idle(step);
   }
 
+  function spatialIndexesAvailable() {
+    return !!entityIndex && !!overlayIndex;
+  }
+
   function spatialReady() {
-    return builtRevision === coreRevision && !!entityIndex && !!overlayIndex;
+    return builtRevision === coreRevision && spatialIndexesAvailable();
   }
 
   function selectedItemsSet() {
@@ -244,6 +248,14 @@
       markFullGeometryChange();
       return result;
     }
+    // FIX V0.18.19-FIX1: the live-stale optimization is safe only when the
+    // spatial index was fully current at the start of the edit. Small/new drawings
+    // have no index, and a large drawing can also have a pending rebuild after new
+    // objects were added. Using an absent/older index here hides unrelated objects.
+    if (!spatialReady()) {
+      liveIndexStale = false;
+      return original.invalidateGeometryCaches();
+    }
     geometryRevision++;
     liveIndexStale = true;
     // Only moving items changed. Keep the expensive global snap/spatial caches alive;
@@ -264,7 +276,7 @@
   };
 
   renderCanvasNow = function renderCanvasNowV0202() {
-    if (!spatialReady() && !liveIndexStale) return original.renderCanvasNow();
+    if (!spatialIndexesAvailable() || (!spatialReady() && !liveIndexStale)) return original.renderCanvasNow();
     const started = now();
     const w = viewportWidth || canvas.clientWidth || 1, h = viewportHeight || canvas.clientHeight || 1;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -354,10 +366,10 @@
   }
 
   hitTest = function hitTestV0202(screen) {
-    return hitFromSpatial(screen, true) || (!spatialReady() && !liveIndexStale ? original.hitTest(screen) : null);
+    return !spatialIndexesAvailable() ? original.hitTest(screen) : (hitFromSpatial(screen, true) || (!spatialReady() && !liveIndexStale ? original.hitTest(screen) : null));
   };
   hitTestAny = function hitTestAnyV0202(screen) {
-    return hitFromSpatial(screen, false) || (!spatialReady() && !liveIndexStale ? original.hitTestAny(screen) : null);
+    return !spatialIndexesAvailable() ? original.hitTestAny(screen) : (hitFromSpatial(screen, false) || (!spatialReady() && !liveIndexStale ? original.hitTestAny(screen) : null));
   };
 
   function regionRefs(start, last, startScreen, lastScreen) {
@@ -415,7 +427,7 @@
   snap = function snapV0202(worldPoint, screen, base = null) {
     const gridPoint = coordinateGridSnap(worldPoint);
     if (!$('snapCheck').checked || !project) { snapPoint = null; return gridPoint; }
-    if (!spatialReady() && !liveIndexStale) return original.snap(worldPoint, screen, base);
+    if (!spatialIndexesAvailable() || (!spatialReady() && !liveIndexStale)) return original.snap(worldPoint, screen, base);
     const tol = num($('snapTolerance').value, 14), worldTol = tol / Math.max(scale, 1e-9);
     const rows = localSnapRows(worldPoint, worldTol);
     if (!rows) return original.snap(worldPoint, screen, base);

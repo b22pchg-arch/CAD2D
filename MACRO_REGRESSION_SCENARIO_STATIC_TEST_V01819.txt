@@ -1,0 +1,15 @@
+DWG SKETCH V0.18.19 / PWA V0.22.19 - STATIC TEST RESULT
+[PASS] C# có MacroRegressionScenarios.V01819.cs.
+[PASS] MainWindow khởi tạo InitializeMacroRegressionScenariosV01819.
+[PASS] XAML hợp lệ; 253 event handler được đối chiếu, không thiếu handler.
+[PASS] XAML có Scenario Set/Scenario/Profile/Baseline/Acceptance controls.
+[PASS] Trace Session có ScenarioId/ScenarioName/ParameterProfileId + ScenarioBaselineIds.
+[PASS] PWA nạp macro-regression-scenarios-v02219.js.
+[PASS] 66 JavaScript top-level của PWA qua node --check.
+[PASS] PWA static HTML không có id trùng lặp.
+[PASS] PWA Service Worker cache module scenario.
+[PASS] PWA embedded/standalone đồng bộ module Scenario, Regression, Trace, Profile, Symbol, Worker và metadata.
+[PASS] Symbol Library appVersion = 0.22.19.
+[PASS] 184 file bắt buộc trong verify_release.ps1 đều tồn tại.
+[PASS] Project JSON v11 và Macro schema v9 giữ nguyên.
+[INFO] Môi trường kiểm tra gói không có dotnet/PowerShell; biên dịch release cuối thực hiện bằng build_release.cmd trên Windows .NET 8.

@@ -1,0 +1,53 @@
+PWA DWG PARITY DIAGNOSTIC - V0.18.19 FIX1
+============================================================
+Mau kiem tra: So do ket day TQ-HG-BinhHG.dwg
+SHA-256: cffeb320314e7c156cb1bea81835af71b76670087c09d7fac1ff8695f30d0530
+DWG: AC1032 / AutoCAD 2018
+Engine PWA: @mlightcad/libredwg-web 0.7.9 WebAssembly
+
+Thong ke raw/converted
+- Source entities: 23,068
+- PWA adapter drawable entities: 23,066
+- MTEXT: 4,547
+- Raw layer records: 36
+- Text styles: 11
+
+1. MTEXT extents
+Truoc FIX, PWA gan:
+  mtextActualWidth  <- extentsWidth
+  mtextActualHeight <- extentsHeight
+Tren file mau, gia tri WebAssembly co nghia nguoc o gan nhu toan bo MTEXT.
+Vi du 373-7/133:
+  textHeight       = 24,916.221
+  extentsWidth     = 25,783.020
+  extentsHeight    = 152,192.050
+  rectWidth        = 157,555.496
+Truoc FIX: actualHeight=152,192.050 -> anchor/layout bi dich rat lon.
+Sau FIX:  actualHeight=25,783.020; actualWidth=152,192.050.
+Ket qua bo nhan dang tren 4,547 MTEXT:
+  web-extents-swapped = 4,544
+  declared            = 3
+
+2. Color
+Doi chieu raw DWG handle voi converted DB:
+- 23,068/23,068 converted entities khop colorIndex raw cho ACI/ByLayer.
+- Co 4 entity packed TrueColor C2 ma converter chi de lai RGB + colorIndex, lam PWA cu uu tien nham ACI.
+TrueColor duoc khoi phuc:
+  Handle 68B1C -> #FECC66
+  Handle 68B31 -> #FECC66
+  Handle 9E5C0 -> #F89B20
+  Handle 9E5D5 -> #CD6928
+
+3. Live render / hidden objects
+interaction-core co nguong SPATIAL_MIN_ITEMS=700.
+- Drawing moi/nho: spatial index = null theo thiet ke.
+- Ban cu: khi MOVE/GRIP, liveIndexStale=true van ep renderer dung spatial query.
+- Query index null => tap render rong => doi tuong khac tam bien mat.
+Ngoai ra tren drawing lon, neu vua them doi tuong va spatial index dang rebuild, dung old index trong live edit co the bo sot cac overlay moi khac.
+FIX1 chi dung live stale optimization khi spatialReady()==true; nguoc lai fallback full renderer.
+
+Behavior harness FIX1:
+- Drawing 2 objects, no spatial index, interaction=move
+- invalidateGeometryCaches -> base invalidation
+- renderCanvasNow -> original full renderer
+- PASS: renders=1, invalidates=1, spatial ready=false

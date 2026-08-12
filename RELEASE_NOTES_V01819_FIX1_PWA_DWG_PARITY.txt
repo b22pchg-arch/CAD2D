@@ -1,0 +1,30 @@
+DWG SKETCH V0.18.19.0 FIX1 / PWA V0.22.19 FIX1
+PWA DWG COLOR + MTEXT + LIVE RENDER PARITY
+============================================================
+
+Muc tieu
+- Sua sai mau PWA tren entity TrueColor ma libredwg-web 0.7.9 lam mat packed method C2 sau convert.
+- Sua lech vi tri MTEXT do extentsWidth/extentsHeight cua WebAssembly co the bi dao nghia tren DWG AC1032.
+- Sua hien tuong doi tuong khac tam an khi MOVE/GRIP doi tuong moi trong luc spatial index khong ton tai hoac dang rebuild.
+
+Thay doi
+1. dwg-worker.js
+   - Doc raw entity TrueColor theo DWG handle truoc khi giai phong con tro DWG.
+   - Uu tien packed C2 TrueColor truoc colorIndex.
+   - resolveWebMTextExtentsV02219 chon actual width/height theo do hop ly cua nominal text height + line spacing.
+   - Ghi mtextWebExtentsMode va dwgImport.mtextExtentsStats de chan doan.
+2. interaction-core-v0202.js
+   - Live stale spatial optimization chi duoc dung neu spatialReady() tai thoi diem edit.
+   - Neu drawing nho khong co spatial index, hoac index dang rebuild sau khi them/xoa doi tuong, fallback ve renderer day du.
+   - Render/hit/snap fallback neu spatial index khong kha dung.
+3. sw.js
+   - Doi CACHE_NAME FIX1 de PWA khong giu dwg-worker/interaction-core cu.
+4. verify_release.ps1
+   - Them regression guards cho 3 sua loi tren.
+
+Tuong thich
+- C# Version van 0.18.19.0.
+- PWA Version van 0.22.19.
+- Project JSON van v11.
+- Macro schema van v9.
+- Khong doi du lieu Macro/Scenario/Trace.

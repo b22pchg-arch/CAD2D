@@ -1,0 +1,16 @@
+DWG SKETCH V0.18.19.0 / PWA V0.22.19 - FINAL PACKAGE VALIDATION
+[PASS] C# Version/FileVersion/AssemblyVersion = 0.18.19.0.
+[PASS] MainWindow title = V0.18.19.0.
+[PASS] MainWindow.xaml và DwgSketchPrototype.csproj parse XML thành công.
+[PASS] 109 file C# được quét cân bằng dấu ngoặc; không phát hiện block bị thiếu/đóng thừa theo static scanner.
+[PASS] 253 XAML event handler được đối chiếu; 0 handler thiếu.
+[PASS] PWA version/title/app/worker/service-worker = 0.22.19.
+[PASS] PWA Symbol Library appVersion = 0.22.19.
+[PASS] 66 JavaScript top-level qua node --check.
+[PASS] Scenario Set core hiện diện trong C# và PWA.
+[PASS] Trace History bảo vệ Global Baseline + Scenario Baseline; test 51 -> 50 phiên PASS.
+[PASS] Acceptance Summary PASS/FAIL/INCOMPLETE và export JSON hiện diện; behavioral test PASS.
+[PASS] Macro schema v9 và Project JSON v11 không thay đổi.
+[PASS] 184 file bắt buộc của verify_release.ps1 đều tồn tại.
+[PASS] Embedded PWA và Standalone PWA đã đồng bộ các file active, bao gồm Scenario module và symbol-template.
+[INFO] Không có dotnet/PowerShell trong môi trường đóng gói; cần chạy build_release.cmd trên Windows .NET 8 để xác nhận compile/publish thực tế.

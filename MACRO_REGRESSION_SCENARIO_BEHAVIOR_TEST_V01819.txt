@@ -1,0 +1,13 @@
+DWG SKETCH V0.18.19 / PWA V0.22.19 - SCENARIO BEHAVIOR TEST
+[PASS] Một macro có thể có nhiều Scenario Set; mỗi Set có nhiều Scenario.
+[PASS] Mỗi Scenario có Parameter Profile và BaselineSessionId riêng; Profile có thể để trống để dùng tham số hiện tại.
+[PASS] Nạp Scenario đặt active context cho lần playback kế tiếp.
+[PASS] Trace Session ghi ScenarioId/ScenarioName/ParameterProfileId.
+[PASS] Scenario Baseline dùng ScenarioBaselineIds/scenarioBaselineIds và không xung đột Baseline chung.
+[PASS] Compare Scenario tái sử dụng engine Compare V0.18.18 thay vì tạo bộ so sánh thứ hai.
+[PASS] Acceptance phân biệt PASS/FAIL/NO_BASELINE/NOT_RUN/STALE/PROFILE_MISSING/BASELINE_MISMATCH/DISABLED.
+[PASS] Acceptance test thực thi trên PWA: bộ 2 Scenario trả INCOMPLETE, 1/2 PASS, 0 FAIL khi Scenario còn lại chưa có Baseline.
+[PASS] Active Scenario test thực thi trên PWA: activeContext trả đúng ScenarioId và ParameterProfileId đã nạp.
+[PASS] Baseline protection test thực thi trên PWA: repair gắn Scenario ID vào Trace Baseline tương ứng.
+[PASS] History trim test thực thi trên PWA với 51 Trace Session: còn đúng 50 và vẫn giữ cả Global Baseline + Scenario Baseline.
+[PASS] Legacy Trace thiếu Scenario metadata được normalize về giá trị rỗng và tiếp tục đọc được.

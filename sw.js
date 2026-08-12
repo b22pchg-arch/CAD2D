@@ -1,6 +1,6 @@
 'use strict';
 const APP_VERSION='0.22.19';
-const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION+'-regression-scenario-sets-acceptance-v01819';
+const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION+'-v01819-fix1-dwg-color-text-render-parity';
 const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(APP_VERSION);
 const CORE_ASSETS=[
   './','./index.html','./manifest.webmanifest','./version.json',WORKER_URL,

@@ -1,0 +1,9 @@
+DWG SKETCH RELEASE PACKAGE
+C#       : V0.18.19.0
+PWA      : V0.22.19
+Feature  : Regression Scenario Sets + Acceptance Summary
+Macro DB : schema v9 (unchanged)
+Project  : JSON v11 (unchanged)
+Trace    : history metadata schema v3, backward compatible
+Build    : run build_release.cmd on Windows .NET 8
+Next     : V0.18.20 - Scenario Runner Queue + Batch Acceptance / Dry-run architecture preparation

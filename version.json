@@ -1,7 +1,7 @@
 {
   "version": "0.22.19",
   "releasedAt": "2026-08-12T22:39:00+07:00",
-  "notes": "V0.22.19: Regression Scenario Sets + Acceptance Summary; multiple scenarios per macro with Parameter Profile and scenario-specific Baseline, automatic scenario trace association, PASS/FAIL/INCOMPLETE acceptance reporting; retains global Regression Baseline and macro schema v9.",
+  "notes": "V0.22.19 FIX1: PWA DWG parity fix for libredwg-web 0.7.9 MTEXT extents, packed TrueColor priority, and live MOVE/GRIP fallback when spatial index is unavailable; retains Regression Scenario Sets + Acceptance Summary.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
@@ -9,5 +9,5 @@
     "source": "local-vendor"
   },
   "title": "DWG Sketch PWA V0.22.19",
-  "build": "V0.18.19.0 / PWA V0.22.19"
+  "build": "V0.18.19.0 FIX1 / PWA V0.22.19 FIX1"
 }
