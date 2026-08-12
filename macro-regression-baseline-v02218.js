@@ -1,6 +1,6 @@
 (()=>{
 'use strict';
-const VERSION='0.22.18',$=id=>document.getElementById(id);let lastReport=null,diffs=[];
+const VERSION='0.22.19',$=id=>document.getElementById(id);let lastReport=null,diffs=[];
 const history=()=>window.DwgSketchMacroTraceHistoryV02217;
 const engine=()=>window.DwgSketchMacroEngineV02216;
 const key=e=>String(e?.stepId||'').trim()?`ID:${String(e.stepId).trim().toLowerCase()}`:`IDX:${Number(e?.stepIndex)||0}:${String(e?.action||'').toUpperCase()}`;
@@ -19,6 +19,6 @@ function reset(){lastReport=null;diffs=[];if($('cadMacroRegressionList'))$('cadM
 function exportDiff(){if(!lastReport){status?.('Chưa có kết quả Compare để xuất.');return}const safe=String(lastReport.macroId||'macro').replace(/[^a-z0-9_-]+/gi,'_');downloadTextFile?.(`Regression_${safe}_${new Date().toISOString().replace(/[:.]/g,'-')}.macro-regression.json`,JSON.stringify(lastReport,null,2),'application/json;charset=utf-8')}
 function gotoDiff(ev){const row=ev.target?.closest?.('[data-step-index]');if(!row)return;const cur=selected(),m=(engine()?.getMacros?.()||[]).find(x=>String(x.id).toLowerCase()===String(cur?.macroId||'').toLowerCase());if(!m)return;let idx=-1;if(row.dataset.stepId)idx=(m.steps||[]).findIndex(s=>String(s.stepId||'').toLowerCase()===String(row.dataset.stepId).toLowerCase());if(idx<0&&Number(row.dataset.stepIndex)>0)idx=Number(row.dataset.stepIndex)-1;if(idx>=0)window.DwgSketchMacroLibraryOrganizerV02216?.gotoStep?.(idx,'Regression Diff')}
 function init(){$('cadMacroRegressionSetBaselineBtn')?.addEventListener('click',setBaseline);$('cadMacroRegressionCompareBtn')?.addEventListener('click',compareSelected);$('cadMacroRegressionExportBtn')?.addEventListener('click',exportDiff);$('cadMacroRegressionClearBaselineBtn')?.addEventListener('click',clearBaseline);$('cadMacroRegressionList')?.addEventListener('dblclick',gotoDiff);refresh()}
-window.DwgSketchMacroRegressionBaselineV02218={version:VERSION,compare,onComplete,refresh,reset,lastReport:()=>lastReport};
+window.DwgSketchMacroRegressionBaselineV02218={version:VERSION,compare,onComplete,refresh,reset,renderExternal:(report,base,cur,automatic=false)=>render(report,automatic),lastReport:()=>lastReport};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
