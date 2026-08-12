@@ -1,6 +1,6 @@
 'use strict';
-const APP_VERSION='0.22.13';
-const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION+'-fix1'; // V0.22.13 FIX1 cache bust for OSNAP aperture UI fix
+const APP_VERSION='0.22.15';
+const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION+'-fix3-default-interaction-mode'; // V0.22.15 FIX3 selectable default Select/Pan
 const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(APP_VERSION);
 const CORE_ASSETS=[
   './','./index.html','./manifest.webmanifest','./version.json',WORKER_URL,
@@ -10,7 +10,7 @@ const CORE_ASSETS=[
   './vendor/libredwg-web-0.7.9/wasm/libredwg-web.wasm',
   './vendor/libredwg-web-0.7.9/package.json',
   './vendor/libredwg-web-0.7.9/INTEGRATION_INFO.json',
-  './vietnamese-text-normalizer-v02253.js','./interaction-core-v0202.js','./cad-interaction-architecture-v0225.js','./symbol-library-catalog-v0226.js','./symbol-instance-link-v0226.js','./macro-library-core-v02213.js','./macro-step-editor-relative-v02213.js','./macro-input-binding-v02213.js','./macro-branch-conditions-v02213.js','./macro-library-core-v02212.js','./macro-step-editor-relative-v02212.js','./macro-input-binding-v02212.js','./symbol-update-manager-v0227.js','./macro-parameter-profiles-v0227.js','./selection-editing-core-v02111.js','./render-stability-core-v021113.js','./object-snap-core-v02112.js','./block-symbol-editing-core-v02113.js','./network-diagram-core-v0210.js','./network-learning-core-v0214.js','./a4-diagram-template-core-v02114.js','./electrical-automation-v0179.js','./electrical-auto-learn-v0174.js','./electrical-learning-core-v0175.js','./electrical-learning-session-v0180.js','./symbol-template-v0169.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
+  './vietnamese-text-normalizer-v02253.js','./interaction-core-v0202.js','./cad-interaction-architecture-v0225.js','./symbol-library-catalog-v0226.js','./symbol-instance-link-v0226.js','./macro-library-core-v02215.js','./macro-step-editor-relative-v02215.js','./macro-input-binding-v02215.js','./macro-branch-conditions-v02215.js','./macro-branch-groups-trace-v02215.js','./macro-control-center-v02215.js','./macro-library-core-v02212.js','./macro-step-editor-relative-v02212.js','./macro-input-binding-v02212.js','./symbol-update-manager-v0227.js','./macro-parameter-profiles-v0227.js','./selection-editing-core-v02111.js','./render-stability-core-v021113.js','./object-snap-core-v02112.js','./block-symbol-editing-core-v02113.js','./network-diagram-core-v0210.js','./network-learning-core-v0214.js','./a4-diagram-template-core-v02114.js','./electrical-automation-v0179.js','./electrical-auto-learn-v0174.js','./electrical-learning-core-v0175.js','./electrical-learning-session-v0180.js','./symbol-template-v0169.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
 ];
 const OPTIONAL_ASSETS=[
   './RELEASE_NOTES_V01812_PWA_V02212.txt','./HUONG_DAN_THU_V01812_ROLE_DERIVED_OUTPUTS.txt','./ROLE_DERIVED_OUTPUT_SCHEMA_V01812.md',

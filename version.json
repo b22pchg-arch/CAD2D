@@ -1,13 +1,13 @@
 {
-  "version": "0.22.13",
-  "releasedAt": "2026-08-11T08:50:00+07:00",
-  "notes": "V0.22.13: Macro Branch/Conditions + Multiple Result Sets; Result/Result1/Result2/Result3; giữ Result Chain, Multi-Selection Roles, Relative Geometry Phase 3, FIX4 TEXT/MTEXT và Project JSON v11.",
+  "version": "0.22.15",
+  "releasedAt": "2026-08-12T07:28:00+07:00",
+  "notes": "V0.22.15: Macro Control Center độc lập khỏi Config; giữ Branch Groups/Else, Trace, Result labels, OSNAP aperture hidden, FIX4 TEXT/MTEXT và Project JSON v11.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.22.13",
-  "build": "macro-branch-multiple-result-sets-v01813"
+  "title": "DWG Sketch PWA V0.22.15",
+  "build": "macro-control-center-independent-workspace-v01815"
 }
