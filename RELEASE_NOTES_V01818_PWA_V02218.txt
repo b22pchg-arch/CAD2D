@@ -1,0 +1,37 @@
+DWG SKETCH C# V0.18.18.0 / PWA V0.22.18
+MACRO REGRESSION BASELINE + COMPARE TRACE
+============================================================
+
+1. Regression Baseline
+- Cho phép chọn một Trace Session ổn định và đánh dấu làm Baseline cho từng macro.
+- Mỗi macro có tối đa một Baseline hoạt động.
+- Baseline hiển thị tiền tố "★ BASE" trong danh sách lịch sử Trace.
+- Khi history đạt 50 phiên, cơ chế trim ưu tiên giữ Baseline và loại phiên thường cũ hơn.
+
+2. Automatic Compare
+- Mỗi lần MACROPLAY/Tạo Trace hoàn tất, nếu macro đã có Baseline thì tự động so sánh phiên mới.
+- So sánh ưu tiên StepId ổn định; fallback StepIndex chỉ dùng cho dữ liệu cũ thiếu StepId.
+- Phát hiện: ADDED, REMOVED, ACTION, STATE, BRANCH, IO, FAIL_DETAIL và RESULT.
+- Revision macro thay đổi được báo trong summary nhưng không tự tạo lỗi nếu hành vi Trace vẫn giống.
+
+3. Result signatures
+- Trace Session V0.18.18 lưu chữ ký Result/Result1/Result2/Result3.
+- Chữ ký gồm tổng số đối tượng, số Overlay và số CAD.
+- Nhờ đó có thể phát hiện đầu ra Result Set thay đổi dù các step đều RUN giống nhau.
+
+4. Regression UI
+- Đặt Baseline: đánh dấu phiên đang chọn làm chuẩn.
+- So sánh phiên: so sánh phiên đang chọn với Baseline cùng macro.
+- Xuất Diff JSON: xuất báo cáo regression hiện tại.
+- Bỏ Baseline: gỡ chuẩn của macro đang chọn.
+- Double-click Diff: điều hướng tới step theo StepId khi còn tồn tại.
+
+5. Tương thích
+- Giữ Macro storage schema v9 / engine 0.18.16.0.
+- Giữ Project JSON v11.
+- Trace History file cũ v1 được đọc tương thích; thuộc tính Baseline/ResultSignatures thiếu sẽ nhận mặc định.
+- PWA giữ localStorage key dwg-sketch-macro-trace-history-v1 để không mất lịch sử cũ.
+
+6. Lưu ý
+- Tạo Trace/MACROPLAY vẫn là playback thật, không phải dry-run.
+- Baseline nên được tạo từ bản vẽ thử ổn định và bộ Input/Role đã được xác nhận.

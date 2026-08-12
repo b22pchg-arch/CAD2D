@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hướng dẫn sử dụng DWG Sketch — C# V0.14.46 / PWA V0.18.6</title>
+<title>Hướng dẫn sử dụng DWG Sketch — C# V0.18.18 / PWA V0.22.18</title>
 <meta name="description" content="Hướng dẫn chi tiết sử dụng DWG Sketch C# và PWA, bao gồm toàn bộ lệnh vẽ, chọn, hiệu chỉnh, sửa hình tự động, xuất bản và tự động hóa sơ đồ điện.">
 <style>
 :root{--bg:#0f1419;--panel:#182028;--panel2:#202a34;--text:#ecf2f8;--muted:#a9b6c3;--line:#344350;--accent:#45c4ef;--accent2:#76e3aa;--warn:#ffcc80;--code:#071b24}
@@ -25,13 +25,13 @@ a{color:#76d7f4}code,kbd{font-family:Consolas,monospace}code{background:var(--co
 <header class="hero"><div class="hero-inner">
 <div class="eyebrow">Tài liệu sử dụng tích hợp · Hoạt động offline</div>
 <h1>DWG Sketch — Hướng dẫn sử dụng chi tiết</h1>
-<p class="lead">Dành cho bản C# WPF V0.14.46 và PWA V0.18.6. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
+<p class="lead">Dành cho bản C# WPF V0.18.18 và PWA V0.22.18. Tài liệu bao quát quy trình đọc DWG/DXF, thao tác trên máy tính và điện thoại, toàn bộ lệnh nhanh, sửa hình tự động, tô vùng, xuất bản, nhập topology và tự động sinh sơ đồ lưới điện.</p>
 <div class="badges"><span class="badge">C# .NET 8 / Windows</span><span class="badge">PWA / Android / Desktop</span><span class="badge">DWG trực tiếp qua LibreDWG 0.7.9</span><span class="badge">Không cần Internet sau khi cài PWA</span></div>
 <div class="hero-actions"><a class="btn" href="./index.html">Mở PWA cùng thư mục</a><a class="btn secondary" href="./HtmlViewer/PWA/index.html">Mở PWA trong gói C#</a><a class="btn secondary" href="#command-reference">Tra cứu lệnh</a><a class="btn secondary" href="javascript:window.print()">In / Lưu PDF hướng dẫn</a></div>
 </div></header>
 <div class="shell">
 <aside><b>Mục lục</b>
-<a href="#start">Bắt đầu nhanh</a><a href="#install">Cài đặt và mở phần mềm</a><a href="#interface">Giao diện</a><a href="#open-files">Mở DWG/DXF/JSON</a><a href="#navigate">Pan, zoom, cảm ứng</a><a href="#selection">Chọn đối tượng và Layer</a><a href="#command-line">Sử dụng dòng lệnh</a><a href="#workflows">Quy trình thao tác mẫu</a><a href="#repair">Sửa hình tự động</a><a href="#electrical">Ký hiệu và topology điện</a><a href="#v01435">Lõi học dài hạn V2</a><a href="#export">Xuất PNG/PDF/DXF/DWG</a><a href="#mobile">Sử dụng trên điện thoại</a><a href="#performance">Bản vẽ lớn và hiệu năng</a><a href="#troubleshooting">Khắc phục lỗi</a><a href="#command-reference">Tra cứu toàn bộ lệnh</a>
+<a href="#start">Bắt đầu nhanh</a><a href="#macro-v01818">Macro Regression V0.18.18</a><a href="#install">Cài đặt và mở phần mềm</a><a href="#interface">Giao diện</a><a href="#open-files">Mở DWG/DXF/JSON</a><a href="#navigate">Pan, zoom, cảm ứng</a><a href="#selection">Chọn đối tượng và Layer</a><a href="#command-line">Sử dụng dòng lệnh</a><a href="#workflows">Quy trình thao tác mẫu</a><a href="#repair">Sửa hình tự động</a><a href="#electrical">Ký hiệu và topology điện</a><a href="#v01435">Lõi học dài hạn V2</a><a href="#export">Xuất PNG/PDF/DXF/DWG</a><a href="#mobile">Sử dụng trên điện thoại</a><a href="#performance">Bản vẽ lớn và hiệu năng</a><a href="#troubleshooting">Khắc phục lỗi</a><a href="#command-reference">Tra cứu toàn bộ lệnh</a>
 </aside>
 <main>
 <section id="start"><h2>1. Bắt đầu nhanh</h2>
@@ -543,7 +543,9 @@ Trung điểm di chuyển       → Pan
 
 <section id="v01442"><h2>V0.14.46 / PWA V0.18.6 — In vector và đối tượng DWG nội bộ</h2><ul><li><b>Ctrl+P</b> mở chế độ in từ mọi vùng làm việc.</li><li>In mặc định bằng vector: WPF DrawingVisual ở C# và SVG ở PWA; có raster độ phân giải cao làm dự phòng.</li><li>Lệnh <code>DWGNATIVE</code> và <code>DWGNATIVEALL</code> chuyển đối tượng DWG/DXF sang đối tượng nội bộ để MOVE, COPY, ROTATE, SCALE, MATCHPROP, OSNAP và Undo/Redo.</li><li>Giữ layer, handle và loại đối tượng nguồn; có thể tự chuẩn hóa ngay khi mở file.</li></ul></section>
 <section id="v01446"><h2>V0.14.46 / PWA V0.18.6 — Bản vẽ lớn và cấu hình mặc định</h2><ul><li>Bản vẽ lớn không còn bị tự chuyển toàn bộ ngay khi mở; chế độ mặc định chỉ chuyển khi số đối tượng không vượt ngưỡng.</li><li>Chuẩn hóa toàn bộ được tối ưu tuyến tính, không chọn toàn bộ kết quả và không tạo lịch sử Undo khổng lồ.</li><li>Có thể lưu, nạp hoặc xóa cấu hình mặc định để tự áp dụng ở lần mở tiếp theo.</li><li>Khuyến nghị giữ DWG lớn ở dạng đọc nhanh và chỉ chuẩn hóa vùng chọn cần chỉnh sửa sâu.</li></ul></section>
-<footer>Tài liệu tích hợp cho DWG Sketch C# V0.14.46 và PWA V0.18.6 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
+
+<section id="macro-v01818"><h2>V0.18.18 / PWA V0.22.18 — Macro Regression Baseline + Compare Trace</h2><p>Macro Control Center giữ Library Organizer, Parameter Profiles, Input/Reference/Output Roles, Result Sets, Branch Conditions/Case/Else, Preflight, Trace và Trace History 50 phiên; V0.18.18 bổ sung Regression Baseline.</p><div class="callout"><b>Lưu ý:</b> Tạo Trace là playback thật, không phải dry-run.</div><ul><li>Chọn một Trace Session ổn định và bấm <b>Đặt Baseline</b>.</li><li>Phiên chuẩn hiện tiền tố <b>★ BASE</b> và được ưu tiên giữ khi history đầy.</li><li>Các lần chạy sau tự so sánh theo StepId, State, Branch/Condition, Input/Output và Result Set.</li><li>Diff gồm ADDED/REMOVED/ACTION/STATE/BRANCH/IO/FAIL_DETAIL/RESULT.</li><li>Có thể xuất báo cáo <code>*.macro-regression.json</code> và double-click Diff để về step.</li></ul><p><a class="btn secondary" href="./HUONG_DAN_CHI_TIET_MACRO_V01818_PWA_V02218.html">Mở hướng dẫn Macro chi tiết V0.18.18</a></p></section>
+<footer>Tài liệu tích hợp cho DWG Sketch C# V0.18.18 và PWA V0.22.18 · Có thể mở offline và in thành PDF.</footer><a class="top" href="#top" title="Lên đầu trang">↑</a>
 <script>
 const cards=[...document.querySelectorAll('.command-card')], search=document.getElementById('commandSearch'), count=document.getElementById('resultCount');let active='ALL';
 function normalize(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}

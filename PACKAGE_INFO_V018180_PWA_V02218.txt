@@ -1,0 +1,9 @@
+DWG SKETCH PACKAGE
+C#       : V0.18.18.0
+PWA      : V0.22.18
+Feature  : Macro Regression Baseline + Compare Trace
+Macro    : storage schema v9 / engine 0.18.16.0
+Project  : JSON v11
+History  : tối đa 50 Trace Session, ưu tiên giữ Baseline
+New C#   : MacroRegressionBaseline.V01818.cs
+New PWA  : macro-regression-baseline-v02218.js

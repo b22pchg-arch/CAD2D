@@ -1,0 +1,10 @@
+DWG SKETCH PACKAGE
+C#       : V0.18.17.0
+PWA      : V0.22.17
+Release  : Macro Test Bench + Persistent Trace History
+Base     : V0.18.16 FIX2 (Create Trace + version metadata build fix)
+Macro DB : schema v9 / engine 0.18.16.0
+Trace DB : schema v1 (separate storage, max 50 sessions)
+Project  : JSON v11 unchanged
+Guide    : HUONG_DAN_CHI_TIET_MACRO_V01817_PWA_V02217.html
+Next     : V0.18.18 Macro Regression Baseline + Compare Trace

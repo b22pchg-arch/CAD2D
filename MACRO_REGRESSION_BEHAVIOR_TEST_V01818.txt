@@ -1,0 +1,13 @@
+DWG SKETCH V0.18.18 / PWA V0.22.18 - REGRESSION BEHAVIOR TEST
+================================================================
+[PASS] Prune 51 Trace Sessions -> giữ đúng 50 phiên.
+[PASS] Baseline cũ nhất vẫn được giữ khi prune; phiên thường bị loại trước.
+[PASS] Compare cùng StepId nhưng RUN -> SKIP trong BranchGroup tạo BRANCH diff.
+[PASS] StepId mới ở Current tạo ADDED diff.
+[PASS] Result signature 1|0O|1C -> 2|0O|2C tạo RESULT diff.
+[PASS] Report có passed=false khi tồn tại behavioral diff.
+[PASS] Baseline legacy không có ResultSignatures bỏ qua Result comparison và không false-positive.
+[PASS] JavaScript module macro-trace-history-v02217.js qua node --check.
+[PASS] JavaScript module macro-regression-baseline-v02218.js qua node --check.
+
+Ghi chú: Đây là behavior test của phần logic PWA bằng dữ liệu mô phỏng. Build/GUI C# thực tế cần chạy build_release.cmd trên Windows .NET 8.

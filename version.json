@@ -1,13 +1,13 @@
 {
-  "version": "0.22.16",
-  "releasedAt": "2026-08-12T18:16:00+07:00",
-  "notes": "V0.22.16 FIX2: sửa metadata title trong version.json để vượt kiểm tra release; giữ nguyên FIX1 bổ sung nút Tạo Trace và toàn bộ chức năng V0.22.16.",
+  "version": "0.22.18",
+  "releasedAt": "2026-08-12T20:40:00+07:00",
+  "notes": "V0.22.18: Macro Regression Baseline + Compare Trace; automatic StepId/Branch/IO/Result regression comparison, baseline preservation and Diff JSON export; retains Test Bench and macro schema v9.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.22.16",
-  "build": "macro-control-center-phase2-create-trace-fix2"
+  "title": "DWG Sketch PWA V0.22.18",
+  "build": "macro-regression-baseline-compare-trace-v01818"
 }

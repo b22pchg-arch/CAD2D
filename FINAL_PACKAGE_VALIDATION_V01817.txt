@@ -1,0 +1,54 @@
+[PASS] C# version trio = 0.18.17.0
+[PASS] C# title = V0.18.17.0
+[PASS] build_release.cmd version sync
+[PASS] build_release_self_contained.cmd version sync
+[PASS] PWA version.json title/version sync
+[PASS] PWA index/app version sync
+[PASS] Service Worker version sync
+[PASS] DWG worker version sync
+[PASS] Manifest start_url version sync
+[PASS] MainWindow.xaml + csproj XML valid
+[PASS] All 225 XAML handlers resolve
+[PASS] C# initializes Trace History
+[PASS] C# begins Trace Session
+[PASS] C# completes Trace Session
+[PASS] C# persistent history max 50
+[PASS] C# StepId navigation
+[PASS] C# Trace History UI
+[PASS] PWA loads history module
+[PASS] PWA persistent history max 50
+[PASS] PWA Trace restore
+[PASS] PWA playback completes Trace Session
+[PASS] PWA StepId navigation
+[PASS] PWA Test Bench UI
+[PASS] Macro schema remains v9 / engine 0.18.16.0
+[PASS] Project JSON remains v11
+[PASS] PWA standalone == embedded: index.html
+[PASS] PWA standalone == embedded: dwg-worker.js
+[PASS] PWA standalone == embedded: sw.js
+[PASS] PWA standalone == embedded: manifest.webmanifest
+[PASS] PWA standalone == embedded: version.json
+[PASS] PWA standalone == embedded: macro-library-core-v02216.js
+[PASS] PWA standalone == embedded: macro-branch-groups-trace-v02216.js
+[PASS] PWA standalone == embedded: macro-library-organizer-v02216.js
+[PASS] PWA standalone == embedded: macro-trace-history-v02217.js
+[PASS] PWA standalone == embedded: huong-dan.html
+[PASS] Service Worker core assets exist
+[PASS] Document replicated: RELEASE_NOTES_V01817_PWA_V02217.txt
+[PASS] Document replicated: HUONG_DAN_THU_V01817_MACRO_TEST_BENCH.txt
+[PASS] Document replicated: HUONG_DAN_CHI_TIET_MACRO_V01817_PWA_V02217.html
+[PASS] Document replicated: MACRO_TRACE_HISTORY_SCHEMA_V01817.md
+[PASS] Document replicated: MACRO_TRACE_HISTORY_STATIC_TEST_V01817.txt
+[PASS] Document replicated: FINAL_PACKAGE_VALIDATION_V01817.txt
+[PASS] Document replicated: PACKAGE_INFO_V018170_PWA_V02217.txt
+[PASS] No real merge conflict markers
+[PASS] node --check macro-trace-history-v02217.js
+[PASS] node --check macro-branch-groups-trace-v02216.js
+[PASS] node --check macro-library-core-v02216.js
+[PASS] node --check macro-library-organizer-v02216.js
+[PASS] node --check dwg-worker.js
+[PASS] node --check sw.js
+[PASS] verify_release required files exist (164)
+
+RESULT: PASS
+NOTE: dotnet/PowerShell CLI are not installed in this container, so actual Windows .NET build and verify_release execution must be confirmed on the user build machine.

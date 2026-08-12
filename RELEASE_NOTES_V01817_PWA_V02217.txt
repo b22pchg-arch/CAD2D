@@ -1,0 +1,17 @@
+DWG SKETCH C# V0.18.17.0 / PWA V0.22.17
+MACRO TEST BENCH + PERSISTENT TRACE HISTORY
+
+1. Macro Trace không còn chỉ tồn tại trong RAM của lần chạy cuối.
+2. Mỗi lần Phát macro hoặc Tạo Trace tự lưu một Trace Session gồm:
+   - Macro ID, tên, revision.
+   - Thời điểm bắt đầu/kết thúc.
+   - Tổng RUN / SKIP / FAIL.
+   - Toàn bộ entry Trace và StepId tương ứng.
+3. Giữ tối đa 50 phiên gần nhất để tránh tăng dữ liệu không giới hạn.
+4. Có thể Nạp phiên, Xuất phiên JSON, Xóa phiên hoặc Xóa toàn bộ lịch sử.
+5. Điều hướng từ Trace về Step ưu tiên StepId; chỉ fallback theo số bước khi StepId không còn tồn tại.
+6. C# lưu history tại LocalApplicationData/DwgSketchPrototype/macro-trace-history-v1.json.
+7. PWA lưu history trong localStorage key dwg-sketch-macro-trace-history-v1.
+8. Tạo Trace tiếp tục dùng chính MACROPLAY/playback thật; KHÔNG phải dry-run. Macro có bước phá hủy vẫn hiện cảnh báo trước khi chạy.
+9. Macro storage vẫn schema v9 / engine 0.18.16.0; không đổi Project JSON v11.
+10. Giữ toàn bộ V0.18.16: Library Organizer, search/filter/category/tag/favorite, duplicate, RunCount/LastRunAt, Preflight navigation và nút Tạo Trace.

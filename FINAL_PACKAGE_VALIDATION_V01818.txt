@@ -1,0 +1,19 @@
+DWG SKETCH V0.18.18.0 / PWA V0.22.18 - FINAL PACKAGE VALIDATION
+================================================================
+[PASS] C# Version/FileVersion/AssemblyVersion = 0.18.18.0.
+[PASS] MainWindow title = V0.18.18.0.
+[PASS] PWA version/title/app/worker/service-worker = 0.22.18.
+[PASS] PWA Symbol Library appVersion = 0.22.18.
+[PASS] MainWindow.xaml và DwgSketchPrototype.csproj là XML hợp lệ.
+[PASS] 243 XAML event handlers đều tìm thấy method tương ứng trong source C#.
+[PASS] MacroRegressionBaseline.V01818.cs tồn tại và được khởi tạo.
+[PASS] Trace Session có IsBaseline + ResultSignatures.
+[PASS] History giới hạn 50 và ưu tiên giữ Baseline khi prune.
+[PASS] Compare hỗ trợ StepId/ADDED/REMOVED/ACTION/STATE/BRANCH/IO/FAIL_DETAIL/RESULT.
+[PASS] Legacy Baseline không có ResultSignatures không sinh false-positive RESULT.
+[PASS] Diff JSON export có schema dwg-sketch-macro-regression-report.
+[PASS] Embedded PWA = Standalone PWA cho các file active V0.22.18.
+[PASS] Toàn bộ JavaScript top-level của PWA qua node --check trong môi trường đóng gói.
+[PASS] Behavior test mô phỏng: preserve baseline, BRANCH/ADDED/RESULT diff, legacy compatibility.
+[PASS] Macro storage schema v9 và Project JSON v11 giữ nguyên.
+[NOT RUN] dotnet build: môi trường đóng gói hiện tại không có .NET SDK; chạy build_release.cmd trên Windows .NET 8 để xác nhận biên dịch/publish thực tế.

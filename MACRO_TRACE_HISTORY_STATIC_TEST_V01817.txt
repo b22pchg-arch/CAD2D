@@ -1,0 +1,13 @@
+DWG SKETCH V0.18.17 / PWA V0.22.17 - STATIC TEST TARGETS
+[PASS TARGET] C# có MacroTraceHistory.V01817.cs và InitializeMacroTraceHistoryV01817().
+[PASS TARGET] Playback C# gọi CompleteMacroTraceHistoryV01817().
+[PASS TARGET] Begin Trace C# gọi BeginMacroTraceHistoryV01817().
+[PASS TARGET] XAML có CadMacroTraceHistoryCombo + Load/Export/Delete/Clear.
+[PASS TARGET] C# history giới hạn 50 phiên và lưu LocalApplicationData.
+[PASS TARGET] C# Trace navigation ưu tiên StepId.
+[PASS TARGET] PWA nạp macro-trace-history-v02217.js.
+[PASS TARGET] PWA history lưu localStorage và giới hạn 50 phiên.
+[PASS TARGET] PWA trace API có restore() để nạp phiên cũ.
+[PASS TARGET] PWA điều hướng Trace ưu tiên StepId.
+[PASS TARGET] version.json / app / worker / service worker = 0.22.17.
+[PASS TARGET] Macro schema v9 và Project JSON v11 giữ nguyên.

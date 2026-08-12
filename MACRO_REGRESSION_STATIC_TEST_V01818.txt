@@ -1,0 +1,11 @@
+DWG SKETCH V0.18.18 / PWA V0.22.18 - STATIC TEST TARGETS
+[PASS TARGET] C# có MacroRegressionBaseline.V01818.cs và InitializeMacroRegressionBaselineV01818().
+[PASS TARGET] Compare C# dùng StepId ổn định và có fallback legacy.
+[PASS TARGET] Trace Session lưu IsBaseline + ResultSignatures.
+[PASS TARGET] Trim history ưu tiên giữ Baseline trong giới hạn 50.
+[PASS TARGET] C# UI có Đặt Baseline / So sánh phiên / Xuất Diff JSON / Bỏ Baseline.
+[PASS TARGET] PWA nạp macro-regression-baseline-v02218.js.
+[PASS TARGET] PWA history lưu isBaseline + resultSignatures và preserve baseline khi prune.
+[PASS TARGET] PWA UI có Regression list/status.
+[PASS TARGET] Service Worker cache module regression V0.22.18.
+[PASS TARGET] C#/PWA giữ Project JSON v11 và macro storage schema v9.

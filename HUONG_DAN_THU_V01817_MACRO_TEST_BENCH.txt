@@ -1,0 +1,33 @@
+HƯỚNG DẪN THỬ V0.18.17 / PWA V0.22.17 - MACRO TEST BENCH
+
+A. BUILD
+1. Giải nén vào thư mục mới.
+2. Chạy CSharp_Source\DwgSketchPrototype\build_release.cmd.
+3. verify_release phải PASS Version C#=0.18.17.0, PWA=0.22.17 và các mục Macro Trace History V0.18.17.
+
+B. TEST TRACE HISTORY
+1. Mở Macro Control Center.
+2. Chọn một macro có sẵn hoặc tạo macro ngắn 2-3 bước replay-safe.
+3. Nếu macro cần Source/Target/Reference, gán role trước.
+4. Bấm Kiểm tra macro; sửa hết lỗi Preflight.
+5. Bấm Tạo Trace. LƯU Ý: thao tác này phát macro thật.
+6. Kiểm tra Trace hiện RUN/SKIP/FAIL.
+7. Kiểm tra Lịch sử Trace xuất hiện một phiên mới có thời gian, tên macro, revision và tổng RUN/SKIP/FAIL.
+8. Chạy lại macro lần thứ hai; phải có hai phiên history.
+9. Chọn phiên cũ -> Nạp phiên. Trace hiện tại phải đổi sang dữ liệu phiên cũ.
+10. Double-click một dòng Trace. Phần Step Editor phải chuyển tới step tương ứng theo StepId.
+11. Thử đổi thứ tự step rồi nạp Trace cũ: nếu StepId còn tồn tại, vẫn phải nhảy đúng step.
+12. Xuất phiên JSON; mở file và kiểm tra schema dwg-sketch-macro-trace-session.
+13. Xóa một phiên, sau đó thử Xóa lịch sử.
+
+C. TEST PWA
+1. Mở PWA V0.22.17 và hard refresh/đóng mở lại nếu máy từng cài bản cũ.
+2. Macro Control Center phải có Lịch sử Trace - Test Bench V0.22.17.
+3. Chạy lại các bước B.5-B.13.
+4. Đóng/mở PWA: history vẫn còn do localStorage.
+5. Kiểm tra Service Worker dùng cache key V0.22.17.
+
+D. AN TOÀN
+- Tạo Trace = playback thật, không phải mô phỏng.
+- Với macro có DELETE hoặc thao tác thay đổi đối tượng, thử trên bản sao bản vẽ hoặc bảo đảm có Undo phù hợp.
+- Luôn chạy Kiểm tra macro trước khi Tạo Trace khi macro dùng Input Roles/Branch/Result Sets.

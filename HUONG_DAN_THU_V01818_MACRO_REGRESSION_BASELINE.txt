@@ -1,0 +1,51 @@
+HƯỚNG DẪN THỬ V0.18.18 / PWA V0.22.18 - MACRO REGRESSION BASELINE
+=================================================================
+
+A. BUILD
+1. Giải nén vào thư mục mới.
+2. Chạy build_release.cmd.
+3. verify_release phải PASS C#=0.18.18.0 và PWA=0.22.18.
+
+B. TẠO BASELINE
+1. Mở Macro Control Center.
+2. Chọn một macro đã chạy ổn định.
+3. Gán Source/Target/Reference nếu macro yêu cầu.
+4. Chạy Kiểm tra macro (Preflight).
+5. Bấm Tạo Trace hoặc Phát macro.
+6. Trong Lịch sử Trace, chọn phiên vừa tạo.
+7. Bấm Đặt Baseline.
+8. Phiên phải xuất hiện tiền tố ★ BASE.
+
+C. TEST PASS
+1. Không sửa macro, giữ cùng loại Input/Role.
+2. Chạy lại Tạo Trace.
+3. Regression Status phải báo Auto Compare: PASS nếu Trace và Result signatures giống Baseline.
+
+D. TEST STATE/BRANCH
+1. Thay Input để một Case khác được chọn hoặc condition đổi RUN/SKIP.
+2. Chạy lại.
+3. Diff phải có STATE hoặc BRANCH và chỉ ra StepId/StepIndex.
+4. Double-click Diff phải đưa Step Editor tới step tương ứng nếu step còn tồn tại.
+
+E. TEST ADDED/REMOVED
+1. Nhân bản macro hoặc sửa macro thử nghiệm.
+2. Thêm/xóa một step, lưu revision mới.
+3. Chạy lại và so sánh với Baseline cũ.
+4. Diff phải có ADDED hoặc REMOVED; summary hiển thị revision cũ -> mới.
+
+F. TEST RESULT
+1. Dùng macro có OutputRole=Result/Result1/Result2/Result3.
+2. Tạo Baseline với một tập input.
+3. Chạy lại với input làm số đối tượng Result thay đổi.
+4. Diff phải có RESULT với chữ ký dạng total|Overlay|CAD.
+
+G. XUẤT BÁO CÁO
+1. Sau một Compare, bấm Xuất Diff JSON.
+2. File *.macro-regression.json phải có baselineSessionId, currentSessionId, revisions, passed và differences.
+
+H. PWA
+1. Nếu máy từng cài PWA cũ, đóng/mở lại hoặc hard refresh một lần.
+2. Service Worker V0.22.18 phải cache macro-regression-baseline-v02218.js.
+3. Baseline và Trace History phải còn sau khi đóng/mở PWA.
+
+LƯU Ý: Tạo Trace là playback thật; test macro có thao tác sửa/xóa trên bản vẽ thử hoặc bản sao dữ liệu.
