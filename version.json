@@ -1,13 +1,13 @@
 {
-  "version": "0.22.19",
-  "releasedAt": "2026-08-12T22:39:00+07:00",
-  "notes": "V0.22.19 FIX1: PWA DWG parity fix for libredwg-web 0.7.9 MTEXT extents, packed TrueColor priority, and live MOVE/GRIP fallback when spatial index is unavailable; retains Regression Scenario Sets + Acceptance Summary.",
+  "version": "0.22.21",
+  "releasedAt": "2026-08-19T09:04:00+07:00",
+  "notes": "V0.22.21: đồng bộ một số hành vi C# — MIRROR mặc định giữ đối tượng gốc hoặc tùy chọn xóa; RMIRROR macro có sourceMode KEEP/DELETE với macro cũ mặc định DELETE; lưới tọa độ và bắt thiết bị vào lưới mặc định tắt.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.22.19",
-  "build": "V0.18.19.0 FIX1 / PWA V0.22.19 FIX1"
+  "title": "DWG Sketch PWA V0.22.21",
+  "build": "V0.18.21.0 / PWA V0.22.21"
 }

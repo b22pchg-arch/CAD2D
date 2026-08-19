@@ -1,6 +1,6 @@
 'use strict';
-const APP_VERSION='0.22.19';
-const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION+'-v01819-fix1-dwg-color-text-render-parity';
+const APP_VERSION='0.22.21';
+const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION+'-v01821-csharp-parity-mirror-dwg-default';
 const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(APP_VERSION);
 const CORE_ASSETS=[
   './','./index.html','./manifest.webmanifest','./version.json',WORKER_URL,
@@ -10,7 +10,7 @@ const CORE_ASSETS=[
   './vendor/libredwg-web-0.7.9/wasm/libredwg-web.wasm',
   './vendor/libredwg-web-0.7.9/package.json',
   './vendor/libredwg-web-0.7.9/INTEGRATION_INFO.json',
-  './vietnamese-text-normalizer-v02253.js','./interaction-core-v0202.js','./block-symbol-editing-core-v02113.js','./runtime/cad-interaction-runtime.js','./runtime/network-electrical-runtime.js','./runtime/electrical-learning-runtime.js','./runtime/symbol-runtime.js','./runtime/macro-runtime.js','./runtime/post-macro-runtime.js','./block-symbol-editing-core-v02113.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
+  './vietnamese-text-normalizer-v02253.js','./interaction-core-v0202.js','./block-symbol-editing-core-v02113.js','./runtime/cad-interaction-runtime.js','./runtime/network-electrical-runtime.js','./runtime/electrical-learning-runtime.js','./runtime/symbol-runtime.js','./runtime/macro-runtime.js','./runtime/post-macro-runtime.js','./runtime/macro-scenario-runner-v02220.js','./block-symbol-editing-core-v02113.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
 ];
 const OPTIONAL_ASSETS=[
   './RELEASE_NOTES_V01819_PWA_V02219.txt','./HUONG_DAN_THU_V01819_REGRESSION_SCENARIOS.txt','./HUONG_DAN_CHI_TIET_MACRO_V01819_PWA_V02219.html','./MACRO_REGRESSION_SCENARIO_SCHEMA_V01819.md','./MACRO_REGRESSION_SCENARIO_BEHAVIOR_TEST_V01819.txt',
