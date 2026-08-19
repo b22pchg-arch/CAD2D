@@ -1,7 +1,7 @@
 {
   "version": "0.22.21",
-  "releasedAt": "2026-08-19T09:04:00+07:00",
-  "notes": "V0.22.21 FIX2: dong bo DWG Worker 0.22.21 voi ung dung 0.22.21; them worker cache revision de tranh nap lai worker 0.22.20 tu cache khi cap nhat PWA. Giu nguyen MIRROR KEEP/DELETE va cac mac dinh luoi.",
+  "releasedAt": "2026-08-19T10:57:00+07:00",
+  "notes": "V0.22.21 FIX3: lệnh MI/MIRROR mở hộp tùy chọn rõ ràng như C#: Giữ lại đối tượng gốc (mặc định) hoặc Xóa đối tượng gốc; lựa chọn được nhớ trong phiên. Đồng thời đổi cache revision để GitHub Pages/PWA nhận ngay giao diện mới.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",

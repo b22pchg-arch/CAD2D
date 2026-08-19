@@ -1,0 +1,10 @@
+DWG Sketch V0.18.21.0 FIX3 / PWA V0.22.21 FIX3
+
+- Sua PWA: MI/MIRROR nay mo hop tuy chon truoc khi ve truc doi xung.
+- Tuy chon 1: Giu lai doi tuong goc (mac dinh).
+- Tuy chon 2: Xoa doi tuong goc, chi giu ket qua doi xung.
+- Lua chon duoc nho trong phien lam viec; reload PWA tro ve KEEP.
+- MI, MIRROR va nut Doi xung deu dung cung hop tuy chon.
+- MIKEEP/MIRRORKEEP va MIDELETE/MIRRORDELETE van duoc giu cho thao tac nhanh.
+- Cache revision doi sang 0.22.21-mirror-options-fix3 de PWA/GitHub Pages khong giu index cu.
+- Khong thay doi DWG worker core, thuat toan doc DWG hoac macro runtime.
