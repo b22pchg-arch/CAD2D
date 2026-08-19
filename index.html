@@ -370,6 +370,7 @@ button,.button,input,select,textarea{font:inherit}.toolbar button,.button,.small
 <script>
 'use strict';
 const PWA_APP_VERSION='0.22.21';
+const DWG_WORKER_CACHE_REV='0.22.21-worker-sync-fix2';
 const MIN_VIEW_SCALE=1e-9,MAX_VIEW_SCALE=1e6;
 const USER_PROFILE_KEY='DwgSketch.UserProfile.V2';
 const PWA_VERSION_URL_KEY='DwgSketchPwa.VersionUrl.V1';
@@ -997,7 +998,7 @@ function setDwgEngineInfo(message,state=''){
 }
 function newDwgWorker(){
   if(dwgEngineWorker)try{dwgEngineWorker.terminate()}catch{}
-  const workerUrl='./dwg-worker.js?v='+encodeURIComponent(PWA_APP_VERSION);dwgEngineWorker=new Worker(workerUrl,{type:'module',name:'DwgSketchDirectReader-'+PWA_APP_VERSION});
+  const workerUrl='./dwg-worker.js?v='+encodeURIComponent(DWG_WORKER_CACHE_REV);dwgEngineWorker=new Worker(workerUrl,{type:'module',name:'DwgSketchDirectReader-'+PWA_APP_VERSION});
   return dwgEngineWorker;
 }
 function initializeDwgEngine(){

@@ -1,0 +1,19 @@
+DWG SKETCH V0.18.21.0 FIX2 - PWA WORKER VERSION SYNC
+=======================================================
+
+Loi da sua:
+- PWA app khai bao 0.22.21 nhung dwg-worker.js van khai bao 0.22.20.
+- Khi mo DWG, identity gate dung dung va bao:
+  Sai phien ban Worker DWG: ung dung 0.22.21, Worker 0.22.20.
+
+Sua:
+1. Dong bo DWG_WORKER_VERSION = 0.22.21 o ca PWA_Standalone va PWA nhung trong C#.
+2. Them worker cache revision: 0.22.21-worker-sync-fix2.
+3. Service Worker dung cache name moi de khong tai lai worker cu.
+4. verify_release.ps1 bat buoc worker version phai trung ExpectedPwaVersion.
+5. Historical worker core van duoc kiem tra bang hash sau khi chuan hoa duy nhat dong version.
+
+GitHub Pages:
+- Nen thay TOAN BO noi dung PWA_Standalone len thu muc site.
+- Sau khi deploy, tai lai trang 1-2 lan. Neu tab cu dang mo, dong tab roi mo lai.
+- Khong can xoa du lieu ban ve/localStorage.

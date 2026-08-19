@@ -1,7 +1,8 @@
 'use strict';
 const APP_VERSION='0.22.21';
-const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION+'-v01821-csharp-parity-mirror-dwg-default';
-const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(APP_VERSION);
+const WORKER_CACHE_REV='0.22.21-worker-sync-fix2';
+const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION+'-v01821-fix2-worker-sync';
+const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(WORKER_CACHE_REV);
 const CORE_ASSETS=[
   './','./index.html','./manifest.webmanifest','./version.json',WORKER_URL,
   './icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png',

@@ -1,7 +1,7 @@
 {
   "version": "0.22.21",
   "releasedAt": "2026-08-19T09:04:00+07:00",
-  "notes": "V0.22.21: đồng bộ một số hành vi C# — MIRROR mặc định giữ đối tượng gốc hoặc tùy chọn xóa; RMIRROR macro có sourceMode KEEP/DELETE với macro cũ mặc định DELETE; lưới tọa độ và bắt thiết bị vào lưới mặc định tắt.",
+  "notes": "V0.22.21 FIX2: dong bo DWG Worker 0.22.21 voi ung dung 0.22.21; them worker cache revision de tranh nap lai worker 0.22.20 tu cache khi cap nhat PWA. Giu nguyen MIRROR KEEP/DELETE va cac mac dinh luoi.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
