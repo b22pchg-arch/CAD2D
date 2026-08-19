@@ -1,13 +1,13 @@
 {
-  "version": "0.22.21",
-  "releasedAt": "2026-08-19T10:57:00+07:00",
-  "notes": "V0.22.21 FIX3: lệnh MI/MIRROR mở hộp tùy chọn rõ ràng như C#: Giữ lại đối tượng gốc (mặc định) hoặc Xóa đối tượng gốc; lựa chọn được nhớ trong phiên. Đồng thời đổi cache revision để GitHub Pages/PWA nhận ngay giao diện mới.",
+  "version": "0.22.22",
+  "releasedAt": "2026-08-19T12:36:00+07:00",
+  "notes": "V0.22.22: Dry-run/Sandbox executor foundation cho Macro Scenario. Kiểm tra Macro/Profile/Preflight/từng Step và phân loại tác động mà không phát lệnh CAD, không đổi bản vẽ, Trace, Baseline hoặc RunCount. REAL PLAYBACK V0.22.20 vẫn giữ nguyên.",
   "downloadUrl": "",
   "dwgEngine": {
     "package": "@mlightcad/libredwg-web",
     "version": "0.7.9",
     "source": "local-vendor"
   },
-  "title": "DWG Sketch PWA V0.22.21",
-  "build": "V0.18.21.0 / PWA V0.22.21"
+  "title": "DWG Sketch PWA V0.22.22",
+  "build": "V0.18.22.0 / PWA V0.22.22"
 }

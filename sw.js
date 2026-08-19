@@ -1,7 +1,7 @@
 'use strict';
-const APP_VERSION='0.22.21';
-const WORKER_CACHE_REV='0.22.21-mirror-options-fix3';
-const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION+'-v01821-fix3-mirror-options';
+const APP_VERSION='0.22.22';
+const WORKER_CACHE_REV='0.22.22-sandbox-foundation';
+const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION+'-v01822-sandbox-foundation';
 const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(WORKER_CACHE_REV);
 const CORE_ASSETS=[
   './','./index.html','./manifest.webmanifest','./version.json',WORKER_URL,
@@ -11,9 +11,10 @@ const CORE_ASSETS=[
   './vendor/libredwg-web-0.7.9/wasm/libredwg-web.wasm',
   './vendor/libredwg-web-0.7.9/package.json',
   './vendor/libredwg-web-0.7.9/INTEGRATION_INFO.json',
-  './vietnamese-text-normalizer-v02253.js','./interaction-core-v0202.js','./block-symbol-editing-core-v02113.js','./runtime/cad-interaction-runtime.js','./runtime/network-electrical-runtime.js','./runtime/electrical-learning-runtime.js','./runtime/symbol-runtime.js','./runtime/macro-runtime.js','./runtime/post-macro-runtime.js','./runtime/macro-scenario-runner-v02220.js','./block-symbol-editing-core-v02113.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
+  './vietnamese-text-normalizer-v02253.js','./interaction-core-v0202.js','./block-symbol-editing-core-v02113.js','./runtime/cad-interaction-runtime.js','./runtime/network-electrical-runtime.js','./runtime/electrical-learning-runtime.js','./runtime/symbol-runtime.js','./runtime/macro-runtime.js','./runtime/post-macro-runtime.js','./runtime/macro-scenario-runner-v02220.js','./runtime/macro-sandbox-executor-v02222.js','./block-symbol-editing-core-v02113.js','./samples/LD_Tinh_AutoLearn/PWA_learned_templates.json'
 ];
 const OPTIONAL_ASSETS=[
+  './RELEASE_NOTES_V01822_PWA_V02222.txt','./HUONG_DAN_THU_V01822_SANDBOX.txt','./PWA_RUNTIME_MANIFEST_V02222.json',
   './RELEASE_NOTES_V01819_PWA_V02219.txt','./HUONG_DAN_THU_V01819_REGRESSION_SCENARIOS.txt','./HUONG_DAN_CHI_TIET_MACRO_V01819_PWA_V02219.html','./MACRO_REGRESSION_SCENARIO_SCHEMA_V01819.md','./MACRO_REGRESSION_SCENARIO_BEHAVIOR_TEST_V01819.txt',
   './RELEASE_NOTES_V01818_PWA_V02218.txt','./HUONG_DAN_THU_V01818_MACRO_REGRESSION_BASELINE.txt','./HUONG_DAN_CHI_TIET_MACRO_V01818_PWA_V02218.html','./MACRO_REGRESSION_BASELINE_SCHEMA_V01818.md','./MACRO_REGRESSION_BEHAVIOR_TEST_V01818.txt',
   './RELEASE_NOTES_V01817_PWA_V02217.txt','./HUONG_DAN_THU_V01817_MACRO_TEST_BENCH.txt','./HUONG_DAN_CHI_TIET_MACRO_V01817_PWA_V02217.html','./MACRO_TRACE_HISTORY_SCHEMA_V01817.md',

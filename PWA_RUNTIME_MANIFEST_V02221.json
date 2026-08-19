@@ -1,0 +1,58 @@
+{
+  "schema": "DWG_SKETCH_PWA_RUNTIME_ORDER_V2",
+  "pwaVersion": "0.22.21",
+  "feature": "C# parity: MIRROR KEEP/DELETE + grid defaults",
+  "runtimeCount": 10,
+  "scripts": [
+    {
+      "path": "./vietnamese-text-normalizer-v02253.js",
+      "sha256": "06bfa1d0c7802eeeb6ef6439461813787fe4f528a0e0cb242b40e54ec90e76d1",
+      "bytes": 7425
+    },
+    {
+      "path": "./interaction-core-v0202.js",
+      "sha256": "dd1f93b43de86d61d48e15a03903205abd81ef1609894b72ef3c0ceb3c513377",
+      "bytes": 25122
+    },
+    {
+      "path": "./runtime/cad-interaction-runtime.js",
+      "sha256": "845a385979072b359269b07c8aff053ee8ff3b249867685f1ec48fcb6037e405",
+      "bytes": 20396
+    },
+    {
+      "path": "./block-symbol-editing-core-v02113.js",
+      "sha256": "fb59d7799dff78d9fbe50b8c94dd2c9a9b655efdf41be41acb496872d69b650c",
+      "bytes": 6792
+    },
+    {
+      "path": "./runtime/network-electrical-runtime.js",
+      "sha256": "b8dc3bcfc02a0022f239d4edcf6e3aa4eab3dd5d9f895bfdef043b1361f93ea7",
+      "bytes": 135957
+    },
+    {
+      "path": "./runtime/electrical-learning-runtime.js",
+      "sha256": "734d8eb4e6b59e81dd992f5cac4afbd12c63f728079d16bfa9d49da4e73c390c",
+      "bytes": 82810
+    },
+    {
+      "path": "./runtime/symbol-runtime.js",
+      "sha256": "1e33287bc85162ab77af330d6710cfa7f055f4e9c2ed2a59a5ab2988ad383d67",
+      "bytes": 60761
+    },
+    {
+      "path": "./runtime/macro-runtime.js",
+      "sha256": "32ff84c6311d8b99db236b1ba4bb975679fed905e277af356586e8e93c8d395b",
+      "bytes": 99926
+    },
+    {
+      "path": "./runtime/post-macro-runtime.js",
+      "sha256": "ae94b60f1a36711d6c5b1b3c80c2fba7c6e258bb184eb30dadfa1df05246380f",
+      "bytes": 29110
+    },
+    {
+      "path": "./runtime/macro-scenario-runner-v02220.js",
+      "sha256": "8c5868d731d796b0bf3c5030075f6f22019d6a30eed62befcb5387689da7dec2",
+      "bytes": 8968
+    }
+  ]
+}

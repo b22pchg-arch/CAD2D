@@ -1,0 +1,200 @@
+{
+  "schema": "DWG_SKETCH_PWA_RUNTIME_BUNDLE_V1",
+  "pwaVersion": "0.22.19",
+  "behaviorChangeAllowed": false,
+  "separator": "explicit semicolon between exact source byte payloads",
+  "bundles": [
+    {
+      "path": "runtime\\cad-interaction-runtime.js",
+      "sha256": "845a385979072b359269b07c8aff053ee8ff3b249867685f1ec48fcb6037e405",
+      "parts": [
+        {
+          "source": "selection-editing-core-v02111.js",
+          "sha256": "a65d40f69b2005e67a470d4fecb74eabdcfaed928e1031072fff5b04a19cc654",
+          "bytes": 3408,
+          "order": 0
+        },
+        {
+          "source": "render-stability-core-v021113.js",
+          "sha256": "3bbf28f7cff2bef72a65d21973d2d11f99cb4c994f33d7512f741ca4a1fb8c71",
+          "bytes": 7196,
+          "order": 1
+        },
+        {
+          "source": "object-snap-core-v02112.js",
+          "sha256": "d27f43b0ca0043ea9fb72ce3293436096e995085526a52855990cdef7f1cfaf8",
+          "bytes": 9333,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "path": "runtime\\network-electrical-runtime.js",
+      "sha256": "b8dc3bcfc02a0022f239d4edcf6e3aa4eab3dd5d9f895bfdef043b1361f93ea7",
+      "parts": [
+        {
+          "source": "network-diagram-core-v0210.js",
+          "sha256": "d66de83e513e9aec77f251c80ea948e4f8605ac2c19dfb32cee89f26f7125963",
+          "bytes": 16616,
+          "order": 0
+        },
+        {
+          "source": "network-learning-core-v0214.js",
+          "sha256": "4aaafc2d0a1d542e05ffe31b2df333cb289cba665a6cf63213ca5bf3e1128d65",
+          "bytes": 22585,
+          "order": 1
+        },
+        {
+          "source": "a4-diagram-template-core-v02114.js",
+          "sha256": "5ee295884127068fa20b5575afa205d09a5ceae3f6a24f2c93cea7e4e9bb5d1a",
+          "bytes": 40687,
+          "order": 2
+        },
+        {
+          "source": "electrical-automation-v0179.js",
+          "sha256": "9aa1ee2d2c05fa42a37d0b08b7c6ea1d679150c2a7df15aff0c4d6924da209a0",
+          "bytes": 55451,
+          "order": 3
+        }
+      ]
+    },
+    {
+      "path": "runtime\\electrical-learning-runtime.js",
+      "sha256": "734d8eb4e6b59e81dd992f5cac4afbd12c63f728079d16bfa9d49da4e73c390c",
+      "parts": [
+        {
+          "source": "electrical-auto-learn-v0174.js",
+          "sha256": "8dbf69429a7dcea8d17ea92735edf4393c0049535a1f55d5cb478413068b4602",
+          "bytes": 18588,
+          "order": 0
+        },
+        {
+          "source": "electrical-learning-core-v0175.js",
+          "sha256": "a39af1a1bae0ee00edeee7f699ef1aaaba848b6f4dadf19915a4a82c9d3ded1a",
+          "bytes": 40690,
+          "order": 1
+        },
+        {
+          "source": "electrical-learning-session-v0180.js",
+          "sha256": "84087e6d70980703d92dc51a64fc9a8089532bdc306a168c8b2109d175b2c958",
+          "bytes": 23055,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "path": "runtime\\symbol-runtime.js",
+      "sha256": "d5490dbe441416e62894e891023777a6fb4c8066dfdd07e47e359774d90bef1d",
+      "parts": [
+        {
+          "source": "symbol-template-v0169.js",
+          "sha256": "d49b7e7ba5ddfb3704be58ca5c8187fb71d3534efa955d7e7e91081d4920d28e",
+          "bytes": 21333,
+          "order": 0
+        },
+        {
+          "source": "cad-interaction-architecture-v0225.js",
+          "sha256": "9760b59182276f882e75a4ae463242c41822c20b196a0073aa76dcdc287abbc5",
+          "bytes": 23815,
+          "order": 1
+        },
+        {
+          "source": "symbol-library-catalog-v0226.js",
+          "sha256": "8999894844470700570f38c9d14c99491eeffc0e8585966ec88b06f551ff90fd",
+          "bytes": 8542,
+          "order": 2
+        },
+        {
+          "source": "symbol-instance-link-v0226.js",
+          "sha256": "823319eaef984b0939726218b1c0b882395d5817d775ff711ae7f706955f6305",
+          "bytes": 5557,
+          "order": 3
+        }
+      ]
+    },
+    {
+      "path": "runtime\\macro-runtime.js",
+      "sha256": "998f24b85583b1ecfc549e8ef3ba4b5eaced3ddae65a64424d03ae63e17e8b75",
+      "parts": [
+        {
+          "source": "macro-library-core-v02216.js",
+          "sha256": "d673451e8197ef06f122911434bc7c34bc116f068d47f3d19426472e06ffdd59",
+          "bytes": 32986,
+          "order": 0
+        },
+        {
+          "source": "macro-step-editor-relative-v02216.js",
+          "sha256": "68e4440cca33459efc4173287756c38e963c88b96706056b871e499074907ebe",
+          "bytes": 16749,
+          "order": 1
+        },
+        {
+          "source": "macro-input-binding-v02216.js",
+          "sha256": "d32233c4e17f372f8901191bb61cbe5e43634452fe7867140ba98159c397a01f",
+          "bytes": 12209,
+          "order": 2
+        },
+        {
+          "source": "macro-branch-conditions-v02216.js",
+          "sha256": "0138a6c0167bb2a595c7fdd386381afd175a4c29e41538f59daed584abc133de",
+          "bytes": 2867,
+          "order": 3
+        },
+        {
+          "source": "macro-branch-groups-trace-v02216.js",
+          "sha256": "ccdb61b5a429c19b56c640b9a68fbf4b05fc16131215a0f66b8a396985c168c5",
+          "bytes": 7437,
+          "order": 4
+        },
+        {
+          "source": "macro-control-center-v02216.js",
+          "sha256": "dcc40ec1f646a7fe7ba33fd777f3d4f6f55e6c1b57567ef8451216369be6be31",
+          "bytes": 1699,
+          "order": 5
+        },
+        {
+          "source": "macro-library-organizer-v02216.js",
+          "sha256": "291fb302503448214849ed2294bb4d6f31b3fb8a104911337f1a22427a623c9a",
+          "bytes": 6472,
+          "order": 6
+        },
+        {
+          "source": "macro-trace-history-v02217.js",
+          "sha256": "78ceef38e68ac41f0041d8d5442b6eed986328b721b2f4ba6af4566ce29c4731",
+          "bytes": 8453,
+          "order": 7
+        },
+        {
+          "source": "macro-regression-baseline-v02218.js",
+          "sha256": "ea54b06606b7360048ab14c34ddd877c18f8d119afeb7f25486a4390d2d6d27a",
+          "bytes": 8157,
+          "order": 8
+        }
+      ]
+    },
+    {
+      "path": "runtime\\post-macro-runtime.js",
+      "sha256": "2d2703ac0cd586e3cdc339cdc7519c2d81dd0b9e3cec2c4e4559f6cd082d00e3",
+      "parts": [
+        {
+          "source": "symbol-update-manager-v0227.js",
+          "sha256": "eb57d715aec192df15d6f0d7b23729c77002eab0a59a58f85f781f647b833222",
+          "bytes": 5037,
+          "order": 0
+        },
+        {
+          "source": "macro-parameter-profiles-v0227.js",
+          "sha256": "92705af72a58b154050138228e47e388021983e98999a85aea40fac878bf4f71",
+          "bytes": 5198,
+          "order": 1
+        },
+        {
+          "source": "macro-regression-scenarios-v02219.js",
+          "sha256": "bbc41568b783b0383422c31e51c58251a7da8d57b84bd1bb20b2365ebc770c8d",
+          "bytes": 17860,
+          "order": 2
+        }
+      ]
+    }
+  ]
+}
