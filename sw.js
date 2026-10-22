@@ -1,7 +1,7 @@
 'use strict';
 const APP_VERSION='0.22.22';
 const WORKER_CACHE_REV='0.22.22-sandbox-foundation';
-const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION+'-v01822-font-hf1';
+const CACHE_NAME='dwg-sketch-pwa-v'+APP_VERSION+'-v01822-font-hf1-fix2';
 const WORKER_URL='./dwg-worker.js?v='+encodeURIComponent(WORKER_CACHE_REV);
 const CORE_ASSETS=[
   './','./index.html','./manifest.webmanifest','./version.json',WORKER_URL,
